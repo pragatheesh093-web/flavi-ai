@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Flavi AI</title>
 
-    <style>
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
+    <style>
         * {
             box-sizing: border-box;
         }
@@ -140,70 +136,46 @@
             font-style: italic;
         }
 
+        #googleLogin {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
-
 </head>
-
 
 <body>
 
+<!-- LOGIN -->
 
-<!-- ==========================================
-     LOGIN
-========================================== -->
-
-<div
-    id="loginScreen"
-    class="screen"
->
+<div id="loginScreen" class="screen">
 
     <div class="card">
 
-        <div class="logo">
-            🌸
-        </div>
+        <div class="logo">🌸</div>
 
-        <h1>
-            Flavi AI
-        </h1>
+        <h1>Flavi AI</h1>
 
-        <p>
-            Your friendly AI companion.
-        </p>
+        <p>Your friendly AI companion.</p>
 
-        <button
-            onclick="fakeGoogleLogin()"
-        >
-            Continue with Google
-        </button>
+        <div id="googleLogin"></div>
 
     </div>
 
 </div>
 
 
-<!-- ==========================================
-     NAME SCREEN
-========================================== -->
+<!-- NAME -->
 
-<div
-    id="nameScreen"
-    class="screen"
->
+<div id="nameScreen" class="screen">
 
     <div class="card">
 
-        <div class="logo">
-            🌸
-        </div>
+        <div class="logo">🌸</div>
 
-        <h1>
-            Welcome to Flavi
-        </h1>
+        <h1>Welcome to Flavi</h1>
 
-        <p>
-            What should I call you?
-        </p>
+        <p>What should I call you?</p>
 
         <input
             id="nameInput"
@@ -211,9 +183,7 @@
             placeholder="Enter your name"
         >
 
-        <button
-            onclick="saveName()"
-        >
+        <button onclick="saveName()">
             Start Chatting
         </button>
 
@@ -222,14 +192,11 @@
 </div>
 
 
-<!-- ==========================================
-     CHAT
-========================================== -->
+<!-- CHAT -->
 
 <div id="chatScreen">
 
     <div id="messages"></div>
-
 
     <div class="input-area">
 
@@ -240,9 +207,7 @@
             onkeydown="handleEnter(event)"
         >
 
-        <button
-            onclick="sendMessage()"
-        >
+        <button onclick="sendMessage()">
             Send
         </button>
 
@@ -253,42 +218,148 @@
 
 <script>
 
-
-// ==========================================
-// VARIABLES
-// ==========================================
-
 let userName = "";
+let googleUser = null;
 
 
-// ==========================================
-// CLOUDFLARE WORKER
-// ==========================================
+/* ==========================================
+   CLOUDFLARE WORKER
+========================================== */
 
 const AI_WORKER_URL =
     "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
 
 
-// ==========================================
-// GOOGLE LOGIN
-// ==========================================
+/* ==========================================
+   GOOGLE SIGN-IN
+========================================== */
 
-function fakeGoogleLogin() {
+function handleGoogleLogin(response) {
 
-    document
-        .getElementById("loginScreen")
-        .style.display = "none";
+    console.log("Google login successful");
 
-    document
-        .getElementById("nameScreen")
-        .style.display = "flex";
+    try {
+
+        /*
+         Google returns a JWT credential.
+         Decode the payload so we can get
+         the user's name/email.
+        */
+
+        const payload =
+            JSON.parse(
+                atob(
+                    response.credential
+                        .split(".")[1]
+                        .replace(/-/g, "+")
+                        .replace(/_/g, "/")
+                )
+            );
+
+        googleUser = payload;
+
+        console.log("Google user:", googleUser);
+
+
+        /*
+         Move to name screen
+        */
+
+        document
+            .getElementById("loginScreen")
+            .style.display = "none";
+
+        document
+            .getElementById("nameScreen")
+            .style.display = "flex";
+
+
+        /*
+         Automatically put Google account
+         name into the name field.
+        */
+
+        if (payload.name) {
+
+            document
+                .getElementById("nameInput")
+                .value = payload.name;
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Google login error:",
+            error
+        );
+
+        alert(
+            "Google Sign-In failed. Please try again."
+        );
+
+    }
 
 }
 
 
-// ==========================================
-// SAVE NAME
-// ==========================================
+/* ==========================================
+   INITIALIZE GOOGLE
+========================================== */
+
+window.onload = function() {
+
+    if (
+        typeof google !== "undefined" &&
+        google.accounts &&
+        google.accounts.id
+    ) {
+
+        google.accounts.id.initialize({
+
+            client_id:
+                "832720805972-30l3cv2qo975kd9qlk4ncopdo4q4onmd.apps.googleusercontent.com",
+
+            callback:
+                handleGoogleLogin,
+
+            auto_select: false,
+
+            cancel_on_tap_outside: true
+
+        });
+
+
+        google.accounts.id.renderButton(
+
+            document.getElementById(
+                "googleLogin"
+            ),
+
+            {
+                theme: "filled_blue",
+                size: "large",
+                text: "signin_with",
+                shape: "rectangular",
+                width: 300
+            }
+
+        );
+
+    } else {
+
+        console.error(
+            "Google Identity Services failed to load."
+        );
+
+    }
+
+};
+
+
+/* ==========================================
+   SAVE NAME
+========================================== */
 
 function saveName() {
 
@@ -331,14 +402,11 @@ function saveName() {
 }
 
 
-// ==========================================
-// ADD MESSAGE
-// ==========================================
+/* ==========================================
+   ADD MESSAGE
+========================================== */
 
-function addMessage(
-    type,
-    text
-) {
+function addMessage(type, text) {
 
     const messages =
         document.getElementById(
@@ -371,9 +439,9 @@ function addMessage(
 }
 
 
-// ==========================================
-// ENTER KEY
-// ==========================================
+/* ==========================================
+   ENTER KEY
+========================================== */
 
 function handleEnter(event) {
 
@@ -390,9 +458,9 @@ function handleEnter(event) {
 }
 
 
-// ==========================================
-// SEND MESSAGE
-// ==========================================
+/* ==========================================
+   SEND MESSAGE
+========================================== */
 
 async function sendMessage() {
 
@@ -406,14 +474,8 @@ async function sendMessage() {
         input.value.trim();
 
 
-    if (!text) {
+    if (!text) return;
 
-        return;
-
-    }
-
-
-    // Show user's message
 
     addMessage(
         "user",
@@ -423,8 +485,6 @@ async function sendMessage() {
 
     input.value = "";
 
-
-    // Thinking message
 
     const thinking =
         document.createElement(
@@ -445,19 +505,7 @@ async function sendMessage() {
         .appendChild(thinking);
 
 
-    document
-        .getElementById("messages")
-        .scrollTop =
-        document
-            .getElementById("messages")
-            .scrollHeight;
-
-
     try {
-
-        // ==================================
-        // SEND TO CLOUDFLARE
-        // ==================================
 
         const response =
             await fetch(
@@ -488,7 +536,6 @@ async function sendMessage() {
             response.status
         );
 
-
         console.log(
             "Worker response:",
             raw
@@ -511,24 +558,8 @@ async function sendMessage() {
         }
 
 
-        let data;
-
-
-        try {
-
-            data =
-                JSON.parse(raw);
-
-        } catch {
-
-            addMessage(
-                "ai",
-                "Flavi returned an invalid response 😭"
-            );
-
-            return;
-
-        }
+        const data =
+            JSON.parse(raw);
 
 
         if (data.reply) {
@@ -542,7 +573,7 @@ async function sendMessage() {
 
             addMessage(
                 "ai",
-                "I received a response, but I couldn't understand it 😭"
+                "Flavi returned an unexpected response 😭"
             );
 
         }
@@ -569,9 +600,7 @@ async function sendMessage() {
 
 }
 
-
 </script>
 
 </body>
-
 </html>
