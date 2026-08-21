@@ -1,14 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
 
     <meta name="google-site-verification"
-        content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
+          content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
 
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
 
     <title>Flavi AI</title>
 
@@ -40,7 +40,7 @@
             border-radius: 24px;
             background: #191922;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+            box-shadow: 0 20px 60px rgba(0,0,0,.5);
         }
 
         .logo {
@@ -150,21 +150,10 @@
             background: #4285f4;
         }
 
-        .google-button:hover {
-            background: #357ae8;
-        }
-
         .account-info {
             margin-top: 15px;
             font-size: 13px;
             color: #999;
-        }
-
-        .logout-button {
-            margin-top: 10px;
-            background: #33333f;
-            padding: 10px;
-            font-size: 13px;
         }
 
         .error {
@@ -178,10 +167,7 @@
 
 <body>
 
-
-<!-- =========================================
-     LOGIN SCREEN
-========================================= -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginScreen" class="screen">
 
@@ -206,9 +192,7 @@
 </div>
 
 
-<!-- =========================================
-     NAME SCREEN
-========================================= -->
+<!-- ================= NAME ================= -->
 
 <div id="nameScreen" class="screen">
 
@@ -226,7 +210,7 @@
             placeholder="Enter your name"
         >
 
-        <button onclick="saveName()">
+        <button id="startButton">
             Start Chatting
         </button>
 
@@ -235,9 +219,7 @@
 </div>
 
 
-<!-- =========================================
-     CHAT SCREEN
-========================================= -->
+<!-- ================= CHAT ================= -->
 
 <div id="chatScreen">
 
@@ -249,10 +231,9 @@
             id="messageInput"
             type="text"
             placeholder="Talk to Flavi..."
-            onkeydown="handleEnter(event)"
         >
 
-        <button onclick="sendMessage()">
+        <button id="sendButton">
             Send
         </button>
 
@@ -261,293 +242,234 @@
 </div>
 
 
-<!-- =========================================
-     FIREBASE AUTHENTICATION
-========================================= -->
+<!-- ================= FIREBASE + FLAVI ================= -->
 
 <script type="module">
 
-    import {
-        initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-    import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
-        onAuthStateChanged,
-        signOut
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-
-    /* =========================================
-       FIREBASE CONFIG
-    ========================================= */
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyCIGFFgukIL7uN38capAC_YX3nezDGFxLk",
-  authDomain: "flavi-ai.firebaseapp.com",
-  projectId: "flavi-ai",
-  storageBucket: "flavi-ai.firebasestorage.app",
-  messagingSenderId: "924955533897",
-  appId: "1:924955533897:web:858db6f25255aba8ee5598"
-};
-
-
-    /* =========================================
-       INITIALIZE FIREBASE
-    ========================================= */
-
-    const app =
-        initializeApp(firebaseConfig);
-
-
-    const auth =
-        getAuth(app);
-
-
-    const provider =
-        new GoogleAuthProvider();
-
-
-    /* =========================================
-       VARIABLES
-    ========================================= */
-
-    let googleUser = null;
-
-    let userName = "";
-
-
-    /* =========================================
-       CLOUDFLARE WORKER
-    ========================================= */
+    /*
+    ==================================================
+    FLAVI AI WORKER
+    ==================================================
+    */
 
     const AI_WORKER_URL =
         "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
 
 
-    /* =========================================
-       GOOGLE LOGIN
-    ========================================= */
+    /*
+    ==================================================
+    FIREBASE
+    ==================================================
+    */
 
-    window.loginWithGoogle =
-        async function () {
+    import {
+        initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-            const errorBox =
-                document.getElementById(
-                    "loginError"
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        onAuthStateChanged
+    } from
+    "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    /*
+    ==================================================
+    FIREBASE CONFIG
+    ==================================================
+    */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyCIGFFgukIL7uN38cap_YX3nezDGFxLk",
+
+        authDomain:
+            "flavi-ai.firebaseapp.com",
+
+        projectId:
+            "flavi-ai",
+
+        storageBucket:
+            "flavi-ai.firebasestorage.app",
+
+        messagingSenderId:
+            "924955533897",
+
+        appId:
+            "1:924955533897:web:858db6f25255aba8ee5598"
+
+    };
+
+
+    /*
+    ==================================================
+    INITIALIZE FIREBASE
+    ==================================================
+    */
+
+    const app =
+        initializeApp(firebaseConfig);
+
+    const auth =
+        getAuth(app);
+
+    const provider =
+        new GoogleAuthProvider();
+
+
+    /*
+    ==================================================
+    VARIABLES
+    ==================================================
+    */
+
+    let currentUser = null;
+    let userName = "";
+
+
+    /*
+    ==================================================
+    GOOGLE LOGIN
+    ==================================================
+    */
+
+    async function loginWithGoogle() {
+
+        const errorBox =
+            document.getElementById("loginError");
+
+        errorBox.textContent = "";
+
+        try {
+
+            provider.setCustomParameters({
+                prompt: "select_account"
+            });
+
+            const result =
+                await signInWithPopup(
+                    auth,
+                    provider
                 );
 
-            errorBox.textContent = "";
+            const user =
+                result.user;
 
+            currentUser = user;
 
-            try {
+            console.log(
+                "Google login successful"
+            );
 
-                console.log(
-                    "Starting Firebase Google login..."
-                );
+            console.log(
+                "Name:",
+                user.displayName
+            );
 
+            console.log(
+                "Email:",
+                user.email
+            );
 
-                const result =
-                    await signInWithPopup(
-                        auth,
-                        provider
-                    );
-
-
-                googleUser =
-                    result.user;
-
-
-                console.log(
-                    "================================"
-                );
-
-                console.log(
-                    "Firebase Google Login SUCCESS"
-                );
-
-                console.log(
-                    "Name:",
-                    googleUser.displayName
-                );
-
-                console.log(
-                    "Email:",
-                    googleUser.email
-                );
-
-                console.log(
-                    "UID:",
-                    googleUser.uid
-                );
-
-                console.log(
-                    "================================"
-                );
-
-
-                /*
-                    Firebase now knows this user.
-
-                    The account should appear in:
-
-                    Firebase
-                    → Authentication
-                    → Users
-                */
-
-
-                document
-                    .getElementById(
-                        "loginScreen"
-                    )
-                    .style.display =
-                    "none";
-
-
-                document
-                    .getElementById(
-                        "nameScreen"
-                    )
-                    .style.display =
-                    "flex";
-
-
-                /*
-                    Use Google display name
-                */
-
-                if (
-                    googleUser.displayName
-                ) {
-
-                    document
-                        .getElementById(
-                            "nameInput"
-                        )
-                        .value =
-                        googleUser.displayName;
-
-                }
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Firebase login error:",
-                    error
-                );
-
-
-                let message =
-                    "Google Sign-In failed.";
-
-
-                if (
-                    error.code ===
-                    "auth/popup-blocked"
-                ) {
-
-                    message =
-                        "The Google login popup was blocked. Please allow popups for Flavi.";
-
-                }
-
-                else if (
-                    error.code ===
-                    "auth/popup-closed-by-user"
-                ) {
-
-                    message =
-                        "The Google login window was closed.";
-
-                }
-
-                else if (
-                    error.code ===
-                    "auth/unauthorized-domain"
-                ) {
-
-                    message =
-                        "Flavi's domain is not authorized in Firebase.\n\nAdd flavi-ai.pages.dev to Firebase Authentication → Settings → Authorized domains.";
-
-                }
-
-                else {
-
-                    message =
-                        error.message;
-
-                }
-
-
-                errorBox.textContent =
-                    message;
-
-            }
-
-        };
-
-
-    /* =========================================
-       CREATE GOOGLE BUTTON
-    ========================================= */
-
-    function createGoogleButton() {
-
-        const container =
-            document.getElementById(
-                "googleLogin"
+            console.log(
+                "UID:",
+                user.uid
             );
 
 
-        const button =
-            document.createElement(
-                "button"
+            /*
+            Show name screen
+            */
+
+            document
+                .getElementById("loginScreen")
+                .style.display = "none";
+
+            document
+                .getElementById("nameScreen")
+                .style.display = "flex";
+
+
+            /*
+            Put Google display name
+            into the name box
+            */
+
+            if (user.displayName) {
+
+                document
+                    .getElementById("nameInput")
+                    .value =
+                    user.displayName;
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Google login error:",
+                error
             );
 
+            errorBox.textContent =
+                "Google Sign-In failed.\n\n" +
+                error.message;
 
-        button.className =
-            "google-button";
-
-
-        button.textContent =
-            "🔵 Continue with Google";
-
-
-        button.onclick =
-            window.loginWithGoogle;
-
-
-        container.appendChild(
-            button
-        );
+        }
 
     }
 
 
-    /* =========================================
-       AUTH STATE LISTENER
-    ========================================= */
+    /*
+    ==================================================
+    CREATE GOOGLE BUTTON
+    ==================================================
+    */
+
+    const googleButton =
+        document.createElement("button");
+
+    googleButton.className =
+        "google-button";
+
+    googleButton.textContent =
+        "🔵 Continue with Google";
+
+    googleButton.addEventListener(
+        "click",
+        loginWithGoogle
+    );
+
+    document
+        .getElementById("googleLogin")
+        .appendChild(
+            googleButton
+        );
+
+
+    /*
+    ==================================================
+    AUTH STATE
+    ==================================================
+    */
 
     onAuthStateChanged(
         auth,
-        function (user) {
+        function(user) {
 
             if (user) {
 
-                googleUser =
+                currentUser =
                     user;
 
-
                 console.log(
-                    "Firebase authenticated user:"
-                );
-
-                console.log(
+                    "Logged in:",
                     user.email
                 );
 
@@ -562,245 +484,27 @@
     );
 
 
-    /* =========================================
-       CREATE LOGIN BUTTON
-    ========================================= */
-
-    createGoogleButton();
-
-
-</script>
-
-
-<!-- =========================================
-     FLAVI CHAT
-========================================= -->
-
-<script>
-
-
-/* =========================================
-   SAVE NAME
-========================================= */
-
-function saveName() {
-
-    const input =
-        document.getElementById(
-            "nameInput"
-        );
-
-
-    const name =
-        input.value.trim();
-
-
-    if (!name) {
-
-        alert(
-            "Please enter your name."
-        );
-
-        return;
-
-    }
-
-
-    userName =
-        name;
-
-
-    document
-        .getElementById(
-            "nameScreen"
-        )
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById(
-            "chatScreen"
-        )
-        .style.display =
-        "block";
-
-
-    addMessage(
-        "ai",
-        `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
-    );
-
-}
-
-
-/* =========================================
-   ADD MESSAGE
-========================================= */
-
-function addMessage(
-    type,
-    text
-) {
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.className =
-        `message ${type}`;
-
-
-    div.textContent =
-        text;
-
-
-    messages.appendChild(
-        div
-    );
-
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-
-/* =========================================
-   ENTER KEY
-========================================= */
-
-function handleEnter(
-    event
-) {
-
-    if (
-        event.key === "Enter"
-    ) {
-
-        event.preventDefault();
-
-        sendMessage();
-
-    }
-
-}
-
-
-/* =========================================
-   SEND MESSAGE
-========================================= */
-
-async function sendMessage() {
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-
-    const text =
-        input.value.trim();
-
-
-    if (!text)
-        return;
-
-
-    addMessage(
-        "user",
-        text
-    );
-
-
-    input.value = "";
-
-
-    const thinking =
-        document.createElement(
-            "div"
-        );
-
-
-    thinking.className =
-        "message ai typing";
-
-
-    thinking.textContent =
-        "Flavi is thinking... 🌸";
-
-
-    document
-        .getElementById(
-            "messages"
-        )
-        .appendChild(
-            thinking
-        );
-
-
-    try {
-
-        const response =
-            await fetch(
-                AI_WORKER_URL,
-                {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            message:
-                                text,
-
-                            name:
-                                userName
-
-                        })
-
-                }
+    /*
+    ==================================================
+    SAVE NAME
+    ==================================================
+    */
+
+    function saveName() {
+
+        const input =
+            document.getElementById(
+                "nameInput"
             );
 
-
-        const raw =
-            await response.text();
-
-
-        console.log(
-            "Worker status:",
-            response.status
-        );
+        const name =
+            input.value.trim();
 
 
-        console.log(
-            "Worker response:",
-            raw
-        );
+        if (!name) {
 
-
-        thinking.remove();
-
-
-        if (!response.ok) {
-
-            addMessage(
-                "ai",
-                "Flavi's AI brain returned an error 😭\n\n" +
-                raw
+            alert(
+                "Please enter your name."
             );
 
             return;
@@ -808,75 +512,347 @@ async function sendMessage() {
         }
 
 
-        let data;
+        userName =
+            name;
 
 
-        try {
-
-            data =
-                JSON.parse(raw);
-
-        }
-
-        catch {
-
-            addMessage(
-                "ai",
-                "Flavi returned an invalid response 😭\n\n" +
-                raw
-            );
-
-            return;
-
-        }
+        document
+            .getElementById("nameScreen")
+            .style.display =
+            "none";
 
 
-        if (
-            data.reply
-        ) {
-
-            addMessage(
-                "ai",
-                data.reply
-            );
-
-        }
-
-        else {
-
-            addMessage(
-                "ai",
-                "Flavi returned an unexpected response 😭"
-            );
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Connection error:",
-            error
-        );
-
-
-        thinking.remove();
+        document
+            .getElementById("chatScreen")
+            .style.display =
+            "block";
 
 
         addMessage(
             "ai",
-            "Unable to connect to Flavi's AI brain 😭\n\n" +
-            error.message
+            `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
         );
 
     }
 
-}
 
+    /*
+    ==================================================
+    START BUTTON
+    ==================================================
+    */
+
+    document
+        .getElementById("startButton")
+        .addEventListener(
+            "click",
+            saveName
+        );
+
+
+    /*
+    ==================================================
+    ADD MESSAGE
+    ==================================================
+    */
+
+    function addMessage(
+        type,
+        text
+    ) {
+
+        const messages =
+            document.getElementById(
+                "messages"
+            );
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "message " + type;
+
+
+        div.textContent =
+            text;
+
+
+        messages.appendChild(
+            div
+        );
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+
+    /*
+    ==================================================
+    SEND MESSAGE
+    ==================================================
+    */
+
+    async function sendMessage() {
+
+        const input =
+            document.getElementById(
+                "messageInput"
+            );
+
+
+        const text =
+            input.value.trim();
+
+
+        if (!text)
+            return;
+
+
+        /*
+        Show user message
+        */
+
+        addMessage(
+            "user",
+            text
+        );
+
+
+        input.value = "";
+
+
+        /*
+        Thinking message
+        */
+
+        const thinking =
+            document.createElement(
+                "div"
+            );
+
+
+        thinking.className =
+            "message ai typing";
+
+
+        thinking.textContent =
+            "Flavi is thinking... 🌸";
+
+
+        document
+            .getElementById("messages")
+            .appendChild(
+                thinking
+            );
+
+
+        try {
+
+            console.log(
+                "Sending message to:",
+                AI_WORKER_URL
+            );
+
+
+            /*
+            Send request to
+            Cloudflare Worker
+            */
+
+            const response =
+                await fetch(
+                    AI_WORKER_URL,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                message:
+                                    text,
+
+                                name:
+                                    userName,
+
+                                email:
+                                    currentUser
+                                        ? currentUser.email
+                                        : null,
+
+                                uid:
+                                    currentUser
+                                        ? currentUser.uid
+                                        : null
+
+                            })
+                    }
+                );
+
+
+            /*
+            Get response
+            */
+
+            const raw =
+                await response.text();
+
+
+            console.log(
+                "Worker status:",
+                response.status
+            );
+
+            console.log(
+                "Worker response:",
+                raw
+            );
+
+
+            thinking.remove();
+
+
+            /*
+            Worker error
+            */
+
+            if (!response.ok) {
+
+                addMessage(
+                    "ai",
+                    "Flavi's AI brain returned an error 😭\n\n" +
+                    raw
+                );
+
+                return;
+
+            }
+
+
+            /*
+            Convert JSON
+            */
+
+            let data;
+
+            try {
+
+                data =
+                    JSON.parse(raw);
+
+            }
+
+            catch {
+
+                addMessage(
+                    "ai",
+                    "Flavi returned invalid data 😭\n\n" +
+                    raw
+                );
+
+                return;
+
+            }
+
+
+            /*
+            Show AI reply
+            */
+
+            if (data.reply) {
+
+                addMessage(
+                    "ai",
+                    data.reply
+                );
+
+            }
+
+            else {
+
+                addMessage(
+                    "ai",
+                    "Flavi returned an unexpected response 😭\n\n" +
+                    raw
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Connection error:",
+                error
+            );
+
+
+            thinking.remove();
+
+
+            addMessage(
+                "ai",
+                "Unable to connect to Flavi's AI brain 😭\n\n" +
+                error.message
+            );
+
+        }
+
+    }
+
+
+    /*
+    ==================================================
+    ENTER KEY
+    ==================================================
+    */
+
+    document
+        .getElementById("messageInput")
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+    /*
+    ==================================================
+    SEND BUTTON
+    ==================================================
+    */
+
+    document
+        .getElementById("sendButton")
+        .addEventListener(
+            "click",
+            sendMessage
+        );
 
 </script>
 
-
 </body>
 </html>
+```
