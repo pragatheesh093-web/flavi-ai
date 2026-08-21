@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,6 +160,13 @@
             color: #999;
         }
 
+        .logout-button {
+            margin-top: 10px;
+            background: #33333f;
+            padding: 10px;
+            font-size: 13px;
+        }
+
         .error {
             color: #ff6b6b;
             margin-top: 15px;
@@ -172,7 +178,10 @@
 
 <body>
 
-<!-- LOGIN -->
+
+<!-- =========================================
+     LOGIN SCREEN
+========================================= -->
 
 <div id="loginScreen" class="screen">
 
@@ -197,7 +206,9 @@
 </div>
 
 
-<!-- NAME -->
+<!-- =========================================
+     NAME SCREEN
+========================================= -->
 
 <div id="nameScreen" class="screen">
 
@@ -224,7 +235,9 @@
 </div>
 
 
-<!-- CHAT -->
+<!-- =========================================
+     CHAT SCREEN
+========================================= -->
 
 <div id="chatScreen">
 
@@ -248,7 +261,9 @@
 </div>
 
 
-<!-- FIREBASE -->
+<!-- =========================================
+     FIREBASE AUTHENTICATION
+========================================= -->
 
 <script type="module">
 
@@ -260,152 +275,284 @@
         getAuth,
         GoogleAuthProvider,
         signInWithPopup,
-        onAuthStateChanged
+        onAuthStateChanged,
+        signOut
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-    /* FIREBASE CONFIG */
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================= */
 
-    const firebaseConfig = {
-
-        apiKey:
-            "AIzaSyCIGFFgukIL7uN38cap_YX3nezDGFxLk",
-
-        authDomain:
-            "flavi-ai.firebaseapp.com",
-
-        projectId:
-            "flavi-ai",
-
-        storageBucket:
-            "flavi-ai.firebasestorage.app",
-
-        messagingSenderId:
-            "924955533897",
-
-        appId:
-            "1:924955533897:web:858db6f25255aba8ee5598"
-
-    };
+  const firebaseConfig = {
+  apiKey: "AIzaSyCIGFFgukIL7uN38capAC_YX3nezDGFxLk",
+  authDomain: "flavi-ai.firebaseapp.com",
+  projectId: "flavi-ai",
+  storageBucket: "flavi-ai.firebasestorage.app",
+  messagingSenderId: "924955533897",
+  appId: "1:924955533897:web:858db6f25255aba8ee5598"
+};
 
 
-    /* INITIALIZE */
+    /* =========================================
+       INITIALIZE FIREBASE
+    ========================================= */
 
     const app =
         initializeApp(firebaseConfig);
 
+
     const auth =
         getAuth(app);
+
 
     const provider =
         new GoogleAuthProvider();
 
 
-    /* GOOGLE LOGIN */
+    /* =========================================
+       VARIABLES
+    ========================================= */
 
-    async function loginWithGoogle() {
+    let googleUser = null;
 
-        const errorBox =
-            document.getElementById("loginError");
+    let userName = "";
 
-        errorBox.textContent = "";
 
-        try {
+    /* =========================================
+       CLOUDFLARE WORKER
+    ========================================= */
 
-            const result =
-                await signInWithPopup(
-                    auth,
-                    provider
+    const AI_WORKER_URL =
+        "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
+
+
+    /* =========================================
+       GOOGLE LOGIN
+    ========================================= */
+
+    window.loginWithGoogle =
+        async function () {
+
+            const errorBox =
+                document.getElementById(
+                    "loginError"
                 );
 
-            const user =
-                result.user;
-
-            console.log("Google login successful");
-            console.log("Name:", user.displayName);
-            console.log("Email:", user.email);
-            console.log("UID:", user.uid);
+            errorBox.textContent = "";
 
 
-            document
-                .getElementById("loginScreen")
-                .style.display = "none";
+            try {
 
-            document
-                .getElementById("nameScreen")
-                .style.display = "flex";
+                console.log(
+                    "Starting Firebase Google login..."
+                );
 
 
-            if (user.displayName) {
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        provider
+                    );
+
+
+                googleUser =
+                    result.user;
+
+
+                console.log(
+                    "================================"
+                );
+
+                console.log(
+                    "Firebase Google Login SUCCESS"
+                );
+
+                console.log(
+                    "Name:",
+                    googleUser.displayName
+                );
+
+                console.log(
+                    "Email:",
+                    googleUser.email
+                );
+
+                console.log(
+                    "UID:",
+                    googleUser.uid
+                );
+
+                console.log(
+                    "================================"
+                );
+
+
+                /*
+                    Firebase now knows this user.
+
+                    The account should appear in:
+
+                    Firebase
+                    → Authentication
+                    → Users
+                */
+
 
                 document
-                    .getElementById("nameInput")
-                    .value =
-                    user.displayName;
+                    .getElementById(
+                        "loginScreen"
+                    )
+                    .style.display =
+                    "none";
+
+
+                document
+                    .getElementById(
+                        "nameScreen"
+                    )
+                    .style.display =
+                    "flex";
+
+
+                /*
+                    Use Google display name
+                */
+
+                if (
+                    googleUser.displayName
+                ) {
+
+                    document
+                        .getElementById(
+                            "nameInput"
+                        )
+                        .value =
+                        googleUser.displayName;
+
+                }
 
             }
 
-        } catch (error) {
+            catch (error) {
 
-            console.error(
-                "Firebase Google login error:",
-                error
+                console.error(
+                    "Firebase login error:",
+                    error
+                );
+
+
+                let message =
+                    "Google Sign-In failed.";
+
+
+                if (
+                    error.code ===
+                    "auth/popup-blocked"
+                ) {
+
+                    message =
+                        "The Google login popup was blocked. Please allow popups for Flavi.";
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                ) {
+
+                    message =
+                        "The Google login window was closed.";
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/unauthorized-domain"
+                ) {
+
+                    message =
+                        "Flavi's domain is not authorized in Firebase.\n\nAdd flavi-ai.pages.dev to Firebase Authentication → Settings → Authorized domains.";
+
+                }
+
+                else {
+
+                    message =
+                        error.message;
+
+                }
+
+
+                errorBox.textContent =
+                    message;
+
+            }
+
+        };
+
+
+    /* =========================================
+       CREATE GOOGLE BUTTON
+    ========================================= */
+
+    function createGoogleButton() {
+
+        const container =
+            document.getElementById(
+                "googleLogin"
             );
 
-            if (
-                error.code ===
-                "auth/unauthorized-domain"
-            ) {
 
-                errorBox.textContent =
-                    "Firebase says this website domain is not authorized.\n\nAdd flavi-ai.pages.dev under Firebase → Authentication → Settings → Authorized domains.";
+        const button =
+            document.createElement(
+                "button"
+            );
 
-            } else {
 
-                errorBox.textContent =
-                    error.message;
+        button.className =
+            "google-button";
 
-            }
 
-        }
+        button.textContent =
+            "🔵 Continue with Google";
+
+
+        button.onclick =
+            window.loginWithGoogle;
+
+
+        container.appendChild(
+            button
+        );
 
     }
 
 
-    /* CREATE BUTTON */
-
-    const googleButton =
-        document.createElement("button");
-
-    googleButton.className =
-        "google-button";
-
-    googleButton.textContent =
-        "🔵 Continue with Google";
-
-    googleButton.onclick =
-        loginWithGoogle;
-
-    document
-        .getElementById("googleLogin")
-        .appendChild(googleButton);
-
-
-    /* AUTH STATE */
+    /* =========================================
+       AUTH STATE LISTENER
+    ========================================= */
 
     onAuthStateChanged(
         auth,
-        function(user) {
+        function (user) {
 
             if (user) {
 
+                googleUser =
+                    user;
+
+
                 console.log(
-                    "Firebase user:",
+                    "Firebase authenticated user:"
+                );
+
+                console.log(
                     user.email
                 );
 
                 console.log(
-                    "Firebase UID:",
+                    "UID:",
                     user.uid
                 );
 
@@ -414,31 +561,39 @@
         }
     );
 
+
+    /* =========================================
+       CREATE LOGIN BUTTON
+    ========================================= */
+
+    createGoogleButton();
+
+
 </script>
 
 
-<!-- FLAVI CHAT -->
+<!-- =========================================
+     FLAVI CHAT
+========================================= -->
 
 <script>
 
-let userName = "";
 
-
-/* CLOUDFLARE WORKER */
-
-const AI_WORKER_URL =
-    "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
-
-
-/* SAVE NAME */
+/* =========================================
+   SAVE NAME
+========================================= */
 
 function saveName() {
 
+    const input =
+        document.getElementById(
+            "nameInput"
+        );
+
+
     const name =
-        document
-            .getElementById("nameInput")
-            .value
-            .trim();
+        input.value.trim();
+
 
     if (!name) {
 
@@ -450,17 +605,23 @@ function saveName() {
 
     }
 
+
     userName =
         name;
 
 
     document
-        .getElementById("nameScreen")
+        .getElementById(
+            "nameScreen"
+        )
         .style.display =
         "none";
 
+
     document
-        .getElementById("chatScreen")
+        .getElementById(
+            "chatScreen"
+        )
         .style.display =
         "block";
 
@@ -473,7 +634,9 @@ function saveName() {
 }
 
 
-/* ADD MESSAGE */
+/* =========================================
+   ADD MESSAGE
+========================================= */
 
 function addMessage(
     type,
@@ -485,20 +648,25 @@ function addMessage(
             "messages"
         );
 
+
     const div =
         document.createElement(
             "div"
         );
 
+
     div.className =
         `message ${type}`;
+
 
     div.textContent =
         text;
 
+
     messages.appendChild(
         div
     );
+
 
     messages.scrollTop =
         messages.scrollHeight;
@@ -506,9 +674,13 @@ function addMessage(
 }
 
 
-/* ENTER */
+/* =========================================
+   ENTER KEY
+========================================= */
 
-function handleEnter(event) {
+function handleEnter(
+    event
+) {
 
     if (
         event.key === "Enter"
@@ -523,7 +695,9 @@ function handleEnter(event) {
 }
 
 
-/* SEND MESSAGE */
+/* =========================================
+   SEND MESSAGE
+========================================= */
 
 async function sendMessage() {
 
@@ -532,8 +706,10 @@ async function sendMessage() {
             "messageInput"
         );
 
+
     const text =
         input.value.trim();
+
 
     if (!text)
         return;
@@ -544,6 +720,7 @@ async function sendMessage() {
         text
     );
 
+
     input.value = "";
 
 
@@ -552,15 +729,19 @@ async function sendMessage() {
             "div"
         );
 
+
     thinking.className =
         "message ai typing";
+
 
     thinking.textContent =
         "Flavi is thinking... 🌸";
 
 
     document
-        .getElementById("messages")
+        .getElementById(
+            "messages"
+        )
         .appendChild(
             thinking
         );
@@ -572,6 +753,7 @@ async function sendMessage() {
             await fetch(
                 AI_WORKER_URL,
                 {
+
                     method: "POST",
 
                     headers: {
@@ -581,18 +763,33 @@ async function sendMessage() {
 
                     body:
                         JSON.stringify({
+
                             message:
                                 text,
 
                             name:
                                 userName
+
                         })
+
                 }
             );
 
 
         const raw =
             await response.text();
+
+
+        console.log(
+            "Worker status:",
+            response.status
+        );
+
+
+        console.log(
+            "Worker response:",
+            raw
+        );
 
 
         thinking.remove();
@@ -611,18 +808,41 @@ async function sendMessage() {
         }
 
 
-        const data =
-            JSON.parse(raw);
+        let data;
 
 
-        if (data.reply) {
+        try {
+
+            data =
+                JSON.parse(raw);
+
+        }
+
+        catch {
+
+            addMessage(
+                "ai",
+                "Flavi returned an invalid response 😭\n\n" +
+                raw
+            );
+
+            return;
+
+        }
+
+
+        if (
+            data.reply
+        ) {
 
             addMessage(
                 "ai",
                 data.reply
             );
 
-        } else {
+        }
+
+        else {
 
             addMessage(
                 "ai",
@@ -631,13 +851,18 @@ async function sendMessage() {
 
         }
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
+            "Connection error:",
             error
         );
 
+
         thinking.remove();
+
 
         addMessage(
             "ai",
@@ -649,8 +874,9 @@ async function sendMessage() {
 
 }
 
+
 </script>
+
 
 </body>
 </html>
-```
