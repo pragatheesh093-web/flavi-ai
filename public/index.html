@@ -1,17 +1,26 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
-   <meta name="google-site-verification" content="k4mBUTsjHzZB79CbN7BSBtN9aWovUcNjV8fBjRvwfAk" />
-    
+    <meta name="google-site-verification"
+          content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
+
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Flavi AI</title>
+    <meta name="description"
+          content="Flavi AI - A friendly AI companion created by Pragatheesh.">
+
+    <meta name="theme-color"
+          content="#0f0f14">
+
+    <title>Flavi AI — Your Friendly AI Companion</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -68,6 +77,10 @@
             outline: none;
         }
 
+        input:focus {
+            outline: 2px solid #ff6fae;
+        }
+
         button {
             width: 100%;
             padding: 15px;
@@ -84,6 +97,11 @@
             opacity: .9;
         }
 
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
         #nameScreen,
         #chatScreen {
             display: none;
@@ -93,6 +111,7 @@
             height: calc(100vh - 150px);
             overflow-y: auto;
             padding: 25px;
+            padding-bottom: 100px;
         }
 
         .message {
@@ -102,6 +121,7 @@
             border-radius: 18px;
             line-height: 1.5;
             white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .user {
@@ -122,6 +142,7 @@
             display: flex;
             gap: 10px;
             background: #15151c;
+            border-top: 1px solid #292934;
         }
 
         .input-area input {
@@ -161,22 +182,85 @@
             font-size: 14px;
             white-space: pre-wrap;
         }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 55px;
+            background: #15151c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+            border-bottom: 1px solid #292934;
+        }
+
+        .flavi-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-info {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        #chatScreen #messages {
+            padding-top: 75px;
+        }
+
+        .logout-button {
+            width: auto;
+            padding: 8px 14px;
+            font-size: 13px;
+            background: #292934;
+        }
+
+        @media (max-width: 600px) {
+
+            .message {
+                max-width: 85%;
+            }
+
+            .input-area button {
+                width: 80px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+        }
+
     </style>
+
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
 
 <div id="loginScreen" class="screen">
 
     <div class="card">
 
-        <div class="logo">🌸</div>
+        <div class="logo">
+            🌸
+        </div>
 
-        <h1>Flavi AI</h1>
+        <h1>
+            Flavi AI
+        </h1>
 
-        <p>Your friendly AI companion.</p>
+        <p>
+            Your friendly AI companion.
+        </p>
 
         <div id="googleLogin"></div>
 
@@ -184,29 +268,40 @@
             Sign in with your Google account
         </div>
 
-        <div id="loginError" class="error"></div>
+        <div id="loginError"
+             class="error">
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- ================= NAME ================= -->
+<!-- =========================================================
+     NAME SCREEN
+========================================================= -->
 
 <div id="nameScreen" class="screen">
 
     <div class="card">
 
-        <div class="logo">🌸</div>
+        <div class="logo">
+            🌸
+        </div>
 
-        <h1>Welcome to Flavi</h1>
+        <h1>
+            Welcome to Flavi
+        </h1>
 
-        <p>What should I call you?</p>
+        <p>
+            What should I call you?
+        </p>
 
         <input
             id="nameInput"
             type="text"
             placeholder="Enter your name"
+            autocomplete="name"
         >
 
         <button id="startButton">
@@ -218,11 +313,34 @@
 </div>
 
 
-<!-- ================= CHAT ================= -->
+<!-- =========================================================
+     CHAT SCREEN
+========================================================= -->
 
 <div id="chatScreen">
 
+    <div class="top-bar">
+
+        <div class="flavi-title">
+            🌸 Flavi AI
+        </div>
+
+        <div
+            id="userInfo"
+            class="user-info">
+        </div>
+
+        <button
+            id="logoutButton"
+            class="logout-button">
+            Sign Out
+        </button>
+
+    </div>
+
+
     <div id="messages"></div>
+
 
     <div class="input-area">
 
@@ -230,6 +348,7 @@
             id="messageInput"
             type="text"
             placeholder="Talk to Flavi..."
+            autocomplete="off"
         >
 
         <button id="sendButton">
@@ -241,45 +360,46 @@
 </div>
 
 
-<!-- ================= FIREBASE + FLAVI ================= -->
+<!-- =========================================================
+     FIREBASE + FLAVI
+========================================================= -->
 
 <script type="module">
 
-    /*
-    ==================================================
-    FLAVI AI WORKER
-    ==================================================
-    */
+
+    /* =========================================================
+       FLAVI AI WORKER
+    ========================================================= */
 
     const AI_WORKER_URL =
         "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
 
 
-    /*
-    ==================================================
-    FIREBASE
-    ==================================================
-    */
+    /* =========================================================
+       FIREBASE IMPORTS
+    ========================================================= */
 
     import {
         initializeApp
-    } from
+    }
+    from
     "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
     import {
         getAuth,
         GoogleAuthProvider,
         signInWithPopup,
-        onAuthStateChanged
-    } from
+        onAuthStateChanged,
+        signOut
+    }
+    from
     "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-    /*
-    ==================================================
-    FIREBASE CONFIG
-    ==================================================
-    */
+    /* =========================================================
+       FIREBASE CONFIG
+    ========================================================= */
 
     const firebaseConfig = {
 
@@ -304,50 +424,127 @@
     };
 
 
-    /*
-    ==================================================
-    INITIALIZE FIREBASE
-    ==================================================
-    */
+    /* =========================================================
+       INITIALIZE FIREBASE
+    ========================================================= */
 
     const app =
         initializeApp(firebaseConfig);
 
+
     const auth =
         getAuth(app);
+
 
     const provider =
         new GoogleAuthProvider();
 
 
-    /*
-    ==================================================
-    VARIABLES
-    ==================================================
-    */
+    provider.setCustomParameters({
+        prompt: "select_account"
+    });
+
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
 
     let currentUser = null;
+
     let userName = "";
 
 
-    /*
-    ==================================================
-    GOOGLE LOGIN
-    ==================================================
-    */
+    /* =========================================================
+       DOM ELEMENTS
+    ========================================================= */
+
+    const loginScreen =
+        document.getElementById(
+            "loginScreen"
+        );
+
+    const nameScreen =
+        document.getElementById(
+            "nameScreen"
+        );
+
+    const chatScreen =
+        document.getElementById(
+            "chatScreen"
+        );
+
+    const nameInput =
+        document.getElementById(
+            "nameInput"
+        );
+
+    const messageInput =
+        document.getElementById(
+            "messageInput"
+        );
+
+    const sendButton =
+        document.getElementById(
+            "sendButton"
+        );
+
+    const loginError =
+        document.getElementById(
+            "loginError"
+        );
+
+    const userInfo =
+        document.getElementById(
+            "userInfo"
+        );
+
+
+    /* =========================================================
+       GOOGLE LOGIN BUTTON
+    ========================================================= */
+
+    const googleButton =
+        document.createElement(
+            "button"
+        );
+
+
+    googleButton.className =
+        "google-button";
+
+
+    googleButton.textContent =
+        "🔵 Continue with Google";
+
+
+    googleButton.addEventListener(
+        "click",
+        loginWithGoogle
+    );
+
+
+    document
+        .getElementById("googleLogin")
+        .appendChild(
+            googleButton
+        );
+
+
+    /* =========================================================
+       GOOGLE LOGIN
+    ========================================================= */
 
     async function loginWithGoogle() {
 
-        const errorBox =
-            document.getElementById("loginError");
+        loginError.textContent = "";
 
-        errorBox.textContent = "";
+        googleButton.disabled = true;
+
+        googleButton.textContent =
+            "Signing in...";
+
 
         try {
-
-            provider.setCustomParameters({
-                prompt: "select_account"
-            });
 
             const result =
                 await signInWithPopup(
@@ -355,57 +552,50 @@
                     provider
                 );
 
-            const user =
+
+            currentUser =
                 result.user;
 
-            currentUser = user;
 
             console.log(
                 "Google login successful"
             );
 
+
             console.log(
                 "Name:",
-                user.displayName
+                currentUser.displayName
             );
+
 
             console.log(
                 "Email:",
-                user.email
+                currentUser.email
             );
+
 
             console.log(
                 "UID:",
-                user.uid
+                currentUser.uid
             );
 
 
             /*
-            Show name screen
-            */
+             * Put Google display name
+             * into the name field.
+             */
 
-            document
-                .getElementById("loginScreen")
-                .style.display = "none";
+            if (
+                currentUser.displayName
+            ) {
 
-            document
-                .getElementById("nameScreen")
-                .style.display = "flex";
-
-
-            /*
-            Put Google display name
-            into the name box
-            */
-
-            if (user.displayName) {
-
-                document
-                    .getElementById("nameInput")
-                    .value =
-                    user.displayName;
+                nameInput.value =
+                    currentUser.displayName;
 
             }
+
+
+            showNameScreen();
 
         }
 
@@ -416,51 +606,33 @@
                 error
             );
 
-            errorBox.textContent =
+
+            loginError.textContent =
                 "Google Sign-In failed.\n\n" +
                 error.message;
+
+        }
+
+        finally {
+
+            googleButton.disabled =
+                false;
+
+            googleButton.textContent =
+                "🔵 Continue with Google";
 
         }
 
     }
 
 
-    /*
-    ==================================================
-    CREATE GOOGLE BUTTON
-    ==================================================
-    */
-
-    const googleButton =
-        document.createElement("button");
-
-    googleButton.className =
-        "google-button";
-
-    googleButton.textContent =
-        "🔵 Continue with Google";
-
-    googleButton.addEventListener(
-        "click",
-        loginWithGoogle
-    );
-
-    document
-        .getElementById("googleLogin")
-        .appendChild(
-            googleButton
-        );
-
-
-    /*
-    ==================================================
-    AUTH STATE
-    ==================================================
-    */
+    /* =========================================================
+       AUTH STATE
+    ========================================================= */
 
     onAuthStateChanged(
         auth,
-        function(user) {
+        async function(user) {
 
             if (user) {
 
@@ -468,7 +640,7 @@
                     user;
 
                 console.log(
-                    "Logged in:",
+                    "Authenticated:",
                     user.email
                 );
 
@@ -477,27 +649,111 @@
                     user.uid
                 );
 
+
+                /*
+                 * Restore name if we already
+                 * saved it in this browser.
+                 */
+
+                const savedName =
+                    localStorage.getItem(
+                        "flavi_user_name"
+                    );
+
+
+                if (savedName) {
+
+                    userName =
+                        savedName;
+
+                    showChatScreen();
+
+                }
+
+            }
+
+            else {
+
+                currentUser = null;
+
+                loginScreen.style.display =
+                    "flex";
+
+                nameScreen.style.display =
+                    "none";
+
+                chatScreen.style.display =
+                    "none";
+
             }
 
         }
     );
 
 
-    /*
-    ==================================================
-    SAVE NAME
-    ==================================================
-    */
+    /* =========================================================
+       SHOW NAME SCREEN
+    ========================================================= */
+
+    function showNameScreen() {
+
+        loginScreen.style.display =
+            "none";
+
+        nameScreen.style.display =
+            "flex";
+
+        chatScreen.style.display =
+            "none";
+
+    }
+
+
+    /* =========================================================
+       SHOW CHAT SCREEN
+    ========================================================= */
+
+    function showChatScreen() {
+
+        loginScreen.style.display =
+            "none";
+
+        nameScreen.style.display =
+            "none";
+
+        chatScreen.style.display =
+            "block";
+
+
+        if (currentUser) {
+
+            userInfo.textContent =
+                currentUser.email || "";
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SAVE NAME
+    ========================================================= */
 
     function saveName() {
 
-        const input =
-            document.getElementById(
-                "nameInput"
+        if (!currentUser) {
+
+            alert(
+                "Please sign in with Google first."
             );
 
+            return;
+
+        }
+
+
         const name =
-            input.value.trim();
+            nameInput.value.trim();
 
 
         if (!name) {
@@ -515,31 +771,42 @@
             name;
 
 
-        document
-            .getElementById("nameScreen")
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById("chatScreen")
-            .style.display =
-            "block";
-
-
-        addMessage(
-            "ai",
-            `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
+        localStorage.setItem(
+            "flavi_user_name",
+            userName
         );
+
+
+        showChatScreen();
+
+
+        /*
+         * Only show the welcome message
+         * when the chat is empty.
+         */
+
+        if (
+            document
+                .getElementById("messages")
+                .children.length === 0
+        ) {
+
+            addMessage(
+                "ai",
+                `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
+            );
+
+        }
+
+
+        messageInput.focus();
 
     }
 
 
-    /*
-    ==================================================
-    START BUTTON
-    ==================================================
-    */
+    /* =========================================================
+       START BUTTON
+    ========================================================= */
 
     document
         .getElementById("startButton")
@@ -549,11 +816,9 @@
         );
 
 
-    /*
-    ==================================================
-    ADD MESSAGE
-    ==================================================
-    */
+    /* =========================================================
+       ADD MESSAGE
+    ========================================================= */
 
     function addMessage(
         type,
@@ -591,22 +856,15 @@
     }
 
 
-    /*
-    ==================================================
-    SEND MESSAGE
-    ==================================================
-    */
+    /* =========================================================
+       SEND MESSAGE
+    ========================================================= */
 
     async function sendMessage() {
 
-        const input =
-            document.getElementById(
-                "messageInput"
-            );
-
 
         const text =
-            input.value.trim();
+            messageInput.value.trim();
 
 
         if (!text)
@@ -614,8 +872,37 @@
 
 
         /*
-        Show user message
-        */
+         * User must be authenticated.
+         */
+
+        if (!currentUser) {
+
+            addMessage(
+                "ai",
+                "Please sign in with Google first 🌸"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * User name fallback.
+         */
+
+        if (!userName) {
+
+            userName =
+                currentUser.displayName ||
+                "friend";
+
+        }
+
+
+        /*
+         * Show user's message.
+         */
 
         addMessage(
             "user",
@@ -623,12 +910,21 @@
         );
 
 
-        input.value = "";
+        messageInput.value =
+            "";
+
+
+        sendButton.disabled =
+            true;
+
+
+        messageInput.disabled =
+            true;
 
 
         /*
-        Thinking message
-        */
+         * Thinking indicator.
+         */
 
         const thinking =
             document.createElement(
@@ -653,26 +949,39 @@
 
         try {
 
+
+            /* =================================================
+               GET FRESH FIREBASE ID TOKEN
+            ================================================= */
+
+            const idToken =
+                await currentUser.getIdToken(
+                    true
+                );
+
+
             console.log(
-                "Sending message to:",
-                AI_WORKER_URL
+                "Firebase ID token obtained."
             );
 
 
-            /*
-            Send request to
-            Cloudflare Worker
-            */
+            /* =================================================
+               SEND TO CLOUDFLARE WORKER
+            ================================================= */
 
             const response =
                 await fetch(
                     AI_WORKER_URL,
                     {
-                        method: "POST",
+
+                        method:
+                            "POST",
 
                         headers: {
+
                             "Content-Type":
                                 "application/json"
+
                         },
 
                         body:
@@ -684,24 +993,14 @@
                                 name:
                                     userName,
 
-                                email:
-                                    currentUser
-                                        ? currentUser.email
-                                        : null,
-
-                                uid:
-                                    currentUser
-                                        ? currentUser.uid
-                                        : null
+                                idToken:
+                                    idToken
 
                             })
+
                     }
                 );
 
-
-            /*
-            Get response
-            */
 
             const raw =
                 await response.text();
@@ -712,6 +1011,7 @@
                 response.status
             );
 
+
             console.log(
                 "Worker response:",
                 raw
@@ -721,9 +1021,28 @@
             thinking.remove();
 
 
-            /*
-            Worker error
-            */
+            /* =================================================
+               HANDLE AUTH ERROR
+            ================================================= */
+
+            if (
+                response.status === 401 ||
+                response.status === 403
+            ) {
+
+                addMessage(
+                    "ai",
+                    "Your login session expired 🌸 Please sign out and sign in again."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================================
+               HANDLE OTHER SERVER ERRORS
+            ================================================= */
 
             if (!response.ok) {
 
@@ -738,16 +1057,19 @@
             }
 
 
-            /*
-            Convert JSON
-            */
+            /* =================================================
+               PARSE JSON
+            ================================================= */
 
             let data;
+
 
             try {
 
                 data =
-                    JSON.parse(raw);
+                    JSON.parse(
+                        raw
+                    );
 
             }
 
@@ -764,9 +1086,9 @@
             }
 
 
-            /*
-            Show AI reply
-            */
+            /* =================================================
+               SHOW REPLY
+            ================================================= */
 
             if (data.reply) {
 
@@ -781,13 +1103,13 @@
 
                 addMessage(
                     "ai",
-                    "Flavi returned an unexpected response 😭\n\n" +
-                    raw
+                    "Flavi returned an unexpected response 😭"
                 );
 
             }
 
         }
+
 
         catch (error) {
 
@@ -808,28 +1130,94 @@
 
         }
 
+
+        finally {
+
+            sendButton.disabled =
+                false;
+
+            messageInput.disabled =
+                false;
+
+            messageInput.focus();
+
+        }
+
     }
 
 
-    /*
-    ==================================================
-    ENTER KEY
-    ==================================================
-    */
+    /* =========================================================
+       ENTER KEY
+    ========================================================= */
+
+    messageInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       SEND BUTTON
+    ========================================================= */
+
+    sendButton.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    /* =========================================================
+       SIGN OUT
+    ========================================================= */
 
     document
-        .getElementById("messageInput")
+        .getElementById("logoutButton")
         .addEventListener(
-            "keydown",
-            function(event) {
+            "click",
+            async function() {
 
-                if (
-                    event.key === "Enter"
-                ) {
+                try {
 
-                    event.preventDefault();
+                    await signOut(
+                        auth
+                    );
 
-                    sendMessage();
+
+                    userName = "";
+
+
+                    localStorage.removeItem(
+                        "flavi_user_name"
+                    );
+
+
+                    document
+                        .getElementById(
+                            "messages"
+                        )
+                        .innerHTML = "";
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Sign out error:",
+                        error
+                    );
 
                 }
 
@@ -837,21 +1225,8 @@
         );
 
 
-    /*
-    ==================================================
-    SEND BUTTON
-    ==================================================
-    */
-
-    document
-        .getElementById("sendButton")
-        .addEventListener(
-            "click",
-            sendMessage
-        );
-
 </script>
 
 </body>
+
 </html>
-```
