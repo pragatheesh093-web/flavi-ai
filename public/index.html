@@ -368,7 +368,7 @@
 
 
     /* =========================================================
-       FLAVI AI WORKER
+       FLAVI WORKER
     ========================================================= */
 
     const AI_WORKER_URL =
@@ -381,8 +381,7 @@
 
     import {
         initializeApp
-    }
-    from
+    } from
     "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
@@ -392,8 +391,7 @@
         signInWithPopup,
         onAuthStateChanged,
         signOut
-    }
-    from
+    } from
     "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
@@ -431,10 +429,8 @@
     const app =
         initializeApp(firebaseConfig);
 
-
     const auth =
         getAuth(app);
-
 
     const provider =
         new GoogleAuthProvider();
@@ -450,53 +446,39 @@
     ========================================================= */
 
     let currentUser = null;
-
     let userName = "";
 
 
     /* =========================================================
-       DOM ELEMENTS
+       DOM
     ========================================================= */
 
     const loginScreen =
-        document.getElementById(
-            "loginScreen"
-        );
+        document.getElementById("loginScreen");
 
     const nameScreen =
-        document.getElementById(
-            "nameScreen"
-        );
+        document.getElementById("nameScreen");
 
     const chatScreen =
-        document.getElementById(
-            "chatScreen"
-        );
+        document.getElementById("chatScreen");
 
     const nameInput =
-        document.getElementById(
-            "nameInput"
-        );
+        document.getElementById("nameInput");
 
     const messageInput =
-        document.getElementById(
-            "messageInput"
-        );
+        document.getElementById("messageInput");
 
     const sendButton =
-        document.getElementById(
-            "sendButton"
-        );
+        document.getElementById("sendButton");
 
     const loginError =
-        document.getElementById(
-            "loginError"
-        );
+        document.getElementById("loginError");
 
     const userInfo =
-        document.getElementById(
-            "userInfo"
-        );
+        document.getElementById("userInfo");
+
+    const messages =
+        document.getElementById("messages");
 
 
     /* =========================================================
@@ -504,30 +486,22 @@
     ========================================================= */
 
     const googleButton =
-        document.createElement(
-            "button"
-        );
-
+        document.createElement("button");
 
     googleButton.className =
         "google-button";
 
-
     googleButton.textContent =
         "🔵 Continue with Google";
-
 
     googleButton.addEventListener(
         "click",
         loginWithGoogle
     );
 
-
     document
         .getElementById("googleLogin")
-        .appendChild(
-            googleButton
-        );
+        .appendChild(googleButton);
 
 
     /* =========================================================
@@ -557,33 +531,29 @@
                 result.user;
 
 
+            /*
+             * Immediately request a fresh token.
+             * This confirms Firebase can issue
+             * a valid ID token.
+             */
+
+            await currentUser.getIdToken(true);
+
+
             console.log(
                 "Google login successful"
             );
 
-
             console.log(
-                "Name:",
-                currentUser.displayName
-            );
-
-
-            console.log(
-                "Email:",
+                "User:",
                 currentUser.email
             );
-
 
             console.log(
                 "UID:",
                 currentUser.uid
             );
 
-
-            /*
-             * Put Google display name
-             * into the name field.
-             */
 
             if (
                 currentUser.displayName
@@ -605,7 +575,6 @@
                 "Google login error:",
                 error
             );
-
 
             loginError.textContent =
                 "Google Sign-In failed.\n\n" +
@@ -634,45 +603,7 @@
         auth,
         async function(user) {
 
-            if (user) {
-
-                currentUser =
-                    user;
-
-                console.log(
-                    "Authenticated:",
-                    user.email
-                );
-
-                console.log(
-                    "UID:",
-                    user.uid
-                );
-
-
-                /*
-                 * Restore name if we already
-                 * saved it in this browser.
-                 */
-
-                const savedName =
-                    localStorage.getItem(
-                        "flavi_user_name"
-                    );
-
-
-                if (savedName) {
-
-                    userName =
-                        savedName;
-
-                    showChatScreen();
-
-                }
-
-            }
-
-            else {
+            if (!user) {
 
                 currentUser = null;
 
@@ -684,6 +615,71 @@
 
                 chatScreen.style.display =
                     "none";
+
+                return;
+            }
+
+
+            currentUser =
+                user;
+
+
+            console.log(
+                "Authenticated:",
+                user.email
+            );
+
+
+            console.log(
+                "UID:",
+                user.uid
+            );
+
+
+            /*
+             * Make sure the Firebase session
+             * can provide a fresh ID token.
+             */
+
+            try {
+
+                await user.getIdToken(true);
+
+                console.log(
+                    "Firebase token refreshed successfully."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Could not refresh Firebase token:",
+                    error
+                );
+
+                return;
+            }
+
+
+            const savedName =
+                localStorage.getItem(
+                    "flavi_user_name"
+                );
+
+
+            if (savedName) {
+
+                userName =
+                    savedName;
+
+                showChatScreen();
+
+            }
+
+            else {
+
+                showNameScreen();
 
             }
 
@@ -780,15 +776,8 @@
         showChatScreen();
 
 
-        /*
-         * Only show the welcome message
-         * when the chat is empty.
-         */
-
         if (
-            document
-                .getElementById("messages")
-                .children.length === 0
+            messages.children.length === 0
         ) {
 
             addMessage(
@@ -803,10 +792,6 @@
 
     }
 
-
-    /* =========================================================
-       START BUTTON
-    ========================================================= */
 
     document
         .getElementById("startButton")
@@ -825,16 +810,8 @@
         text
     ) {
 
-        const messages =
-            document.getElementById(
-                "messages"
-            );
-
-
         const div =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         div.className =
@@ -845,13 +822,150 @@
             text;
 
 
-        messages.appendChild(
-            div
-        );
+        messages.appendChild(div);
 
 
         messages.scrollTop =
             messages.scrollHeight;
+
+    }
+
+
+    /* =========================================================
+       GET FIREBASE TOKEN
+    ========================================================= */
+
+    async function getFreshFirebaseToken(
+        forceRefresh = false
+    ) {
+
+        if (!currentUser) {
+
+            throw new Error(
+                "No authenticated Firebase user."
+            );
+
+        }
+
+
+        /*
+         * Firebase handles token caching,
+         * expiration and refresh internally.
+         */
+
+        const token =
+            await currentUser.getIdToken(
+                forceRefresh
+            );
+
+
+        if (!token) {
+
+            throw new Error(
+                "Firebase did not return an ID token."
+            );
+
+        }
+
+
+        return token;
+
+    }
+
+
+    /* =========================================================
+       SEND REQUEST TO WORKER
+    ========================================================= */
+
+    async function callFlaviWorker(
+        text,
+        forceRefresh = false
+    ) {
+
+        const idToken =
+            await getFreshFirebaseToken(
+                forceRefresh
+            );
+
+
+        console.log(
+            "Sending Firebase token to Worker..."
+        );
+
+
+        const response =
+            await fetch(
+                AI_WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            message:
+                                text,
+
+                            name:
+                                userName ||
+                                currentUser.displayName ||
+                                "friend",
+
+                            idToken:
+                                idToken
+
+                        })
+
+                }
+            );
+
+
+        const raw =
+            await response.text();
+
+
+        console.log(
+            "Worker status:",
+            response.status
+        );
+
+
+        console.log(
+            "Worker response:",
+            raw
+        );
+
+
+        let data = null;
+
+
+        try {
+
+            data =
+                JSON.parse(raw);
+
+        }
+
+        catch {
+
+            data = null;
+
+        }
+
+
+        return {
+            response,
+            raw,
+            data
+        };
 
     }
 
@@ -862,7 +976,6 @@
 
     async function sendMessage() {
 
-
         const text =
             messageInput.value.trim();
 
@@ -870,10 +983,6 @@
         if (!text)
             return;
 
-
-        /*
-         * User must be authenticated.
-         */
 
         if (!currentUser) {
 
@@ -887,10 +996,6 @@
         }
 
 
-        /*
-         * User name fallback.
-         */
-
         if (!userName) {
 
             userName =
@@ -899,10 +1004,6 @@
 
         }
 
-
-        /*
-         * Show user's message.
-         */
 
         addMessage(
             "user",
@@ -917,19 +1018,12 @@
         sendButton.disabled =
             true;
 
-
         messageInput.disabled =
             true;
 
 
-        /*
-         * Thinking indicator.
-         */
-
         const thinking =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         thinking.className =
@@ -940,117 +1034,93 @@
             "Flavi is thinking... 🌸";
 
 
-        document
-            .getElementById("messages")
-            .appendChild(
-                thinking
-            );
+        messages.appendChild(
+            thinking
+        );
 
 
         try {
 
+            /*
+             * FIRST ATTEMPT
+             *
+             * Use Firebase's current token.
+             */
 
-            /* =================================================
-               GET FRESH FIREBASE ID TOKEN
-            ================================================= */
-
-            const idToken =
-                await currentUser.getIdToken(
-                    true
+            let result =
+                await callFlaviWorker(
+                    text,
+                    false
                 );
 
 
-            console.log(
-                "Firebase ID token obtained."
-            );
+            /*
+             * If Worker rejects the token,
+             * force Firebase to refresh it
+             * and retry ONCE.
+             */
 
+            if (
+                result.response.status === 401
+            ) {
 
-            /* =================================================
-               SEND TO CLOUDFLARE WORKER
-            ================================================= */
-
-            const response =
-                await fetch(
-                    AI_WORKER_URL,
-                    {
-
-                        method:
-                            "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json"
-
-                        },
-
-                        body:
-                            JSON.stringify({
-
-                                message:
-                                    text,
-
-                                name:
-                                    userName,
-
-                                idToken:
-                                    idToken
-
-                            })
-
-                    }
+                console.warn(
+                    "Worker rejected token. Refreshing Firebase token..."
                 );
 
 
-            const raw =
-                await response.text();
+                result =
+                    await callFlaviWorker(
+                        text,
+                        true
+                    );
 
-
-            console.log(
-                "Worker status:",
-                response.status
-            );
-
-
-            console.log(
-                "Worker response:",
-                raw
-            );
+            }
 
 
             thinking.remove();
 
 
             /* =================================================
-               HANDLE AUTH ERROR
+               AUTHENTICATION STILL FAILED
             ================================================= */
 
             if (
-                response.status === 401 ||
-                response.status === 403
+                result.response.status === 401 ||
+                result.response.status === 403
+            ) {
+
+                console.error(
+                    "Authentication failed after token refresh:",
+                    result.raw
+                );
+
+
+                addMessage(
+                    "ai",
+                    "Flavi couldn't verify your Google login 🌸\n\nPlease sign out, sign in again, and try once more."
+                );
+
+
+                return;
+
+            }
+
+
+            /* =================================================
+               OTHER SERVER ERROR
+            ================================================= */
+
+            if (
+                !result.response.ok
             ) {
 
                 addMessage(
                     "ai",
-                    "Your login session expired 🌸 Please sign out and sign in again."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               HANDLE OTHER SERVER ERRORS
-            ================================================= */
-
-            if (!response.ok) {
-
-                addMessage(
-                    "ai",
                     "Flavi's AI brain returned an error 😭\n\n" +
-                    raw
+                    result.raw
                 );
+
 
                 return;
 
@@ -1058,28 +1128,17 @@
 
 
             /* =================================================
-               PARSE JSON
+               JSON RESPONSE
             ================================================= */
 
-            let data;
-
-
-            try {
-
-                data =
-                    JSON.parse(
-                        raw
-                    );
-
-            }
-
-            catch {
+            if (!result.data) {
 
                 addMessage(
                     "ai",
                     "Flavi returned invalid data 😭\n\n" +
-                    raw
+                    result.raw
                 );
+
 
                 return;
 
@@ -1087,14 +1146,16 @@
 
 
             /* =================================================
-               SHOW REPLY
+               AI REPLY
             ================================================= */
 
-            if (data.reply) {
+            if (
+                result.data.reply
+            ) {
 
                 addMessage(
                     "ai",
-                    data.reply
+                    result.data.reply
                 );
 
             }
@@ -1110,11 +1171,10 @@
 
         }
 
-
         catch (error) {
 
             console.error(
-                "Connection error:",
+                "Flavi connection error:",
                 error
             );
 
@@ -1129,7 +1189,6 @@
             );
 
         }
-
 
         finally {
 
@@ -1190,12 +1249,14 @@
 
                 try {
 
-                    await signOut(
-                        auth
-                    );
+                    await signOut(auth);
 
 
-                    userName = "";
+                    currentUser =
+                        null;
+
+                    userName =
+                        "";
 
 
                     localStorage.removeItem(
@@ -1203,12 +1264,13 @@
                     );
 
 
-                    document
-                        .getElementById(
-                            "messages"
-                        )
-                        .innerHTML = "";
+                    messages.innerHTML =
+                        "";
 
+
+                    console.log(
+                        "Signed out successfully."
+                    );
 
                 }
 
