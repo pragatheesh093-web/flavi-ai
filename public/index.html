@@ -2,1274 +2,2279 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="google-site-verification"
-          content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
+        content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Flavi AI - A friendly AI companion created by Pragatheesh.">
+        content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
     <meta name="theme-color"
-          content="#0f0f14">
+        content="#f59abb">
 
     <title>Flavi AI — Your Friendly AI Companion</title>
 
     <style>
 
+        /* =========================================================
+           RESET
+        ========================================================= */
+
         * {
             box-sizing: border-box;
         }
 
+        html,
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f0f14;
-            color: white;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .screen {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card {
-            width: 420px;
-            max-width: 90%;
-            padding: 35px;
-            border-radius: 24px;
-            background: #191922;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,.5);
-        }
-
-        .logo {
-            font-size: 60px;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            margin: 0 0 10px;
-            font-size: 32px;
-        }
-
-        p {
-            color: #aaa;
-        }
-
-        input {
             width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            border: none;
-            border-radius: 12px;
-            background: #292934;
-            color: white;
-            font-size: 16px;
-            outline: none;
+            height: 100%;
+            margin: 0;
         }
 
-        input:focus {
-            outline: 2px solid #ff6fae;
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #4a3440;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(255,255,255,.95),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(255,190,215,.75),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(255,220,235,.85),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #ffeaf3,
+                    #fff7fb,
+                    #f9e7f1
+                );
+        }
+
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        button,
+        input,
+        textarea {
+            font: inherit;
         }
 
         button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            background: #ff6fae;
-            color: white;
-            font-size: 16px;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        button:hover {
-            opacity: .9;
+        .hidden {
+            display: none !important;
         }
 
-        button:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-        }
 
-        #nameScreen,
-        #chatScreen {
-            display: none;
-        }
+        /* =========================================================
+           FLOATING BACKGROUND
+        ========================================================= */
 
-        #messages {
-            height: calc(100vh - 150px);
-            overflow-y: auto;
-            padding: 25px;
-            padding-bottom: 100px;
-        }
-
-        .message {
-            max-width: 75%;
-            padding: 12px 16px;
-            margin: 10px;
-            border-radius: 18px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .user {
-            margin-left: auto;
-            background: #ff6fae;
-        }
-
-        .ai {
-            margin-right: auto;
-            background: #24242f;
-        }
-
-        .input-area {
+        .background-decoration {
             position: fixed;
-            bottom: 0;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(45px);
+            opacity: .45;
+            animation: floatBlob 10s ease-in-out infinite;
+        }
+
+        .blob.one {
+            width: 300px;
+            height: 300px;
+            background: #ffb6d3;
+            top: -100px;
+            left: -80px;
+        }
+
+        .blob.two {
+            width: 360px;
+            height: 360px;
+            background: #ffd5e6;
+            right: -130px;
+            top: 20%;
+            animation-delay: -3s;
+        }
+
+        .blob.three {
+            width: 260px;
+            height: 260px;
+            background: #f7c5df;
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -6s;
+        }
+
+        @keyframes floatBlob {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(20px, -25px) scale(1.08);
+            }
+        }
+
+
+        /* =========================================================
+           PETALS
+        ========================================================= */
+
+        .petal {
+            position: fixed;
+            width: 13px;
+            height: 19px;
+            background: rgba(255, 148, 188, .35);
+            border-radius: 100% 0 100% 0;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        .petal:nth-child(1) {
+            left: 8%;
+            animation-duration: 13s;
+            animation-delay: -3s;
+        }
+
+        .petal:nth-child(2) {
+            left: 22%;
+            animation-duration: 16s;
+            animation-delay: -8s;
+        }
+
+        .petal:nth-child(3) {
+            left: 41%;
+            animation-duration: 12s;
+            animation-delay: -5s;
+        }
+
+        .petal:nth-child(4) {
+            left: 64%;
+            animation-duration: 18s;
+            animation-delay: -10s;
+        }
+
+        .petal:nth-child(5) {
+            left: 83%;
+            animation-duration: 14s;
+            animation-delay: -2s;
+        }
+
+        @keyframes fall {
+
+            0% {
+                top: -30px;
+                transform:
+                    translateX(0)
+                    rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .8;
+            }
+
+            50% {
+                transform:
+                    translateX(80px)
+                    rotate(180deg);
+            }
+
+            100% {
+                top: 110vh;
+                transform:
+                    translateX(-60px)
+                    rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================================================
+           LOGIN / NAME SCREENS
+        ========================================================= */
+
+        .screen {
+            position: relative;
+            z-index: 5;
+
             width: 100%;
-            padding: 15px;
+            height: 100vh;
+
             display: flex;
-            gap: 10px;
-            background: #15151c;
-            border-top: 1px solid #292934;
-        }
-
-        .input-area input {
-            margin: 0;
-            flex: 1;
-        }
-
-        .input-area button {
-            width: 100px;
-        }
-
-        .typing {
-            opacity: .7;
-            font-style: italic;
-        }
-
-        #googleLogin {
-            display: flex;
+            align-items: center;
             justify-content: center;
-            margin-top: 20px;
+
+            padding: 20px;
         }
+
+        .glass-card {
+            width: 430px;
+            max-width: 100%;
+
+            padding: 42px 36px;
+
+            border-radius: 32px;
+
+            background:
+                rgba(255,255,255,.64);
+
+            border:
+                1px solid rgba(255,255,255,.9);
+
+            box-shadow:
+                0 30px 80px rgba(167, 82, 116, .18),
+                inset 0 1px 0 rgba(255,255,255,.9);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+
+            text-align: center;
+
+            animation:
+                cardIn .6s ease;
+        }
+
+        @keyframes cardIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(20px)
+                    scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .flavi-logo {
+            width: 105px;
+            height: 105px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 54px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffd5e4,
+                    #fff
+                );
+
+            box-shadow:
+                0 15px 35px rgba(224, 109, 151, .22);
+
+            animation:
+                logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .glass-card h1 {
+            margin: 0;
+
+            color: #4a2637;
+
+            font-size: 35px;
+            letter-spacing: -1px;
+        }
+
+        .glass-card h2 {
+            margin: 0 0 10px;
+
+            color: #4a2637;
+
+            font-size: 28px;
+        }
+
+        .subtitle {
+            margin: 10px 0 25px;
+
+            color: #8c6878;
+
+            line-height: 1.6;
+        }
+
+        .tiny-text {
+            margin-top: 18px;
+
+            color: #a48694;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           GOOGLE BUTTON
+        ========================================================= */
 
         .google-button {
-            width: 300px;
-            background: #4285f4;
+            width: 100%;
+
+            border: none;
+
+            padding: 15px 20px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(255,255,255,.9);
+
+            color: #4a3440;
+
+            font-weight: 700;
+
+            border:
+                1px solid rgba(218,177,194,.45);
+
+            box-shadow:
+                0 10px 25px rgba(150,90,115,.1);
+
+            transition:
+                .2s ease;
         }
 
-        .account-info {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #999;
+        .google-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 30px rgba(150,90,115,.18);
         }
+
+        .google-button:disabled {
+            opacity: .55;
+            cursor: wait;
+        }
+
+
+        /* =========================================================
+           INPUTS
+        ========================================================= */
+
+        .name-input {
+            width: 100%;
+
+            padding: 16px 18px;
+
+            margin: 12px 0 15px;
+
+            border:
+                1px solid rgba(215,174,192,.5);
+
+            border-radius: 17px;
+
+            background:
+                rgba(255,255,255,.72);
+
+            color: #4a3440;
+
+            outline: none;
+
+            transition: .2s;
+        }
+
+        .name-input:focus {
+            border-color: #ee91b5;
+
+            box-shadow:
+                0 0 0 4px rgba(238,145,181,.13);
+        }
+
+        .start-button {
+            width: 100%;
+
+            border: none;
+
+            padding: 16px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7a4c2,
+                    #e77da6
+                );
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 28px rgba(221,105,149,.25);
+
+            transition: .2s;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================================
+           ERROR
+        ========================================================= */
 
         .error {
-            color: #ff6b6b;
             margin-top: 15px;
-            font-size: 14px;
+
+            color: #c94c68;
+
+            font-size: 13px;
+
             white-space: pre-wrap;
+
+            line-height: 1.5;
         }
 
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        /* =========================================================
+           CHAT APP
+        ========================================================= */
+
+        #chatScreen {
+            position: relative;
+
             width: 100%;
-            height: 55px;
-            background: #15151c;
+            height: 100vh;
+
+            z-index: 4;
+        }
+
+        .app-shell {
+            position: relative;
+
+            display: flex;
+
+            width: 100%;
+            height: 100%;
+
+            padding: 16px;
+
+            gap: 16px;
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+            width: 250px;
+
+            flex-shrink: 0;
+
+            padding: 18px;
+
+            border-radius: 28px;
+
+            background:
+                rgba(255,255,255,.57);
+
+            border:
+                1px solid rgba(255,255,255,.85);
+
+            box-shadow:
+                0 20px 55px rgba(166,83,116,.12);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+
+            display: flex;
+            flex-direction: column;
+
+            animation:
+                sidebarIn .5s ease;
+        }
+
+        @keyframes sidebarIn {
+
+            from {
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 7px 8px 20px;
+
+            border-bottom:
+                1px solid rgba(206,159,180,.25);
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffd4e5,
+                    #fff
+                );
+        }
+
+        .brand-title {
+            font-weight: 850;
+            font-size: 18px;
+            color: #4a2637;
+        }
+
+        .brand-subtitle {
+            font-size: 11px;
+            color: #a37c8d;
+            margin-top: 2px;
+        }
+
+        .sidebar-section {
+            margin-top: 20px;
+
+            color: #aa8797;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.3px;
+
+            padding-left: 8px;
+        }
+
+        .side-button {
+            width: 100%;
+
+            border: none;
+
+            background:
+                transparent;
+
+            color: #765565;
+
+            padding: 12px 11px;
+
+            margin-top: 6px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            text-align: left;
+
+            font-weight: 650;
+
+            transition: .2s;
+        }
+
+        .side-button:hover {
+            background:
+                rgba(255,255,255,.7);
+
+            color: #d65d8c;
+
+            transform: translateX(2px);
+        }
+
+        .side-button.active {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,192,216,.62),
+                    rgba(255,255,255,.72)
+                );
+
+            color: #c94f7e;
+        }
+
+        .side-icon {
+            width: 28px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .account-card {
+            padding: 13px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,.5);
+
+            border:
+                1px solid rgba(255,255,255,.7);
+        }
+
+        .account-name {
+            font-weight: 800;
+
+            color: #563746;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .account-email {
+            margin-top: 4px;
+
+            font-size: 11px;
+
+            color: #a18090;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .signout-side {
+            margin-top: 8px;
+
+            width: 100%;
+
+            border: none;
+
+            padding: 9px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,.7);
+
+            color: #8b6474;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           MAIN PANEL
+        ========================================================= */
+
+        .main-panel {
+            min-width: 0;
+
+            flex: 1;
+
+            height: 100%;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                rgba(255,255,255,.47);
+
+            border:
+                1px solid rgba(255,255,255,.85);
+
+            box-shadow:
+                0 25px 70px rgba(159,78,111,.13);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .chat-header {
+            height: 75px;
+
+            flex-shrink: 0;
+
+            padding: 12px 20px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            z-index: 10;
-            border-bottom: 1px solid #292934;
+
+            border-bottom:
+                1px solid rgba(205,160,180,.24);
+
+            background:
+                rgba(255,255,255,.35);
         }
 
-        .flavi-title {
-            font-weight: bold;
-            font-size: 18px;
+        .header-left {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
         }
 
-        .user-info {
-            font-size: 13px;
-            color: #aaa;
+        .mobile-menu {
+            display: none;
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.7);
+
+            color: #774c60;
         }
 
-        #chatScreen #messages {
-            padding-top: 75px;
+        .flavi-avatar {
+            width: 46px;
+            height: 46px;
+
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffd3e4,
+                    #fff
+                );
+
+            box-shadow:
+                0 8px 18px rgba(221,105,149,.15);
         }
 
-        .logout-button {
-            width: auto;
-            padding: 8px 14px;
-            font-size: 13px;
-            background: #292934;
+        .header-title {
+            font-weight: 850;
+            color: #4a2637;
         }
+
+        .online {
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            font-size: 11px;
+
+            color: #9b7485;
+        }
+
+        .online-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #72c88c;
+
+            box-shadow:
+                0 0 0 4px rgba(114,200,140,.13);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .header-button {
+            width: 39px;
+            height: 39px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.65);
+
+            color: #795466;
+
+            transition: .2s;
+        }
+
+        .header-button:hover {
+            background:
+                rgba(255,255,255,.9);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           CHAT AREA
+        ========================================================= */
+
+        #messages {
+            flex: 1;
+
+            min-height: 0;
+
+            overflow-y: auto;
+
+            padding: 28px 6% 25px;
+
+            scroll-behavior: smooth;
+        }
+
+        #messages::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        #messages::-webkit-scrollbar-thumb {
+            background:
+                rgba(202,125,155,.25);
+
+            border-radius: 20px;
+        }
+
+        .welcome {
+            min-height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .welcome-content {
+            max-width: 570px;
+
+            animation:
+                welcomeIn .7s ease;
+        }
+
+        @keyframes welcomeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-flower {
+            font-size: 52px;
+
+            margin-bottom: 10px;
+
+            animation:
+                logoFloat 4s ease-in-out infinite;
+        }
+
+        .welcome h1 {
+            margin: 0;
+
+            color: #4a2637;
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            letter-spacing: -1.5px;
+        }
+
+        .welcome p {
+            margin: 12px auto 25px;
+
+            color: #8e6b7b;
+
+            line-height: 1.6;
+        }
+
+        .quick-actions {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 9px;
+        }
+
+        .quick-button {
+            border:
+                1px solid rgba(213,165,187,.35);
+
+            background:
+                rgba(255,255,255,.64);
+
+            color: #775365;
+
+            padding: 10px 14px;
+
+            border-radius: 14px;
+
+            font-size: 12px;
+
+            font-weight: 650;
+
+            transition: .2s;
+        }
+
+        .quick-button:hover {
+            background: white;
+
+            color: #d35c8a;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================================
+           MESSAGES
+        ========================================================= */
+
+        .message-row {
+            display: flex;
+
+            width: 100%;
+
+            margin-bottom: 14px;
+
+            animation:
+                messageIn .25s ease;
+        }
+
+        .message-row.user {
+            justify-content: flex-end;
+        }
+
+        .message-row.ai {
+            justify-content: flex-start;
+        }
+
+        .message {
+            position: relative;
+
+            max-width: min(72%, 680px);
+
+            padding: 13px 17px;
+
+            border-radius: 20px;
+
+            line-height: 1.6;
+
+            white-space: pre-wrap;
+
+            overflow-wrap: anywhere;
+
+            font-size: 14px;
+        }
+
+        .message.user {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4a0bd,
+                    #e77ca5
+                );
+
+            border-bottom-right-radius: 6px;
+
+            box-shadow:
+                0 8px 20px rgba(221,105,149,.18);
+        }
+
+        .message.ai {
+            color: #563c49;
+
+            background:
+                rgba(255,255,255,.72);
+
+            border:
+                1px solid rgba(255,255,255,.85);
+
+            border-bottom-left-radius: 6px;
+
+            box-shadow:
+                0 8px 20px rgba(160,90,119,.08);
+        }
+
+        .typing {
+            display: flex;
+            gap: 5px;
+
+            width: fit-content;
+
+            padding: 15px 17px;
+        }
+
+        .typing span {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #d983a5;
+
+            animation:
+                typing 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: .45;
+            }
+
+            30% {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(7px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           COMPOSER
+        ========================================================= */
+
+        .composer-wrap {
+            flex-shrink: 0;
+
+            padding:
+                12px 5% 18px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(255,255,255,.58),
+                    rgba(255,255,255,.15)
+                );
+        }
+
+        .composer {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 7px 7px 7px 17px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.78);
+
+            border:
+                1px solid rgba(255,255,255,.9);
+
+            box-shadow:
+                0 12px 35px rgba(156,81,110,.1);
+        }
+
+        #messageInput {
+            min-width: 0;
+
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: #4e3541;
+
+            font-size: 14px;
+
+            padding: 10px 0;
+        }
+
+        #messageInput::placeholder {
+            color: #b395a2;
+        }
+
+        .composer-button {
+            flex-shrink: 0;
+
+            width: 43px;
+            height: 43px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                rgba(250,218,231,.7);
+
+            color: #c35a84;
+
+            transition: .2s;
+        }
+
+        .composer-button:hover {
+            transform: scale(1.04);
+
+            background:
+                #ffd7e6;
+        }
+
+        #sendButton {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3a0bf,
+                    #e77ba5
+                );
+
+            color: white;
+
+            box-shadow:
+                0 7px 16px rgba(220,105,149,.2);
+        }
+
+        #sendButton:disabled {
+            opacity: .55;
+
+            cursor: wait;
+        }
+
+        .composer-hint {
+            text-align: center;
+
+            font-size: 10px;
+
+            color: #ae8b9a;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================================================
+           DRAWER / SIMPLE PANELS
+        ========================================================= */
+
+        .panel-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(74,38,55,.18);
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+        .panel-overlay.open {
+            display: flex;
+        }
+
+        .info-panel {
+            width: 430px;
+            max-width: 100%;
+
+            padding: 28px;
+
+            border-radius: 26px;
+
+            background:
+                rgba(255,255,255,.88);
+
+            border:
+                1px solid rgba(255,255,255,.95);
+
+            box-shadow:
+                0 30px 80px rgba(112,52,77,.2);
+
+            animation:
+                cardIn .3s ease;
+        }
+
+        .info-panel h2 {
+            margin: 0 0 10px;
+
+            color: #4a2637;
+        }
+
+        .info-panel p {
+            color: #80606f;
+
+            line-height: 1.7;
+        }
+
+        .panel-close {
+            float: right;
+
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #fce4ee;
+
+            color: #a34f70;
+        }
+
+        .announcement {
+            padding: 14px;
+
+            margin-top: 16px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f6,
+                    #fff
+                );
+
+            border:
+                1px solid #f7d6e4;
+
+            color: #6e4858;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .app-shell {
+                padding: 8px;
+            }
+
+            .sidebar {
+                position: fixed;
+
+                left: 8px;
+                top: 8px;
+                bottom: 8px;
+
+                z-index: 80;
+
+                transform:
+                    translateX(-115%);
+
+                transition:
+                    transform .3s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .main-panel {
+                width: 100%;
+            }
+
+            .message {
+                max-width: 84%;
+            }
+
+            #messages {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+            .composer-wrap {
+                padding-left: 3%;
+                padding-right: 3%;
+            }
+
+        }
+
 
         @media (max-width: 600px) {
 
+            .glass-card {
+                padding: 32px 23px;
+
+                border-radius: 27px;
+            }
+
+            .flavi-logo {
+                width: 85px;
+                height: 85px;
+
+                font-size: 43px;
+            }
+
+            .glass-card h1 {
+                font-size: 29px;
+            }
+
+            .chat-header {
+                height: 68px;
+
+                padding:
+                    10px 12px;
+            }
+
+            .flavi-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header-actions {
+                display: none;
+            }
+
             .message {
-                max-width: 85%;
+                max-width: 88%;
+
+                font-size: 13px;
             }
 
-            .input-area button {
-                width: 80px;
-            }
-
-            .user-info {
+            .composer-hint {
                 display: none;
             }
 
         }
 
     </style>
-
 </head>
+
 
 <body>
 
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================= -->
 
-<!-- =========================================================
-     LOGIN SCREEN
-========================================================= -->
+    <div class="background-decoration">
 
-<div id="loginScreen" class="screen">
+        <div class="blob one"></div>
+        <div class="blob two"></div>
+        <div class="blob three"></div>
 
-    <div class="card">
-
-        <div class="logo">
-            🌸
-        </div>
-
-        <h1>
-            Flavi AI
-        </h1>
-
-        <p>
-            Your friendly AI companion.
-        </p>
-
-        <div id="googleLogin"></div>
-
-        <div class="account-info">
-            Sign in with your Google account
-        </div>
-
-        <div id="loginError"
-             class="error">
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     NAME SCREEN
-========================================================= -->
-
-<div id="nameScreen" class="screen">
-
-    <div class="card">
-
-        <div class="logo">
-            🌸
-        </div>
-
-        <h1>
-            Welcome to Flavi
-        </h1>
-
-        <p>
-            What should I call you?
-        </p>
-
-        <input
-            id="nameInput"
-            type="text"
-            placeholder="Enter your name"
-            autocomplete="name"
-        >
-
-        <button id="startButton">
-            Start Chatting
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     CHAT SCREEN
-========================================================= -->
-
-<div id="chatScreen">
-
-    <div class="top-bar">
-
-        <div class="flavi-title">
-            🌸 Flavi AI
-        </div>
-
-        <div
-            id="userInfo"
-            class="user-info">
-        </div>
-
-        <button
-            id="logoutButton"
-            class="logout-button">
-            Sign Out
-        </button>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
 
     </div>
 
 
-    <div id="messages"></div>
+    <!-- =========================================================
+         LOGIN
+    ========================================================= -->
 
+    <div id="loginScreen" class="screen">
 
-    <div class="input-area">
+        <div class="glass-card">
 
-        <input
-            id="messageInput"
-            type="text"
-            placeholder="Talk to Flavi..."
-            autocomplete="off"
-        >
+            <div class="flavi-logo">
+                🌸
+            </div>
 
-        <button id="sendButton">
-            Send
-        </button>
+            <h1>
+                Flavi
+            </h1>
+
+            <p class="subtitle">
+                Your cute little AI companion 💗
+                <br>
+                Talk, laugh, share and explore together.
+            </p>
+
+            <div id="googleLogin"></div>
+
+            <div class="tiny-text">
+                🔐 Secure Google sign-in
+            </div>
+
+            <div id="loginError"
+                class="error">
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+
+    <!-- =========================================================
+         NAME SCREEN
+    ========================================================= -->
+
+    <div id="nameScreen"
+        class="screen"
+        style="display:none;">
+
+        <div class="glass-card">
+
+            <div class="flavi-logo">
+                🌷
+            </div>
+
+            <h2>
+                Welcome to Flavi
+            </h2>
+
+            <p class="subtitle">
+                What should I call you? 💗
+            </p>
+
+            <input
+                id="nameInput"
+                class="name-input"
+                type="text"
+                placeholder="Enter your name..."
+                autocomplete="name"
+            >
+
+            <button
+                id="startButton"
+                class="start-button">
+
+                Meet Flavi ✨
+
+            </button>
+
+            <div class="tiny-text">
+                Flavi will remember your name on this device.
+            </div>
+
+        </div>
+
+    </div>
 
 
-<!-- =========================================================
-     FIREBASE + FLAVI
-========================================================= -->
+    <!-- =========================================================
+         CHAT APP
+    ========================================================= -->
 
-<script type="module">
+    <div id="chatScreen"
+        style="display:none;">
 
-
-    /* =========================================================
-       FLAVI WORKER
-    ========================================================= */
-
-    const AI_WORKER_URL =
-        "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
+        <div class="app-shell">
 
 
-    /* =========================================================
-       FIREBASE IMPORTS
-    ========================================================= */
+            <!-- =====================================================
+                 SIDEBAR
+            ===================================================== -->
 
-    import {
-        initializeApp
-    } from
-    "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+            <aside
+                class="sidebar"
+                id="sidebar">
 
+                <div class="brand">
 
-    import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
-        onAuthStateChanged,
-        signOut
-    } from
-    "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+                    <div class="brand-icon">
+                        🌸
+                    </div>
 
+                    <div>
 
-    /* =========================================================
-       FIREBASE CONFIG
-    ========================================================= */
+                        <div class="brand-title">
+                            Flavi AI
+                        </div>
 
-    const firebaseConfig = {
+                        <div class="brand-subtitle">
+                            your little companion
+                        </div>
 
-        apiKey:
-            "AIzaSyCIGFFgukIL7uN38capAC_YX3nezDGFxLk",
+                    </div>
 
-        authDomain:
-            "flavi-ai.firebaseapp.com",
-
-        projectId:
-            "flavi-ai",
-
-        storageBucket:
-            "flavi-ai.firebasestorage.app",
-
-        messagingSenderId:
-            "924955533897",
-
-        appId:
-            "1:924955533897:web:858db6f25255aba8ee5598"
-
-    };
+                </div>
 
 
-    /* =========================================================
-       INITIALIZE FIREBASE
-    ========================================================= */
-
-    const app =
-        initializeApp(firebaseConfig);
-
-    const auth =
-        getAuth(app);
-
-    const provider =
-        new GoogleAuthProvider();
+                <div class="sidebar-section">
+                    Chat
+                </div>
 
 
-    provider.setCustomParameters({
-        prompt: "select_account"
-    });
+                <button
+                    class="side-button active"
+                    id="newChatButton">
+
+                    <span class="side-icon">
+                        💬
+                    </span>
+
+                    New Chat
+
+                </button>
 
 
-    /* =========================================================
-       VARIABLES
-    ========================================================= */
+                <button
+                    class="side-button"
+                    id="announcementButton">
 
-    let currentUser = null;
-    let userName = "";
+                    <span class="side-icon">
+                        📢
+                    </span>
 
+                    Announcements
 
-    /* =========================================================
-       DOM
-    ========================================================= */
-
-    const loginScreen =
-        document.getElementById("loginScreen");
-
-    const nameScreen =
-        document.getElementById("nameScreen");
-
-    const chatScreen =
-        document.getElementById("chatScreen");
-
-    const nameInput =
-        document.getElementById("nameInput");
-
-    const messageInput =
-        document.getElementById("messageInput");
-
-    const sendButton =
-        document.getElementById("sendButton");
-
-    const loginError =
-        document.getElementById("loginError");
-
-    const userInfo =
-        document.getElementById("userInfo");
-
-    const messages =
-        document.getElementById("messages");
+                </button>
 
 
-    /* =========================================================
-       GOOGLE LOGIN BUTTON
-    ========================================================= */
+                <button
+                    class="side-button"
+                    id="memoryButton">
 
-    const googleButton =
-        document.createElement("button");
+                    <span class="side-icon">
+                        🧠
+                    </span>
 
-    googleButton.className =
-        "google-button";
+                    Memories
 
-    googleButton.textContent =
-        "🔵 Continue with Google";
-
-    googleButton.addEventListener(
-        "click",
-        loginWithGoogle
-    );
-
-    document
-        .getElementById("googleLogin")
-        .appendChild(googleButton);
+                </button>
 
 
-    /* =========================================================
-       GOOGLE LOGIN
-    ========================================================= */
+                <div class="sidebar-section">
+                    Flavi
+                </div>
 
-    async function loginWithGoogle() {
 
-        loginError.textContent = "";
+                <button
+                    class="side-button"
+                    id="voiceButton">
 
-        googleButton.disabled = true;
+                    <span class="side-icon">
+                        🎙️
+                    </span>
+
+                    Voice
+
+                </button>
+
+
+                <button
+                    class="side-button"
+                    id="aboutButton">
+
+                    <span class="side-icon">
+                        💗
+                    </span>
+
+                    About Flavi
+
+                </button>
+
+
+                <div class="sidebar-bottom">
+
+                    <div class="account-card">
+
+                        <div
+                            id="accountName"
+                            class="account-name">
+
+                            Pragatheesh
+
+                        </div>
+
+                        <div
+                            id="accountEmail"
+                            class="account-email">
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="logoutButton"
+                        class="signout-side">
+
+                        🚪 Sign Out
+
+                    </button>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =====================================================
+                 MAIN
+            ===================================================== -->
+
+            <main class="main-panel">
+
+
+                <!-- HEADER -->
+
+                <header class="chat-header">
+
+                    <div class="header-left">
+
+                        <button
+                            class="mobile-menu"
+                            id="mobileMenu">
+
+                            ☰
+
+                        </button>
+
+
+                        <div class="flavi-avatar">
+                            🌸
+                        </div>
+
+
+                        <div>
+
+                            <div class="header-title">
+                                Flavi
+                            </div>
+
+                            <div class="online">
+
+                                <span
+                                    class="online-dot">
+                                </span>
+
+                                Online & ready to chat
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="header-actions">
+
+                        <button
+                            class="header-button"
+                            id="headerNewChat"
+                            title="New chat">
+
+                            ✨
+
+                        </button>
+
+
+                        <button
+                            class="header-button"
+                            id="headerAbout"
+                            title="About Flavi">
+
+                            💗
+
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <!-- MESSAGES -->
+
+                <div id="messages">
+
+                    <div
+                        class="welcome"
+                        id="welcome">
+
+                        <div class="welcome-content">
+
+                            <div class="welcome-flower">
+                                🌸
+                            </div>
+
+                            <h1>
+                                Heyyy! I'm Flavi 💗
+                            </h1>
+
+                            <p>
+                                I'm ready to talk with you,
+                                Pragatheesh.
+                                <br>
+                                Tell me what's on your mind.
+                            </p>
+
+
+                            <div class="quick-actions">
+
+                                <button
+                                    class="quick-button"
+                                    data-message="Hey Flavi! How are you?">
+
+                                    🌸 How are you?
+
+                                </button>
+
+
+                                <button
+                                    class="quick-button"
+                                    data-message="Tell me something funny 😂">
+
+                                    😂 Make me laugh
+
+                                </button>
+
+
+                                <button
+                                    class="quick-button"
+                                    data-message="Tell me something interesting">
+
+                                    ✨ Tell me something
+
+                                </button>
+
+
+                                <button
+                                    class="quick-button"
+                                    data-message="Let's chat casually">
+
+                                    💗 Let's chat
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPOSER -->
+
+                <div class="composer-wrap">
+
+                    <div class="composer">
+
+                        <button
+                            class="composer-button"
+                            id="emojiButton"
+                            title="Emoji">
+
+                            😊
+
+                        </button>
+
+
+                        <input
+                            id="messageInput"
+                            type="text"
+                            placeholder="Talk to Flavi..."
+                            autocomplete="off"
+                        >
+
+
+                        <button
+                            class="composer-button"
+                            id="voiceInputButton"
+                            title="Voice input">
+
+                            🎙️
+
+                        </button>
+
+
+                        <button
+                            id="sendButton"
+                            class="composer-button"
+                            title="Send">
+
+                            ➤
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="composer-hint">
+                        Press Enter to send • Flavi can reply with voice
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         INFORMATION PANEL
+    ========================================================= -->
+
+    <div
+        class="panel-overlay"
+        id="panelOverlay">
+
+        <div class="info-panel">
+
+            <button
+                class="panel-close"
+                id="panelClose">
+
+                ✕
+
+            </button>
+
+            <h2 id="panelTitle">
+                Flavi 🌸
+            </h2>
+
+            <div id="panelContent">
+
+                <p>
+                    Your friendly AI companion created by
+                    Pragatheesh. 💗
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         FIREBASE + FLAVI
+    ========================================================= -->
+
+    <script type="module">
+
+        /* =========================================================
+           WORKER
+        ========================================================= */
+
+        const AI_WORKER_URL =
+            "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
+
+
+        /* =========================================================
+           FIREBASE IMPORTS
+        ========================================================= */
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            onAuthStateChanged,
+            signOut
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+        /* =========================================================
+           FIREBASE CONFIG
+        ========================================================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCIGFFgukIL7uN38capAC_YX3nezDGFxLk",
+
+            authDomain:
+                "flavi-ai.firebaseapp.com",
+
+            projectId:
+                "flavi-ai",
+
+            storageBucket:
+                "flavi-ai.firebasestorage.app",
+
+            messagingSenderId:
+                "924955533897",
+
+            appId:
+                "1:924955533897:web:858db6f25255aba8ee5598"
+
+        };
+
+
+        /* =========================================================
+           INITIALIZE
+        ========================================================= */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+        const auth =
+            getAuth(app);
+
+        const provider =
+            new GoogleAuthProvider();
+
+
+        provider.setCustomParameters({
+            prompt: "select_account"
+        });
+
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        let currentUser = null;
+
+        let userName = "";
+
+        let speakingEnabled = true;
+
+
+        /* =========================================================
+           DOM
+        ========================================================= */
+
+        const loginScreen =
+            document.getElementById(
+                "loginScreen"
+            );
+
+        const nameScreen =
+            document.getElementById(
+                "nameScreen"
+            );
+
+        const chatScreen =
+            document.getElementById(
+                "chatScreen"
+            );
+
+        const nameInput =
+            document.getElementById(
+                "nameInput"
+            );
+
+        const messageInput =
+            document.getElementById(
+                "messageInput"
+            );
+
+        const sendButton =
+            document.getElementById(
+                "sendButton"
+            );
+
+        const loginError =
+            document.getElementById(
+                "loginError"
+            );
+
+        const messages =
+            document.getElementById(
+                "messages"
+            );
+
+        const welcome =
+            document.getElementById(
+                "welcome"
+            );
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const panelOverlay =
+            document.getElementById(
+                "panelOverlay"
+            );
+
+        const panelTitle =
+            document.getElementById(
+                "panelTitle"
+            );
+
+        const panelContent =
+            document.getElementById(
+                "panelContent"
+            );
+
+
+        /* =========================================================
+           GOOGLE LOGIN BUTTON
+        ========================================================= */
+
+        const googleButton =
+            document.createElement(
+                "button"
+            );
+
+        googleButton.className =
+            "google-button";
 
         googleButton.textContent =
-            "Signing in...";
+            "🔵 Continue with Google";
 
+        googleButton.addEventListener(
+            "click",
+            loginWithGoogle
+        );
 
-        try {
-
-            const result =
-                await signInWithPopup(
-                    auth,
-                    provider
-                );
-
-
-            currentUser =
-                result.user;
-
-
-            /*
-             * Immediately request a fresh token.
-             * This confirms Firebase can issue
-             * a valid ID token.
-             */
-
-            await currentUser.getIdToken(true);
-
-
-            console.log(
-                "Google login successful"
-            );
-
-            console.log(
-                "User:",
-                currentUser.email
-            );
-
-            console.log(
-                "UID:",
-                currentUser.uid
+        document
+            .getElementById(
+                "googleLogin"
+            )
+            .appendChild(
+                googleButton
             );
 
 
-            if (
-                currentUser.displayName
-            ) {
+        /* =========================================================
+           GOOGLE LOGIN
+        ========================================================= */
 
-                nameInput.value =
-                    currentUser.displayName;
-
-            }
-
-
-            showNameScreen();
-
-        }
-
-        catch (error) {
-
-            console.error(
-                "Google login error:",
-                error
-            );
+        async function loginWithGoogle() {
 
             loginError.textContent =
-                "Google Sign-In failed.\n\n" +
-                error.message;
-
-        }
-
-        finally {
+                "";
 
             googleButton.disabled =
-                false;
+                true;
 
             googleButton.textContent =
-                "🔵 Continue with Google";
+                "Signing in...";
 
-        }
-
-    }
-
-
-    /* =========================================================
-       AUTH STATE
-    ========================================================= */
-
-    onAuthStateChanged(
-        auth,
-        async function(user) {
-
-            if (!user) {
-
-                currentUser = null;
-
-                loginScreen.style.display =
-                    "flex";
-
-                nameScreen.style.display =
-                    "none";
-
-                chatScreen.style.display =
-                    "none";
-
-                return;
-            }
-
-
-            currentUser =
-                user;
-
-
-            console.log(
-                "Authenticated:",
-                user.email
-            );
-
-
-            console.log(
-                "UID:",
-                user.uid
-            );
-
-
-            /*
-             * Make sure the Firebase session
-             * can provide a fresh ID token.
-             */
 
             try {
 
-                await user.getIdToken(true);
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        provider
+                    );
+
+
+                currentUser =
+                    result.user;
+
+
+                await currentUser
+                    .getIdToken(true);
+
 
                 console.log(
-                    "Firebase token refreshed successfully."
+                    "Google login successful"
                 );
+
+
+                if (
+                    currentUser.displayName
+                ) {
+
+                    nameInput.value =
+                        currentUser.displayName;
+
+                }
+
+
+                showNameScreen();
 
             }
 
             catch (error) {
 
                 console.error(
-                    "Could not refresh Firebase token:",
+                    "Google login error:",
                     error
                 );
 
-                return;
-            }
 
-
-            const savedName =
-                localStorage.getItem(
-                    "flavi_user_name"
-                );
-
-
-            if (savedName) {
-
-                userName =
-                    savedName;
-
-                showChatScreen();
+                loginError.textContent =
+                    "Google Sign-In failed.\n\n" +
+                    error.message;
 
             }
 
-            else {
+            finally {
 
-                showNameScreen();
+                googleButton.disabled =
+                    false;
 
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       SHOW NAME SCREEN
-    ========================================================= */
-
-    function showNameScreen() {
-
-        loginScreen.style.display =
-            "none";
-
-        nameScreen.style.display =
-            "flex";
-
-        chatScreen.style.display =
-            "none";
-
-    }
-
-
-    /* =========================================================
-       SHOW CHAT SCREEN
-    ========================================================= */
-
-    function showChatScreen() {
-
-        loginScreen.style.display =
-            "none";
-
-        nameScreen.style.display =
-            "none";
-
-        chatScreen.style.display =
-            "block";
-
-
-        if (currentUser) {
-
-            userInfo.textContent =
-                currentUser.email || "";
-
-        }
-
-    }
-
-
-    /* =========================================================
-       SAVE NAME
-    ========================================================= */
-
-    function saveName() {
-
-        if (!currentUser) {
-
-            alert(
-                "Please sign in with Google first."
-            );
-
-            return;
-
-        }
-
-
-        const name =
-            nameInput.value.trim();
-
-
-        if (!name) {
-
-            alert(
-                "Please enter your name."
-            );
-
-            return;
-
-        }
-
-
-        userName =
-            name;
-
-
-        localStorage.setItem(
-            "flavi_user_name",
-            userName
-        );
-
-
-        showChatScreen();
-
-
-        if (
-            messages.children.length === 0
-        ) {
-
-            addMessage(
-                "ai",
-                `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
-            );
-
-        }
-
-
-        messageInput.focus();
-
-    }
-
-
-    document
-        .getElementById("startButton")
-        .addEventListener(
-            "click",
-            saveName
-        );
-
-
-    /* =========================================================
-       ADD MESSAGE
-    ========================================================= */
-
-    function addMessage(
-        type,
-        text
-    ) {
-
-        const div =
-            document.createElement("div");
-
-
-        div.className =
-            "message " + type;
-
-
-        div.textContent =
-            text;
-
-
-        messages.appendChild(div);
-
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-    }
-
-
-    /* =========================================================
-       GET FIREBASE TOKEN
-    ========================================================= */
-
-    async function getFreshFirebaseToken(
-        forceRefresh = false
-    ) {
-
-        if (!currentUser) {
-
-            throw new Error(
-                "No authenticated Firebase user."
-            );
-
-        }
-
-
-        /*
-         * Firebase handles token caching,
-         * expiration and refresh internally.
-         */
-
-        const token =
-            await currentUser.getIdToken(
-                forceRefresh
-            );
-
-
-        if (!token) {
-
-            throw new Error(
-                "Firebase did not return an ID token."
-            );
-
-        }
-
-
-        return token;
-
-    }
-
-
-    /* =========================================================
-       SEND REQUEST TO WORKER
-    ========================================================= */
-
-    async function callFlaviWorker(
-        text,
-        forceRefresh = false
-    ) {
-
-        const idToken =
-            await getFreshFirebaseToken(
-                forceRefresh
-            );
-
-
-        console.log(
-            "Sending Firebase token to Worker..."
-        );
-
-
-        const response =
-            await fetch(
-                AI_WORKER_URL,
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            message:
-                                text,
-
-                            name:
-                                userName ||
-                                currentUser.displayName ||
-                                "friend",
-
-                            idToken:
-                                idToken
-
-                        })
-
-                }
-            );
-
-
-        const raw =
-            await response.text();
-
-
-        console.log(
-            "Worker status:",
-            response.status
-        );
-
-
-        console.log(
-            "Worker response:",
-            raw
-        );
-
-
-        let data = null;
-
-
-        try {
-
-            data =
-                JSON.parse(raw);
-
-        }
-
-        catch {
-
-            data = null;
-
-        }
-
-
-        return {
-            response,
-            raw,
-            data
-        };
-
-    }
-
-
-    /* =========================================================
-       SEND MESSAGE
-    ========================================================= */
-
-    async function sendMessage() {
-
-        const text =
-            messageInput.value.trim();
-
-
-        if (!text)
-            return;
-
-
-        if (!currentUser) {
-
-            addMessage(
-                "ai",
-                "Please sign in with Google first 🌸"
-            );
-
-            return;
-
-        }
-
-
-        if (!userName) {
-
-            userName =
-                currentUser.displayName ||
-                "friend";
-
-        }
-
-
-        addMessage(
-            "user",
-            text
-        );
-
-
-        messageInput.value =
-            "";
-
-
-        sendButton.disabled =
-            true;
-
-        messageInput.disabled =
-            true;
-
-
-        const thinking =
-            document.createElement("div");
-
-
-        thinking.className =
-            "message ai typing";
-
-
-        thinking.textContent =
-            "Flavi is thinking... 🌸";
-
-
-        messages.appendChild(
-            thinking
-        );
-
-
-        try {
-
-            /*
-             * FIRST ATTEMPT
-             *
-             * Use Firebase's current token.
-             */
-
-            let result =
-                await callFlaviWorker(
-                    text,
-                    false
-                );
-
-
-            /*
-             * If Worker rejects the token,
-             * force Firebase to refresh it
-             * and retry ONCE.
-             */
-
-            if (
-                result.response.status === 401
-            ) {
-
-                console.warn(
-                    "Worker rejected token. Refreshing Firebase token..."
-                );
-
-
-                result =
-                    await callFlaviWorker(
-                        text,
-                        true
-                    );
-
-            }
-
-
-            thinking.remove();
-
-
-            /* =================================================
-               AUTHENTICATION STILL FAILED
-            ================================================= */
-
-            if (
-                result.response.status === 401 ||
-                result.response.status === 403
-            ) {
-
-                console.error(
-                    "Authentication failed after token refresh:",
-                    result.raw
-                );
-
-
-                addMessage(
-                    "ai",
-                    "Flavi couldn't verify your Google login 🌸\n\nPlease sign out, sign in again, and try once more."
-                );
-
-
-                return;
-
-            }
-
-
-            /* =================================================
-               OTHER SERVER ERROR
-            ================================================= */
-
-            if (
-                !result.response.ok
-            ) {
-
-                addMessage(
-                    "ai",
-                    "Flavi's AI brain returned an error 😭\n\n" +
-                    result.raw
-                );
-
-
-                return;
-
-            }
-
-
-            /* =================================================
-               JSON RESPONSE
-            ================================================= */
-
-            if (!result.data) {
-
-                addMessage(
-                    "ai",
-                    "Flavi returned invalid data 😭\n\n" +
-                    result.raw
-                );
-
-
-                return;
-
-            }
-
-
-            /* =================================================
-               AI REPLY
-            ================================================= */
-
-            if (
-                result.data.reply
-            ) {
-
-                addMessage(
-                    "ai",
-                    result.data.reply
-                );
-
-            }
-
-            else {
-
-                addMessage(
-                    "ai",
-                    "Flavi returned an unexpected response 😭"
-                );
+                googleButton.textContent =
+                    "🔵 Continue with Google";
 
             }
 
         }
 
-        catch (error) {
 
-            console.error(
-                "Flavi connection error:",
-                error
-            );
+        /* =========================================================
+           AUTH STATE
+        ========================================================= */
 
+        onAuthStateChanged(
+            auth,
+            async function(user) {
 
-            thinking.remove();
-
-
-            addMessage(
-                "ai",
-                "Unable to connect to Flavi's AI brain 😭\n\n" +
-                error.message
-            );
-
-        }
-
-        finally {
-
-            sendButton.disabled =
-                false;
-
-            messageInput.disabled =
-                false;
-
-            messageInput.focus();
-
-        }
-
-    }
-
-
-    /* =========================================================
-       ENTER KEY
-    ========================================================= */
-
-    messageInput.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                event.preventDefault();
-
-                sendMessage();
-
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       SEND BUTTON
-    ========================================================= */
-
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
-
-
-    /* =========================================================
-       SIGN OUT
-    ========================================================= */
-
-    document
-        .getElementById("logoutButton")
-        .addEventListener(
-            "click",
-            async function() {
-
-                try {
-
-                    await signOut(auth);
-
+                if (!user) {
 
                     currentUser =
                         null;
 
-                    userName =
-                        "";
+                    loginScreen.style.display =
+                        "flex";
+
+                    nameScreen.style.display =
+                        "none";
+
+                    chatScreen.style.display =
+                        "none";
+
+                    return;
+
+                }
 
 
-                    localStorage.removeItem(
-                        "flavi_user_name"
-                    );
+                currentUser =
+                    user;
 
 
-                    messages.innerHTML =
-                        "";
+                try {
 
-
-                    console.log(
-                        "Signed out successfully."
+                    await user.getIdToken(
+                        true
                     );
 
                 }
@@ -1277,9 +2282,33 @@
                 catch (error) {
 
                     console.error(
-                        "Sign out error:",
+                        "Could not refresh Firebase token:",
                         error
                     );
+
+                    return;
+
+                }
+
+
+                const savedName =
+                    localStorage.getItem(
+                        "flavi_user_name"
+                    );
+
+
+                if (savedName) {
+
+                    userName =
+                        savedName;
+
+                    showChatScreen();
+
+                }
+
+                else {
+
+                    showNameScreen();
 
                 }
 
@@ -1287,7 +2316,1229 @@
         );
 
 
-</script>
+        /* =========================================================
+           SHOW NAME
+        ========================================================= */
+
+        function showNameScreen() {
+
+            loginScreen.style.display =
+                "none";
+
+            nameScreen.style.display =
+                "flex";
+
+            chatScreen.style.display =
+                "none";
+
+        }
+
+
+        /* =========================================================
+           SHOW CHAT
+        ========================================================= */
+
+        function showChatScreen() {
+
+            loginScreen.style.display =
+                "none";
+
+            nameScreen.style.display =
+                "none";
+
+            chatScreen.style.display =
+                "block";
+
+
+            const accountName =
+                document.getElementById(
+                    "accountName"
+                );
+
+            const accountEmail =
+                document.getElementById(
+                    "accountEmail"
+                );
+
+
+            accountName.textContent =
+                userName ||
+                currentUser?.displayName ||
+                "Pragatheesh";
+
+
+            accountEmail.textContent =
+                currentUser?.email ||
+                "";
+
+
+            setTimeout(
+                () => messageInput.focus(),
+                200
+            );
+
+        }
+
+
+        /* =========================================================
+           SAVE NAME
+        ========================================================= */
+
+        function saveName() {
+
+            if (!currentUser) {
+
+                alert(
+                    "Please sign in with Google first."
+                );
+
+                return;
+
+            }
+
+
+            const name =
+                nameInput.value.trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Please enter your name."
+                );
+
+                return;
+
+            }
+
+
+            userName =
+                name;
+
+
+            localStorage.setItem(
+                "flavi_user_name",
+                userName
+            );
+
+
+            showChatScreen();
+
+
+            if (
+                messages.querySelectorAll(
+                    ".message"
+                ).length === 0
+            ) {
+
+                addMessage(
+                    "ai",
+                    `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`
+                );
+
+            }
+
+        }
+
+
+        document
+            .getElementById(
+                "startButton"
+            )
+            .addEventListener(
+                "click",
+                saveName
+            );
+
+
+        /* =========================================================
+           ADD MESSAGE
+        ========================================================= */
+
+        function addMessage(
+            type,
+            text
+        ) {
+
+            if (welcome) {
+
+                welcome.classList.add(
+                    "hidden"
+                );
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "message-row " +
+                type;
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "message " +
+                type;
+
+
+            div.textContent =
+                text;
+
+
+            row.appendChild(
+                div
+            );
+
+
+            messages.appendChild(
+                row
+            );
+
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+
+            return row;
+
+        }
+
+
+        /* =========================================================
+           TYPING
+        ========================================================= */
+
+        function addTyping() {
+
+            if (welcome) {
+
+                welcome.classList.add(
+                    "hidden"
+                );
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "message-row ai";
+
+
+            const typing =
+                document.createElement(
+                    "div"
+                );
+
+
+            typing.className =
+                "message ai typing";
+
+
+            typing.innerHTML =
+                "<span></span><span></span><span></span>";
+
+
+            row.appendChild(
+                typing
+            );
+
+
+            messages.appendChild(
+                row
+            );
+
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+
+            return row;
+
+        }
+
+
+        /* =========================================================
+           FIREBASE TOKEN
+        ========================================================= */
+
+        async function getFreshFirebaseToken(
+            forceRefresh = false
+        ) {
+
+            if (!currentUser) {
+
+                throw new Error(
+                    "No authenticated Firebase user."
+                );
+
+            }
+
+
+            const token =
+                await currentUser.getIdToken(
+                    forceRefresh
+                );
+
+
+            if (!token) {
+
+                throw new Error(
+                    "Firebase did not return an ID token."
+                );
+
+            }
+
+
+            return token;
+
+        }
+
+
+        /* =========================================================
+           CALL WORKER
+        ========================================================= */
+
+        async function callFlaviWorker(
+            text,
+            forceRefresh = false
+        ) {
+
+            const idToken =
+                await getFreshFirebaseToken(
+                    forceRefresh
+                );
+
+
+            const response =
+                await fetch(
+                    AI_WORKER_URL,
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                message:
+                                    text,
+
+                                name:
+                                    userName ||
+                                    currentUser.displayName ||
+                                    "friend",
+
+                                idToken:
+                                    idToken
+
+                            })
+
+                    }
+                );
+
+
+            const raw =
+                await response.text();
+
+
+            let data = null;
+
+
+            try {
+
+                data =
+                    JSON.parse(raw);
+
+            }
+
+            catch {
+
+                data = null;
+
+            }
+
+
+            return {
+
+                response,
+                raw,
+                data
+
+            };
+
+        }
+
+
+        /* =========================================================
+           SPEAK
+        ========================================================= */
+
+        function speak(text) {
+
+            if (!speakingEnabled)
+                return;
+
+            if (
+                !("speechSynthesis" in window)
+            )
+                return;
+
+
+            window.speechSynthesis.cancel();
+
+
+            const utterance =
+                new SpeechSynthesisUtterance(
+                    text
+                );
+
+
+            utterance.rate =
+                1;
+
+            utterance.pitch =
+                1.08;
+
+            utterance.volume =
+                1;
+
+
+            const voices =
+                speechSynthesis.getVoices();
+
+
+            const preferred =
+                voices.find(
+                    voice =>
+                        /zira|female|samantha|aria/i
+                            .test(
+                                voice.name
+                            )
+                );
+
+
+            if (preferred) {
+
+                utterance.voice =
+                    preferred;
+
+            }
+
+
+            speechSynthesis.speak(
+                utterance
+            );
+
+        }
+
+
+        /* =========================================================
+           SEND MESSAGE
+        ========================================================= */
+
+        async function sendMessage(
+            forcedText = null
+        ) {
+
+            const text =
+                forcedText !== null
+                    ? forcedText
+                    : messageInput.value.trim();
+
+
+            if (!text)
+                return;
+
+
+            if (!currentUser) {
+
+                addMessage(
+                    "ai",
+                    "Please sign in with Google first 🌸"
+                );
+
+                return;
+
+            }
+
+
+            if (!userName) {
+
+                userName =
+                    currentUser.displayName ||
+                    "friend";
+
+            }
+
+
+            addMessage(
+                "user",
+                text
+            );
+
+
+            messageInput.value =
+                "";
+
+
+            sendButton.disabled =
+                true;
+
+            messageInput.disabled =
+                true;
+
+
+            const thinking =
+                addTyping();
+
+
+            try {
+
+                let result =
+                    await callFlaviWorker(
+                        text,
+                        false
+                    );
+
+
+                if (
+                    result.response.status ===
+                    401
+                ) {
+
+                    console.warn(
+                        "Refreshing Firebase token..."
+                    );
+
+
+                    result =
+                        await callFlaviWorker(
+                            text,
+                            true
+                        );
+
+                }
+
+
+                thinking.remove();
+
+
+                if (
+                    result.response.status === 401 ||
+                    result.response.status === 403
+                ) {
+
+                    addMessage(
+                        "ai",
+                        "Aiyo 😭 I couldn't verify your Google login.\n\nPlease sign out, sign in again, and try once more. 🌸"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !result.response.ok
+                ) {
+
+                    addMessage(
+                        "ai",
+                        "Flavi's AI brain returned an error 😭\n\n" +
+                        result.raw
+                    );
+
+                    return;
+
+                }
+
+
+                if (!result.data) {
+
+                    addMessage(
+                        "ai",
+                        "Flavi returned invalid data 😭\n\n" +
+                        result.raw
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    result.data.reply
+                ) {
+
+                    addMessage(
+                        "ai",
+                        result.data.reply
+                    );
+
+
+                    speak(
+                        result.data.reply
+                    );
+
+                }
+
+                else {
+
+                    addMessage(
+                        "ai",
+                        "Flavi returned an unexpected response 😭"
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Flavi connection error:",
+                    error
+                );
+
+
+                thinking.remove();
+
+
+                addMessage(
+                    "ai",
+                    "Unable to connect to Flavi's AI brain 😭\n\n" +
+                    error.message
+                );
+
+            }
+
+            finally {
+
+                sendButton.disabled =
+                    false;
+
+                messageInput.disabled =
+                    false;
+
+                messageInput.focus();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           ENTER KEY
+        ========================================================= */
+
+        messageInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           SEND BUTTON
+        ========================================================= */
+
+        sendButton.addEventListener(
+            "click",
+            () => sendMessage()
+        );
+
+
+        /* =========================================================
+           QUICK BUTTONS
+        ========================================================= */
+
+        document
+            .querySelectorAll(
+                ".quick-button"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            sendMessage(
+                                button.dataset.message
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           NEW CHAT
+        ========================================================= */
+
+        function newChat() {
+
+            messages.innerHTML = "";
+
+
+            const newWelcome =
+                document.createElement(
+                    "div"
+                );
+
+
+            newWelcome.className =
+                "welcome";
+
+
+            newWelcome.id =
+                "welcome";
+
+
+            newWelcome.innerHTML = `
+
+                <div class="welcome-content">
+
+                    <div class="welcome-flower">
+                        🌸
+                    </div>
+
+                    <h1>
+                        Fresh chat 💗
+                    </h1>
+
+                    <p>
+                        I'm listening, ${userName || "Pragatheesh"}.
+                        <br>
+                        What shall we talk about?
+                    </p>
+
+                    <div class="quick-actions">
+
+                        <button
+                            class="quick-button"
+                            data-message="Hey Flavi! How are you?">
+
+                            🌸 How are you?
+
+                        </button>
+
+                        <button
+                            class="quick-button"
+                            data-message="Tell me something funny 😂">
+
+                            😂 Make me laugh
+
+                        </button>
+
+                        <button
+                            class="quick-button"
+                            data-message="Tell me something interesting">
+
+                            ✨ Tell me something
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            messages.appendChild(
+                newWelcome
+            );
+
+
+            newWelcome
+                .querySelectorAll(
+                    ".quick-button"
+                )
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                sendMessage(
+                                    button.dataset.message
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+        }
+
+
+        document
+            .getElementById(
+                "newChatButton"
+            )
+            .addEventListener(
+                "click",
+                newChat
+            );
+
+
+        document
+            .getElementById(
+                "headerNewChat"
+            )
+            .addEventListener(
+                "click",
+                newChat
+            );
+
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        document
+            .getElementById(
+                "mobileMenu"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           PANEL
+        ========================================================= */
+
+        function openPanel(
+            title,
+            content
+        ) {
+
+            panelTitle.textContent =
+                title;
+
+            panelContent.innerHTML =
+                content;
+
+            panelOverlay.classList.add(
+                "open"
+            );
+
+        }
+
+
+        function closePanel() {
+
+            panelOverlay.classList.remove(
+                "open"
+            );
+
+        }
+
+
+        document
+            .getElementById(
+                "panelClose"
+            )
+            .addEventListener(
+                "click",
+                closePanel
+            );
+
+
+        panelOverlay.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    panelOverlay
+                ) {
+
+                    closePanel();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        function openAbout() {
+
+            window.location.href =
+                "about.html";
+
+        }
+
+
+        document
+            .getElementById(
+                "aboutButton"
+            )
+            .addEventListener(
+                "click",
+                openAbout
+            );
+
+
+        document
+            .getElementById(
+                "headerAbout"
+            )
+            .addEventListener(
+                "click",
+                openAbout
+            );
+
+
+        /* =========================================================
+           ANNOUNCEMENTS
+        ========================================================= */
+
+        document
+            .getElementById(
+                "announcementButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    openPanel(
+                        "Announcements 📢",
+                        `
+                            <p>
+                                Welcome to the new Flavi experience! 🌸
+                            </p>
+
+                            <div class="announcement">
+                                💗 Flavi has a fresh new look.
+                                More features are coming soon!
+                            </div>
+                        `
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           MEMORIES
+        ========================================================= */
+
+        document
+            .getElementById(
+                "memoryButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    openPanel(
+                        "Flavi Memories 🧠",
+                        `
+                            <p>
+                                Flavi's memory system is connected
+                                to your AI backend.
+                            </p>
+
+                            <div class="announcement">
+                                🧠 You can use commands such as:
+                                <br><br>
+                                <b>/remember</b> something
+                                <br>
+                                <b>/memories</b>
+                                <br>
+                                <b>/forget</b> something
+                            </div>
+                        `
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           VOICE
+        ========================================================= */
+
+        document
+            .getElementById(
+                "voiceButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    speakingEnabled =
+                        !speakingEnabled;
+
+
+                    openPanel(
+                        "Flavi Voice 🎙️",
+                        speakingEnabled
+                            ? `
+                                <p>
+                                    Voice replies are
+                                    <b>enabled</b>. 🔊
+                                </p>
+
+                                <div class="announcement">
+                                    Flavi will automatically
+                                    speak her replies when
+                                    your browser supports
+                                    speech synthesis.
+                                </div>
+                            `
+                            : `
+                                <p>
+                                    Voice replies are
+                                    <b>disabled</b>. 🔇
+                                </p>
+
+                                <div class="announcement">
+                                    You can turn them back on
+                                    anytime from the Voice button.
+                                </div>
+                            `
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           EMOJI
+        ========================================================= */
+
+        document
+            .getElementById(
+                "emojiButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    messageInput.value +=
+                        " 😊";
+
+                    messageInput.focus();
+
+                }
+            );
+
+
+        /* =========================================================
+           VOICE INPUT
+        ========================================================= */
+
+        document
+            .getElementById(
+                "voiceInputButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    const Recognition =
+                        window.SpeechRecognition ||
+                        window.webkitSpeechRecognition;
+
+
+                    if (!Recognition) {
+
+                        alert(
+                            "Voice input isn't supported by this browser."
+                        );
+
+                        return;
+
+                    }
+
+
+                    const recognition =
+                        new Recognition();
+
+
+                    recognition.lang =
+                        "en-IN";
+
+
+                    recognition.interimResults =
+                        false;
+
+
+                    recognition.maxAlternatives =
+                        1;
+
+
+                    recognition.onresult =
+                        event => {
+
+                            const transcript =
+                                event
+                                    .results[0][0]
+                                    .transcript;
+
+
+                            messageInput.value =
+                                transcript;
+
+
+                            messageInput.focus();
+
+                        };
+
+
+                    recognition.onerror =
+                        error => {
+
+                            console.error(
+                                "Voice input error:",
+                                error
+                            );
+
+                        };
+
+
+                    recognition.start();
+
+                }
+            );
+
+
+        /* =========================================================
+           SIGN OUT
+        ========================================================= */
+
+        document
+            .getElementById(
+                "logoutButton"
+            )
+            .addEventListener(
+                "click",
+                async function() {
+
+                    try {
+
+                        await signOut(
+                            auth
+                        );
+
+
+                        currentUser =
+                            null;
+
+                        userName =
+                            "";
+
+
+                        localStorage.removeItem(
+                            "flavi_user_name"
+                        );
+
+
+                        messages.innerHTML =
+                            "";
+
+
+                        console.log(
+                            "Signed out successfully."
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Sign out error:",
+                            error
+                        );
+
+                    }
+
+                }
+            );
+
+
+        /* =========================================================
+           ESCAPE PANEL
+        ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closePanel();
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
