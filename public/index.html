@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="google-site-verification"
@@ -15,10 +14,9 @@
       content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
 <meta name="theme-color"
-      content="#ff72ae">
+      content="#170d19">
 
 <title>Flavi AI — Your Friendly AI Companion</title>
-
 
 <style>
 
@@ -39,12 +37,8 @@ body {
 }
 
 body {
-
     font-family:
         Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
         "Segoe UI",
         Arial,
         sans-serif;
@@ -53,16 +47,21 @@ body {
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(255, 105, 170, .18),
-            transparent 35%
+            circle at 15% 15%,
+            rgba(255, 105, 174, .30),
+            transparent 32%
         ),
         radial-gradient(
-            circle at 80% 80%,
-            rgba(168, 107, 255, .16),
+            circle at 85% 25%,
+            rgba(255, 150, 205, .25),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255, 182, 217, .20),
             transparent 35%
         ),
-        #090912;
+        #170d19;
 
     overflow: hidden;
 }
@@ -73,68 +72,45 @@ body {
 ========================================================= */
 
 .background {
-
     position: fixed;
-
     inset: 0;
-
     overflow: hidden;
-
     pointer-events: none;
-
     z-index: 0;
 }
 
 .blob {
-
     position: absolute;
-
     border-radius: 50%;
-
-    filter: blur(55px);
-
-    opacity: .35;
-
-    animation:
-        floatBlob 12s ease-in-out infinite;
+    filter: blur(80px);
+    opacity: .55;
+    animation: floatBlob 12s ease-in-out infinite;
 }
 
 .blob.one {
-
-    width: 280px;
-    height: 280px;
-
-    background: #ff5fa2;
-
+    width: 320px;
+    height: 320px;
+    background: #ff6fae;
     left: -80px;
     top: 10%;
-
 }
 
 .blob.two {
-
-    width: 330px;
-    height: 330px;
-
-    background: #9c6cff;
-
+    width: 350px;
+    height: 350px;
+    background: #ff9acb;
     right: -100px;
-    top: 25%;
-
+    top: 20%;
     animation-delay: -4s;
 }
 
 .blob.three {
-
-    width: 240px;
-    height: 240px;
-
-    background: #ff8fd0;
-
-    left: 40%;
+    width: 280px;
+    height: 280px;
+    background: #ffb6d9;
+    left: 35%;
     bottom: -100px;
-
-    animation-delay: -8s;
+    animation-delay: -7s;
 }
 
 @keyframes floatBlob {
@@ -142,340 +118,70 @@ body {
     0%,
     100% {
         transform:
-            translate3d(0,0,0)
+            translate(0, 0)
             scale(1);
     }
 
     50% {
         transform:
-            translate3d(50px,-35px,0)
-            scale(1.12);
+            translate(45px, -35px)
+            scale(1.13);
     }
 }
 
 
 /* =========================================================
-   FLOATING PETALS
+   FLOATING HEARTS
 ========================================================= */
 
-.petals {
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 1;
-}
-
-.petal {
-
+.particle {
     position: absolute;
-
-    top: -50px;
-
-    font-size: 20px;
-
-    opacity: .55;
+    color: rgba(255, 220, 237, .75);
+    font-size: 18px;
 
     animation:
-        fall linear infinite;
+        particleFloat linear infinite;
 }
 
-.petal:nth-child(1) {
-    left: 8%;
-    animation-duration: 13s;
-    animation-delay: -3s;
-}
-
-.petal:nth-child(2) {
-    left: 23%;
-    animation-duration: 17s;
-    animation-delay: -9s;
-}
-
-.petal:nth-child(3) {
-    left: 42%;
-    animation-duration: 14s;
-    animation-delay: -6s;
-}
-
-.petal:nth-child(4) {
-    left: 61%;
-    animation-duration: 19s;
-    animation-delay: -12s;
-}
-
-.petal:nth-child(5) {
-    left: 79%;
-    animation-duration: 15s;
-    animation-delay: -2s;
-}
-
-.petal:nth-child(6) {
-    left: 93%;
-    animation-duration: 18s;
-    animation-delay: -10s;
-}
-
-@keyframes fall {
-
-    0% {
-        transform:
-            translateY(-80px)
-            rotate(0deg);
-    }
-
-    100% {
-        transform:
-            translateY(110vh)
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   INTRO SCREEN
-========================================================= */
-
-#introScreen {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 9999;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #211225,
-            #090912 70%
-        );
-
-    animation:
-        introFade 4.2s forwards;
-}
-
-.intro-content {
-
-    text-align: center;
-
-    animation:
-        introPop 1.5s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-.intro-flower {
-
-    font-size: 90px;
-
-    animation:
-        flowerFloat 2s
-        ease-in-out infinite;
-
-    filter:
-        drop-shadow(
-            0 0 35px
-            rgba(255,110,180,.7)
-        );
-}
-
-.intro-title {
-
-    margin-top: 15px;
-
-    font-size: clamp(
-        42px,
-        8vw,
-        78px
-    );
-
-    font-weight: 800;
-
-    letter-spacing: -3px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #ff8ec5,
-            #c9a3ff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-}
-
-.intro-subtitle {
-
-    margin-top: 8px;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 15px;
-
-    letter-spacing: 2px;
-}
-
-.intro-loader {
-
-    width: 130px;
-
-    height: 4px;
-
-    margin:
-        25px auto 0;
-
-    overflow: hidden;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.1);
-}
-
-.intro-loader::after {
-
-    content: "";
-
-    display: block;
-
-    width: 50%;
-
-    height: 100%;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff6fab,
-            #c993ff
-        );
-
-    animation:
-        loader 2s ease-in-out infinite;
-}
-
-@keyframes introPop {
+@keyframes particleFloat {
 
     from {
-        opacity: 0;
         transform:
-            scale(.65)
-            translateY(30px);
+            translateY(110vh)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .8;
     }
 
     to {
-        opacity: 1;
         transform:
-            scale(1)
-            translateY(0);
-    }
-}
+            translateY(-15vh)
+            rotate(360deg);
 
-@keyframes flowerFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-4deg);
-    }
-
-    50% {
-        transform:
-            translateY(-12px)
-            rotate(4deg);
-    }
-}
-
-@keyframes loader {
-
-    0% {
-        transform:
-            translateX(-130px);
-    }
-
-    100% {
-        transform:
-            translateX(260px);
-    }
-}
-
-@keyframes introFade {
-
-    0%,
-    72% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
         opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
     }
 }
 
 
 /* =========================================================
-   LOGIN / NAME SCREEN
+   GLASS
 ========================================================= */
 
-.screen {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 20;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-}
-
-#nameScreen,
-#chatScreen {
-
-    display: none;
-}
-
-.auth-card {
-
-    width: min(
-        440px,
-        94vw
-    );
-
-    padding: 38px 32px;
+.glass {
+    background:
+        rgba(255, 255, 255, .075);
 
     border:
         1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 30px;
-
-    background:
-        rgba(20,20,32,.68);
+        rgba(255, 255, 255, .14);
 
     backdrop-filter:
         blur(25px);
@@ -484,24 +190,202 @@ body {
         blur(25px);
 
     box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.45),
+        0 25px 80px
+        rgba(0, 0, 0, .35);
+}
 
-        inset 0 1px 0
-        rgba(255,255,255,.08);
+
+/* =========================================================
+   INTRO ANIMATION
+========================================================= */
+
+#introScreen {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #6d294d,
+            #170d19 65%
+        );
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+#introScreen.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-content {
+    text-align: center;
+
+    animation:
+        introAppear 1.2s ease;
+}
+
+.intro-logo {
+
+    width: 115px;
+    height: 115px;
+
+    margin:
+        0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 36px;
+
+    font-size: 62px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6fae,
+            #ff9bca
+        );
+
+    box-shadow:
+        0 0 70px
+        rgba(255, 105, 174, .65);
+
+    animation:
+        logoPulse 2s ease-in-out infinite;
+}
+
+.intro-title {
+
+    font-size: 48px;
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ffb8d8,
+            #ffd9e9,
+            #fff
+        );
+
+    background-size: 250% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    animation:
+        gradientMove 3s linear infinite;
+}
+
+.intro-subtitle {
+
+    margin-top: 10px;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size: 15px;
+}
+
+@keyframes introAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.88);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes logoPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes gradientMove {
+
+    to {
+        background-position:
+            250% center;
+    }
+}
+
+
+/* =========================================================
+   SCREEN
+========================================================= */
+
+.screen {
+
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.card {
+
+    width: 430px;
+    max-width: 92%;
+
+    padding: 42px 35px;
+
+    border-radius: 32px;
 
     text-align: center;
 
     animation:
-        authCardIn
-        .9s
-        cubic-bezier(.2,.8,.2,1);
+        cardAppear .8s ease;
 }
 
-@keyframes authCardIn {
+@keyframes cardAppear {
 
     from {
         opacity: 0;
+
         transform:
             translateY(35px)
             scale(.94);
@@ -509,124 +393,106 @@ body {
 
     to {
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
 }
 
-.auth-logo {
+.logo {
 
     width: 90px;
     height: 90px;
 
-    margin: 0 auto 18px;
+    margin:
+        0 auto 20px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    border-radius: 28px;
+    border-radius: 29px;
+
+    font-size: 50px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,111,174,.22),
-            rgba(168,112,255,.22)
+            #ff6fae,
+            #ff9bca
         );
 
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    font-size: 50px;
+    box-shadow:
+        0 15px 50px
+        rgba(255, 105, 174, .35);
 
     animation:
-        logoPulse 3s
-        ease-in-out infinite;
+        logoPulse 3s ease-in-out infinite;
 }
 
-@keyframes logoPulse {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-2deg);
-    }
-
-    50% {
-        transform:
-            translateY(-7px)
-            rotate(2deg);
-    }
-}
-
-.auth-card h1 {
+h1 {
 
     font-size: 34px;
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 
-    letter-spacing: -1px;
+    letter-spacing: -.8px;
 }
 
-.auth-card p {
+.card p {
 
     color:
-        rgba(255,255,255,.6);
+        rgba(255,255,255,.65);
 
-    margin-bottom: 24px;
+    margin-bottom: 25px;
 
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   INPUTS
+   INPUT
 ========================================================= */
 
 input {
 
     width: 100%;
 
-    border: 0;
-    outline: 0;
-
-    padding: 15px 17px;
-
-    border-radius: 16px;
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.07);
+    padding:
+        16px 18px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.12);
 
-    font-size: 15px;
+    border-radius: 16px;
 
-    transition:
-        .25s;
+    background:
+        rgba(255,255,255,.075);
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition: .25s;
 }
 
 input::placeholder {
-
     color:
-        rgba(255,255,255,.38);
+        rgba(255,255,255,.4);
 }
 
 input:focus {
 
     border-color:
-        rgba(255,111,174,.65);
+        rgba(255, 105, 174, .75);
 
     box-shadow:
         0 0 0 4px
-        rgba(255,111,174,.1);
+        rgba(255,105,174,.12);
 }
 
 
@@ -636,124 +502,135 @@ input:focus {
 
 button {
 
-    border: 0;
-    outline: 0;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-weight: 700;
+    border: none;
 
     border-radius: 15px;
 
+    padding:
+        15px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6eae,
+            #ff92c2
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
     transition:
         transform .2s,
-        opacity .2s,
-        background .2s;
+        box-shadow .2s,
+        opacity .2s;
 }
 
 button:hover {
 
     transform:
         translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,105,174,.28);
 }
 
 button:active {
-
-    transform:
-        translateY(0)
-        scale(.98);
+    transform: scale(.97);
 }
 
 button:disabled {
 
     opacity: .5;
 
-    cursor:
-        not-allowed;
+    cursor: not-allowed;
 }
 
-.primary-button {
+#startButton {
 
     width: 100%;
 
-    padding: 14px 18px;
-
     margin-top: 14px;
+}
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff5fa2,
-            #c56cff
-        );
 
-    box-shadow:
-        0 10px 30px
-        rgba(255,95,162,.2);
+/* =========================================================
+   GOOGLE LOGIN
+========================================================= */
+
+#googleLogin {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 20px;
 }
 
 .google-button {
 
     width: 100%;
 
-    padding: 14px;
-
-    margin-top: 5px;
-
     background:
-        rgba(255,255,255,.09);
+        rgba(255,255,255,.1);
 
     border:
         1px solid
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.15);
+
+    box-shadow: none;
 }
 
 .google-button:hover {
 
     background:
-        rgba(255,255,255,.14);
+        rgba(255,255,255,.16);
+
+    box-shadow: none;
 }
 
 .account-info {
 
-    margin-top: 18px;
+    margin-top: 16px;
+
+    font-size: 12px;
 
     color:
         rgba(255,255,255,.4);
-
-    font-size: 12px;
 }
 
 .error {
 
-    margin-top: 15px;
-
     color:
-        #ff7d91;
+        #ff9db8;
+
+    margin-top: 15px;
 
     font-size: 13px;
 
-    white-space:
-        pre-wrap;
+    white-space: pre-wrap;
 }
 
 
 /* =========================================================
-   CHAT APP
+   CHAT
 ========================================================= */
 
 #chatScreen {
 
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 10;
+    position: relative;
 
     width: 100%;
-    height: 100%;
+    height: 100vh;
+
+    z-index: 5;
+
+    display: none;
 }
 
 
@@ -765,110 +642,90 @@ button:disabled {
 
     position: fixed;
 
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 18px;
+    top: 18px;
+    bottom: 18px;
 
-    width: 265px;
+    width: 245px;
 
-    z-index: 100;
+    border-radius: 27px;
 
-    padding: 20px 14px;
+    padding: 20px;
 
-    background:
-        rgba(12,12,21,.78);
-
-    backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
-
-    border-right:
-        1px solid
-        rgba(255,255,255,.08);
+    z-index: 30;
 
     display: flex;
 
     flex-direction: column;
 
     transition:
-        transform .3s
-        ease;
+        transform .3s ease;
 }
 
-.brand {
+.sidebar-brand {
 
     display: flex;
 
     align-items: center;
 
-    gap: 11px;
+    gap: 12px;
 
     padding:
-        5px 10px 22px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.07);
+        7px 5px 25px;
 }
 
-.brand-icon {
+.sidebar-brand-icon {
 
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
+
+    border-radius: 15px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 14px;
-
     background:
         linear-gradient(
             135deg,
-            rgba(255,102,166,.2),
-            rgba(172,110,255,.2)
+            #ff6eae,
+            #ff9bc9
         );
 
     font-size: 24px;
 }
 
-.brand-name {
-
-    font-size: 19px;
-
-    font-weight: 800;
+.sidebar-brand strong {
+    font-size: 18px;
 }
 
-.brand-small {
+.sidebar-brand small {
+
+    display: block;
 
     color:
-        rgba(255,255,255,.4);
-
-    font-size: 11px;
+        rgba(255,255,255,.45);
 
     margin-top: 2px;
 }
 
+.sidebar-section {
 
-/* =========================================================
-   SIDEBAR NAV
-========================================================= */
+    margin:
+        8px 0 9px 7px;
 
-.nav {
+    font-size: 11px;
 
-    display: flex;
+    text-transform: uppercase;
 
-    flex-direction: column;
+    letter-spacing: 1px;
 
-    gap: 6px;
-
-    margin-top: 20px;
+    color:
+        rgba(255,255,255,.35);
 }
 
-.nav-item {
+.sidebar-button {
 
     width: 100%;
 
@@ -876,144 +733,76 @@ button:disabled {
 
     align-items: center;
 
-    gap: 13px;
+    gap: 12px;
 
     padding:
-        12px 13px;
+        13px 14px;
+
+    margin-bottom: 6px;
+
+    background: transparent;
 
     color:
-        rgba(255,255,255,.65);
-
-    background:
-        transparent;
+        rgba(255,255,255,.72);
 
     text-align: left;
 
-    font-size: 14px;
+    border-radius: 14px;
+
+    box-shadow: none;
 
     font-weight: 600;
 }
 
-.nav-item:hover {
+.sidebar-button:hover {
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.08);
+
+    box-shadow: none;
+
+    transform: none;
 
     color: white;
 }
 
-.nav-item.active {
+.sidebar-button.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,105,174,.28),
+            rgba(255,160,205,.16)
+        );
 
     color: white;
+}
+
+.sidebar-spacer {
+    flex: 1;
+}
+
+.voice-status {
+
+    padding: 12px;
+
+    margin-bottom: 12px;
+
+    border-radius: 15px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,95,162,.18),
-            rgba(161,104,255,.13)
-        );
-
-    border:
-        1px solid
-        rgba(255,111,174,.15);
-}
-
-.nav-icon {
-
-    width: 25px;
-
-    text-align: center;
-
-    font-size: 18px;
-}
-
-.owner-nav {
-
-    margin-top: 12px;
+        rgba(255,255,255,.05);
 
     color:
-        #ffc1dc;
+        rgba(255,255,255,.55);
+
+    font-size: 12px;
+
+    line-height: 1.5;
 }
 
-
-/* =========================================================
-   SIDEBAR BOTTOM
-========================================================= */
-
-.sidebar-bottom {
-
-    margin-top: auto;
-
-    padding-top: 15px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.07);
-}
-
-.profile {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 9px;
-}
-
-.profile-avatar {
-
-    width: 37px;
-    height: 37px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff70ac,
-            #a56cff
-        );
-
-    font-size: 17px;
-}
-
-.profile-text {
-
-    min-width: 0;
-}
-
-.profile-name {
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-}
-
-.profile-email {
-
-    color:
-        rgba(255,255,255,.35);
-
-    font-size: 10px;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
+.voice-status strong {
+    color: #ffb2d4;
 }
 
 
@@ -1021,24 +810,22 @@ button:disabled {
    MAIN CHAT
 ========================================================= */
 
-.main {
+.chat-main {
 
-    position: fixed;
+    height: 100vh;
 
-    left: 265px;
+    margin-left: 281px;
 
-    top: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
 
     display: flex;
 
     flex-direction: column;
 }
 
-.topbar {
+.chat-header {
 
-    height: 65px;
+    height: 75px;
 
     flex-shrink: 0;
 
@@ -1049,71 +836,50 @@ button:disabled {
     justify-content: space-between;
 
     padding:
-        0 22px;
+        0 28px;
 
     border-bottom:
         1px solid
         rgba(255,255,255,.07);
 
     background:
-        rgba(9,9,18,.45);
+        rgba(23,13,25,.35);
 
     backdrop-filter:
-        blur(18px);
+        blur(20px);
 }
 
-.mobile-menu {
-
-    display: none;
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 13px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    font-size: 20px;
-}
-
-.top-title {
+.chat-title {
 
     display: flex;
 
     align-items: center;
 
-    gap: 9px;
+    gap: 10px;
 
-    font-weight: 750;
+    font-weight: 800;
 
-    font-size: 15px;
+    font-size: 18px;
 }
 
-.status-dot {
+.online-dot {
 
     width: 8px;
     height: 8px;
 
     border-radius: 50%;
 
-    background: #67e8a3;
+    background: #75f0a6;
 
     box-shadow:
         0 0 12px
-        rgba(103,232,163,.7);
+        #75f0a6;
 }
 
-.logout {
-
-    padding:
-        9px 13px;
+.user-info {
 
     color:
-        rgba(255,255,255,.65);
-
-    background:
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.5);
 
     font-size: 12px;
 }
@@ -1130,34 +896,26 @@ button:disabled {
     overflow-y: auto;
 
     padding:
-        35px
-        clamp(18px, 7vw, 90px)
-        140px;
+        30px 7% 140px;
 
-    scroll-behavior:
-        smooth;
+    scroll-behavior: smooth;
 }
 
 #messages::-webkit-scrollbar {
-
-    width: 6px;
+    width: 7px;
 }
 
 #messages::-webkit-scrollbar-thumb {
 
     background:
-        rgba(255,255,255,.1);
+        rgba(255,255,255,.12);
 
-    border-radius:
-        10px;
+    border-radius: 20px;
 }
 
 .message {
 
-    width: fit-content;
-
-    max-width:
-        min(720px, 78%);
+    max-width: 72%;
 
     padding:
         13px 17px;
@@ -1165,36 +923,36 @@ button:disabled {
     margin:
         10px 0;
 
-    border-radius:
-        19px;
+    border-radius: 21px;
 
-    line-height:
-        1.6;
+    line-height: 1.55;
 
-    white-space:
-        pre-wrap;
+    white-space: pre-wrap;
 
-    word-break:
-        break-word;
+    word-wrap: break-word;
 
     animation:
-        messageIn
-        .3s
-        ease;
+        messageIn .3s ease;
 }
 
 @keyframes messageIn {
 
     from {
+
         opacity: 0;
+
         transform:
-            translateY(8px);
+            translateY(10px)
+            scale(.98);
     }
 
     to {
+
         opacity: 1;
+
         transform:
-            translateY(0);
+            translateY(0)
+            scale(1);
     }
 }
 
@@ -1205,16 +963,16 @@ button:disabled {
     background:
         linear-gradient(
             135deg,
-            #ff5fa2,
-            #c46cff
+            #ff6ba9,
+            #ff91c2
         );
 
     border-bottom-right-radius:
-        5px;
+        7px;
 
     box-shadow:
-        0 8px 25px
-        rgba(255,95,162,.13);
+        0 8px 30px
+        rgba(255,105,180,.16);
 }
 
 .message.ai {
@@ -1222,14 +980,14 @@ button:disabled {
     margin-right: auto;
 
     background:
-        rgba(255,255,255,.065);
+        rgba(255,255,255,.075);
 
     border:
         1px solid
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.08);
 
     border-bottom-left-radius:
-        5px;
+        7px;
 }
 
 .typing {
@@ -1237,99 +995,15 @@ button:disabled {
     color:
         rgba(255,255,255,.55);
 
-    font-style:
-        italic;
+    font-style: italic;
 }
 
 
 /* =========================================================
-   WELCOME
+   INPUT AREA
 ========================================================= */
 
-.welcome {
-
-    min-height:
-        100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding:
-        30px 0 100px;
-}
-
-.welcome-flavi {
-
-    width: 95px;
-    height: 95px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 30px;
-
-    font-size: 53px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,100,169,.18),
-            rgba(170,105,255,.17)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    box-shadow:
-        0 0 70px
-        rgba(255,100,170,.1);
-
-    animation:
-        logoPulse
-        3s
-        ease-in-out
-        infinite;
-}
-
-.welcome h2 {
-
-    margin-top: 20px;
-
-    font-size:
-        clamp(26px, 4vw, 38px);
-
-    letter-spacing:
-        -1px;
-}
-
-.welcome p {
-
-    margin-top: 8px;
-
-    max-width: 550px;
-
-    color:
-        rgba(255,255,255,.5);
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   CHAT INPUT
-========================================================= */
-
-.composer {
+.input-area {
 
     position: absolute;
 
@@ -1338,114 +1012,126 @@ button:disabled {
     bottom: 0;
 
     padding:
-        15px
-        clamp(15px, 6vw, 80px)
-        22px;
+        18px 7% 22px;
+
+    display: flex;
+
+    gap: 10px;
 
     background:
         linear-gradient(
             to top,
-            rgba(9,9,18,1),
-            rgba(9,9,18,.85),
+            #170d19 30%,
+            rgba(23,13,25,.85),
             transparent
         );
+
+    z-index: 20;
 }
 
-.composer-inner {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    max-width: 900px;
-
-    margin: auto;
-
-    padding:
-        7px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 20px;
-
-    background:
-        rgba(20,20,30,.78);
-
-    backdrop-filter:
-        blur(20px);
-
-    box-shadow:
-        0 15px 50px
-        rgba(0,0,0,.3);
-}
-
-.composer input {
+.input-area input {
 
     flex: 1;
 
-    background:
-        transparent;
+    min-width: 0;
 
-    border: 0;
-
-    padding:
-        12px 13px;
-
-    box-shadow:
-        none;
-}
-
-.composer input:focus {
-
-    box-shadow:
-        none;
-}
-
-.send-button {
-
-    width: 47px;
-    height: 47px;
-
-    flex-shrink: 0;
-
-    border-radius: 15px;
+    margin: 0;
 
     background:
-        linear-gradient(
-            135deg,
-            #ff5fa2,
-            #c66cff
-        );
+        rgba(255,255,255,.09);
 
-    font-size: 19px;
+    backdrop-filter:
+        blur(20px);
+}
+
+.input-area button {
+    width: 105px;
 }
 
 
 /* =========================================================
-   MOBILE OVERLAY
+   MOBILE MENU
 ========================================================= */
 
-.sidebar-overlay {
+.mobile-menu {
+
+    display: none;
+
+    position: fixed;
+
+    left: 16px;
+    top: 16px;
+
+    z-index: 100;
+
+    width: 45px;
+    height: 45px;
+
+    padding: 0;
+
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
 
     position: fixed;
 
     inset: 0;
 
-    z-index: 90;
+    z-index: 200;
 
     display: none;
 
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
     background:
-        rgba(0,0,0,.5);
+        rgba(0,0,0,.55);
+
+    backdrop-filter:
+        blur(10px);
 }
 
-.sidebar-overlay.show {
+.modal.show {
+    display: flex;
+}
 
-    display: block;
+.modal-card {
+
+    width: 440px;
+    max-width: 100%;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    animation:
+        cardAppear .3s ease;
+}
+
+.modal-card h2 {
+    margin-bottom: 12px;
+}
+
+.modal-card p {
+
+    color:
+        rgba(255,255,255,.62);
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.modal-close {
+    width: 100%;
 }
 
 
@@ -1453,165 +1139,81 @@ button:disabled {
    MOBILE
 ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
 
     .sidebar {
 
         transform:
-            translateX(-100%);
+            translateX(-115%);
+
+        top: 12px;
+        bottom: 12px;
+        left: 12px;
     }
 
     .sidebar.open {
 
         transform:
             translateX(0);
-    }
 
-    .main {
-
-        left: 0;
+        box-shadow:
+            0 20px 70px
+            rgba(0,0,0,.5);
     }
 
     .mobile-menu {
 
-        display: block;
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
     }
 
-    .topbar {
+    .chat-main {
+        margin-left: 0;
+    }
 
-        padding:
-            0 12px;
+    .chat-header {
+        padding-left: 75px;
     }
 
     #messages {
 
-        padding:
-            25px
-            15px
-            130px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .input-area {
+
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .message {
+        max-width: 86%;
+    }
+}
 
-        max-width:
-            88%;
+@media (max-width: 500px) {
+
+    .card {
+        padding: 32px 22px;
     }
 
-    .logout {
+    .intro-title {
+        font-size: 38px;
+    }
 
+    .input-area button {
+        width: 78px;
+    }
+
+    .user-info {
         display: none;
-    }
-
-}
-
-
-/* =========================================================
-   PANEL BUTTONS
-========================================================= */
-
-.panel-button {
-
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 13px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-}
-
-.panel-button:hover {
-
-    background:
-        rgba(255,255,255,.11);
-}
-
-.panel-danger {
-
-    background:
-        rgba(255,70,120,.12);
-}
-
-.panel-input {
-
-    margin-top: 10px;
-
-    margin-bottom: 2px;
-}
-
-
-/* =========================================================
-   ANNOUNCEMENT CARD
-========================================================= */
-
-.announcement-card {
-
-    width:
-        min(650px, 100%);
-
-    padding:
-        22px;
-
-    border-radius:
-        22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,95,162,.13),
-            rgba(165,105,255,.10)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    text-align:
-        left;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading-dots span {
-
-    display:
-        inline-block;
-
-    animation:
-        dots 1.3s infinite;
-}
-
-.loading-dots span:nth-child(2) {
-    animation-delay: .15s;
-}
-
-.loading-dots span:nth-child(3) {
-    animation-delay: .3s;
-}
-
-@keyframes dots {
-
-    0%,
-    70%,
-    100% {
-        opacity: .2;
-    }
-
-    35% {
-        opacity: 1;
     }
 }
 
 </style>
-
 </head>
 
 
@@ -1619,7 +1221,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     ANIMATED BACKGROUND
+     BACKGROUND
 ========================================================= -->
 
 <div class="background">
@@ -1628,42 +1230,63 @@ button:disabled {
     <div class="blob two"></div>
     <div class="blob three"></div>
 
-</div>
+    <div class="particle"
+         style="left:8%;animation-duration:14s;">
+        ♡
+    </div>
 
+    <div class="particle"
+         style="left:20%;animation-duration:18s;animation-delay:2s;">
+        ✦
+    </div>
 
-<div class="petals">
+    <div class="particle"
+         style="left:35%;animation-duration:15s;animation-delay:5s;">
+        ♡
+    </div>
 
-    <div class="petal">🌸</div>
-    <div class="petal">✨</div>
-    <div class="petal">🌷</div>
-    <div class="petal">🌸</div>
-    <div class="petal">✨</div>
-    <div class="petal">🌸</div>
+    <div class="particle"
+         style="left:52%;animation-duration:19s;animation-delay:1s;">
+        ✧
+    </div>
+
+    <div class="particle"
+         style="left:67%;animation-duration:16s;animation-delay:4s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:82%;animation-duration:20s;animation-delay:3s;">
+        ✦
+    </div>
+
+    <div class="particle"
+         style="left:94%;animation-duration:13s;animation-delay:6s;">
+        ♡
+    </div>
 
 </div>
 
 
 <!-- =========================================================
-     FLAVI INTRO ANIMATION
+     INTRO
 ========================================================= -->
 
 <div id="introScreen">
 
     <div class="intro-content">
 
-        <div class="intro-flower">
+        <div class="intro-logo">
             🌸
         </div>
 
         <div class="intro-title">
-            Flavi
+            Flavi AI
         </div>
 
         <div class="intro-subtitle">
-            YOUR FRIENDLY AI COMPANION
+            Your little AI companion is waking up...
         </div>
-
-        <div class="intro-loader"></div>
 
     </div>
 
@@ -1674,27 +1297,26 @@ button:disabled {
      LOGIN
 ========================================================= -->
 
-<div id="loginScreen"
-     class="screen">
+<div id="loginScreen" class="screen">
 
-    <div class="auth-card">
+    <div class="card glass">
 
-        <div class="auth-logo">
+        <div class="logo">
             🌸
         </div>
 
         <h1>
-            Welcome to Flavi
+            Flavi AI
         </h1>
 
         <p>
-            Your cute little AI companion is waiting for you. 💗
+            A cute little AI companion made for you.
         </p>
 
         <div id="googleLogin"></div>
 
         <div class="account-info">
-            Securely sign in with your Google account
+            Sign in securely with your Google account
         </div>
 
         <div id="loginError"
@@ -1711,35 +1333,31 @@ button:disabled {
 ========================================================= -->
 
 <div id="nameScreen"
-     class="screen">
+     class="screen"
+     style="display:none;">
 
-    <div class="auth-card">
+    <div class="card glass">
 
-        <div class="auth-logo">
+        <div class="logo">
             🌸
         </div>
 
         <h1>
-            Hi there! 💗
+            Welcome to Flavi
         </h1>
 
         <p>
-            What should Flavi call you?
+            What should I call you?
         </p>
 
         <input
             id="nameInput"
             type="text"
             placeholder="Enter your name"
-            autocomplete="name"
-        >
+            autocomplete="name">
 
-        <button
-            id="startButton"
-            class="primary-button">
-
+        <button id="startButton">
             Start Chatting ✨
-
         </button>
 
     </div>
@@ -1748,296 +1366,244 @@ button:disabled {
 
 
 <!-- =========================================================
-     CHAT APP
+     CHAT
 ========================================================= -->
 
 <div id="chatScreen">
+
+
+    <button
+        id="mobileMenu"
+        class="mobile-menu">
+
+        ☰
+
+    </button>
 
 
     <!-- SIDEBAR -->
 
     <aside
         id="sidebar"
-        class="sidebar">
+        class="sidebar glass">
 
 
-        <div class="brand">
+        <div class="sidebar-brand">
 
-            <div class="brand-icon">
+            <div class="sidebar-brand-icon">
                 🌸
             </div>
 
             <div>
 
-                <div class="brand-name">
+                <strong>
                     Flavi AI
-                </div>
+                </strong>
 
-                <div class="brand-small">
-                    Your friendly companion
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- NAV -->
-
-        <nav class="nav">
-
-
-            <button
-                class="nav-item active"
-                data-page="chat">
-
-                <span class="nav-icon">
-                    💬
-                </span>
-
-                <span>
-                    Chat
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item"
-                data-page="memories">
-
-                <span class="nav-icon">
-                    🧠
-                </span>
-
-                <span>
-                    Memories
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item"
-                data-page="announcements">
-
-                <span class="nav-icon">
-                    📢
-                </span>
-
-                <span>
-                    Announcements
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item owner-nav"
-                id="ownerAnnouncementsButton">
-
-                <span class="nav-icon">
-                    👑
-                </span>
-
-                <span>
-                    Owner Announcements
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item"
-                data-page="history">
-
-                <span class="nav-icon">
-                    🕘
-                </span>
-
-                <span>
-                    Chat History
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item"
-                data-page="voice">
-
-                <span class="nav-icon">
-                    🔊
-                </span>
-
-                <span>
-                    Flavi Voice
-                </span>
-
-            </button>
-
-
-            <button
-                class="nav-item"
-                data-page="settings">
-
-                <span class="nav-icon">
-                    ⚙️
-                </span>
-
-                <span>
-                    Settings
-                </span>
-
-            </button>
-
-
-        </nav>
-
-
-        <!-- PROFILE -->
-
-        <div class="sidebar-bottom">
-
-            <div class="profile">
-
-                <div
-                    id="profileAvatar"
-                    class="profile-avatar">
-
-                    🌸
-
-                </div>
-
-                <div class="profile-text">
-
-                    <div
-                        id="profileName"
-                        class="profile-name">
-
-                        Pragatheesh
-
-                    </div>
-
-                    <div
-                        id="profileEmail"
-                        class="profile-email">
-
-                    </div>
-
-                </div>
+                <small>
+                    Your companion
+                </small>
 
             </div>
 
         </div>
+
+
+        <div class="sidebar-section">
+            Chat
+        </div>
+
+
+        <button
+            class="sidebar-button active"
+            id="newChatButton">
+
+            💬
+
+            <span>
+                New Chat
+            </span>
+
+        </button>
+
+
+        <button
+            class="sidebar-button"
+            id="clearChatButton">
+
+            🗑️
+
+            <span>
+                Clear Chat
+            </span>
+
+        </button>
+
+
+        <div class="sidebar-section">
+            Flavi
+        </div>
+
+
+        <button
+            class="sidebar-button"
+            id="memoriesButton">
+
+            🧠
+
+            <span>
+                My Memories
+            </span>
+
+        </button>
+
+
+        <button
+            class="sidebar-button"
+            id="announcementsButton">
+
+            📢
+
+            <span>
+                Announcements
+            </span>
+
+        </button>
+
+
+        <button
+            class="sidebar-button"
+            id="voiceButton">
+
+            🎀
+
+            <span>
+                Flavi Voice
+            </span>
+
+        </button>
+
+
+        <button
+            class="sidebar-button"
+            id="aboutButton">
+
+            ℹ️
+
+            <span>
+                About Flavi
+            </span>
+
+        </button>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="voice-status">
+
+            🎙️ Voice
+
+            <br>
+
+            <strong>
+                Microsoft Aria Online
+            </strong>
+
+            <br>
+
+            <span>
+                Cute natural voice
+            </span>
+
+        </div>
+
+
+        <button
+            class="sidebar-button"
+            id="logoutButton">
+
+            🚪
+
+            <span>
+                Sign Out
+            </span>
+
+        </button>
 
     </aside>
 
 
-    <div
-        id="sidebarOverlay"
-        class="sidebar-overlay">
-    </div>
+    <!-- MAIN CHAT -->
+
+    <main class="chat-main">
 
 
-    <!-- MAIN -->
+        <header class="chat-header">
 
-    <main class="main">
+            <div class="chat-title">
 
+                <span class="online-dot"></span>
 
-        <!-- TOP BAR -->
-
-        <header class="topbar">
-
-            <div
-                style="
-                    display:flex;
-                    align-items:center;
-                    gap:10px;
-                ">
-
-                <button
-                    id="mobileMenu"
-                    class="mobile-menu">
-
-                    ☰
-
-                </button>
-
-                <div class="top-title">
-
-                    <span class="status-dot"></span>
-
-                    Flavi is online
-
-                </div>
+                🌸 Flavi AI
 
             </div>
 
-
-            <button
-                id="logoutButton"
-                class="logout">
-
-                Sign Out
-
-            </button>
+            <div
+                id="userInfo"
+                class="user-info">
+            </div>
 
         </header>
 
 
-        <!-- MESSAGES -->
-
-        <section id="messages">
-
-            <div class="welcome">
-
-                <div class="welcome-flavi">
-                    🌸
-                </div>
-
-                <h2>
-                    Hey, I'm Flavi 💗
-                </h2>
-
-                <p>
-                    Talk to me, ask me anything,
-                    or just stay here and chat.
-                    I'm listening. ✨
-                </p>
-
-            </div>
-
-        </section>
+        <div id="messages"></div>
 
 
-        <!-- COMPOSER -->
+        <div class="input-area">
 
-        <div class="composer">
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="Talk to Flavi... 💗"
+                autocomplete="off">
 
-            <div class="composer-inner">
-
-                <input
-                    id="messageInput"
-                    type="text"
-                    placeholder="Talk to Flavi..."
-                    autocomplete="off"
-                >
-
-                <button
-                    id="sendButton"
-                    class="send-button">
-
-                    ➤
-
-                </button>
-
-            </div>
+            <button id="sendButton">
+                Send
+            </button>
 
         </div>
 
 
     </main>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div id="modal"
+     class="modal">
+
+    <div class="modal-card glass">
+
+        <h2 id="modalTitle">
+            Flavi
+        </h2>
+
+        <p id="modalText"></p>
+
+        <button
+            id="modalClose"
+            class="modal-close">
+
+            Close
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -2050,13 +1616,20 @@ button:disabled {
 
 
 /* =========================================================
+   FLAVI WORKER
+========================================================= */
+
+const AI_WORKER_URL =
+    "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
+
+
+/* =========================================================
    FIREBASE IMPORTS
 ========================================================= */
 
 import {
     initializeApp
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
@@ -2066,8 +1639,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
     signOut
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
@@ -2099,7 +1671,7 @@ const firebaseConfig = {
 
 
 /* =========================================================
-   FIREBASE INITIALIZATION
+   INITIALIZE FIREBASE
 ========================================================= */
 
 const app =
@@ -2115,19 +1687,8 @@ const provider =
 
 
 provider.setCustomParameters({
-
-    prompt:
-        "select_account"
-
+    prompt: "select_account"
 });
-
-
-/* =========================================================
-   FLAVI WORKER
-========================================================= */
-
-const AI_WORKER_URL =
-    "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
 
 
 /* =========================================================
@@ -2137,6 +1698,118 @@ const AI_WORKER_URL =
 let currentUser = null;
 
 let userName = "";
+
+let flaviVoice = null;
+
+let voiceEnabled =
+    localStorage.getItem(
+        "flavi_voice_enabled"
+    ) !== "false";
+
+
+/* =========================================================
+   FLAVI VOICE
+========================================================= */
+
+const FLAVI_VOICE_NAME =
+    "Microsoft Aria Online (Natural) - English (United States)";
+
+
+function loadFlaviVoice() {
+
+    const voices =
+        speechSynthesis.getVoices();
+
+
+    flaviVoice =
+        voices.find(
+            voice =>
+                voice.name ===
+                FLAVI_VOICE_NAME
+        ) || null;
+
+
+    console.log(
+        "Flavi voice:",
+        flaviVoice
+            ? flaviVoice.name
+            : "Aria not loaded yet"
+    );
+
+}
+
+
+speechSynthesis.addEventListener(
+    "voiceschanged",
+    loadFlaviVoice
+);
+
+
+loadFlaviVoice();
+
+
+/* =========================================================
+   SPEAK AS FLAVI
+========================================================= */
+
+function speakFlavi(text) {
+
+    if (!voiceEnabled)
+        return;
+
+
+    if (!text)
+        return;
+
+
+    loadFlaviVoice();
+
+
+    if (!flaviVoice) {
+
+        console.warn(
+            "Microsoft Aria voice is unavailable."
+        );
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.voice =
+        flaviVoice;
+
+
+    utterance.lang =
+        "en-US";
+
+
+    utterance.rate =
+        0.92;
+
+
+    utterance.pitch =
+        1.12;
+
+
+    utterance.volume =
+        1.0;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
 
 
 /* =========================================================
@@ -2173,6 +1846,16 @@ const sendButton =
         "sendButton"
     );
 
+const loginError =
+    document.getElementById(
+        "loginError"
+    );
+
+const userInfo =
+    document.getElementById(
+        "userInfo"
+    );
+
 const messages =
     document.getElementById(
         "messages"
@@ -2183,24 +1866,9 @@ const sidebar =
         "sidebar"
     );
 
-const sidebarOverlay =
-    document.getElementById(
-        "sidebarOverlay"
-    );
-
-const profileName =
-    document.getElementById(
-        "profileName"
-    );
-
-const profileEmail =
-    document.getElementById(
-        "profileEmail"
-    );
-
 
 /* =========================================================
-   GOOGLE LOGIN BUTTON
+   GOOGLE BUTTON
 ========================================================= */
 
 const googleButton =
@@ -2208,16 +1876,20 @@ const googleButton =
         "button"
     );
 
+
 googleButton.className =
     "google-button";
 
+
 googleButton.textContent =
     "🔵 Continue with Google";
+
 
 googleButton.addEventListener(
     "click",
     loginWithGoogle
 );
+
 
 document
     .getElementById(
@@ -2225,7 +1897,7 @@ document
     )
     .appendChild(
         googleButton
-);
+    );
 
 
 /* =========================================================
@@ -2234,19 +1906,14 @@ document
 
 async function loginWithGoogle() {
 
-    const errorBox =
-        document.getElementById(
-            "loginError"
-        );
-
-    errorBox.textContent =
+    loginError.textContent =
         "";
 
     googleButton.disabled =
         true;
 
     googleButton.textContent =
-        "Signing in... ✨";
+        "Signing in... 🌸";
 
 
     try {
@@ -2262,8 +1929,9 @@ async function loginWithGoogle() {
             result.user;
 
 
-        await currentUser
-            .getIdToken(true);
+        await currentUser.getIdToken(
+            true
+        );
 
 
         if (
@@ -2288,50 +1956,9 @@ async function loginWithGoogle() {
         );
 
 
-        let message =
-            "Google Sign-In failed.";
-
-
-        if (
-            error.code ===
-            "auth/popup-blocked"
-        ) {
-
-            message =
-                "The Google login popup was blocked. Please allow popups.";
-
-        }
-
-        else if (
-            error.code ===
-            "auth/popup-closed-by-user"
-        ) {
-
-            message =
-                "The Google login window was closed.";
-
-        }
-
-        else if (
-            error.code ===
-            "auth/unauthorized-domain"
-        ) {
-
-            message =
-                "This domain isn't authorized in Firebase Authentication.";
-
-        }
-
-        else {
-
-            message =
-                error.message;
-
-        }
-
-
-        errorBox.textContent =
-            message;
+        loginError.textContent =
+            "Google Sign-In failed.\n\n" +
+            error.message;
 
     }
 
@@ -2381,14 +2008,16 @@ onAuthStateChanged(
 
         try {
 
-            await user.getIdToken(true);
+            await user.getIdToken(
+                true
+            );
 
         }
 
         catch (error) {
 
             console.error(
-                "Token refresh failed:",
+                "Token error:",
                 error
             );
 
@@ -2413,15 +2042,6 @@ onAuthStateChanged(
         }
 
         else {
-
-            if (
-                user.displayName
-            ) {
-
-                nameInput.value =
-                    user.displayName;
-
-            }
 
             showNameScreen();
 
@@ -2450,7 +2070,7 @@ function showNameScreen() {
 
 
 /* =========================================================
-   SHOW CHAT SCREEN
+   SHOW CHAT
 ========================================================= */
 
 function showChatScreen() {
@@ -2465,22 +2085,10 @@ function showChatScreen() {
         "block";
 
 
-    profileName.textContent =
-        userName ||
-        currentUser?.displayName ||
-        "Friend";
+    if (currentUser) {
 
-
-    profileEmail.textContent =
-        currentUser?.email ||
-        "";
-
-
-    if (
-        messages.children.length === 0
-    ) {
-
-        showWelcome();
+        userInfo.textContent =
+            currentUser.email || "";
 
     }
 
@@ -2488,50 +2096,8 @@ function showChatScreen() {
 
 
 /* =========================================================
-   WELCOME
-========================================================= */
-
-function showWelcome() {
-
-    messages.innerHTML = `
-
-        <div class="welcome">
-
-            <div class="welcome-flavi">
-                🌸
-            </div>
-
-            <h2>
-                Hey, I'm Flavi 💗
-            </h2>
-
-            <p>
-                Hi ${escapeHTML(
-                    userName || "there"
-                )}! I'm here whenever you want
-                to talk. ✨
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
    SAVE NAME
 ========================================================= */
-
-document
-    .getElementById(
-        "startButton"
-    )
-    .addEventListener(
-        "click",
-        saveName
-    );
-
 
 function saveName() {
 
@@ -2573,23 +2139,97 @@ function saveName() {
 
     showChatScreen();
 
+
+    if (
+        messages.children.length ===
+        0
+    ) {
+
+        const greeting =
+            `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`;
+
+
+        addMessage(
+            "ai",
+            greeting
+        );
+
+
+        setTimeout(
+            function() {
+
+                speakFlavi(
+                    greeting
+                );
+
+            },
+            500
+        );
+
+    }
+
+
     messageInput.focus();
 
 }
 
 
+document
+    .getElementById(
+        "startButton"
+    )
+    .addEventListener(
+        "click",
+        saveName
+    );
+
+
 /* =========================================================
-   GET FIREBASE TOKEN
+   ADD MESSAGE
 ========================================================= */
 
-async function getFirebaseToken(
+function addMessage(
+    type,
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "message " + type;
+
+
+    div.textContent =
+        text;
+
+
+    messages.appendChild(
+        div
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =========================================================
+   FIREBASE TOKEN
+========================================================= */
+
+async function getFreshFirebaseToken(
     forceRefresh = false
 ) {
 
     if (!currentUser) {
 
         throw new Error(
-            "You are not signed in."
+            "No authenticated Firebase user."
         );
 
     }
@@ -2625,7 +2265,7 @@ async function callFlaviWorker(
 ) {
 
     const idToken =
-        await getFirebaseToken(
+        await getFreshFirebaseToken(
             forceRefresh
         );
 
@@ -2653,7 +2293,7 @@ async function callFlaviWorker(
 
                         name:
                             userName ||
-                            currentUser?.displayName ||
+                            currentUser.displayName ||
                             "friend",
 
                         idToken:
@@ -2675,7 +2315,9 @@ async function callFlaviWorker(
     try {
 
         data =
-            JSON.parse(raw);
+            JSON.parse(
+                raw
+            );
 
     }
 
@@ -2687,117 +2329,10 @@ async function callFlaviWorker(
 
 
     return {
-
         response,
         raw,
         data
-
     };
-
-}
-
-
-/* =========================================================
-   ADD MESSAGE
-========================================================= */
-
-function addMessage(
-    type,
-    text
-) {
-
-    const welcome =
-        messages.querySelector(
-            ".welcome"
-        );
-
-
-    if (welcome) {
-
-        welcome.remove();
-
-    }
-
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.className =
-        "message " +
-        type;
-
-
-    div.textContent =
-        text;
-
-
-    messages.appendChild(
-        div
-    );
-
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-
-    saveChatMessage(
-        type,
-        text
-    );
-
-}
-
-
-/* =========================================================
-   SAVE LOCAL HISTORY
-========================================================= */
-
-function saveChatMessage(
-    type,
-    text
-) {
-
-    try {
-
-        const saved =
-            JSON.parse(
-                localStorage.getItem(
-                    "flavi_chat"
-                ) || "[]"
-            );
-
-
-        saved.push({
-
-            type,
-            text,
-
-            time:
-                new Date().toISOString()
-
-        });
-
-
-        localStorage.setItem(
-            "flavi_chat",
-            JSON.stringify(
-                saved.slice(-100)
-            )
-        );
-
-    }
-
-    catch (error) {
-
-        console.warn(
-            "Could not save local history:",
-            error
-        );
-
-    }
 
 }
 
@@ -2805,30 +2340,6 @@ function saveChatMessage(
 /* =========================================================
    SEND MESSAGE
 ========================================================= */
-
-sendButton.addEventListener(
-    "click",
-    sendMessage
-);
-
-
-messageInput.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            event.preventDefault();
-
-            sendMessage();
-
-        }
-
-    }
-);
-
 
 async function sendMessage() {
 
@@ -2888,16 +2399,8 @@ async function sendMessage() {
         "message ai typing";
 
 
-    thinking.innerHTML =
-        `
-        Flavi is thinking
-        <span class="loading-dots">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-        </span>
-        🌸
-        `;
+    thinking.textContent =
+        "Flavi is thinking... 🌸";
 
 
     messages.appendChild(
@@ -2918,10 +2421,6 @@ async function sendMessage() {
             );
 
 
-        /* -----------------------------------------
-           RETRY AFTER TOKEN REFRESH
-        ----------------------------------------- */
-
         if (
             result.response.status ===
             401
@@ -2939,10 +2438,6 @@ async function sendMessage() {
         thinking.remove();
 
 
-        /* -----------------------------------------
-           AUTH ERROR
-        ----------------------------------------- */
-
         if (
             result.response.status === 401 ||
             result.response.status === 403
@@ -2957,10 +2452,6 @@ async function sendMessage() {
 
         }
 
-
-        /* -----------------------------------------
-           SERVER ERROR
-        ----------------------------------------- */
 
         if (
             !result.response.ok
@@ -2977,10 +2468,6 @@ async function sendMessage() {
         }
 
 
-        /* -----------------------------------------
-           INVALID RESPONSE
-        ----------------------------------------- */
-
         if (!result.data) {
 
             addMessage(
@@ -2994,10 +2481,6 @@ async function sendMessage() {
         }
 
 
-        /* -----------------------------------------
-           REPLY
-        ----------------------------------------- */
-
         if (
             result.data.reply
         ) {
@@ -3008,19 +2491,9 @@ async function sendMessage() {
             );
 
 
-            /* Optional browser voice */
-
-            if (
-                localStorage.getItem(
-                    "flavi_voice_enabled"
-                ) === "true"
-            ) {
-
-                speakFlavi(
-                    result.data.reply
-                );
-
-            }
+            speakFlavi(
+                result.data.reply
+            );
 
         }
 
@@ -3070,1125 +2543,281 @@ async function sendMessage() {
 
 
 /* =========================================================
-   GENERIC FLAVI COMMAND
-   Used by sidebar → existing Worker → D1
+   ENTER KEY
 ========================================================= */
 
-async function flaviCommand(
-    command
-) {
+messageInput.addEventListener(
+    "keydown",
+    function(event) {
 
-    let result =
-        await callFlaviWorker(
-            command,
-            false
-        );
+        if (
+            event.key ===
+            "Enter"
+        ) {
 
+            event.preventDefault();
 
-    if (
-        result.response.status ===
-        401
-    ) {
+            sendMessage();
 
-        result =
-            await callFlaviWorker(
-                command,
-                true
-            );
-
-    }
-
-
-    if (!result.response.ok) {
-
-        throw new Error(
-            result.data?.reply ||
-            result.data?.error ||
-            result.raw ||
-            `Worker returned ${result.response.status}`
-        );
-
-    }
-
-
-    return result.data;
-
-}
-
-
-/* =========================================================
-   SIDEBAR NAVIGATION
-========================================================= */
-
-const navItems =
-    document.querySelectorAll(
-        ".nav-item[data-page]"
-    );
-
-
-navItems.forEach(
-    item => {
-
-        item.addEventListener(
-            "click",
-            async function() {
-
-                navItems.forEach(
-                    button => {
-
-                        button.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                item.classList.add(
-                    "active"
-                );
-
-
-                closeSidebar();
-
-
-                const page =
-                    item.dataset.page;
-
-
-                if (
-                    page === "chat"
-                ) {
-
-                    showChatPage();
-
-                }
-
-                else if (
-                    page === "memories"
-                ) {
-
-                    await loadMemories();
-
-                }
-
-                else if (
-                    page === "announcements"
-                ) {
-
-                    await loadAnnouncement();
-
-                }
-
-                else if (
-                    page === "history"
-                ) {
-
-                    loadHistory();
-
-                }
-
-                else if (
-                    page === "voice"
-                ) {
-
-                    showVoicePanel();
-
-                }
-
-                else if (
-                    page === "settings"
-                ) {
-
-                    showSettingsPanel();
-
-                }
-
-            }
-        );
+        }
 
     }
 );
 
 
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
+
+
 /* =========================================================
-   CHAT PAGE
+   NEW CHAT
 ========================================================= */
 
-function showChatPage() {
+document
+    .getElementById(
+        "newChatButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
 
-    showWelcome();
+            messages.innerHTML =
+                "";
 
-    messageInput.focus();
 
-}
+            const greeting =
+                `Hey ${userName || "there"}! 🌸 I'm Flavi. What's on your mind?`;
+
+
+            addMessage(
+                "ai",
+                greeting
+            );
+
+
+            speakFlavi(
+                greeting
+            );
+
+
+            messageInput.focus();
+
+        }
+    );
+
+
+/* =========================================================
+   CLEAR CHAT
+========================================================= */
+
+document
+    .getElementById(
+        "clearChatButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            messages.innerHTML =
+                "";
+
+
+            const greeting =
+                `Chat cleared 🌸 I'm still here, ${userName || "friend"}!`;
+
+
+            addMessage(
+                "ai",
+                greeting
+            );
+
+
+            speakFlavi(
+                greeting
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   VOICE BUTTON
+========================================================= */
+
+document
+    .getElementById(
+        "voiceButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            voiceEnabled =
+                !voiceEnabled;
+
+
+            localStorage.setItem(
+                "flavi_voice_enabled",
+                voiceEnabled
+            );
+
+
+            if (!voiceEnabled) {
+
+                speechSynthesis.cancel();
+
+
+                alert(
+                    "Flavi voice is now OFF 🔇"
+                );
+
+            }
+
+            else {
+
+                speakFlavi(
+                    `Hi ${userName || "Pragatheesh"}! 🌸`
+                );
+
+            }
+
+        }
+    );
 
 
 /* =========================================================
    MEMORIES
 ========================================================= */
 
-async function loadMemories() {
-
-    showPanel(
-        "Your Memories",
-        "🧠",
-        `
-        <div class="message ai">
-            Loading your memories
-            <span class="loading-dots">
-                <span>.</span>
-                <span>.</span>
-                <span>.</span>
-            </span>
-            🌸
-        </div>
-        `
-    );
-
-
-    try {
-
-        const data =
-            await flaviCommand(
-                "/memories"
-            );
-
-
-        const reply =
-            data?.reply ||
-            "Flavi doesn't have any saved memories yet 🌸";
-
-
-        showPanel(
-            "Your Memories",
-            "🧠",
-            `
-            <div class="announcement-card">
-
-                <div
-                    style="
-                        font-size:13px;
-                        line-height:1.8;
-                        white-space:pre-wrap;
-                    "
-                >
-                    ${escapeHTML(reply)}
-                </div>
-
-            </div>
-            `
-        );
-
-    }
-
-    catch (error) {
-
-        showPanel(
-            "Your Memories",
-            "🧠",
-            `
-            <div class="message ai">
-
-                Couldn't load your D1 memories 😭
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-            `
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   ANNOUNCEMENT
-========================================================= */
-
-async function loadAnnouncement() {
-
-    showPanel(
-        "Announcements",
-        "📢",
-        `
-        <div class="message ai">
-
-            Checking for announcements
-            <span class="loading-dots">
-                <span>.</span>
-                <span>.</span>
-                <span>.</span>
-            </span>
-
-        </div>
-        `
-    );
-
-
-    try {
-
-        const data =
-            await flaviCommand(
-                "/announcement"
-            );
-
-
-        const reply =
-            data?.reply ||
-            "There are no announcements right now 🌸";
-
-
-        showPanel(
-            "Announcements",
-            "📢",
-            `
-            <div class="announcement-card">
-
-                <div
-                    style="
-                        font-size:25px;
-                        margin-bottom:10px;
-                    "
-                >
-                    📢
-                </div>
-
-                <div
-                    style="
-                        font-size:15px;
-                        line-height:1.7;
-                        white-space:pre-wrap;
-                    "
-                >
-                    ${escapeHTML(reply)}
-                </div>
-
-            </div>
-            `
-        );
-
-    }
-
-    catch (error) {
-
-        showPanel(
-            "Announcements",
-            "📢",
-            `
-            <div class="message ai">
-
-                Couldn't load the announcement 😭
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-            `
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   OWNER ANNOUNCEMENTS
-========================================================= */
-
 document
     .getElementById(
-        "ownerAnnouncementsButton"
+        "memoriesButton"
     )
     .addEventListener(
         "click",
         function() {
 
-            navItems.forEach(
-                button =>
-                    button.classList.remove(
-                        "active"
-                    )
+            showModal(
+                "🧠 My Memories",
+                "Your existing Flavi memory system is available through the chat. Try commands such as /remember to save something."
             );
-
-
-            this.classList.add(
-                "active"
-            );
-
-
-            closeSidebar();
-
-
-            showOwnerPanel();
 
         }
     );
 
 
-function showOwnerPanel() {
+/* =========================================================
+   ANNOUNCEMENTS
+========================================================= */
 
-    showPanel(
-        "Owner Announcements",
-        "👑",
-        `
+document
+    .getElementById(
+        "announcementsButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
 
-        <div class="announcement-card">
+            showModal(
+                "📢 Announcements",
+                "Your Flavi announcement system is available through your existing Worker and owner commands."
+            );
 
-            <div
-                style="
-                    font-weight:700;
-                    margin-bottom:6px;
-                "
-            >
-                👑 Owner Control
-            </div>
-
-            <div
-                style="
-                    color:rgba(255,255,255,.5);
-                    font-size:13px;
-                    line-height:1.6;
-                "
-            >
-                Publish an announcement for Flavi users.
-                Your Worker will perform the owner
-                authorization check.
-            </div>
-
-
-            <input
-                id="announcementInput"
-                class="panel-input"
-                type="text"
-                placeholder="Write your announcement..."
-            >
-
-
-            <button
-                id="publishAnnouncementButton"
-                class="panel-button"
-                style="
-                    background:
-                    linear-gradient(
-                        135deg,
-                        rgba(255,95,162,.3),
-                        rgba(190,100,255,.25)
-                    );
-                "
-            >
-
-                📢 Publish Announcement
-
-            </button>
-
-
-            <button
-                id="previewAnnouncementButton"
-                class="panel-button"
-            >
-
-                👀 Preview Current Announcement
-
-            </button>
-
-
-            <button
-                id="removeAnnouncementButton"
-                class="panel-button panel-danger"
-            >
-
-                🗑️ Remove Announcement
-
-            </button>
-
-        </div>
-
-        `
+        }
     );
 
 
-    document
-        .getElementById(
-            "publishAnnouncementButton"
-        )
-        .addEventListener(
-            "click",
-            publishAnnouncement
-        );
-
-
-    document
-        .getElementById(
-            "previewAnnouncementButton"
-        )
-        .addEventListener(
-            "click",
-            loadAnnouncement
-        );
-
-
-    document
-        .getElementById(
-            "removeAnnouncementButton"
-        )
-        .addEventListener(
-            "click",
-            removeAnnouncement
-        );
-
-}
-
-
 /* =========================================================
-   PUBLISH ANNOUNCEMENT
+   ABOUT
 ========================================================= */
 
-async function publishAnnouncement() {
-
-    const input =
-        document.getElementById(
-            "announcementInput"
-        );
-
-
-    const text =
-        input?.value.trim();
-
-
-    if (!text) {
-
-        alert(
-            "Write an announcement first 🌸"
-        );
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById(
-            "publishAnnouncementButton"
-        );
-
-
-    button.disabled =
-        true;
-
-    button.textContent =
-        "Publishing...";
-
-
-    try {
-
-        const data =
-            await flaviCommand(
-                "/announce " +
-                text
-            );
-
-
-        showPanel(
-            "Announcement Published",
-            "📢",
-            `
-            <div class="announcement-card">
-
-                <div
-                    style="
-                        font-size:28px;
-                        margin-bottom:10px;
-                    "
-                >
-                    ✨
-                </div>
-
-                <div
-                    style="
-                        line-height:1.7;
-                        white-space:pre-wrap;
-                    "
-                >
-                    ${escapeHTML(
-                        data?.reply ||
-                        "Announcement published successfully 🌸"
-                    )}
-                </div>
-
-            </div>
-            `
-        );
-
-    }
-
-    catch (error) {
-
-        showPanel(
-            "Owner Command Failed",
-            "😭",
-            `
-            <div class="message ai">
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-            `
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   REMOVE ANNOUNCEMENT
-========================================================= */
-
-async function removeAnnouncement() {
-
-    if (
-        !confirm(
-            "Remove the current Flavi announcement?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    try {
-
-        const data =
-            await flaviCommand(
-                "/removeannouncement"
-            );
-
-
-        showPanel(
-            "Announcement Removed",
-            "🗑️",
-            `
-            <div class="message ai">
-
-                ${escapeHTML(
-                    data?.reply ||
-                    "The announcement was removed 🌸"
-                )}
-
-            </div>
-            `
-        );
-
-    }
-
-    catch (error) {
-
-        showPanel(
-            "Owner Command Failed",
-            "😭",
-            `
-            <div class="message ai">
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-            `
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function loadHistory() {
-
-    let history = [];
-
-
-    try {
-
-        history =
-            JSON.parse(
-                localStorage.getItem(
-                    "flavi_chat"
-                ) || "[]"
-            );
-
-    }
-
-    catch {
-
-        history = [];
-
-    }
-
-
-    if (
-        !history.length
-    ) {
-
-        showPanel(
-            "Chat History",
-            "🕘",
-            `
-            <div class="message ai">
-
-                No saved conversations yet 🌸
-
-            </div>
-            `
-        );
-
-        return;
-
-    }
-
-
-    const items =
-        history
-            .slice(-30)
-            .map(
-                item => `
-
-                <div
-                    class="message ${
-                        item.type === "user"
-                            ? "user"
-                            : "ai"
-                    }"
-                    style="
-                        margin-bottom:8px;
-                    "
-                >
-                    ${escapeHTML(
-                        item.text || ""
-                    )}
-                </div>
-
-                `
-            )
-            .join("");
-
-
-    showPanel(
-        "Chat History",
-        "🕘",
-        `
-
-        <div
-            style="
-                width:min(800px,100%);
-                max-height:55vh;
-                overflow-y:auto;
-            "
-        >
-
-            ${items}
-
-        </div>
-
-        <button
-            id="clearHistoryButton"
-            class="panel-button panel-danger"
-        >
-
-            🗑️ Clear Local History
-
-        </button>
-
-        `
+document
+    .getElementById(
+        "aboutButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "about.html";
+
+        }
     );
 
 
-    document
-        .getElementById(
-            "clearHistoryButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                localStorage.removeItem(
-                    "flavi_chat"
-                );
-
-
-                loadHistory();
-
-            }
-        );
-
-}
-
-
 /* =========================================================
-   VOICE
+   MODAL
 ========================================================= */
 
-function showVoicePanel() {
+const modal =
+    document.getElementById(
+        "modal"
+    );
 
-    const enabled =
-        localStorage.getItem(
-            "flavi_voice_enabled"
-        ) === "true";
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
 
-
-    showPanel(
-        "Flavi Voice",
-        "🔊",
-        `
-
-        <div class="announcement-card">
-
-            <div
-                style="
-                    line-height:1.7;
-                    margin-bottom:15px;
-                "
-            >
-
-                🎙️ Flavi can speak her replies
-                using your browser's speech engine.
-
-            </div>
-
-
-            <button
-                id="voiceToggleButton"
-                class="panel-button"
-            >
-
-                ${
-                    enabled
-                    ? "🔇 Disable Voice"
-                    : "🔊 Enable Voice"
-                }
-
-            </button>
-
-
-            <button
-                id="testVoiceButton"
-                class="panel-button"
-            >
-
-                💗 Test Flavi Voice
-
-            </button>
-
-        </div>
-
-        `
+const modalText =
+    document.getElementById(
+        "modalText"
     );
 
 
-    document
-        .getElementById(
-            "voiceToggleButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                const current =
-                    localStorage.getItem(
-                        "flavi_voice_enabled"
-                    ) === "true";
-
-
-                localStorage.setItem(
-                    "flavi_voice_enabled",
-                    String(!current)
-                );
-
-
-                showVoicePanel();
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "testVoiceButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                speakFlavi(
-                    `Hi ${userName || "there"}! 🌸 I'm Flavi. It's nice to talk with you.`
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   SPEECH
-========================================================= */
-
-function speakFlavi(
+function showModal(
+    title,
     text
 ) {
 
-    if (
-        !("speechSynthesis" in window)
-    ) {
+    modalTitle.textContent =
+        title;
 
-        alert(
-            "Speech synthesis is not supported in this browser."
-        );
+    modalText.textContent =
+        text;
 
-        return;
-
-    }
-
-
-    speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(
-            text
-        );
-
-
-    utterance.rate =
-        1;
-
-    utterance.pitch =
-        1.08;
-
-    utterance.volume =
-        1;
-
-
-    const voices =
-        speechSynthesis.getVoices();
-
-
-    const preferred =
-        voices.find(
-            voice =>
-                /zira|female|samantha|google us english/i
-                    .test(
-                        voice.name
-                    )
-        );
-
-
-    if (preferred) {
-
-        utterance.voice =
-            preferred;
-
-    }
-
-
-    speechSynthesis.speak(
-        utterance
+    modal.classList.add(
+        "show"
     );
 
 }
 
 
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-function showSettingsPanel() {
-
-    showPanel(
-        "Settings",
-        "⚙️",
-        `
-
-        <div class="announcement-card">
-
-            <div
-                style="
-                    line-height:1.8;
-                "
-            >
-
-                <strong>
-                    Flavi AI
-                </strong>
-
-                <br>
-
-                Your friendly AI companion 🌸
-
-                <br><br>
-
-                <strong>
-                    Signed in as
-                </strong>
-
-                <br>
-
-                ${escapeHTML(
-                    currentUser?.email || ""
-                )}
-
-                <br><br>
-
-                <strong>
-                    User
-                </strong>
-
-                <br>
-
-                ${escapeHTML(
-                    userName || "Friend"
-                )}
-
-            </div>
-
-
-            <button
-                id="settingsClearChat"
-                class="panel-button panel-danger"
-            >
-
-                🗑️ Clear Local Chat History
-
-            </button>
-
-        </div>
-
-        `
-    );
-
-
-    document
-        .getElementById(
-            "settingsClearChat"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                if (
-                    confirm(
-                        "Clear your local chat history?"
-                    )
-                ) {
-
-                    localStorage.removeItem(
-                        "flavi_chat"
-                    );
-
-
-                    showChatPage();
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   GENERIC PANEL
-========================================================= */
-
-function showPanel(
-    title,
-    icon,
-    content
-) {
-
-    messages.innerHTML = `
-
-        <div class="welcome"
-             style="
-                justify-content:flex-start;
-                padding-top:45px;
-             ">
-
-            <div class="welcome-flavi">
-                ${icon}
-            </div>
-
-            <h2>
-                ${escapeHTML(title)}
-            </h2>
-
-            <div
-                style="
-                    width:min(800px,100%);
-                    margin-top:20px;
-                    text-align:left;
-                "
-            >
-
-                ${content}
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value ?? ""
+document
+    .getElementById(
+        "modalClose"
     )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    .addEventListener(
+        "click",
+        function() {
 
-}
+            modal.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+modal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === modal
+        ) {
+
+            modal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
 
 
 /* =========================================================
@@ -4203,39 +2832,45 @@ document
         "click",
         function() {
 
-            sidebar.classList.add(
+            sidebar.classList.toggle(
                 "open"
-            );
-
-            sidebarOverlay.classList.add(
-                "show"
             );
 
         }
     );
 
 
-sidebarOverlay.addEventListener(
-    "click",
-    closeSidebar
-);
+document
+    .querySelectorAll(
+        ".sidebar-button"
+    )
+    .forEach(
+        button => {
 
+            button.addEventListener(
+                "click",
+                function() {
 
-function closeSidebar() {
+                    if (
+                        window.innerWidth <=
+                        850
+                    ) {
 
-    sidebar.classList.remove(
-        "open"
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
     );
-
-    sidebarOverlay.classList.remove(
-        "show"
-    );
-
-}
 
 
 /* =========================================================
-   LOGOUT
+   SIGN OUT
 ========================================================= */
 
 document
@@ -4245,6 +2880,9 @@ document
     .addEventListener(
         "click",
         async function() {
+
+            speechSynthesis.cancel();
+
 
             try {
 
@@ -4273,7 +2911,7 @@ document
             catch (error) {
 
                 console.error(
-                    "Logout error:",
+                    "Sign out error:",
                     error
                 );
 
@@ -4283,9 +2921,14 @@ document
     );
 
 
-/* =========================================================
-   INTRO
-========================================================= */
+</script>
+
+
+<!-- =========================================================
+     INTRO TIMER
+========================================================= -->
+
+<script>
 
 setTimeout(
     function() {
@@ -4295,38 +2938,16 @@ setTimeout(
                 "introScreen"
             );
 
-
-        if (intro) {
-
-            intro.style.pointerEvents =
-                "none";
-
-        }
+        intro.classList.add(
+            "hide"
+        );
 
     },
-    4300
+    2300
 );
 
-
-/* =========================================================
-   FIREBASE VOICE LIST
-========================================================= */
-
-if (
-    "speechSynthesis" in window
-) {
-
-    speechSynthesis.onvoiceschanged =
-        function() {
-
-            speechSynthesis
-                .getVoices();
-
-        };
-
-}
-
 </script>
+
 
 </body>
 </html>
