@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="google-site-verification"
@@ -14,174 +15,381 @@
       content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
 <meta name="theme-color"
-      content="#170d19">
+      content="#ffb6d5">
 
-<title>Flavi AI — Your Friendly AI Companion</title>
+<title>Flavi AI 🌸</title>
 
 <style>
 
-/* =========================================================
+/* ============================================================
    RESET
-========================================================= */
+============================================================ */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html,
 body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
 }
 
 body {
+
     font-family:
         Inter,
+        -apple-system,
+        BlinkMacSystemFont,
         "Segoe UI",
         Arial,
         sans-serif;
 
-    color: white;
+    color: #fff;
+
+    overflow: hidden;
 
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(255, 105, 174, .30),
-            transparent 32%
+            circle at 20% 20%,
+            rgba(255, 182, 213, .28),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 85% 25%,
-            rgba(255, 150, 205, .25),
-            transparent 32%
+            circle at 80% 70%,
+            rgba(255, 120, 180, .20),
+            transparent 30%
         ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(255, 182, 217, .20),
-            transparent 35%
-        ),
-        #170d19;
+        linear-gradient(
+            135deg,
+            #170d17,
+            #24101f,
+            #160d19
+        );
 
-    overflow: hidden;
 }
 
 
-/* =========================================================
+/* ============================================================
    ANIMATED BACKGROUND
-========================================================= */
+============================================================ */
 
 .background {
+
     position: fixed;
+
     inset: 0;
+
     overflow: hidden;
+
+    z-index: -10;
+
     pointer-events: none;
-    z-index: 0;
+
 }
+
 
 .blob {
+
     position: absolute;
+
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: .55;
-    animation: floatBlob 12s ease-in-out infinite;
+
+    filter: blur(55px);
+
+    opacity: .45;
+
+    animation:
+        floatBlob 14s ease-in-out infinite alternate;
+
 }
+
 
 .blob.one {
-    width: 320px;
-    height: 320px;
-    background: #ff6fae;
-    left: -80px;
-    top: 10%;
-}
 
-.blob.two {
-    width: 350px;
-    height: 350px;
-    background: #ff9acb;
-    right: -100px;
-    top: 20%;
-    animation-delay: -4s;
-}
-
-.blob.three {
     width: 280px;
     height: 280px;
-    background: #ffb6d9;
-    left: 35%;
-    bottom: -100px;
-    animation-delay: -7s;
+
+    background: #ff79b0;
+
+    top: -80px;
+    left: -60px;
+
 }
+
+
+.blob.two {
+
+    width: 330px;
+    height: 330px;
+
+    background: #ffb6d5;
+
+    right: -100px;
+    top: 25%;
+
+    animation-delay: -4s;
+
+}
+
+
+.blob.three {
+
+    width: 250px;
+    height: 250px;
+
+    background: #ff4f9a;
+
+    left: 25%;
+    bottom: -120px;
+
+    animation-delay: -8s;
+
+}
+
 
 @keyframes floatBlob {
 
-    0%,
-    100% {
-        transform:
-            translate(0, 0)
-            scale(1);
+    0% {
+        transform: translate(
+            0,
+            0
+        ) scale(1);
     }
 
     50% {
-        transform:
-            translate(45px, -35px)
-            scale(1.13);
+        transform: translate(
+            60px,
+            -40px
+        ) scale(1.15);
     }
+
+    100% {
+        transform: translate(
+            -40px,
+            60px
+        ) scale(.95);
+    }
+
 }
 
 
-/* =========================================================
-   FLOATING HEARTS
-========================================================= */
+/* ============================================================
+   FLOATING FLOWERS
+============================================================ */
 
 .particle {
+
     position: absolute;
-    color: rgba(255, 220, 237, .75);
-    font-size: 18px;
+
+    font-size: 20px;
+
+    opacity: .35;
 
     animation:
-        particleFloat linear infinite;
+        floatingParticle linear infinite;
+
 }
 
-@keyframes particleFloat {
+
+@keyframes floatingParticle {
 
     from {
         transform:
             translateY(110vh)
             rotate(0deg);
-
         opacity: 0;
     }
 
-    15% {
-        opacity: .8;
+    10% {
+        opacity: .45;
     }
 
-    85% {
-        opacity: .8;
+    90% {
+        opacity: .45;
     }
 
     to {
         transform:
             translateY(-15vh)
             rotate(360deg);
-
         opacity: 0;
     }
+
 }
 
 
-/* =========================================================
-   GLASS
-========================================================= */
+/* ============================================================
+   INTRO SCREEN
+============================================================ */
 
-.glass {
+#introScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
     background:
-        rgba(255, 255, 255, .075);
+        radial-gradient(
+            circle,
+            #401d34,
+            #170d17 70%
+        );
+
+    z-index: 9999;
+
+    animation:
+        introFadeOut 1s ease 3.2s forwards;
+
+}
+
+
+.intro-logo {
+
+    font-size: 90px;
+
+    animation:
+        logoIntro 2s cubic-bezier(.17,.67,.3,1.3)
+        forwards;
+
+}
+
+
+.intro-title {
+
+    margin-top: 12px;
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    opacity: 0;
+
+    animation:
+        titleIntro 1s ease 1s forwards;
+
+}
+
+
+.intro-subtitle {
+
+    margin-top: 8px;
+
+    color: #ffc5df;
+
+    opacity: 0;
+
+    animation:
+        titleIntro 1s ease 1.5s forwards;
+
+}
+
+
+@keyframes logoIntro {
+
+    0% {
+        opacity: 0;
+        transform:
+            scale(.2)
+            rotate(-30deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            scale(1.25)
+            rotate(10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+
+@keyframes titleIntro {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes introFadeOut {
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+}
+
+
+/* ============================================================
+   LOGIN / NAME SCREENS
+============================================================ */
+
+.screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.card {
+
+    width: 430px;
+
+    max-width: 100%;
+
+    padding: 42px 34px;
+
+    border-radius: 30px;
+
+    text-align: center;
+
+    background:
+        rgba(35, 18, 31, .72);
 
     border:
         1px solid
-        rgba(255, 255, 255, .14);
+        rgba(255, 210, 230, .15);
 
     backdrop-filter:
         blur(25px);
@@ -190,286 +398,108 @@ body {
         blur(25px);
 
     box-shadow:
-        0 25px 80px
-        rgba(0, 0, 0, .35);
-}
+        0 30px 100px
+        rgba(0,0,0,.45),
 
-
-/* =========================================================
-   INTRO ANIMATION
-========================================================= */
-
-#introScreen {
-
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #6d294d,
-            #170d19 65%
-        );
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-}
-
-#introScreen.hide {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.intro-content {
-    text-align: center;
+        inset 0 1px 0
+        rgba(255,255,255,.08);
 
     animation:
-        introAppear 1.2s ease;
+        cardEnter .8s ease;
+
 }
 
-.intro-logo {
 
-    width: 115px;
-    height: 115px;
-
-    margin:
-        0 auto 22px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 36px;
-
-    font-size: 62px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff6fae,
-            #ff9bca
-        );
-
-    box-shadow:
-        0 0 70px
-        rgba(255, 105, 174, .65);
-
-    animation:
-        logoPulse 2s ease-in-out infinite;
-}
-
-.intro-title {
-
-    font-size: 48px;
-    font-weight: 800;
-
-    letter-spacing: -2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #ffb8d8,
-            #ffd9e9,
-            #fff
-        );
-
-    background-size: 250% auto;
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
-    animation:
-        gradientMove 3s linear infinite;
-}
-
-.intro-subtitle {
-
-    margin-top: 10px;
-
-    color:
-        rgba(255,255,255,.68);
-
-    font-size: 15px;
-}
-
-@keyframes introAppear {
+@keyframes cardEnter {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(35px)
-            scale(.88);
+            translateY(30px)
+            scale(.95);
+
     }
 
     to {
+
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-    }
-}
 
-@keyframes logoPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
     }
 
-    50% {
-        transform: scale(1.08);
-    }
 }
 
-@keyframes gradientMove {
-
-    to {
-        background-position:
-            250% center;
-    }
-}
-
-
-/* =========================================================
-   SCREEN
-========================================================= */
-
-.screen {
-
-    position: relative;
-
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    z-index: 2;
-}
-
-
-/* =========================================================
-   LOGIN CARD
-========================================================= */
-
-.card {
-
-    width: 430px;
-    max-width: 92%;
-
-    padding: 42px 35px;
-
-    border-radius: 32px;
-
-    text-align: center;
-
-    animation:
-        cardAppear .8s ease;
-}
-
-@keyframes cardAppear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(35px)
-            scale(.94);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
 
 .logo {
 
-    width: 90px;
-    height: 90px;
+    font-size: 70px;
 
-    margin:
-        0 auto 20px;
+    margin-bottom: 12px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 29px;
-
-    font-size: 50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff6fae,
-            #ff9bca
+    filter:
+        drop-shadow(
+            0 8px 20px
+            rgba(255,100,170,.35)
         );
 
-    box-shadow:
-        0 15px 50px
-        rgba(255, 105, 174, .35);
-
     animation:
-        logoPulse 3s ease-in-out infinite;
+        cuteBounce 3s ease-in-out infinite;
+
 }
+
+
+@keyframes cuteBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+}
+
 
 h1 {
 
+    margin: 0 0 10px;
+
     font-size: 34px;
 
-    margin-bottom: 9px;
-
-    letter-spacing: -.8px;
 }
+
 
 .card p {
 
-    color:
-        rgba(255,255,255,.65);
-
-    margin-bottom: 25px;
+    color: #d8b9ca;
 
     line-height: 1.6;
+
 }
 
-
-/* =========================================================
-   INPUT
-========================================================= */
 
 input {
 
     width: 100%;
 
-    padding:
-        16px 18px;
+    padding: 16px 18px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.12);
+    margin: 15px 0;
+
+    border: 1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 16px;
 
     background:
-        rgba(255,255,255,.075);
+        rgba(255,255,255,.07);
 
     color: white;
 
@@ -478,57 +508,47 @@ input {
     outline: none;
 
     transition: .25s;
+
 }
 
-input::placeholder {
-    color:
-        rgba(255,255,255,.4);
-}
 
 input:focus {
 
-    border-color:
-        rgba(255, 105, 174, .75);
+    border-color: #ff8fbd;
 
     box-shadow:
         0 0 0 4px
-        rgba(255,105,174,.12);
+        rgba(255,120,180,.12);
+
 }
 
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 button {
 
     border: none;
 
-    border-radius: 15px;
+    cursor: pointer;
 
-    padding:
-        15px 20px;
+    font-weight: 700;
+
+    color: white;
 
     background:
         linear-gradient(
             135deg,
-            #ff6eae,
-            #ff92c2
+            #ff6fae,
+            #ff91c3
         );
 
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    cursor: pointer;
+    border-radius: 15px;
 
     transition:
         transform .2s,
         box-shadow .2s,
         opacity .2s;
+
 }
+
 
 button:hover {
 
@@ -536,198 +556,201 @@ button:hover {
         translateY(-2px);
 
     box-shadow:
-        0 10px 30px
-        rgba(255,105,174,.28);
+        0 10px 25px
+        rgba(255,100,170,.25);
+
 }
 
+
 button:active {
-    transform: scale(.97);
+
+    transform:
+        translateY(0)
+        scale(.98);
+
 }
+
 
 button:disabled {
 
     opacity: .5;
 
-    cursor: not-allowed;
+    cursor:
+        not-allowed;
+
 }
+
 
 #startButton {
 
     width: 100%;
 
-    margin-top: 14px;
+    padding: 16px;
+
+    font-size: 16px;
+
 }
 
-
-/* =========================================================
-   GOOGLE LOGIN
-========================================================= */
 
 #googleLogin {
 
-    display: flex;
+    margin-top: 25px;
 
-    justify-content: center;
-
-    margin-top: 20px;
 }
+
 
 .google-button {
 
     width: 100%;
 
-    background:
-        rgba(255,255,255,.1);
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    box-shadow: none;
-}
-
-.google-button:hover {
+    padding: 15px;
 
     background:
-        rgba(255,255,255,.16);
+        rgba(255,255,255,.95);
 
-    box-shadow: none;
+    color: #333;
+
 }
+
 
 .account-info {
 
-    margin-top: 16px;
-
-    font-size: 12px;
-
-    color:
-        rgba(255,255,255,.4);
-}
-
-.error {
-
-    color:
-        #ff9db8;
-
-    margin-top: 15px;
+    margin-top: 18px;
 
     font-size: 13px;
 
-    white-space: pre-wrap;
+    color: #ad91a1;
+
 }
 
 
-/* =========================================================
-   CHAT
-========================================================= */
+.error {
+
+    margin-top: 15px;
+
+    color: #ff8c9f;
+
+    font-size: 14px;
+
+    white-space: pre-wrap;
+
+}
+
+
+/* ============================================================
+   CHAT APP
+============================================================ */
 
 #chatScreen {
 
-    position: relative;
-
-    width: 100%;
-    height: 100vh;
-
-    z-index: 5;
-
     display: none;
+
+    position: fixed;
+
+    inset: 0;
+
 }
 
 
-/* =========================================================
+/* ============================================================
    SIDEBAR
-========================================================= */
+============================================================ */
 
 .sidebar {
 
     position: fixed;
 
-    left: 18px;
-    top: 18px;
-    bottom: 18px;
+    left: 0;
 
-    width: 245px;
+    top: 0;
 
-    border-radius: 27px;
+    bottom: 0;
 
-    padding: 20px;
+    width: 255px;
 
-    z-index: 30;
+    padding: 18px 14px;
 
-    display: flex;
+    background:
+        rgba(24, 13, 23, .82);
 
-    flex-direction: column;
+    border-right:
+        1px solid
+        rgba(255,255,255,.08);
+
+    backdrop-filter:
+        blur(25px);
+
+    z-index: 100;
 
     transition:
         transform .3s ease;
+
 }
 
-.sidebar-brand {
+
+.sidebar-header {
 
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    gap: 11px;
 
-    padding:
-        7px 5px 25px;
+    padding: 10px;
+
+    margin-bottom: 20px;
+
 }
 
-.sidebar-brand-icon {
 
-    width: 45px;
-    height: 45px;
+.sidebar-logo {
 
-    border-radius: 15px;
+    font-size: 35px;
 
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff6eae,
-            #ff9bc9
-        );
-
-    font-size: 24px;
 }
 
-.sidebar-brand strong {
-    font-size: 18px;
+
+.sidebar-title {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
 }
 
-.sidebar-brand small {
 
-    display: block;
+.sidebar-subtitle {
 
-    color:
-        rgba(255,255,255,.45);
+    color: #bfa2b3;
 
-    margin-top: 2px;
+    font-size: 11px;
+
 }
+
 
 .sidebar-section {
 
     margin:
-        8px 0 9px 7px;
+        15px 8px 8px;
 
     font-size: 11px;
 
     text-transform: uppercase;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
 
-    color:
-        rgba(255,255,255,.35);
+    color: #9d8190;
+
 }
 
-.sidebar-button {
+
+.sidebar-item {
 
     width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 5px;
 
     display: flex;
 
@@ -735,97 +758,194 @@ button:disabled {
 
     gap: 12px;
 
-    padding:
-        13px 14px;
+    background:
+        transparent;
 
-    margin-bottom: 6px;
-
-    background: transparent;
-
-    color:
-        rgba(255,255,255,.72);
+    color: #ead8e2;
 
     text-align: left;
 
     border-radius: 14px;
 
-    box-shadow: none;
+    font-size: 14px;
 
-    font-weight: 600;
 }
 
-.sidebar-button:hover {
+
+.sidebar-item:hover {
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
     box-shadow: none;
 
-    transform: none;
+    transform:
+        translateX(3px);
 
-    color: white;
 }
 
-.sidebar-button.active {
+
+.sidebar-item.active {
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,105,174,.28),
-            rgba(255,160,205,.16)
+            rgba(255,105,170,.25),
+            rgba(255,170,210,.10)
         );
 
-    color: white;
+    color: #fff;
+
 }
 
-.sidebar-spacer {
-    flex: 1;
+
+.sidebar-icon {
+
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 18px;
+
 }
 
-.voice-status {
+
+.sidebar-bottom {
+
+    position: absolute;
+
+    left: 14px;
+
+    right: 14px;
+
+    bottom: 15px;
+
+}
+
+
+.sidebar-user {
 
     padding: 12px;
 
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 
     border-radius: 15px;
 
     background:
         rgba(255,255,255,.05);
 
-    color:
-        rgba(255,255,255,.55);
+    overflow: hidden;
 
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-.voice-status strong {
-    color: #ffb2d4;
 }
 
 
-/* =========================================================
+.sidebar-user-name {
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.sidebar-user-email {
+
+    font-size: 11px;
+
+    color: #9e8693;
+
+    margin-top: 3px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.logout-button {
+
+    width: 100%;
+
+    padding: 11px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: #eacfdc;
+
+}
+
+
+/* ============================================================
+   MOBILE SIDEBAR BUTTON
+============================================================ */
+
+.menu-button {
+
+    display: none;
+
+    position: fixed;
+
+    left: 14px;
+
+    top: 14px;
+
+    width: 43px;
+
+    height: 43px;
+
+    z-index: 150;
+
+    border-radius: 13px;
+
+    background:
+        rgba(30,15,27,.85);
+
+    backdrop-filter:
+        blur(15px);
+
+    font-size: 20px;
+
+}
+
+
+/* ============================================================
    MAIN CHAT
-========================================================= */
+============================================================ */
 
-.chat-main {
+.main {
 
-    height: 100vh;
+    position: fixed;
 
-    margin-left: 281px;
+    left: 255px;
 
-    position: relative;
+    right: 0;
+
+    top: 0;
+
+    bottom: 0;
 
     display: flex;
 
     flex-direction: column;
+
 }
 
-.chat-header {
 
-    height: 75px;
+/* ============================================================
+   TOP BAR
+============================================================ */
+
+.top-bar {
+
+    height: 68px;
 
     flex-shrink: 0;
 
@@ -835,21 +955,22 @@ button:disabled {
 
     justify-content: space-between;
 
-    padding:
-        0 28px;
+    padding: 0 24px;
+
+    background:
+        rgba(22,12,21,.62);
 
     border-bottom:
         1px solid
         rgba(255,255,255,.07);
 
-    background:
-        rgba(23,13,25,.35);
-
     backdrop-filter:
         blur(20px);
+
 }
 
-.chat-title {
+
+.top-title {
 
     display: flex;
 
@@ -859,35 +980,37 @@ button:disabled {
 
     font-weight: 800;
 
-    font-size: 18px;
 }
 
-.online-dot {
+
+.status-dot {
 
     width: 8px;
+
     height: 8px;
 
     border-radius: 50%;
 
-    background: #75f0a6;
+    background: #7affae;
 
     box-shadow:
-        0 0 12px
-        #75f0a6;
-}
+        0 0 12px #7affae;
 
-.user-info {
-
-    color:
-        rgba(255,255,255,.5);
-
-    font-size: 12px;
 }
 
 
-/* =========================================================
+.top-user {
+
+    color: #c9adbc;
+
+    font-size: 13px;
+
+}
+
+
+/* ============================================================
    MESSAGES
-========================================================= */
+============================================================ */
 
 #messages {
 
@@ -896,44 +1019,54 @@ button:disabled {
     overflow-y: auto;
 
     padding:
-        30px 7% 140px;
+        30px
+        30px
+        130px;
 
     scroll-behavior: smooth;
+
 }
 
+
 #messages::-webkit-scrollbar {
-    width: 7px;
+
+    width: 6px;
+
 }
+
 
 #messages::-webkit-scrollbar-thumb {
 
     background:
-        rgba(255,255,255,.12);
+        rgba(255,150,195,.25);
 
-    border-radius: 20px;
+    border-radius: 10px;
+
 }
+
 
 .message {
 
-    max-width: 72%;
+    max-width: 75%;
 
-    padding:
-        13px 17px;
+    padding: 13px 17px;
 
     margin:
-        10px 0;
+        9px 0;
 
-    border-radius: 21px;
+    border-radius: 20px;
 
     line-height: 1.55;
 
     white-space: pre-wrap;
 
-    word-wrap: break-word;
+    word-break: break-word;
 
     animation:
-        messageIn .3s ease;
+        messageIn .25s ease;
+
 }
+
 
 @keyframes messageIn {
 
@@ -942,8 +1075,9 @@ button:disabled {
         opacity: 0;
 
         transform:
-            translateY(10px)
+            translateY(8px)
             scale(.98);
+
     }
 
     to {
@@ -953,353 +1087,499 @@ button:disabled {
         transform:
             translateY(0)
             scale(1);
+
     }
+
 }
+
 
 .message.user {
 
     margin-left: auto;
 
+    border-bottom-right-radius: 6px;
+
     background:
         linear-gradient(
             135deg,
-            #ff6ba9,
-            #ff91c2
+            #ff62a6,
+            #ff88bb
         );
 
-    border-bottom-right-radius:
-        7px;
-
     box-shadow:
-        0 8px 30px
-        rgba(255,105,180,.16);
+        0 8px 25px
+        rgba(255,90,160,.16);
+
 }
+
 
 .message.ai {
 
     margin-right: auto;
+
+    border-bottom-left-radius: 6px;
 
     background:
         rgba(255,255,255,.075);
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
-    border-bottom-left-radius:
-        7px;
+    backdrop-filter:
+        blur(12px);
+
 }
+
 
 .typing {
 
-    color:
-        rgba(255,255,255,.55);
+    color: #d9b8c9;
 
     font-style: italic;
+
 }
 
 
-/* =========================================================
-   INPUT AREA
-========================================================= */
+/* ============================================================
+   CHAT INPUT
+============================================================ */
 
 .input-area {
 
     position: absolute;
 
     left: 0;
+
     right: 0;
+
     bottom: 0;
 
     padding:
-        18px 7% 22px;
-
-    display: flex;
-
-    gap: 10px;
+        15px 22px 20px;
 
     background:
         linear-gradient(
             to top,
-            #170d19 30%,
-            rgba(23,13,25,.85),
+            rgba(19,10,18,.98),
+            rgba(19,10,18,.75),
             transparent
         );
 
-    z-index: 20;
 }
 
-.input-area input {
 
-    flex: 1;
+.input-box {
 
-    min-width: 0;
+    max-width: 950px;
 
-    margin: 0;
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 7px;
+
+    border:
+        1px solid
+        rgba(255,190,215,.14);
+
+    border-radius: 19px;
 
     background:
-        rgba(255,255,255,.09);
+        rgba(40,20,35,.88);
 
     backdrop-filter:
         blur(20px);
-}
 
-.input-area button {
-    width: 105px;
-}
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.3);
 
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-.mobile-menu {
-
-    display: none;
-
-    position: fixed;
-
-    left: 16px;
-    top: 16px;
-
-    z-index: 100;
-
-    width: 45px;
-    height: 45px;
-
-    padding: 0;
-
-    border-radius: 14px;
 }
 
 
-/* =========================================================
-   MODAL
-========================================================= */
+.input-box input {
 
-.modal {
+    flex: 1;
+
+    margin: 0;
+
+    border: none;
+
+    background:
+        transparent;
+
+    box-shadow: none;
+
+    padding:
+        13px 14px;
+
+}
+
+
+.input-box input:focus {
+
+    box-shadow: none;
+
+}
+
+
+#sendButton {
+
+    width: 54px;
+
+    height: 50px;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    font-size: 18px;
+
+}
+
+
+/* ============================================================
+   PANEL
+============================================================ */
+
+.panel-overlay {
 
     position: fixed;
 
     inset: 0;
 
-    z-index: 200;
+    z-index: 300;
 
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 20px;
 
     background:
-        rgba(0,0,0,.55);
+        rgba(10,5,10,.55);
 
     backdrop-filter:
-        blur(10px);
+        blur(8px);
+
 }
 
-.modal.show {
-    display: flex;
-}
 
-.modal-card {
+.panel {
 
-    width: 440px;
+    width: 650px;
+
     max-width: 100%;
 
-    padding: 30px;
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    padding: 25px;
 
     border-radius: 25px;
 
+    background:
+        rgba(38,19,34,.95);
+
+    border:
+        1px solid
+        rgba(255,190,215,.12);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.5);
+
     animation:
-        cardAppear .3s ease;
+        panelIn .25s ease;
+
 }
 
-.modal-card h2 {
-    margin-bottom: 12px;
+
+@keyframes panelIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
 }
 
-.modal-card p {
 
-    color:
-        rgba(255,255,255,.62);
+.panel-header {
 
-    line-height: 1.6;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
 
     margin-bottom: 20px;
-}
 
-.modal-close {
-    width: 100%;
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+.panel-header h2 {
 
-@media (max-width: 850px) {
+    margin: 0;
+
+}
+
+
+.close-panel {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+
+.announcement {
+
+    padding: 16px;
+
+    margin-bottom: 10px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+
+.announcement-id {
+
+    color: #ff9fc6;
+
+    font-weight: 800;
+
+    font-size: 13px;
+
+}
+
+
+.announcement-text {
+
+    margin-top: 6px;
+
+    line-height: 1.5;
+
+}
+
+
+.announcement-date {
+
+    margin-top: 8px;
+
+    font-size: 11px;
+
+    color: #9f8594;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 800px) {
 
     .sidebar {
 
         transform:
-            translateX(-115%);
+            translateX(-100%);
 
-        top: 12px;
-        bottom: 12px;
-        left: 12px;
     }
+
 
     .sidebar.open {
 
         transform:
             translateX(0);
 
-        box-shadow:
-            0 20px 70px
-            rgba(0,0,0,.5);
     }
 
-    .mobile-menu {
 
-        display: flex;
+    .main {
 
-        align-items: center;
-        justify-content: center;
+        left: 0;
+
     }
 
-    .chat-main {
-        margin-left: 0;
+
+    .menu-button {
+
+        display: block;
+
     }
 
-    .chat-header {
-        padding-left: 75px;
+
+    .top-bar {
+
+        padding-left: 70px;
+
     }
+
+
+    .top-user {
+
+        display: none;
+
+    }
+
 
     #messages {
 
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .input-area {
-
         padding-left: 15px;
         padding-right: 15px;
+
     }
 
+
     .message {
-        max-width: 86%;
+
+        max-width: 88%;
+
     }
+
 }
+
 
 @media (max-width: 500px) {
 
     .card {
-        padding: 32px 22px;
+
+        padding:
+            32px 22px;
+
     }
 
-    .intro-title {
-        font-size: 38px;
+
+    .logo {
+
+        font-size: 60px;
+
     }
 
-    .input-area button {
-        width: 78px;
+
+    h1 {
+
+        font-size: 29px;
+
     }
 
-    .user-info {
-        display: none;
+
+    .input-area {
+
+        padding:
+            10px;
+
     }
+
+
+}
+
+
+/* ============================================================
+   HIDDEN
+============================================================ */
+
+.hidden {
+
+    display: none !important;
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     BACKGROUND
-========================================================= -->
+<!-- ============================================================
+     ANIMATED BACKGROUND
+============================================================ -->
 
 <div class="background">
 
     <div class="blob one"></div>
+
     <div class="blob two"></div>
+
     <div class="blob three"></div>
-
-    <div class="particle"
-         style="left:8%;animation-duration:14s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:20%;animation-duration:18s;animation-delay:2s;">
-        ✦
-    </div>
-
-    <div class="particle"
-         style="left:35%;animation-duration:15s;animation-delay:5s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:52%;animation-duration:19s;animation-delay:1s;">
-        ✧
-    </div>
-
-    <div class="particle"
-         style="left:67%;animation-duration:16s;animation-delay:4s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:82%;animation-duration:20s;animation-delay:3s;">
-        ✦
-    </div>
-
-    <div class="particle"
-         style="left:94%;animation-duration:13s;animation-delay:6s;">
-        ♡
-    </div>
 
 </div>
 
 
-<!-- =========================================================
+<div id="particles"></div>
+
+
+<!-- ============================================================
      INTRO
-========================================================= -->
+============================================================ -->
 
 <div id="introScreen">
 
-    <div class="intro-content">
+    <div class="intro-logo">
+        🌸
+    </div>
 
-        <div class="intro-logo">
-            🌸
-        </div>
+    <div class="intro-title">
+        Flavi AI
+    </div>
 
-        <div class="intro-title">
-            Flavi AI
-        </div>
-
-        <div class="intro-subtitle">
-            Your little AI companion is waking up...
-        </div>
-
+    <div class="intro-subtitle">
+        Your little AI companion ✨
     </div>
 
 </div>
 
 
-<!-- =========================================================
+<!-- ============================================================
      LOGIN
-========================================================= -->
+============================================================ -->
 
-<div id="loginScreen" class="screen">
+<div
+    id="loginScreen"
+    class="screen"
+>
 
-    <div class="card glass">
+    <div class="card">
 
         <div class="logo">
             🌸
@@ -1310,33 +1590,36 @@ button:disabled {
         </h1>
 
         <p>
-            A cute little AI companion made for you.
+            A cute little AI companion made by Pragatheesh.
         </p>
 
         <div id="googleLogin"></div>
 
         <div class="account-info">
-            Sign in securely with your Google account
+            Sign in with your Google account
         </div>
 
-        <div id="loginError"
-             class="error">
-        </div>
+        <div
+            id="loginError"
+            class="error"
+        ></div>
 
     </div>
 
 </div>
 
 
-<!-- =========================================================
-     NAME SCREEN
-========================================================= -->
+<!-- ============================================================
+     NAME
+============================================================ -->
 
-<div id="nameScreen"
-     class="screen"
-     style="display:none;">
+<div
+    id="nameScreen"
+    class="screen"
+    style="display:none;"
+>
 
-    <div class="card glass">
+    <div class="card">
 
         <div class="logo">
             🌸
@@ -1354,10 +1637,11 @@ button:disabled {
             id="nameInput"
             type="text"
             placeholder="Enter your name"
-            autocomplete="name">
+            autocomplete="name"
+        >
 
         <button id="startButton">
-            Start Chatting ✨
+            Start Chatting 💗
         </button>
 
     </div>
@@ -1365,44 +1649,50 @@ button:disabled {
 </div>
 
 
-<!-- =========================================================
+<!-- ============================================================
      CHAT
-========================================================= -->
+============================================================ -->
 
-<div id="chatScreen">
+<div
+    id="chatScreen"
+    style="display:none;"
+>
 
+
+    <!-- MOBILE MENU -->
 
     <button
-        id="mobileMenu"
-        class="mobile-menu">
-
+        class="menu-button"
+        id="menuButton"
+    >
         ☰
-
     </button>
 
 
-    <!-- SIDEBAR -->
+    <!-- ========================================================
+         SIDEBAR
+    ======================================================== -->
 
     <aside
+        class="sidebar"
         id="sidebar"
-        class="sidebar glass">
+    >
 
+        <div class="sidebar-header">
 
-        <div class="sidebar-brand">
-
-            <div class="sidebar-brand-icon">
+            <div class="sidebar-logo">
                 🌸
             </div>
 
             <div>
 
-                <strong>
+                <div class="sidebar-title">
                     Flavi AI
-                </strong>
+                </div>
 
-                <small>
-                    Your companion
-                </small>
+                <div class="sidebar-subtitle">
+                    Your AI companion
+                </div>
 
             </div>
 
@@ -1415,26 +1705,33 @@ button:disabled {
 
 
         <button
-            class="sidebar-button active"
-            id="newChatButton">
+            class="sidebar-item active"
+            data-page="chat"
+            id="chatButton"
+        >
 
-            💬
+            <span class="sidebar-icon">
+                💬
+            </span>
 
             <span>
-                New Chat
+                Chat
             </span>
 
         </button>
 
 
         <button
-            class="sidebar-button"
-            id="clearChatButton">
+            class="sidebar-item"
+            id="announcementsButton"
+        >
 
-            🗑️
+            <span class="sidebar-icon">
+                📢
+            </span>
 
             <span>
-                Clear Chat
+                Announcements
             </span>
 
         </button>
@@ -1446,49 +1743,45 @@ button:disabled {
 
 
         <button
-            class="sidebar-button"
-            id="memoriesButton">
+            class="sidebar-item"
+            id="memoriesButton"
+        >
 
-            🧠
+            <span class="sidebar-icon">
+                🧠
+            </span>
 
             <span>
-                My Memories
+                Memories
             </span>
 
         </button>
 
 
         <button
-            class="sidebar-button"
-            id="announcementsButton">
+            class="sidebar-item"
+            id="voiceButton"
+        >
 
-            📢
+            <span class="sidebar-icon">
+                🎙️
+            </span>
 
             <span>
-                Announcements
+                Voice
             </span>
 
         </button>
 
 
         <button
-            class="sidebar-button"
-            id="voiceButton">
+            class="sidebar-item"
+            id="aboutButton"
+        >
 
-            🎀
-
-            <span>
-                Flavi Voice
+            <span class="sidebar-icon">
+                💗
             </span>
-
-        </button>
-
-
-        <button
-            class="sidebar-button"
-            id="aboutButton">
-
-            ℹ️
 
             <span>
                 About Flavi
@@ -1497,64 +1790,92 @@ button:disabled {
         </button>
 
 
-        <div class="sidebar-spacer"></div>
-
-
-        <div class="voice-status">
-
-            🎙️ Voice
-
-            <br>
-
-            <strong>
-                Microsoft Aria Online
-            </strong>
-
-            <br>
-
-            <span>
-                Cute natural voice
-            </span>
-
+        <div
+            class="sidebar-section"
+            id="ownerSection"
+            style="display:none;"
+        >
+            Owner
         </div>
 
 
         <button
-            class="sidebar-button"
-            id="logoutButton">
+            class="sidebar-item"
+            id="ownerButton"
+            style="display:none;"
+        >
 
-            🚪
+            <span class="sidebar-icon">
+                👑
+            </span>
 
             <span>
-                Sign Out
+                Owner Commands
             </span>
 
         </button>
 
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-user">
+
+                <div
+                    class="sidebar-user-name"
+                    id="sidebarUserName"
+                >
+                    Pragatheesh
+                </div>
+
+                <div
+                    class="sidebar-user-email"
+                    id="sidebarUserEmail"
+                ></div>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
     </aside>
 
 
-    <!-- MAIN CHAT -->
+    <!-- ========================================================
+         MAIN
+    ======================================================== -->
 
-    <main class="chat-main">
+    <main class="main">
 
 
-        <header class="chat-header">
+        <div class="top-bar">
 
-            <div class="chat-title">
+            <div class="top-title">
 
-                <span class="online-dot"></span>
+                <span>
+                    🌸 Flavi AI
+                </span>
 
-                🌸 Flavi AI
+                <span
+                    class="status-dot"
+                    title="Online"
+                ></span>
 
             </div>
+
 
             <div
+                class="top-user"
                 id="userInfo"
-                class="user-info">
-            </div>
+            ></div>
 
-        </header>
+        </div>
 
 
         <div id="messages"></div>
@@ -1562,15 +1883,23 @@ button:disabled {
 
         <div class="input-area">
 
-            <input
-                id="messageInput"
-                type="text"
-                placeholder="Talk to Flavi... 💗"
-                autocomplete="off">
+            <div class="input-box">
 
-            <button id="sendButton">
-                Send
-            </button>
+                <input
+                    id="messageInput"
+                    type="text"
+                    placeholder="Talk to Flavi..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="sendButton"
+                    title="Send"
+                >
+                    ➤
+                </button>
+
+            </div>
 
         </div>
 
@@ -1580,27 +1909,135 @@ button:disabled {
 </div>
 
 
-<!-- =========================================================
-     MODAL
-========================================================= -->
+<!-- ============================================================
+     ANNOUNCEMENTS PANEL
+============================================================ -->
 
-<div id="modal"
-     class="modal">
+<div
+    class="panel-overlay"
+    id="announcementsPanel"
+>
 
-    <div class="modal-card glass">
+    <div class="panel">
 
-        <h2 id="modalTitle">
-            Flavi
-        </h2>
+        <div class="panel-header">
 
-        <p id="modalText"></p>
+            <h2>
+                📢 Announcements
+            </h2>
+
+            <button
+                class="close-panel"
+                id="closeAnnouncements"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div id="announcementList">
+
+            <div class="announcement">
+                Loading announcements...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     MEMORIES PANEL
+============================================================ -->
+
+<div
+    class="panel-overlay"
+    id="memoriesPanel"
+>
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h2>
+                🧠 Your Memories
+            </h2>
+
+            <button
+                class="close-panel"
+                id="closeMemories"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div id="memoryList">
+
+            <div class="announcement">
+                Loading memories...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     VOICE PANEL
+============================================================ -->
+
+<div
+    class="panel-overlay"
+    id="voicePanel"
+>
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h2>
+                🎙️ Flavi Voice
+            </h2>
+
+            <button
+                class="close-panel"
+                id="closeVoice"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="announcement-id">
+                Current voice
+            </div>
+
+            <div class="announcement-text">
+                Microsoft Aira Online (Natural) 💗
+            </div>
+
+            <div class="announcement-date">
+                Cute English voice selected for Flavi.
+            </div>
+
+        </div>
 
         <button
-            id="modalClose"
-            class="modal-close">
-
-            Close
-
+            id="testVoice"
+            style="
+                width:100%;
+                padding:15px;
+                margin-top:10px;
+            "
+        >
+            Test Flavi's Voice 🔊
         </button>
 
     </div>
@@ -1608,28 +2045,131 @@ button:disabled {
 </div>
 
 
-<!-- =========================================================
+<!-- ============================================================
+     OWNER PANEL
+============================================================ -->
+
+<div
+    class="panel-overlay"
+    id="ownerPanel"
+>
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h2>
+                👑 Owner Commands
+            </h2>
+
+            <button
+                class="close-panel"
+                id="closeOwner"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="announcement">
+
+            <div class="announcement-id">
+                📢 Create announcement
+            </div>
+
+            <div class="announcement-text">
+
+                Type:
+
+                <br><br>
+
+                <code>
+                    /announce Your announcement here
+                </code>
+
+            </div>
+
+        </div>
+
+
+        <div class="announcement">
+
+            <div class="announcement-id">
+                🧠 Memories
+            </div>
+
+            <div class="announcement-text">
+
+                <code>/remember TEXT</code>
+                <br>
+                <code>/memories</code>
+                <br>
+                <code>/forget ID</code>
+                <br>
+                <code>/clear</code>
+
+            </div>
+
+        </div>
+
+
+        <div class="announcement">
+
+            <div class="announcement-id">
+                📢 Announcement management
+            </div>
+
+            <div class="announcement-text">
+
+                <code>/announcements</code>
+                <br>
+                <code>/deleteannouncement ID</code>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="announceQuickButton"
+            style="
+                width:100%;
+                padding:15px;
+                margin-top:10px;
+            "
+        >
+            Create Announcement 📢
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
      FIREBASE + FLAVI
-========================================================= -->
+============================================================ -->
 
 <script type="module">
 
 
-/* =========================================================
-   FLAVI WORKER
-========================================================= */
+/* ============================================================
+   WORKER
+============================================================ */
 
 const AI_WORKER_URL =
     "https://flavi-ai-backend.pragatheesh687.workers.dev/api/chat";
 
 
-/* =========================================================
+/* ============================================================
    FIREBASE IMPORTS
-========================================================= */
+============================================================ */
 
 import {
     initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
@@ -1639,13 +2179,14 @@ import {
     signInWithPopup,
     onAuthStateChanged,
     signOut
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-/* =========================================================
+/* ============================================================
    FIREBASE CONFIG
-========================================================= */
+============================================================ */
 
 const firebaseConfig = {
 
@@ -1670,206 +2211,104 @@ const firebaseConfig = {
 };
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
+/* ============================================================
+   FIREBASE
+============================================================ */
 
 const app =
     initializeApp(
         firebaseConfig
     );
 
+
 const auth =
     getAuth(app);
+
 
 const provider =
     new GoogleAuthProvider();
 
 
 provider.setCustomParameters({
-    prompt: "select_account"
+    prompt:
+        "select_account"
 });
 
 
-/* =========================================================
+/* ============================================================
    VARIABLES
-========================================================= */
+============================================================ */
 
 let currentUser = null;
 
 let userName = "";
 
-let flaviVoice = null;
+let voices = [];
 
-let voiceEnabled =
-    localStorage.getItem(
-        "flavi_voice_enabled"
-    ) !== "false";
+let airaVoice = null;
 
 
-/* =========================================================
-   FLAVI VOICE
-========================================================= */
-
-const FLAVI_VOICE_NAME =
-    "Microsoft Aria Online (Natural) - English (United States)";
-
-
-function loadFlaviVoice() {
-
-    const voices =
-        speechSynthesis.getVoices();
-
-
-    flaviVoice =
-        voices.find(
-            voice =>
-                voice.name ===
-                FLAVI_VOICE_NAME
-        ) || null;
-
-
-    console.log(
-        "Flavi voice:",
-        flaviVoice
-            ? flaviVoice.name
-            : "Aria not loaded yet"
-    );
-
-}
-
-
-speechSynthesis.addEventListener(
-    "voiceschanged",
-    loadFlaviVoice
-);
-
-
-loadFlaviVoice();
-
-
-/* =========================================================
-   SPEAK AS FLAVI
-========================================================= */
-
-function speakFlavi(text) {
-
-    if (!voiceEnabled)
-        return;
-
-
-    if (!text)
-        return;
-
-
-    loadFlaviVoice();
-
-
-    if (!flaviVoice) {
-
-        console.warn(
-            "Microsoft Aria voice is unavailable."
-        );
-
-        return;
-
-    }
-
-
-    speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(
-            text
-        );
-
-
-    utterance.voice =
-        flaviVoice;
-
-
-    utterance.lang =
-        "en-US";
-
-
-    utterance.rate =
-        0.92;
-
-
-    utterance.pitch =
-        1.12;
-
-
-    utterance.volume =
-        1.0;
-
-
-    speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-/* =========================================================
+/* ============================================================
    DOM
-========================================================= */
+============================================================ */
 
 const loginScreen =
     document.getElementById(
         "loginScreen"
     );
 
+
 const nameScreen =
     document.getElementById(
         "nameScreen"
     );
+
 
 const chatScreen =
     document.getElementById(
         "chatScreen"
     );
 
+
 const nameInput =
     document.getElementById(
         "nameInput"
     );
+
 
 const messageInput =
     document.getElementById(
         "messageInput"
     );
 
+
 const sendButton =
     document.getElementById(
         "sendButton"
     );
+
 
 const loginError =
     document.getElementById(
         "loginError"
     );
 
+
 const userInfo =
     document.getElementById(
         "userInfo"
     );
+
 
 const messages =
     document.getElementById(
         "messages"
     );
 
-const sidebar =
-    document.getElementById(
-        "sidebar"
-    );
 
-
-/* =========================================================
+/* ============================================================
    GOOGLE BUTTON
-========================================================= */
+============================================================ */
 
 const googleButton =
     document.createElement(
@@ -1900,20 +2339,22 @@ document
     );
 
 
-/* =========================================================
-   GOOGLE LOGIN
-========================================================= */
+/* ============================================================
+   LOGIN
+============================================================ */
 
 async function loginWithGoogle() {
 
     loginError.textContent =
         "";
 
+
     googleButton.disabled =
         true;
 
+
     googleButton.textContent =
-        "Signing in... 🌸";
+        "Signing in...";
 
 
     try {
@@ -1929,9 +2370,8 @@ async function loginWithGoogle() {
             result.user;
 
 
-        await currentUser.getIdToken(
-            true
-        );
+        await currentUser
+            .getIdToken(true);
 
 
         if (
@@ -1951,7 +2391,6 @@ async function loginWithGoogle() {
     catch (error) {
 
         console.error(
-            "Google login error:",
             error
         );
 
@@ -1967,6 +2406,7 @@ async function loginWithGoogle() {
         googleButton.disabled =
             false;
 
+
         googleButton.textContent =
             "🔵 Continue with Google";
 
@@ -1975,13 +2415,13 @@ async function loginWithGoogle() {
 }
 
 
-/* =========================================================
+/* ============================================================
    AUTH STATE
-========================================================= */
+============================================================ */
 
 onAuthStateChanged(
     auth,
-    async function(user) {
+    async user => {
 
         if (!user) {
 
@@ -2017,7 +2457,6 @@ onAuthStateChanged(
         catch (error) {
 
             console.error(
-                "Token error:",
                 error
             );
 
@@ -2051,9 +2490,9 @@ onAuthStateChanged(
 );
 
 
-/* =========================================================
-   SHOW NAME SCREEN
-========================================================= */
+/* ============================================================
+   SHOW NAME
+============================================================ */
 
 function showNameScreen() {
 
@@ -2069,9 +2508,9 @@ function showNameScreen() {
 }
 
 
-/* =========================================================
+/* ============================================================
    SHOW CHAT
-========================================================= */
+============================================================ */
 
 function showChatScreen() {
 
@@ -2090,14 +2529,47 @@ function showChatScreen() {
         userInfo.textContent =
             currentUser.email || "";
 
+
+        document
+            .getElementById(
+                "sidebarUserName"
+            )
+            .textContent =
+            userName ||
+            currentUser.displayName ||
+            "Pragatheesh";
+
+
+        document
+            .getElementById(
+                "sidebarUserEmail"
+            )
+            .textContent =
+            currentUser.email || "";
+
+    }
+
+
+    checkOwnerUI();
+
+
+    if (
+        messages.children.length === 0
+    ) {
+
+        addMessage(
+            "ai",
+            `Hi ${userName || "there"}! 🌸 I'm Flavi. Nice to see you again!`
+        );
+
     }
 
 }
 
 
-/* =========================================================
+/* ============================================================
    SAVE NAME
-========================================================= */
+============================================================ */
 
 function saveName() {
 
@@ -2140,35 +2612,6 @@ function saveName() {
     showChatScreen();
 
 
-    if (
-        messages.children.length ===
-        0
-    ) {
-
-        const greeting =
-            `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`;
-
-
-        addMessage(
-            "ai",
-            greeting
-        );
-
-
-        setTimeout(
-            function() {
-
-                speakFlavi(
-                    greeting
-                );
-
-            },
-            500
-        );
-
-    }
-
-
     messageInput.focus();
 
 }
@@ -2184,9 +2627,9 @@ document
     );
 
 
-/* =========================================================
+/* ============================================================
    ADD MESSAGE
-========================================================= */
+============================================================ */
 
 function addMessage(
     type,
@@ -2200,7 +2643,8 @@ function addMessage(
 
 
     div.className =
-        "message " + type;
+        "message " +
+        type;
 
 
     div.textContent =
@@ -2215,12 +2659,27 @@ function addMessage(
     messages.scrollTop =
         messages.scrollHeight;
 
+
+    /*
+     * Automatically speak AI responses.
+     */
+
+    if (
+        type === "ai"
+    ) {
+
+        speakFlavi(
+            text
+        );
+
+    }
+
 }
 
 
-/* =========================================================
-   FIREBASE TOKEN
-========================================================= */
+/* ============================================================
+   GET TOKEN
+============================================================ */
 
 async function getFreshFirebaseToken(
     forceRefresh = false
@@ -2255,9 +2714,9 @@ async function getFreshFirebaseToken(
 }
 
 
-/* =========================================================
-   CALL WORKER
-========================================================= */
+/* ============================================================
+   WORKER REQUEST
+============================================================ */
 
 async function callFlaviWorker(
     text,
@@ -2309,7 +2768,8 @@ async function callFlaviWorker(
         await response.text();
 
 
-    let data = null;
+    let data =
+        null;
 
 
     try {
@@ -2323,7 +2783,8 @@ async function callFlaviWorker(
 
     catch {
 
-        data = null;
+        data =
+            null;
 
     }
 
@@ -2337,9 +2798,9 @@ async function callFlaviWorker(
 }
 
 
-/* =========================================================
+/* ============================================================
    SEND MESSAGE
-========================================================= */
+============================================================ */
 
 async function sendMessage() {
 
@@ -2363,15 +2824,6 @@ async function sendMessage() {
     }
 
 
-    if (!userName) {
-
-        userName =
-            currentUser.displayName ||
-            "friend";
-
-    }
-
-
     addMessage(
         "user",
         text
@@ -2384,6 +2836,7 @@ async function sendMessage() {
 
     sendButton.disabled =
         true;
+
 
     messageInput.disabled =
         true;
@@ -2408,10 +2861,6 @@ async function sendMessage() {
     );
 
 
-    messages.scrollTop =
-        messages.scrollHeight;
-
-
     try {
 
         let result =
@@ -2422,8 +2871,7 @@ async function sendMessage() {
 
 
         if (
-            result.response.status ===
-            401
+            result.response.status === 401
         ) {
 
             result =
@@ -2445,7 +2893,7 @@ async function sendMessage() {
 
             addMessage(
                 "ai",
-                "Flavi couldn't verify your Google login 🌸\n\nPlease sign out, sign in again, and try once more."
+                "Flavi couldn't verify your Google login 🌸\n\nPlease sign out and sign in again."
             );
 
             return;
@@ -2468,12 +2916,13 @@ async function sendMessage() {
         }
 
 
-        if (!result.data) {
+        if (
+            !result.data
+        ) {
 
             addMessage(
                 "ai",
-                "Flavi returned invalid data 😭\n\n" +
-                result.raw
+                "Flavi returned invalid data 😭"
             );
 
             return;
@@ -2487,11 +2936,6 @@ async function sendMessage() {
 
             addMessage(
                 "ai",
-                result.data.reply
-            );
-
-
-            speakFlavi(
                 result.data.reply
             );
 
@@ -2511,7 +2955,6 @@ async function sendMessage() {
     catch (error) {
 
         console.error(
-            "Flavi connection error:",
             error
         );
 
@@ -2532,8 +2975,10 @@ async function sendMessage() {
         sendButton.disabled =
             false;
 
+
         messageInput.disabled =
             false;
+
 
         messageInput.focus();
 
@@ -2542,17 +2987,16 @@ async function sendMessage() {
 }
 
 
-/* =========================================================
-   ENTER KEY
-========================================================= */
+/* ============================================================
+   ENTER
+============================================================ */
 
 messageInput.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (
-            event.key ===
-            "Enter"
+            event.key === "Enter"
         ) {
 
             event.preventDefault();
@@ -2565,272 +3009,33 @@ messageInput.addEventListener(
 );
 
 
+/* ============================================================
+   SEND BUTTON
+============================================================ */
+
 sendButton.addEventListener(
     "click",
     sendMessage
 );
 
 
-/* =========================================================
-   NEW CHAT
-========================================================= */
+/* ============================================================
+   SIDEBAR
+============================================================ */
 
-document
-    .getElementById(
-        "newChatButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            messages.innerHTML =
-                "";
-
-
-            const greeting =
-                `Hey ${userName || "there"}! 🌸 I'm Flavi. What's on your mind?`;
-
-
-            addMessage(
-                "ai",
-                greeting
-            );
-
-
-            speakFlavi(
-                greeting
-            );
-
-
-            messageInput.focus();
-
-        }
-    );
-
-
-/* =========================================================
-   CLEAR CHAT
-========================================================= */
-
-document
-    .getElementById(
-        "clearChatButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            messages.innerHTML =
-                "";
-
-
-            const greeting =
-                `Chat cleared 🌸 I'm still here, ${userName || "friend"}!`;
-
-
-            addMessage(
-                "ai",
-                greeting
-            );
-
-
-            speakFlavi(
-                greeting
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   VOICE BUTTON
-========================================================= */
-
-document
-    .getElementById(
-        "voiceButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            voiceEnabled =
-                !voiceEnabled;
-
-
-            localStorage.setItem(
-                "flavi_voice_enabled",
-                voiceEnabled
-            );
-
-
-            if (!voiceEnabled) {
-
-                speechSynthesis.cancel();
-
-
-                alert(
-                    "Flavi voice is now OFF 🔇"
-                );
-
-            }
-
-            else {
-
-                speakFlavi(
-                    `Hi ${userName || "Pragatheesh"}! 🌸`
-                );
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   MEMORIES
-========================================================= */
-
-document
-    .getElementById(
-        "memoriesButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            showModal(
-                "🧠 My Memories",
-                "Your existing Flavi memory system is available through the chat. Try commands such as /remember to save something."
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   ANNOUNCEMENTS
-========================================================= */
-
-document
-    .getElementById(
-        "announcementsButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            showModal(
-                "📢 Announcements",
-                "Your Flavi announcement system is available through your existing Worker and owner commands."
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-document
-    .getElementById(
-        "aboutButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "about.html";
-
-        }
-    );
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-const modal =
+const sidebar =
     document.getElementById(
-        "modal"
+        "sidebar"
     );
-
-const modalTitle =
-    document.getElementById(
-        "modalTitle"
-    );
-
-const modalText =
-    document.getElementById(
-        "modalText"
-    );
-
-
-function showModal(
-    title,
-    text
-) {
-
-    modalTitle.textContent =
-        title;
-
-    modalText.textContent =
-        text;
-
-    modal.classList.add(
-        "show"
-    );
-
-}
 
 
 document
     .getElementById(
-        "modalClose"
+        "menuButton"
     )
     .addEventListener(
         "click",
-        function() {
-
-            modal.classList.remove(
-                "show"
-            );
-
-        }
-    );
-
-
-modal.addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            event.target === modal
-        ) {
-
-            modal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
-
-document
-    .getElementById(
-        "mobileMenu"
-    )
-    .addEventListener(
-        "click",
-        function() {
+        () => {
 
             sidebar.classList.toggle(
                 "open"
@@ -2841,24 +3046,754 @@ document
 
 
 document
+    .getElementById(
+        "chatButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            closeAllPanels();
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            messageInput.focus();
+
+        }
+    );
+
+
+/* ============================================================
+   ANNOUNCEMENTS
+============================================================ */
+
+document
+    .getElementById(
+        "announcementsButton"
+    )
+    .addEventListener(
+        "click",
+        openAnnouncements
+    );
+
+
+async function openAnnouncements() {
+
+    sidebar.classList.remove(
+        "open"
+    );
+
+
+    const panel =
+        document.getElementById(
+            "announcementsPanel"
+        );
+
+
+    const list =
+        document.getElementById(
+            "announcementList"
+        );
+
+
+    panel.style.display =
+        "flex";
+
+
+    list.innerHTML =
+        `<div class="announcement">
+            Loading announcements... 📢
+        </div>`;
+
+
+    try {
+
+        const result =
+            await callFlaviWorker(
+                "/announcements"
+            );
+
+
+        if (
+            result.data &&
+            result.data.reply
+        ) {
+
+            renderAnnouncements(
+                result.data.reply
+            );
+
+        }
+
+        else {
+
+            list.innerHTML =
+                `<div class="announcement">
+                    Couldn't load announcements 😭
+                </div>`;
+
+        }
+
+    }
+
+    catch (error) {
+
+        list.innerHTML =
+            `<div class="announcement">
+                Couldn't load announcements 😭
+            </div>`;
+
+    }
+
+}
+
+
+/*
+ * Worker returns text.
+ * We display it safely.
+ */
+
+function renderAnnouncements(
+    text
+) {
+
+    const list =
+        document.getElementById(
+            "announcementList"
+        );
+
+
+    list.innerHTML =
+        "";
+
+
+    const lines =
+        text.split(
+            "\n"
+        );
+
+
+    let current =
+        null;
+
+
+    for (
+        const line
+        of lines
+    ) {
+
+        if (
+            line.startsWith("#")
+        ) {
+
+            if (current) {
+
+                list.appendChild(
+                    current
+                );
+
+            }
+
+
+            current =
+                document.createElement(
+                    "div"
+                );
+
+
+            current.className =
+                "announcement";
+
+
+            const id =
+                document.createElement(
+                    "div"
+                );
+
+
+            id.className =
+                "announcement-id";
+
+
+            id.textContent =
+                "📢 " +
+                line;
+
+
+            current.appendChild(
+                id
+            );
+
+        }
+
+        else if (
+            current &&
+            line.trim()
+        ) {
+
+            const text =
+                document.createElement(
+                    "div"
+                );
+
+
+            text.className =
+                "announcement-text";
+
+
+            text.textContent =
+                line;
+
+
+            current.appendChild(
+                text
+            );
+
+        }
+
+    }
+
+
+    if (current) {
+
+        list.appendChild(
+            current
+        );
+
+    }
+
+
+    if (
+        !list.children.length
+    ) {
+
+        list.innerHTML =
+            `<div class="announcement">
+                No announcements yet 🌸
+            </div>`;
+
+    }
+
+}
+
+
+/* ============================================================
+   MEMORIES
+============================================================ */
+
+document
+    .getElementById(
+        "memoriesButton"
+    )
+    .addEventListener(
+        "click",
+        openMemories
+    );
+
+
+async function openMemories() {
+
+    sidebar.classList.remove(
+        "open"
+    );
+
+
+    const panel =
+        document.getElementById(
+            "memoriesPanel"
+        );
+
+
+    const list =
+        document.getElementById(
+            "memoryList"
+        );
+
+
+    panel.style.display =
+        "flex";
+
+
+    list.innerHTML =
+        `<div class="announcement">
+            Loading memories... 🧠
+        </div>`;
+
+
+    try {
+
+        const result =
+            await callFlaviWorker(
+                "/memories"
+            );
+
+
+        list.innerHTML =
+            "";
+
+
+        if (
+            result.data &&
+            result.data.reply
+        ) {
+
+            const memoryBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            memoryBox.className =
+                "announcement";
+
+
+            memoryBox.style.whiteSpace =
+                "pre-wrap";
+
+
+            memoryBox.textContent =
+                result.data.reply;
+
+
+            list.appendChild(
+                memoryBox
+            );
+
+        }
+
+    }
+
+    catch {
+
+        list.innerHTML =
+            `<div class="announcement">
+                Couldn't load memories 😭
+            </div>`;
+
+    }
+
+}
+
+
+/* ============================================================
+   VOICE
+============================================================ */
+
+document
+    .getElementById(
+        "voiceButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "voicePanel"
+                )
+                .style.display =
+                "flex";
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "testVoice"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            speakFlavi(
+                "Hiii Pragatheesh! 🌸 I'm Flavi. This is my new cute voice!"
+            );
+
+        }
+    );
+
+
+/* ============================================================
+   AIRA VOICE
+============================================================ */
+
+function loadVoices() {
+
+    voices =
+        speechSynthesis.getVoices();
+
+
+    airaVoice =
+        voices.find(
+            voice =>
+                voice.name
+                    .toLowerCase()
+                    .includes("aira")
+        );
+
+
+    if (!airaVoice) {
+
+        airaVoice =
+            voices.find(
+                voice =>
+                    voice.name
+                        .toLowerCase()
+                        .includes(
+                            "online (natural)"
+                        ) &&
+                    voice.lang
+                        .toLowerCase()
+                        .startsWith(
+                            "en"
+                        )
+            );
+
+    }
+
+}
+
+
+speechSynthesis.onvoiceschanged =
+    loadVoices;
+
+
+loadVoices();
+
+
+/*
+ * Remove emoji before speech.
+ *
+ * This prevents Flavi from saying things
+ * like "red heart", "flower", etc.
+ */
+
+function removeEmojisForSpeech(
+    text
+) {
+
+    return text
+        .replace(
+            /[\u{1F300}-\u{1FAFF}]/gu,
+            ""
+        )
+        .replace(
+            /[\u{2600}-\u{27BF}]/g,
+            ""
+        )
+        .replace(
+            /[\u{1F1E6}-\u{1F1FF}]/gu,
+            ""
+        )
+        .replace(
+            /\s+/g,
+            " "
+        )
+        .trim();
+
+}
+
+
+function speakFlavi(
+    text
+) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    const cleanText =
+        removeEmojisForSpeech(
+            text
+        );
+
+
+    if (!cleanText)
+        return;
+
+
+    speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            cleanText
+        );
+
+
+    if (airaVoice) {
+
+        utterance.voice =
+            airaVoice;
+
+    }
+
+
+    utterance.lang =
+        "en-US";
+
+
+    utterance.rate =
+        1.02;
+
+
+    utterance.pitch =
+        1.12;
+
+
+    utterance.volume =
+        1;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* ============================================================
+   ABOUT
+============================================================ */
+
+document
+    .getElementById(
+        "aboutButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "about.html";
+
+        }
+    );
+
+
+/* ============================================================
+   OWNER UI
+============================================================ */
+
+function checkOwnerUI() {
+
+    if (!currentUser)
+        return;
+
+
+    /*
+     * Your Firebase UID.
+     */
+
+    const ownerUID =
+        "yGQ9j6NeRsgwKjvBw6aiLJrzxtD3";
+
+
+    if (
+        currentUser.uid === ownerUID
+    ) {
+
+        document
+            .getElementById(
+                "ownerSection"
+            )
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById(
+                "ownerButton"
+            )
+            .style.display =
+            "flex";
+
+    }
+
+}
+
+
+/* ============================================================
+   OWNER PANEL
+============================================================ */
+
+document
+    .getElementById(
+        "ownerButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "ownerPanel"
+                )
+                .style.display =
+                "flex";
+
+        }
+    );
+
+
+/* ============================================================
+   QUICK ANNOUNCEMENT
+============================================================ */
+
+document
+    .getElementById(
+        "announceQuickButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const announcement =
+                prompt(
+                    "Enter your Flavi announcement:"
+                );
+
+
+            if (
+                !announcement ||
+                !announcement.trim()
+            ) {
+
+                return;
+
+            }
+
+
+            addMessage(
+                "user",
+                "/announce " +
+                announcement.trim()
+            );
+
+
+            try {
+
+                const result =
+                    await callFlaviWorker(
+                        "/announce " +
+                        announcement.trim()
+                    );
+
+
+                if (
+                    result.data &&
+                    result.data.reply
+                ) {
+
+                    addMessage(
+                        "ai",
+                        result.data.reply
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                addMessage(
+                    "ai",
+                    "Couldn't publish announcement 😭"
+                );
+
+            }
+
+        }
+    );
+
+
+/* ============================================================
+   PANELS
+============================================================ */
+
+function closeAllPanels() {
+
+    document
+        .querySelectorAll(
+            ".panel-overlay"
+        )
+        .forEach(
+            panel => {
+
+                panel.style.display =
+                    "none";
+
+            }
+        );
+
+}
+
+
+document
+    .getElementById(
+        "closeAnnouncements"
+    )
+    .addEventListener(
+        "click",
+        closeAllPanels
+    );
+
+
+document
+    .getElementById(
+        "closeMemories"
+    )
+    .addEventListener(
+        "click",
+        closeAllPanels
+    );
+
+
+document
+    .getElementById(
+        "closeVoice"
+    )
+    .addEventListener(
+        "click",
+        closeAllPanels
+    );
+
+
+document
+    .getElementById(
+        "closeOwner"
+    )
+    .addEventListener(
+        "click",
+        closeAllPanels
+    );
+
+
+document
     .querySelectorAll(
-        ".sidebar-button"
+        ".panel-overlay"
     )
     .forEach(
-        button => {
+        overlay => {
 
-            button.addEventListener(
+            overlay.addEventListener(
                 "click",
-                function() {
+                event => {
 
                     if (
-                        window.innerWidth <=
-                        850
+                        event.target ===
+                        overlay
                     ) {
 
-                        sidebar.classList.remove(
-                            "open"
-                        );
+                        closeAllPanels();
 
                     }
 
@@ -2869,9 +3804,9 @@ document
     );
 
 
-/* =========================================================
-   SIGN OUT
-========================================================= */
+/* ============================================================
+   LOGOUT
+============================================================ */
 
 document
     .getElementById(
@@ -2879,12 +3814,12 @@ document
     )
     .addEventListener(
         "click",
-        async function() {
-
-            speechSynthesis.cancel();
-
+        async () => {
 
             try {
+
+                speechSynthesis.cancel();
+
 
                 await signOut(
                     auth
@@ -2893,6 +3828,7 @@ document
 
                 currentUser =
                     null;
+
 
                 userName =
                     "";
@@ -2906,12 +3842,12 @@ document
                 messages.innerHTML =
                     "";
 
+
             }
 
             catch (error) {
 
                 console.error(
-                    "Sign out error:",
                     error
                 );
 
@@ -2921,33 +3857,78 @@ document
     );
 
 
-</script>
+/* ============================================================
+   BACKGROUND PARTICLES
+============================================================ */
+
+const particleContainer =
+    document.getElementById(
+        "particles"
+    );
 
 
-<!-- =========================================================
-     INTRO TIMER
-========================================================= -->
+const particleSymbols = [
+    "🌸",
+    "💗",
+    "✨",
+    "♡",
+    "✦",
+    "🌷"
+];
 
-<script>
 
-setTimeout(
-    function() {
+for (
+    let i = 0;
+    i < 18;
+    i++
+) {
 
-        const intro =
-            document.getElementById(
-                "introScreen"
-            );
-
-        intro.classList.add(
-            "hide"
+    const particle =
+        document.createElement(
+            "div"
         );
 
-    },
-    2300
-);
+
+    particle.className =
+        "particle";
+
+
+    particle.textContent =
+        particleSymbols[
+            Math.floor(
+                Math.random() *
+                particleSymbols.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() *
+        100 +
+        "%";
+
+
+    particle.style.animationDuration =
+        12 +
+        Math.random() *
+        15 +
+        "s";
+
+
+    particle.style.animationDelay =
+        -Math.random() *
+        15 +
+        "s";
+
+
+    particleContainer.appendChild(
+        particle
+    );
+
+}
 
 </script>
 
-
 </body>
+
 </html>
