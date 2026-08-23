@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="google-site-verification"
@@ -14,7 +15,7 @@
       content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
 <meta name="theme-color"
-      content="#170d19">
+      content="#120b18">
 
 <title>Flavi AI — Your Friendly AI Companion</title>
 
@@ -47,21 +48,16 @@ body {
 
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(255, 105, 174, .30),
-            transparent 32%
+            circle at 20% 20%,
+            rgba(255,105,180,.18),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 85% 25%,
-            rgba(255, 150, 205, .25),
-            transparent 32%
+            circle at 80% 80%,
+            rgba(160,100,255,.16),
+            transparent 30%
         ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(255, 182, 217, .20),
-            transparent 35%
-        ),
-        #170d19;
+        #100b17;
 
     overflow: hidden;
 }
@@ -82,15 +78,15 @@ body {
 .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: .55;
+    filter: blur(70px);
+    opacity: .45;
     animation: floatBlob 12s ease-in-out infinite;
 }
 
 .blob.one {
-    width: 320px;
-    height: 320px;
-    background: #ff6fae;
+    width: 280px;
+    height: 280px;
+    background: #ff5ca8;
     left: -80px;
     top: 10%;
 }
@@ -98,16 +94,16 @@ body {
 .blob.two {
     width: 350px;
     height: 350px;
-    background: #ff9acb;
+    background: #8b5cf6;
     right: -100px;
     top: 20%;
     animation-delay: -4s;
 }
 
 .blob.three {
-    width: 280px;
-    height: 280px;
-    background: #ffb6d9;
+    width: 250px;
+    height: 250px;
+    background: #ff8bd1;
     left: 35%;
     bottom: -100px;
     animation-delay: -7s;
@@ -118,29 +114,27 @@ body {
     0%,
     100% {
         transform:
-            translate(0, 0)
+            translate(0,0)
             scale(1);
     }
 
     50% {
         transform:
-            translate(45px, -35px)
-            scale(1.13);
+            translate(40px,-35px)
+            scale(1.12);
     }
 }
 
 
 /* =========================================================
-   FLOATING HEARTS
+   FLOATING HEARTS / SPARKLES
 ========================================================= */
 
 .particle {
     position: absolute;
-    color: rgba(255, 220, 237, .75);
+    color: rgba(255,255,255,.65);
     font-size: 18px;
-
-    animation:
-        particleFloat linear infinite;
+    animation: particleFloat linear infinite;
 }
 
 @keyframes particleFloat {
@@ -149,7 +143,6 @@ body {
         transform:
             translateY(110vh)
             rotate(0deg);
-
         opacity: 0;
     }
 
@@ -165,7 +158,6 @@ body {
         transform:
             translateY(-15vh)
             rotate(360deg);
-
         opacity: 0;
     }
 }
@@ -177,11 +169,10 @@ body {
 
 .glass {
     background:
-        rgba(255, 255, 255, .075);
+        rgba(255,255,255,.075);
 
     border:
-        1px solid
-        rgba(255, 255, 255, .14);
+        1px solid rgba(255,255,255,.12);
 
     backdrop-filter:
         blur(25px);
@@ -190,13 +181,12 @@ body {
         blur(25px);
 
     box-shadow:
-        0 25px 80px
-        rgba(0, 0, 0, .35);
+        0 25px 80px rgba(0,0,0,.35);
 }
 
 
 /* =========================================================
-   INTRO ANIMATION
+   INTRO
 ========================================================= */
 
 #introScreen {
@@ -213,8 +203,8 @@ body {
     background:
         radial-gradient(
             circle at center,
-            #6d294d,
-            #170d19 65%
+            #3c183d,
+            #100b17 65%
         );
 
     transition:
@@ -229,37 +219,34 @@ body {
 
 .intro-content {
     text-align: center;
-
     animation:
         introAppear 1.2s ease;
 }
 
 .intro-logo {
 
-    width: 115px;
-    height: 115px;
+    width: 110px;
+    height: 110px;
 
-    margin:
-        0 auto 22px;
+    margin: auto auto 22px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 36px;
+    border-radius: 35px;
 
-    font-size: 62px;
+    font-size: 60px;
 
     background:
         linear-gradient(
             135deg,
-            #ff6fae,
-            #ff9bca
+            #ff70b5,
+            #b86cff
         );
 
     box-shadow:
-        0 0 70px
-        rgba(255, 105, 174, .65);
+        0 0 60px rgba(255,105,180,.55);
 
     animation:
         logoPulse 2s ease-in-out infinite;
@@ -267,7 +254,7 @@ body {
 
 .intro-title {
 
-    font-size: 48px;
+    font-size: 46px;
     font-weight: 800;
 
     letter-spacing: -2px;
@@ -276,8 +263,8 @@ body {
         linear-gradient(
             90deg,
             #fff,
-            #ffb8d8,
-            #ffd9e9,
+            #ffb7dc,
+            #d5b5ff,
             #fff
         );
 
@@ -285,7 +272,6 @@ body {
 
     -webkit-background-clip: text;
     background-clip: text;
-
     color: transparent;
 
     animation:
@@ -296,25 +282,25 @@ body {
 
     margin-top: 10px;
 
-    color:
-        rgba(255,255,255,.68);
+    color: rgba(255,255,255,.65);
 
     font-size: 15px;
+
+    animation:
+        fadeIn 1.5s ease;
 }
 
 @keyframes introAppear {
 
     from {
         opacity: 0;
-
         transform:
-            translateY(35px)
-            scale(.88);
+            translateY(30px)
+            scale(.9);
     }
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -336,14 +322,24 @@ body {
 @keyframes gradientMove {
 
     to {
-        background-position:
-            250% center;
+        background-position: 250% center;
+    }
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 
 
 /* =========================================================
-   SCREEN
+   SCREENS
 ========================================================= */
 
 .screen {
@@ -379,13 +375,13 @@ body {
 
     animation:
         cardAppear .8s ease;
+
 }
 
 @keyframes cardAppear {
 
     from {
         opacity: 0;
-
         transform:
             translateY(35px)
             scale(.94);
@@ -393,7 +389,6 @@ body {
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -402,8 +397,8 @@ body {
 
 .logo {
 
-    width: 90px;
-    height: 90px;
+    width: 88px;
+    height: 88px;
 
     margin:
         0 auto 20px;
@@ -412,20 +407,19 @@ body {
     align-items: center;
     justify-content: center;
 
-    border-radius: 29px;
+    border-radius: 28px;
 
-    font-size: 50px;
+    font-size: 48px;
 
     background:
         linear-gradient(
             135deg,
-            #ff6fae,
-            #ff9bca
+            #ff6fb1,
+            #a56cff
         );
 
     box-shadow:
-        0 15px 50px
-        rgba(255, 105, 174, .35);
+        0 15px 45px rgba(255,105,180,.3);
 
     animation:
         logoPulse 3s ease-in-out infinite;
@@ -443,7 +437,7 @@ h1 {
 .card p {
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.62);
 
     margin-bottom: 25px;
 
@@ -459,17 +453,15 @@ input {
 
     width: 100%;
 
-    padding:
-        16px 18px;
+    padding: 16px 18px;
 
     border:
-        1px solid
-        rgba(255,255,255,.12);
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 16px;
 
     background:
-        rgba(255,255,255,.075);
+        rgba(255,255,255,.07);
 
     color: white;
 
@@ -488,16 +480,16 @@ input::placeholder {
 input:focus {
 
     border-color:
-        rgba(255, 105, 174, .75);
+        rgba(255,112,180,.7);
 
     box-shadow:
         0 0 0 4px
-        rgba(255,105,174,.12);
+        rgba(255,112,180,.1);
 }
 
 
 /* =========================================================
-   BUTTONS
+   BUTTON
 ========================================================= */
 
 button {
@@ -506,14 +498,13 @@ button {
 
     border-radius: 15px;
 
-    padding:
-        15px 20px;
+    padding: 15px 20px;
 
     background:
         linear-gradient(
             135deg,
             #ff6eae,
-            #ff92c2
+            #b06cff
         );
 
     color: white;
@@ -537,7 +528,7 @@ button:hover {
 
     box-shadow:
         0 10px 30px
-        rgba(255,105,174,.28);
+        rgba(255,105,180,.25);
 }
 
 button:active {
@@ -545,22 +536,18 @@ button:active {
 }
 
 button:disabled {
-
     opacity: .5;
-
     cursor: not-allowed;
 }
 
 #startButton {
-
     width: 100%;
-
     margin-top: 14px;
 }
 
 
 /* =========================================================
-   GOOGLE LOGIN
+   GOOGLE
 ========================================================= */
 
 #googleLogin {
@@ -581,7 +568,7 @@ button:disabled {
 
     border:
         1px solid
-        rgba(255,255,255,.15);
+        rgba(255,255,255,.14);
 
     box-shadow: none;
 }
@@ -589,9 +576,11 @@ button:disabled {
 .google-button:hover {
 
     background:
-        rgba(255,255,255,.16);
+        rgba(255,255,255,.15);
 
-    box-shadow: none;
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.2);
 }
 
 .account-info {
@@ -607,7 +596,7 @@ button:disabled {
 .error {
 
     color:
-        #ff9db8;
+        #ff8ba7;
 
     margin-top: 15px;
 
@@ -655,7 +644,6 @@ button:disabled {
     z-index: 30;
 
     display: flex;
-
     flex-direction: column;
 
     transition:
@@ -682,7 +670,6 @@ button:disabled {
     border-radius: 15px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -690,7 +677,7 @@ button:disabled {
         linear-gradient(
             135deg,
             #ff6eae,
-            #ff9bc9
+            #a86cff
         );
 
     font-size: 24px;
@@ -735,8 +722,7 @@ button:disabled {
 
     gap: 12px;
 
-    padding:
-        13px 14px;
+    padding: 13px 14px;
 
     margin-bottom: 6px;
 
@@ -771,8 +757,8 @@ button:disabled {
     background:
         linear-gradient(
             135deg,
-            rgba(255,105,174,.28),
-            rgba(255,160,205,.16)
+            rgba(255,105,180,.25),
+            rgba(170,100,255,.2)
         );
 
     color: white;
@@ -802,12 +788,12 @@ button:disabled {
 }
 
 .voice-status strong {
-    color: #ffb2d4;
+    color: #ffb2d8;
 }
 
 
 /* =========================================================
-   MAIN CHAT
+   MAIN CHAT AREA
 ========================================================= */
 
 .chat-main {
@@ -819,7 +805,6 @@ button:disabled {
     position: relative;
 
     display: flex;
-
     flex-direction: column;
 }
 
@@ -843,7 +828,7 @@ button:disabled {
         rgba(255,255,255,.07);
 
     background:
-        rgba(23,13,25,.35);
+        rgba(15,10,23,.35);
 
     backdrop-filter:
         blur(20px);
@@ -872,8 +857,7 @@ button:disabled {
     background: #75f0a6;
 
     box-shadow:
-        0 0 12px
-        #75f0a6;
+        0 0 12px #75f0a6;
 }
 
 .user-info {
@@ -933,23 +917,21 @@ button:disabled {
 
     animation:
         messageIn .3s ease;
+
+    position: relative;
 }
 
 @keyframes messageIn {
 
     from {
-
         opacity: 0;
-
         transform:
             translateY(10px)
             scale(.98);
     }
 
     to {
-
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -964,7 +946,7 @@ button:disabled {
         linear-gradient(
             135deg,
             #ff6ba9,
-            #ff91c2
+            #a76cff
         );
 
     border-bottom-right-radius:
@@ -972,7 +954,7 @@ button:disabled {
 
     box-shadow:
         0 8px 30px
-        rgba(255,105,180,.16);
+        rgba(255,105,180,.15);
 }
 
 .message.ai {
@@ -984,7 +966,7 @@ button:disabled {
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
     border-bottom-left-radius:
         7px;
@@ -1021,8 +1003,8 @@ button:disabled {
     background:
         linear-gradient(
             to top,
-            #170d19 30%,
-            rgba(23,13,25,.85),
+            #100b17 30%,
+            rgba(16,11,23,.85),
             transparent
         );
 
@@ -1045,6 +1027,7 @@ button:disabled {
 }
 
 .input-area button {
+
     width: 105px;
 }
 
@@ -1131,12 +1114,13 @@ button:disabled {
 }
 
 .modal-close {
+
     width: 100%;
 }
 
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 850px) {
@@ -1170,10 +1154,12 @@ button:disabled {
     }
 
     .chat-main {
+
         margin-left: 0;
     }
 
     .chat-header {
+
         padding-left: 75px;
     }
 
@@ -1214,14 +1200,14 @@ button:disabled {
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
 
 <!-- =========================================================
-     BACKGROUND
+     ANIMATED BACKGROUND
 ========================================================= -->
 
 <div class="background">
@@ -1230,40 +1216,13 @@ button:disabled {
     <div class="blob two"></div>
     <div class="blob three"></div>
 
-    <div class="particle"
-         style="left:8%;animation-duration:14s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:20%;animation-duration:18s;animation-delay:2s;">
-        ✦
-    </div>
-
-    <div class="particle"
-         style="left:35%;animation-duration:15s;animation-delay:5s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:52%;animation-duration:19s;animation-delay:1s;">
-        ✧
-    </div>
-
-    <div class="particle"
-         style="left:67%;animation-duration:16s;animation-delay:4s;">
-        ♡
-    </div>
-
-    <div class="particle"
-         style="left:82%;animation-duration:20s;animation-delay:3s;">
-        ✦
-    </div>
-
-    <div class="particle"
-         style="left:94%;animation-duration:13s;animation-delay:6s;">
-        ♡
-    </div>
+    <div class="particle" style="left:8%;animation-duration:14s;">♡</div>
+    <div class="particle" style="left:20%;animation-duration:18s;animation-delay:2s;">✦</div>
+    <div class="particle" style="left:35%;animation-duration:15s;animation-delay:5s;">♡</div>
+    <div class="particle" style="left:52%;animation-duration:19s;animation-delay:1s;">✧</div>
+    <div class="particle" style="left:67%;animation-duration:16s;animation-delay:4s;">♡</div>
+    <div class="particle" style="left:82%;animation-duration:20s;animation-delay:3s;">✦</div>
+    <div class="particle" style="left:94%;animation-duration:13s;animation-delay:6s;">♡</div>
 
 </div>
 
@@ -1319,9 +1278,7 @@ button:disabled {
             Sign in securely with your Google account
         </div>
 
-        <div id="loginError"
-             class="error">
-        </div>
+        <div id="loginError" class="error"></div>
 
     </div>
 
@@ -1371,6 +1328,8 @@ button:disabled {
 
 <div id="chatScreen">
 
+
+    <!-- MOBILE MENU -->
 
     <button
         id="mobileMenu"
@@ -1534,7 +1493,7 @@ button:disabled {
     </aside>
 
 
-    <!-- MAIN CHAT -->
+    <!-- MAIN -->
 
     <main class="chat-main">
 
@@ -1593,7 +1552,8 @@ button:disabled {
             Flavi
         </h2>
 
-        <p id="modalText"></p>
+        <p id="modalText">
+        </p>
 
         <button
             id="modalClose"
@@ -1616,7 +1576,7 @@ button:disabled {
 
 
 /* =========================================================
-   FLAVI WORKER
+   WORKER
 ========================================================= */
 
 const AI_WORKER_URL =
@@ -1624,7 +1584,7 @@ const AI_WORKER_URL =
 
 
 /* =========================================================
-   FIREBASE IMPORTS
+   FIREBASE
 ========================================================= */
 
 import {
@@ -1642,10 +1602,6 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
 
 const firebaseConfig = {
 
@@ -1670,14 +1626,8 @@ const firebaseConfig = {
 };
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
-
 const app =
-    initializeApp(
-        firebaseConfig
-    );
+    initializeApp(firebaseConfig);
 
 const auth =
     getAuth(app);
@@ -1702,13 +1652,12 @@ let userName = "";
 let flaviVoice = null;
 
 let voiceEnabled =
-    localStorage.getItem(
-        "flavi_voice_enabled"
-    ) !== "false";
+    localStorage.getItem("flavi_voice_enabled")
+    !== "false";
 
 
 /* =========================================================
-   FLAVI VOICE
+   ARIA VOICE
 ========================================================= */
 
 const FLAVI_VOICE_NAME =
@@ -1735,7 +1684,6 @@ function loadFlaviVoice() {
             ? flaviVoice.name
             : "Aria not loaded yet"
     );
-
 }
 
 
@@ -1749,7 +1697,7 @@ loadFlaviVoice();
 
 
 /* =========================================================
-   SPEAK AS FLAVI
+   SPEAK
 ========================================================= */
 
 function speakFlavi(text) {
@@ -1768,7 +1716,7 @@ function speakFlavi(text) {
     if (!flaviVoice) {
 
         console.warn(
-            "Microsoft Aria voice is unavailable."
+            "Microsoft Aria Online is unavailable."
         );
 
         return;
@@ -1892,9 +1840,7 @@ googleButton.addEventListener(
 
 
 document
-    .getElementById(
-        "googleLogin"
-    )
+    .getElementById("googleLogin")
     .appendChild(
         googleButton
     );
@@ -1929,9 +1875,8 @@ async function loginWithGoogle() {
             result.user;
 
 
-        await currentUser.getIdToken(
-            true
-        );
+        await currentUser
+            .getIdToken(true);
 
 
         if (
@@ -1976,7 +1921,7 @@ async function loginWithGoogle() {
 
 
 /* =========================================================
-   AUTH STATE
+   AUTH
 ========================================================= */
 
 onAuthStateChanged(
@@ -2017,7 +1962,6 @@ onAuthStateChanged(
         catch (error) {
 
             console.error(
-                "Token error:",
                 error
             );
 
@@ -2052,7 +1996,7 @@ onAuthStateChanged(
 
 
 /* =========================================================
-   SHOW NAME SCREEN
+   SCREENS
 ========================================================= */
 
 function showNameScreen() {
@@ -2068,10 +2012,6 @@ function showNameScreen() {
 
 }
 
-
-/* =========================================================
-   SHOW CHAT
-========================================================= */
 
 function showChatScreen() {
 
@@ -2148,21 +2088,13 @@ function saveName() {
         const greeting =
             `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`;
 
-
         addMessage(
             "ai",
             greeting
         );
 
-
         setTimeout(
-            function() {
-
-                speakFlavi(
-                    greeting
-                );
-
-            },
+            () => speakFlavi(greeting),
             500
         );
 
@@ -2175,9 +2107,7 @@ function saveName() {
 
 
 document
-    .getElementById(
-        "startButton"
-    )
+    .getElementById("startButton")
     .addEventListener(
         "click",
         saveName
@@ -2219,7 +2149,7 @@ function addMessage(
 
 
 /* =========================================================
-   FIREBASE TOKEN
+   TOKEN
 ========================================================= */
 
 async function getFreshFirebaseToken(
@@ -2256,7 +2186,7 @@ async function getFreshFirebaseToken(
 
 
 /* =========================================================
-   CALL WORKER
+   WORKER
 ========================================================= */
 
 async function callFlaviWorker(
@@ -2275,8 +2205,7 @@ async function callFlaviWorker(
             AI_WORKER_URL,
             {
 
-                method:
-                    "POST",
+                method: "POST",
 
                 headers: {
 
@@ -2315,9 +2244,7 @@ async function callFlaviWorker(
     try {
 
         data =
-            JSON.parse(
-                raw
-            );
+            JSON.parse(raw);
 
     }
 
@@ -2329,9 +2256,11 @@ async function callFlaviWorker(
 
 
     return {
+
         response,
         raw,
         data
+
     };
 
 }
@@ -2491,6 +2420,10 @@ async function sendMessage() {
             );
 
 
+            /*
+             * SPEAK THE AI REPLY
+             */
+
             speakFlavi(
                 result.data.reply
             );
@@ -2543,7 +2476,7 @@ async function sendMessage() {
 
 
 /* =========================================================
-   ENTER KEY
+   ENTER
 ========================================================= */
 
 messageInput.addEventListener(
@@ -2586,21 +2519,17 @@ document
             messages.innerHTML =
                 "";
 
-
             const greeting =
                 `Hey ${userName || "there"}! 🌸 I'm Flavi. What's on your mind?`;
-
 
             addMessage(
                 "ai",
                 greeting
             );
 
-
             speakFlavi(
                 greeting
             );
-
 
             messageInput.focus();
 
@@ -2623,16 +2552,13 @@ document
             messages.innerHTML =
                 "";
 
-
             const greeting =
                 `Chat cleared 🌸 I'm still here, ${userName || "friend"}!`;
-
 
             addMessage(
                 "ai",
                 greeting
             );
-
 
             speakFlavi(
                 greeting
@@ -2668,7 +2594,6 @@ document
 
                 speechSynthesis.cancel();
 
-
                 alert(
                     "Flavi voice is now OFF 🔇"
                 );
@@ -2677,8 +2602,11 @@ document
 
             else {
 
+                const test =
+                    `Hi ${userName || "Pragatheesh"}! 🌸`;
+
                 speakFlavi(
-                    `Hi ${userName || "Pragatheesh"}! 🌸`
+                    test
                 );
 
             }
@@ -2701,7 +2629,7 @@ document
 
             showModal(
                 "🧠 My Memories",
-                "Your existing Flavi memory system is available through the chat. Try commands such as /remember to save something."
+                "Your memories are managed by Flavi's existing D1 memory system. You can use Flavi's memory commands in chat, such as /remember."
             );
 
         }
@@ -2722,7 +2650,7 @@ document
 
             showModal(
                 "📢 Announcements",
-                "Your Flavi announcement system is available through your existing Worker and owner commands."
+                "Your existing announcements system is connected through your Flavi backend. Owner announcements can continue to be managed using your existing owner commands."
             );
 
         }
@@ -2950,4 +2878,5 @@ setTimeout(
 
 
 </body>
+
 </html>
