@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
       content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
 <meta name="theme-color"
-      content="#120b18">
+      content="#ff9fc7">
 
 <title>Flavi AI — Your Friendly AI Companion</title>
 
@@ -38,128 +39,311 @@ body {
 }
 
 body {
+
     font-family:
         Inter,
         "Segoe UI",
         Arial,
         sans-serif;
 
-    color: white;
+    color: #5a2140;
 
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,105,180,.18),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(160,100,255,.16),
-            transparent 30%
-        ),
-        #100b17;
+        linear-gradient(
+            180deg,
+            #ffd6e7 0%,
+            #ffc2dc 35%,
+            #ffacd0 70%,
+            #ff9fc7 100%
+        );
 
     overflow: hidden;
 }
 
 
 /* =========================================================
-   ANIMATED BACKGROUND
+   JAPANESE SAKURA BACKGROUND 🌸
 ========================================================= */
 
 .background {
+
     position: fixed;
+
     inset: 0;
+
     overflow: hidden;
+
     pointer-events: none;
+
     z-index: 0;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 12%,
+            rgba(255,255,255,.72),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 10% 60%,
+            rgba(255,255,255,.25),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(255,255,255,.25),
+            transparent 30%
+        );
 }
 
-.blob {
+
+/* =========================================================
+   MOON
+========================================================= */
+
+.background::before {
+
+    content: "🌕";
+
     position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: .45;
-    animation: floatBlob 12s ease-in-out infinite;
+
+    right: 9%;
+
+    top: 7%;
+
+    font-size: 85px;
+
+    opacity: .72;
+
+    filter:
+        drop-shadow(
+            0 0 35px
+            rgba(255,255,255,.8)
+        );
+
+    animation:
+        moonFloat 7s ease-in-out infinite;
 }
 
-.blob.one {
-    width: 280px;
-    height: 280px;
-    background: #ff5ca8;
-    left: -80px;
-    top: 10%;
-}
-
-.blob.two {
-    width: 350px;
-    height: 350px;
-    background: #8b5cf6;
-    right: -100px;
-    top: 20%;
-    animation-delay: -4s;
-}
-
-.blob.three {
-    width: 250px;
-    height: 250px;
-    background: #ff8bd1;
-    left: 35%;
-    bottom: -100px;
-    animation-delay: -7s;
-}
-
-@keyframes floatBlob {
+@keyframes moonFloat {
 
     0%,
     100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(4deg);
+    }
+}
+
+
+/* =========================================================
+   TORII GATE
+========================================================= */
+
+.background::after {
+
+    content: "⛩️";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -25px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 170px;
+
+    opacity: .10;
+
+    filter:
+        blur(.4px);
+
+}
+
+
+/* =========================================================
+   SOFT BLOBS
+========================================================= */
+
+.blob {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter:
+        blur(80px);
+
+    opacity: .48;
+
+    animation:
+        japanBlob 13s ease-in-out infinite;
+}
+
+
+.blob.one {
+
+    width: 350px;
+    height: 350px;
+
+    left: -130px;
+
+    top: 8%;
+
+    background:
+        #ff6fae;
+}
+
+
+.blob.two {
+
+    width: 420px;
+    height: 420px;
+
+    right: -150px;
+
+    top: 28%;
+
+    background:
+        #ff82b9;
+
+    animation-delay:
+        -4s;
+}
+
+
+.blob.three {
+
+    width: 320px;
+    height: 320px;
+
+    left: 40%;
+
+    bottom: -140px;
+
+    background:
+        #ffd9e8;
+
+    animation-delay:
+        -7s;
+}
+
+
+@keyframes japanBlob {
+
+    0%,
+    100% {
+
         transform:
             translate(0,0)
             scale(1);
     }
 
     50% {
+
         transform:
             translate(40px,-35px)
-            scale(1.12);
+            scale(1.13);
     }
 }
 
 
 /* =========================================================
-   FLOATING HEARTS / SPARKLES
+   FLOATING SAKURA
 ========================================================= */
 
 .particle {
+
     position: absolute;
-    color: rgba(255,255,255,.65);
+
+    top: -60px;
+
+    color:
+        rgba(255,255,255,.92);
+
     font-size: 18px;
-    animation: particleFloat linear infinite;
+
+    text-shadow:
+        0 3px 15px
+        rgba(255,70,140,.35);
+
+    animation:
+        sakuraFall linear infinite;
 }
 
-@keyframes particleFloat {
 
-    from {
+@keyframes sakuraFall {
+
+    0% {
+
         transform:
-            translateY(110vh)
+            translateY(-10vh)
+            translateX(0)
             rotate(0deg);
+
         opacity: 0;
     }
 
-    15% {
-        opacity: .8;
+    10% {
+        opacity: .95;
     }
 
-    85% {
-        opacity: .8;
-    }
+    50% {
 
-    to {
         transform:
-            translateY(-15vh)
+            translateY(50vh)
+            translateX(75px)
+            rotate(180deg);
+    }
+
+    90% {
+        opacity: .9;
+    }
+
+    100% {
+
+        transform:
+            translateY(115vh)
+            translateX(-50px)
             rotate(360deg);
+
         opacity: 0;
     }
+}
+
+
+/* =========================================================
+   EXTRA LIGHT GLOW
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.12),
+            transparent 55%
+        );
 }
 
 
@@ -168,20 +352,23 @@ body {
 ========================================================= */
 
 .glass {
+
     background:
-        rgba(255,255,255,.075);
+        rgba(255,255,255,.46);
 
     border:
-        1px solid rgba(255,255,255,.12);
+        1px solid
+        rgba(255,255,255,.72);
 
     backdrop-filter:
-        blur(25px);
+        blur(28px);
 
     -webkit-backdrop-filter:
-        blur(25px);
+        blur(28px);
 
     box-shadow:
-        0 25px 80px rgba(0,0,0,.35);
+        0 25px 80px
+        rgba(180,50,105,.14);
 }
 
 
@@ -192,19 +379,24 @@ body {
 #introScreen {
 
     position: fixed;
+
     inset: 0;
 
     z-index: 9999;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     background:
+
         radial-gradient(
             circle at center,
-            #3c183d,
-            #100b17 65%
+            #ffe7f1,
+            #ffc1dc 55%,
+            #ff9fc7
         );
 
     transition:
@@ -212,26 +404,37 @@ body {
         visibility .8s ease;
 }
 
+
 #introScreen.hide {
+
     opacity: 0;
+
     visibility: hidden;
 }
 
+
 .intro-content {
+
     text-align: center;
+
     animation:
         introAppear 1.2s ease;
 }
 
+
 .intro-logo {
 
     width: 110px;
+
     height: 110px;
 
-    margin: auto auto 22px;
+    margin:
+        auto auto 22px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 35px;
@@ -239,50 +442,59 @@ body {
     font-size: 60px;
 
     background:
+
         linear-gradient(
             135deg,
-            #ff70b5,
-            #b86cff
+            #ff73ae,
+            #ff9bc7
         );
 
     box-shadow:
-        0 0 60px rgba(255,105,180,.55);
+        0 0 60px
+        rgba(255,105,180,.42);
 
     animation:
         logoPulse 2s ease-in-out infinite;
 }
 
+
 .intro-title {
 
     font-size: 46px;
+
     font-weight: 800;
 
     letter-spacing: -2px;
 
     background:
+
         linear-gradient(
             90deg,
-            #fff,
-            #ffb7dc,
-            #d5b5ff,
-            #fff
+            #6b294b,
+            #ff4f98,
+            #8f4167,
+            #6b294b
         );
 
     background-size: 250% auto;
 
     -webkit-background-clip: text;
+
     background-clip: text;
+
     color: transparent;
 
     animation:
         gradientMove 3s linear infinite;
 }
 
+
 .intro-subtitle {
 
     margin-top: 10px;
 
-    color: rgba(255,255,255,.65);
+    color:
+        rgba(90,33,64,.62);
 
     font-size: 15px;
 
@@ -290,22 +502,28 @@ body {
         fadeIn 1.5s ease;
 }
 
+
 @keyframes introAppear {
 
     from {
+
         opacity: 0;
+
         transform:
             translateY(30px)
             scale(.9);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
 }
+
 
 @keyframes logoPulse {
 
@@ -319,12 +537,15 @@ body {
     }
 }
 
+
 @keyframes gradientMove {
 
     to {
-        background-position: 250% center;
+        background-position:
+            250% center;
     }
 }
+
 
 @keyframes fadeIn {
 
@@ -347,11 +568,13 @@ body {
     position: relative;
 
     width: 100%;
+
     height: 100vh;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     z-index: 2;
@@ -365,6 +588,7 @@ body {
 .card {
 
     width: 430px;
+
     max-width: 92%;
 
     padding: 42px 35px;
@@ -375,36 +599,48 @@ body {
 
     animation:
         cardAppear .8s ease;
-
 }
+
 
 @keyframes cardAppear {
 
     from {
+
         opacity: 0;
+
         transform:
             translateY(35px)
             scale(.94);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
 }
 
+
+/* =========================================================
+   FLAVI LOGO
+========================================================= */
+
 .logo {
 
     width: 88px;
+
     height: 88px;
 
     margin:
         0 auto 20px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 28px;
@@ -412,18 +648,21 @@ body {
     font-size: 48px;
 
     background:
+
         linear-gradient(
             135deg,
-            #ff6fb1,
-            #a56cff
+            #ff69a9,
+            #ff9bc7
         );
 
     box-shadow:
-        0 15px 45px rgba(255,105,180,.3);
+        0 15px 45px
+        rgba(255,105,180,.3);
 
     animation:
         logoPulse 3s ease-in-out infinite;
 }
+
 
 h1 {
 
@@ -432,12 +671,16 @@ h1 {
     margin-bottom: 9px;
 
     letter-spacing: -.8px;
+
+    color:
+        #5a2140;
 }
+
 
 .card p {
 
     color:
-        rgba(255,255,255,.62);
+        rgba(90,33,64,.62);
 
     margin-bottom: 25px;
 
@@ -456,40 +699,54 @@ input {
     padding: 16px 18px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.72);
 
     border-radius: 16px;
 
     background:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.58);
 
-    color: white;
+    color:
+        #5a2140;
 
     font-size: 16px;
 
     outline: none;
 
-    transition: .25s;
+    transition:
+        .25s;
+
+    box-shadow:
+        0 8px 25px
+        rgba(180,50,105,.07);
 }
 
+
 input::placeholder {
+
     color:
-        rgba(255,255,255,.4);
+        rgba(90,33,64,.42);
 }
+
 
 input:focus {
 
     border-color:
-        rgba(255,112,180,.7);
+        rgba(255,70,145,.65);
 
     box-shadow:
+
         0 0 0 4px
-        rgba(255,112,180,.1);
+        rgba(255,112,180,.12),
+
+        0 10px 30px
+        rgba(180,50,105,.10);
 }
 
 
 /* =========================================================
-   BUTTON
+   BUTTONS
 ========================================================= */
 
 button {
@@ -501,10 +758,11 @@ button {
     padding: 15px 20px;
 
     background:
+
         linear-gradient(
             135deg,
-            #ff6eae,
-            #b06cff
+            #ff5fa3,
+            #ff91bf
         );
 
     color: white;
@@ -521,27 +779,39 @@ button {
         opacity .2s;
 }
 
+
 button:hover {
 
     transform:
         translateY(-2px);
 
     box-shadow:
+
         0 10px 30px
         rgba(255,105,180,.25);
 }
 
+
 button:active {
-    transform: scale(.97);
+
+    transform:
+        scale(.97);
 }
+
 
 button:disabled {
+
     opacity: .5;
-    cursor: not-allowed;
+
+    cursor:
+        not-allowed;
 }
 
+
 #startButton {
+
     width: 100%;
+
     margin-top: 14px;
 }
 
@@ -559,29 +829,37 @@ button:disabled {
     margin-top: 20px;
 }
 
+
 .google-button {
 
     width: 100%;
 
     background:
-        rgba(255,255,255,.1);
+        rgba(255,255,255,.68);
+
+    color:
+        #5a2140;
 
     border:
         1px solid
-        rgba(255,255,255,.14);
+        rgba(255,255,255,.85);
 
-    box-shadow: none;
+    box-shadow:
+        0 8px 25px
+        rgba(180,50,105,.08);
 }
+
 
 .google-button:hover {
 
     background:
-        rgba(255,255,255,.15);
+        rgba(255,255,255,.82);
 
     box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.2);
+        0 12px 35px
+        rgba(180,50,105,.12);
 }
+
 
 .account-info {
 
@@ -590,13 +868,14 @@ button:disabled {
     font-size: 12px;
 
     color:
-        rgba(255,255,255,.4);
+        rgba(90,33,64,.45);
 }
+
 
 .error {
 
     color:
-        #ff8ba7;
+        #d6336c;
 
     margin-top: 15px;
 
@@ -615,6 +894,7 @@ button:disabled {
     position: relative;
 
     width: 100%;
+
     height: 100vh;
 
     z-index: 5;
@@ -632,7 +912,9 @@ button:disabled {
     position: fixed;
 
     left: 18px;
+
     top: 18px;
+
     bottom: 18px;
 
     width: 245px;
@@ -644,11 +926,16 @@ button:disabled {
     z-index: 30;
 
     display: flex;
+
     flex-direction: column;
 
     transition:
         transform .3s ease;
+
+    background:
+        rgba(255,255,255,.48);
 }
+
 
 .sidebar-brand {
 
@@ -662,40 +949,56 @@ button:disabled {
         7px 5px 25px;
 }
 
+
 .sidebar-brand-icon {
 
     width: 45px;
+
     height: 45px;
 
     border-radius: 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     background:
+
         linear-gradient(
             135deg,
-            #ff6eae,
-            #a86cff
+            #ff62a5,
+            #ff9ac7
         );
 
     font-size: 24px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(255,90,160,.18);
 }
 
+
 .sidebar-brand strong {
+
     font-size: 18px;
+
+    color:
+        #5a2140;
 }
+
 
 .sidebar-brand small {
 
     display: block;
 
     color:
-        rgba(255,255,255,.45);
+        rgba(90,33,64,.45);
 
     margin-top: 2px;
 }
+
 
 .sidebar-section {
 
@@ -709,8 +1012,9 @@ button:disabled {
     letter-spacing: 1px;
 
     color:
-        rgba(255,255,255,.35);
+        rgba(90,33,64,.38);
 }
+
 
 .sidebar-button {
 
@@ -726,10 +1030,11 @@ button:disabled {
 
     margin-bottom: 6px;
 
-    background: transparent;
+    background:
+        transparent;
 
     color:
-        rgba(255,255,255,.72);
+        rgba(90,33,64,.68);
 
     text-align: left;
 
@@ -740,33 +1045,45 @@ button:disabled {
     font-weight: 600;
 }
 
+
 .sidebar-button:hover {
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.45);
 
     box-shadow: none;
 
     transform: none;
 
-    color: white;
+    color:
+        #5a2140;
 }
+
 
 .sidebar-button.active {
 
     background:
+
         linear-gradient(
             135deg,
-            rgba(255,105,180,.25),
-            rgba(170,100,255,.2)
+            rgba(255,105,180,.22),
+            rgba(255,255,255,.35)
         );
 
-    color: white;
+    color:
+        #8f2f5a;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(255,255,255,.35);
 }
 
+
 .sidebar-spacer {
+
     flex: 1;
 }
+
 
 .voice-status {
 
@@ -777,23 +1094,30 @@ button:disabled {
     border-radius: 15px;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255,255,255,.34);
 
     color:
-        rgba(255,255,255,.55);
+        rgba(90,33,64,.58);
 
     font-size: 12px;
 
     line-height: 1.5;
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
 }
 
+
 .voice-status strong {
-    color: #ffb2d8;
+
+    color:
+        #d43d78;
 }
 
 
 /* =========================================================
-   MAIN CHAT AREA
+   CHAT MAIN
 ========================================================= */
 
 .chat-main {
@@ -805,8 +1129,14 @@ button:disabled {
     position: relative;
 
     display: flex;
+
     flex-direction: column;
 }
+
+
+/* =========================================================
+   CHAT HEADER
+========================================================= */
 
 .chat-header {
 
@@ -825,14 +1155,18 @@ button:disabled {
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.45);
 
     background:
-        rgba(15,10,23,.35);
+        rgba(255,255,255,.22);
 
     backdrop-filter:
         blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
 }
+
 
 .chat-title {
 
@@ -845,25 +1179,33 @@ button:disabled {
     font-weight: 800;
 
     font-size: 18px;
+
+    color:
+        #5a2140;
 }
+
 
 .online-dot {
 
     width: 8px;
+
     height: 8px;
 
     border-radius: 50%;
 
-    background: #75f0a6;
+    background:
+        #45d98a;
 
     box-shadow:
-        0 0 12px #75f0a6;
+        0 0 12px
+        rgba(69,217,138,.7);
 }
+
 
 .user-info {
 
     color:
-        rgba(255,255,255,.5);
+        rgba(90,33,64,.5);
 
     font-size: 12px;
 }
@@ -885,17 +1227,22 @@ button:disabled {
     scroll-behavior: smooth;
 }
 
+
 #messages::-webkit-scrollbar {
+
     width: 7px;
 }
+
 
 #messages::-webkit-scrollbar-thumb {
 
     background:
-        rgba(255,255,255,.12);
+        rgba(180,50,105,.18);
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 }
+
 
 .message {
 
@@ -921,63 +1268,92 @@ button:disabled {
     position: relative;
 }
 
+
 @keyframes messageIn {
 
     from {
+
         opacity: 0;
+
         transform:
             translateY(10px)
             scale(.98);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
 }
 
+
+/* =========================================================
+   USER MESSAGE
+========================================================= */
+
 .message.user {
 
     margin-left: auto;
 
     background:
+
         linear-gradient(
             135deg,
-            #ff6ba9,
-            #a76cff
+            #ff579d,
+            #ff82b8
         );
+
+    color:
+        white;
 
     border-bottom-right-radius:
         7px;
 
     box-shadow:
+
         0 8px 30px
-        rgba(255,105,180,.15);
+        rgba(255,105,180,.18);
 }
+
+
+/* =========================================================
+   AI MESSAGE
+========================================================= */
 
 .message.ai {
 
     margin-right: auto;
 
     background:
-        rgba(255,255,255,.075);
+        rgba(255,255,255,.56);
+
+    color:
+        #5a2140;
 
     border:
         1px solid
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.68);
 
     border-bottom-left-radius:
         7px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(180,50,105,.06);
 }
+
 
 .typing {
 
     color:
-        rgba(255,255,255,.55);
+        rgba(90,33,64,.52);
 
-    font-style: italic;
+    font-style:
+        italic;
 }
 
 
@@ -990,7 +1366,9 @@ button:disabled {
     position: absolute;
 
     left: 0;
+
     right: 0;
+
     bottom: 0;
 
     padding:
@@ -1001,15 +1379,17 @@ button:disabled {
     gap: 10px;
 
     background:
+
         linear-gradient(
             to top,
-            #100b17 30%,
-            rgba(16,11,23,.85),
+            rgba(255,159,199,.96) 20%,
+            rgba(255,180,212,.82),
             transparent
         );
 
     z-index: 20;
 }
+
 
 .input-area input {
 
@@ -1020,11 +1400,23 @@ button:disabled {
     margin: 0;
 
     background:
-        rgba(255,255,255,.09);
+        rgba(255,255,255,.68);
 
     backdrop-filter:
         blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
+
+    box-shadow:
+        0 10px 35px
+        rgba(180,50,105,.12);
 }
+
 
 .input-area button {
 
@@ -1043,16 +1435,28 @@ button:disabled {
     position: fixed;
 
     left: 16px;
+
     top: 16px;
 
     z-index: 100;
 
     width: 45px;
+
     height: 45px;
 
     padding: 0;
 
     border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.7);
+
+    color:
+        #8f2f5a;
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
 }
 
 
@@ -1071,24 +1475,32 @@ button:disabled {
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 20px;
 
     background:
-        rgba(0,0,0,.55);
+        rgba(130,40,80,.22);
 
     backdrop-filter:
-        blur(10px);
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
 }
 
+
 .modal.show {
+
     display: flex;
 }
+
 
 .modal-card {
 
     width: 440px;
+
     max-width: 100%;
 
     padding: 30px;
@@ -1099,19 +1511,26 @@ button:disabled {
         cardAppear .3s ease;
 }
 
+
 .modal-card h2 {
+
     margin-bottom: 12px;
+
+    color:
+        #5a2140;
 }
+
 
 .modal-card p {
 
     color:
-        rgba(255,255,255,.62);
+        rgba(90,33,64,.62);
 
     line-height: 1.6;
 
     margin-bottom: 20px;
 }
+
 
 .modal-close {
 
@@ -1131,9 +1550,12 @@ button:disabled {
             translateX(-115%);
 
         top: 12px;
+
         bottom: 12px;
+
         left: 12px;
     }
+
 
     .sidebar.open {
 
@@ -1142,60 +1564,118 @@ button:disabled {
 
         box-shadow:
             0 20px 70px
-            rgba(0,0,0,.5);
+            rgba(130,40,80,.25);
     }
+
 
     .mobile-menu {
 
         display: flex;
 
         align-items: center;
+
         justify-content: center;
     }
+
 
     .chat-main {
 
         margin-left: 0;
     }
 
+
     .chat-header {
 
-        padding-left: 75px;
+        padding-left:
+            75px;
     }
+
 
     #messages {
 
         padding-left: 18px;
+
         padding-right: 18px;
     }
+
 
     .input-area {
 
         padding-left: 15px;
+
         padding-right: 15px;
     }
 
+
     .message {
+
         max-width: 86%;
     }
 }
 
+
 @media (max-width: 500px) {
 
     .card {
-        padding: 32px 22px;
+
+        padding:
+            32px 22px;
     }
 
+
     .intro-title {
+
         font-size: 38px;
     }
 
+
     .input-area button {
+
         width: 78px;
     }
 
+
     .user-info {
+
         display: none;
+    }
+
+
+    .background::before {
+
+        right: 4%;
+
+        top: 5%;
+
+        font-size: 60px;
+    }
+
+
+    .background::after {
+
+        font-size: 120px;
+    }
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
     }
 }
 
@@ -1203,26 +1683,67 @@ button:disabled {
 
 </head>
 
+
 <body>
 
 
 <!-- =========================================================
-     ANIMATED BACKGROUND
+     JAPANESE BACKGROUND
 ========================================================= -->
 
 <div class="background">
 
     <div class="blob one"></div>
+
     <div class="blob two"></div>
+
     <div class="blob three"></div>
 
-    <div class="particle" style="left:8%;animation-duration:14s;">♡</div>
-    <div class="particle" style="left:20%;animation-duration:18s;animation-delay:2s;">✦</div>
-    <div class="particle" style="left:35%;animation-duration:15s;animation-delay:5s;">♡</div>
-    <div class="particle" style="left:52%;animation-duration:19s;animation-delay:1s;">✧</div>
-    <div class="particle" style="left:67%;animation-duration:16s;animation-delay:4s;">♡</div>
-    <div class="particle" style="left:82%;animation-duration:20s;animation-delay:3s;">✦</div>
-    <div class="particle" style="left:94%;animation-duration:13s;animation-delay:6s;">♡</div>
+
+    <div class="particle"
+         style="left:5%;animation-duration:11s;">
+        🌸
+    </div>
+
+    <div class="particle"
+         style="left:14%;animation-duration:15s;animation-delay:2s;">
+        🌸
+    </div>
+
+    <div class="particle"
+         style="left:25%;animation-duration:13s;animation-delay:5s;">
+        ✿
+    </div>
+
+    <div class="particle"
+         style="left:37%;animation-duration:17s;animation-delay:1s;">
+        🌸
+    </div>
+
+    <div class="particle"
+         style="left:49%;animation-duration:12s;animation-delay:4s;">
+        ✧
+    </div>
+
+    <div class="particle"
+         style="left:61%;animation-duration:16s;animation-delay:3s;">
+        🌸
+    </div>
+
+    <div class="particle"
+         style="left:74%;animation-duration:14s;animation-delay:6s;">
+        ✿
+    </div>
+
+    <div class="particle"
+         style="left:86%;animation-duration:18s;animation-delay:1s;">
+        🌸
+    </div>
+
+    <div class="particle"
+         style="left:95%;animation-duration:13s;animation-delay:5s;">
+        ♡
+    </div>
 
 </div>
 
@@ -1589,7 +2110,8 @@ const AI_WORKER_URL =
 
 import {
     initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
@@ -1599,7 +2121,8 @@ import {
     signInWithPopup,
     onAuthStateChanged,
     signOut
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
@@ -1629,15 +2152,20 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
+
 const auth =
     getAuth(app);
+
 
 const provider =
     new GoogleAuthProvider();
 
 
 provider.setCustomParameters({
-    prompt: "select_account"
+
+    prompt:
+        "select_account"
+
 });
 
 
@@ -1645,14 +2173,23 @@ provider.setCustomParameters({
    VARIABLES
 ========================================================= */
 
-let currentUser = null;
+let currentUser =
+    null;
 
-let userName = "";
 
-let flaviVoice = null;
+let userName =
+    "";
+
+
+let flaviVoice =
+    null;
+
 
 let voiceEnabled =
-    localStorage.getItem("flavi_voice_enabled")
+
+    localStorage.getItem(
+        "flavi_voice_enabled"
+    )
     !== "false";
 
 
@@ -1684,6 +2221,7 @@ function loadFlaviVoice() {
             ? flaviVoice.name
             : "Aria not loaded yet"
     );
+
 }
 
 
@@ -1769,45 +2307,54 @@ const loginScreen =
         "loginScreen"
     );
 
+
 const nameScreen =
     document.getElementById(
         "nameScreen"
     );
+
 
 const chatScreen =
     document.getElementById(
         "chatScreen"
     );
 
+
 const nameInput =
     document.getElementById(
         "nameInput"
     );
+
 
 const messageInput =
     document.getElementById(
         "messageInput"
     );
 
+
 const sendButton =
     document.getElementById(
         "sendButton"
     );
+
 
 const loginError =
     document.getElementById(
         "loginError"
     );
 
+
 const userInfo =
     document.getElementById(
         "userInfo"
     );
 
+
 const messages =
     document.getElementById(
         "messages"
     );
+
 
 const sidebar =
     document.getElementById(
@@ -1840,7 +2387,9 @@ googleButton.addEventListener(
 
 
 document
-    .getElementById("googleLogin")
+    .getElementById(
+        "googleLogin"
+    )
     .appendChild(
         googleButton
     );
@@ -1855,8 +2404,10 @@ async function loginWithGoogle() {
     loginError.textContent =
         "";
 
+
     googleButton.disabled =
         true;
+
 
     googleButton.textContent =
         "Signing in... 🌸";
@@ -1912,6 +2463,7 @@ async function loginWithGoogle() {
         googleButton.disabled =
             false;
 
+
         googleButton.textContent =
             "🔵 Continue with Google";
 
@@ -1933,14 +2485,18 @@ onAuthStateChanged(
             currentUser =
                 null;
 
+
             loginScreen.style.display =
                 "flex";
+
 
             nameScreen.style.display =
                 "none";
 
+
             chatScreen.style.display =
                 "none";
+
 
             return;
 
@@ -1981,6 +2537,7 @@ onAuthStateChanged(
             userName =
                 savedName;
 
+
             showChatScreen();
 
         }
@@ -2004,8 +2561,10 @@ function showNameScreen() {
     loginScreen.style.display =
         "none";
 
+
     nameScreen.style.display =
         "flex";
+
 
     chatScreen.style.display =
         "none";
@@ -2018,8 +2577,10 @@ function showChatScreen() {
     loginScreen.style.display =
         "none";
 
+
     nameScreen.style.display =
         "none";
+
 
     chatScreen.style.display =
         "block";
@@ -2088,10 +2649,12 @@ function saveName() {
         const greeting =
             `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`;
 
+
         addMessage(
             "ai",
             greeting
         );
+
 
         setTimeout(
             () => speakFlavi(greeting),
@@ -2107,7 +2670,9 @@ function saveName() {
 
 
 document
-    .getElementById("startButton")
+    .getElementById(
+        "startButton"
+    )
     .addEventListener(
         "click",
         saveName
@@ -2205,7 +2770,8 @@ async function callFlaviWorker(
             AI_WORKER_URL,
             {
 
-                method: "POST",
+                method:
+                    "POST",
 
                 headers: {
 
@@ -2238,7 +2804,8 @@ async function callFlaviWorker(
         await response.text();
 
 
-    let data = null;
+    let data =
+        null;
 
 
     try {
@@ -2250,7 +2817,8 @@ async function callFlaviWorker(
 
     catch {
 
-        data = null;
+        data =
+            null;
 
     }
 
@@ -2314,6 +2882,7 @@ async function sendMessage() {
     sendButton.disabled =
         true;
 
+
     messageInput.disabled =
         true;
 
@@ -2368,8 +2937,10 @@ async function sendMessage() {
 
 
         if (
-            result.response.status === 401 ||
-            result.response.status === 403
+            result.response.status ===
+                401 ||
+            result.response.status ===
+                403
         ) {
 
             addMessage(
@@ -2420,10 +2991,6 @@ async function sendMessage() {
             );
 
 
-            /*
-             * SPEAK THE AI REPLY
-             */
-
             speakFlavi(
                 result.data.reply
             );
@@ -2465,8 +3032,10 @@ async function sendMessage() {
         sendButton.disabled =
             false;
 
+
         messageInput.disabled =
             false;
+
 
         messageInput.focus();
 
@@ -2519,17 +3088,21 @@ document
             messages.innerHTML =
                 "";
 
+
             const greeting =
                 `Hey ${userName || "there"}! 🌸 I'm Flavi. What's on your mind?`;
+
 
             addMessage(
                 "ai",
                 greeting
             );
 
+
             speakFlavi(
                 greeting
             );
+
 
             messageInput.focus();
 
@@ -2552,13 +3125,16 @@ document
             messages.innerHTML =
                 "";
 
+
             const greeting =
                 `Chat cleared 🌸 I'm still here, ${userName || "friend"}!`;
+
 
             addMessage(
                 "ai",
                 greeting
             );
+
 
             speakFlavi(
                 greeting
@@ -2594,6 +3170,7 @@ document
 
                 speechSynthesis.cancel();
 
+
                 alert(
                     "Flavi voice is now OFF 🔇"
                 );
@@ -2604,6 +3181,7 @@ document
 
                 const test =
                     `Hi ${userName || "Pragatheesh"}! 🌸`;
+
 
                 speakFlavi(
                     test
@@ -2685,10 +3263,12 @@ const modal =
         "modal"
     );
 
+
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
+
 
 const modalText =
     document.getElementById(
@@ -2704,8 +3284,10 @@ function showModal(
     modalTitle.textContent =
         title;
 
+
     modalText.textContent =
         text;
+
 
     modal.classList.add(
         "show"
@@ -2735,7 +3317,8 @@ modal.addEventListener(
     function(event) {
 
         if (
-            event.target === modal
+            event.target ===
+            modal
         ) {
 
             modal.classList.remove(
@@ -2822,6 +3405,7 @@ document
                 currentUser =
                     null;
 
+
                 userName =
                     "";
 
@@ -2848,7 +3432,6 @@ document
         }
     );
 
-
 </script>
 
 
@@ -2866,6 +3449,7 @@ setTimeout(
                 "introScreen"
             );
 
+
         intro.classList.add(
             "hide"
         );
@@ -2880,3 +3464,4 @@ setTimeout(
 </body>
 
 </html>
+```
