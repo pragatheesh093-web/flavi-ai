@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+    name="description"
+    content="About Flavi AI — a cute and friendly AI companion created by Pragatheesh."
+>
 
-<meta name="description"
-      content="About Flavi AI - A cute AI companion created by Pragatheesh.">
+<meta name="theme-color" content="#ff72ad">
 
-<title>About Flavi 🌸</title>
+<title>About Flavi AI 🌸</title>
 
 <style>
 
@@ -20,929 +20,485 @@
 ========================================================= */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    min-height: 100vh;
+    overflow-x: hidden;
 
     font-family:
         "Segoe UI",
         Arial,
+        Helvetica,
         sans-serif;
 
-    overflow: hidden;
-
-    color: #fff;
+    color: #5a2140;
 
     background:
         radial-gradient(
-            circle at 15% 20%,
-            rgba(255, 150, 205, .28),
+            circle at 10% 10%,
+            rgba(255,255,255,.95),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(255,182,218,.9),
             transparent 30%
         ),
         radial-gradient(
-            circle at 85% 25%,
-            rgba(255, 190, 225, .22),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255, 90, 170, .25),
-            transparent 40%
+            circle at 50% 90%,
+            rgba(255,132,187,.55),
+            transparent 35%
         ),
         linear-gradient(
             135deg,
-            #160914,
-            #2a0d22,
-            #190b19,
-            #35102d
+            #ffd6e9 0%,
+            #ffb8d7 35%,
+            #ff91c0 70%,
+            #ffb9d9 100%
         );
 
-    min-height: 100vh;
-
+    background-attachment: fixed;
 }
 
-
 /* =========================================================
-   ANIMATED BACKGROUND
+   BACKGROUND GLOW
 ========================================================= */
 
-.background {
-
+body::before,
+body::after {
+    content: "";
     position: fixed;
 
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation:
+        cloudFloat
+        12s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+body::before {
+    left: -160px;
+    top: -150px;
+
+    background: rgba(255,255,255,.8);
+}
+
+body::after {
+    right: -150px;
+    bottom: -180px;
+
+    background: rgba(255,68,145,.4);
+
+    animation-delay: -5s;
+}
+
+@keyframes cloudFloat {
+
+    0% {
+        transform: translate(0,0) scale(1);
+    }
+
+    100% {
+        transform: translate(80px,50px) scale(1.18);
+    }
+}
+
+/* =========================================================
+   FLOATING DECORATIONS
+========================================================= */
+
+.decorations {
+    position: fixed;
     inset: 0;
 
     overflow: hidden;
 
-    z-index: 0;
-
-}
-
-
-/* glowing blobs */
-
-.glow {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    filter: blur(70px);
-
-    opacity: .5;
-
-    animation:
-        floatGlow 10s ease-in-out infinite;
-
-}
-
-.glow.one {
-
-    width: 300px;
-    height: 300px;
-
-    background: #ff65b5;
-
-    top: -100px;
-    left: -80px;
-
-}
-
-.glow.two {
-
-    width: 350px;
-    height: 350px;
-
-    background: #ff9bd0;
-
-    right: -120px;
-    top: 25%;
-
-    animation-delay: -3s;
-
-}
-
-.glow.three {
-
-    width: 280px;
-    height: 280px;
-
-    background: #e93b91;
-
-    bottom: -100px;
-    left: 35%;
-
-    animation-delay: -6s;
-
-}
-
-
-@keyframes floatGlow {
-
-    0%,
-    100% {
-
-        transform:
-            translate(0, 0)
-            scale(1);
-
-    }
-
-    50% {
-
-        transform:
-            translate(30px, -25px)
-            scale(1.12);
-
-    }
-
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.particles {
-
-    position: absolute;
-
-    inset: 0;
-
     pointer-events: none;
 
+    z-index: 1;
 }
 
-.particle {
-
+.decor {
     position: absolute;
 
-    width: 5px;
-    height: 5px;
+    bottom: -80px;
 
-    background: #fff;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 12px #ff9bd2;
-
-    opacity: .7;
+    opacity: 0;
 
     animation:
-        particleFloat 8s linear infinite;
-
+        floatUp
+        linear
+        infinite;
 }
 
-.particle:nth-child(1) {
-    left: 10%;
-    top: 80%;
-    animation-delay: 0s;
+.decor:nth-child(1) {
+    left: 7%;
+    font-size: 25px;
+    animation-duration: 11s;
+    animation-delay: 1s;
 }
 
-.particle:nth-child(2) {
-    left: 20%;
-    top: 60%;
-    animation-delay: 2s;
-}
-
-.particle:nth-child(3) {
-    left: 35%;
-    top: 90%;
+.decor:nth-child(2) {
+    left: 17%;
+    font-size: 18px;
+    animation-duration: 14s;
     animation-delay: 4s;
 }
 
-.particle:nth-child(4) {
-    left: 50%;
-    top: 70%;
-    animation-delay: 1s;
+.decor:nth-child(3) {
+    left: 30%;
+    font-size: 30px;
+    animation-duration: 10s;
+    animation-delay: 2s;
 }
 
-.particle:nth-child(5) {
-    left: 65%;
-    top: 85%;
+.decor:nth-child(4) {
+    left: 45%;
+    font-size: 22px;
+    animation-duration: 13s;
+    animation-delay: 6s;
+}
+
+.decor:nth-child(5) {
+    left: 58%;
+    font-size: 27px;
+    animation-duration: 12s;
     animation-delay: 3s;
 }
 
-.particle:nth-child(6) {
-    left: 80%;
-    top: 65%;
+.decor:nth-child(6) {
+    left: 72%;
+    font-size: 20px;
+    animation-duration: 15s;
+    animation-delay: 7s;
+}
+
+.decor:nth-child(7) {
+    left: 85%;
+    font-size: 28px;
+    animation-duration: 11s;
     animation-delay: 5s;
 }
 
-.particle:nth-child(7) {
-    left: 90%;
-    top: 90%;
-    animation-delay: 1.5s;
+.decor:nth-child(8) {
+    left: 94%;
+    font-size: 17px;
+    animation-duration: 14s;
+    animation-delay: 2s;
 }
 
-
-@keyframes particleFloat {
+@keyframes floatUp {
 
     0% {
-
         transform:
-            translateY(50px)
-            scale(.5);
+            translateY(0)
+            rotate(0deg)
+            scale(.8);
 
         opacity: 0;
-
     }
 
-    20% {
-
+    15% {
         opacity: .8;
-
     }
 
     80% {
-
-        opacity: .8;
-
+        opacity: .65;
     }
 
     100% {
-
         transform:
-            translateY(-700px)
-            scale(1.3);
+            translateY(-120vh)
+            rotate(35deg)
+            scale(1.2);
 
         opacity: 0;
-
     }
-
 }
-
 
 /* =========================================================
-   SAKURA
+   NAVBAR
 ========================================================= */
 
-.sakura {
+.navbar {
+    position: sticky;
 
-    position: absolute;
+    top: 0;
 
-    top: -50px;
+    z-index: 50;
 
-    font-size: 22px;
+    height: 74px;
 
-    opacity: .75;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0
+        clamp(18px, 6vw, 90px);
+
+    background:
+        rgba(255,255,255,.55);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.7);
+
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 8px 30px
+        rgba(190,50,110,.08);
+}
+
+/* Logo */
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #7b2450;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -.4px;
+}
+
+.logo-flower {
+    display: inline-block;
+
+    font-size: 27px;
 
     animation:
-        sakuraFall linear infinite;
-
-    pointer-events: none;
-
+        flowerBeat
+        2.5s
+        ease-in-out
+        infinite;
 }
 
-.sakura:nth-child(1) {
+@keyframes flowerBeat {
 
-    left: 8%;
-    animation-duration: 9s;
-    animation-delay: 0s;
-
-}
-
-.sakura:nth-child(2) {
-
-    left: 25%;
-    animation-duration: 12s;
-    animation-delay: 3s;
-
-}
-
-.sakura:nth-child(3) {
-
-    left: 45%;
-    animation-duration: 10s;
-    animation-delay: 1s;
-
-}
-
-.sakura:nth-child(4) {
-
-    left: 67%;
-    animation-duration: 13s;
-    animation-delay: 5s;
-
-}
-
-.sakura:nth-child(5) {
-
-    left: 85%;
-    animation-duration: 9s;
-    animation-delay: 2s;
-
-}
-
-.sakura:nth-child(6) {
-
-    left: 95%;
-    animation-duration: 14s;
-    animation-delay: 6s;
-
-}
-
-
-@keyframes sakuraFall {
-
-    0% {
-
+    0%,100% {
         transform:
-            translateY(-50px)
-            rotate(0deg)
-            translateX(0);
-
-        opacity: 0;
-
-    }
-
-    10% {
-
-        opacity: .8;
-
+            scale(1)
+            rotate(0deg);
     }
 
     50% {
-
         transform:
-            translateY(50vh)
-            rotate(180deg)
-            translateX(80px);
-
+            scale(1.18)
+            rotate(8deg);
     }
-
-    100% {
-
-        transform:
-            translateY(110vh)
-            rotate(360deg)
-            translateX(-80px);
-
-        opacity: 0;
-
-    }
-
 }
 
+/* Back button */
+
+.back-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        11px
+        19px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5d9f,
+            #ff83b8
+        );
+
+    box-shadow:
+        0 8px 22px
+        rgba(255,73,145,.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.back-btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+        0 14px 30px
+        rgba(255,73,145,.35);
+}
+
+.back-btn:active {
+    transform: scale(.97);
+}
 
 /* =========================================================
    MAIN
 ========================================================= */
 
-.main {
-
+main {
     position: relative;
 
     z-index: 5;
 
-    width: 100%;
-    height: 100vh;
+    width: min(1180px, 92%);
 
-    display: flex;
+    margin: auto;
 
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 30px;
-
+    padding:
+        65px
+        0
+        80px;
 }
 
-
 /* =========================================================
-   ABOUT CARD
+   HERO
 ========================================================= */
 
-.about-card {
-
-    width: min(920px, 95vw);
-
-    max-height: 90vh;
-
-    padding: 45px;
-
-    border-radius: 35px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.12),
-            rgba(255,130,190,.06)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.18);
-
-    backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.45),
-        inset 0 1px rgba(255,255,255,.12);
+.hero {
+    min-height: 650px;
 
     display: grid;
 
     grid-template-columns:
-        280px 1fr;
+        1fr
+        1fr;
 
-    gap: 50px;
+    gap: 55px;
 
-    overflow: auto;
-
-    animation:
-        cardAppear 1.2s cubic-bezier(.2,.8,.2,1);
-
+    align-items: center;
 }
 
+/* =========================================================
+   HERO TEXT
+========================================================= */
 
-@keyframes cardAppear {
+.hero-text {
+    animation:
+        heroText
+        1s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+}
 
-    0% {
+@keyframes heroText {
 
+    from {
         opacity: 0;
 
         transform:
-            translateY(60px)
-            scale(.9);
-
+            translateX(-45px);
     }
 
-    100% {
-
+    to {
         opacity: 1;
 
         transform:
-            translateY(0)
-            scale(1);
-
+            translateX(0);
     }
-
 }
 
+/* Badge */
 
-/* =========================================================
-   CHARACTER AREA
-========================================================= */
-
-.character-area {
-
-    display: flex;
-
-    flex-direction: column;
+.badge {
+    display: inline-flex;
 
     align-items: center;
 
-    justify-content: center;
+    gap: 8px;
 
-}
+    padding:
+        10px
+        17px;
 
+    border-radius: 999px;
 
-/* anime character container */
+    color: #a1265c;
 
-.anime-girl {
-
-    position: relative;
-
-    width: 210px;
-    height: 280px;
-
-    animation:
-        animeFloat 4s ease-in-out infinite;
-
-}
-
-
-@keyframes animeFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0)
-            rotate(-1deg);
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-15px)
-            rotate(1deg);
-
-    }
-
-}
-
-
-/* glow behind character */
-
-.character-glow {
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    left: 15px;
-    top: 30px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,130,200,.65),
-            transparent 70%
-        );
-
-    filter: blur(20px);
-
-}
-
-
-/* hair */
-
-.hair {
-
-    position: absolute;
-
-    width: 145px;
-    height: 150px;
-
-    left: 33px;
-    top: 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff77b9,
-            #d92f86
-        );
-
-    border-radius:
-        50% 50% 42% 48%;
-
-    border:
-        4px solid #ffb3d9;
-
-    box-shadow:
-        0 0 25px rgba(255,90,175,.45);
-
-}
-
-
-/* face */
-
-.face {
-
-    position: absolute;
-
-    width: 105px;
-    height: 115px;
-
-    left: 53px;
-    top: 62px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffd9e8,
-            #ffc4dd
-        );
-
-    border-radius:
-        48% 48% 45% 45%;
-
-    border:
-        3px solid #ff9cc8;
-
-}
-
-
-/* hair fringe */
-
-.fringe {
-
-    position: absolute;
-
-    width: 110px;
-    height: 50px;
-
-    left: 48px;
-    top: 57px;
-
-    background: #f05b9f;
-
-    border-radius:
-        50% 50% 70% 20%;
-
-    z-index: 3;
-
-}
-
-
-/* eyes */
-
-.eye {
-
-    position: absolute;
-
-    width: 14px;
-    height: 20px;
-
-    top: 108px;
-
-    background:
-        linear-gradient(
-            #5b2149,
-            #ff4f9c
-        );
-
-    border-radius: 50%;
-
-    z-index: 4;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,.2);
-
-}
-
-.eye.left {
-
-    left: 78px;
-
-}
-
-.eye.right {
-
-    left: 121px;
-
-}
-
-
-/* eye shine */
-
-.eye::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 5px;
-    height: 7px;
-
-    background: white;
-
-    border-radius: 50%;
-
-    top: 3px;
-    left: 3px;
-
-}
-
-
-/* mouth */
-
-.mouth {
-
-    position: absolute;
-
-    left: 99px;
-    top: 139px;
-
-    width: 18px;
-    height: 9px;
-
-    border-bottom:
-        3px solid #d94d82;
-
-    border-radius: 50%;
-
-    z-index: 4;
-
-}
-
-
-/* body */
-
-.body {
-
-    position: absolute;
-
-    width: 130px;
-    height: 100px;
-
-    left: 40px;
-    top: 175px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff77b9,
-            #e73891
-        );
-
-    border-radius:
-        35px 35px 20px 20px;
-
-    border:
-        4px solid #ffb1d7;
-
-}
-
-
-/* collar */
-
-.collar {
-
-    position: absolute;
-
-    width: 60px;
-    height: 35px;
-
-    left: 75px;
-    top: 170px;
-
-    background: #fff;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            50% 100%
-        );
-
-    z-index: 5;
-
-}
-
-
-/* bow */
-
-.bow {
-
-    position: absolute;
-
-    left: 91px;
-    top: 195px;
-
-    width: 30px;
-    height: 25px;
-
-    background: #ffb0d7;
-
-    border-radius: 50%;
-
-    z-index: 6;
-
-}
-
-
-/* flower */
-
-.flower {
-
-    position: absolute;
-
-    left: 164px;
-    top: 75px;
-
-    font-size: 32px;
-
-    z-index: 8;
-
-    animation:
-        flowerSpin 5s linear infinite;
-
-}
-
-
-@keyframes flowerSpin {
-
-    0% {
-
-        transform:
-            rotate(0deg);
-
-    }
-
-    100% {
-
-        transform:
-            rotate(360deg);
-
-    }
-
-}
-
-
-/* =========================================================
-   CHARACTER TEXT
-========================================================= */
-
-.character-name {
-
-    margin-top: 15px;
-
-    font-size: 26px;
+    font-size: 13px;
 
     font-weight: 800;
 
-    color: #ffd6e9;
+    background:
+        rgba(255,255,255,.62);
 
-    text-shadow:
-        0 0 20px rgba(255,110,180,.6);
+    border:
+        1px solid
+        rgba(255,255,255,.85);
 
+    box-shadow:
+        0 8px 25px
+        rgba(255,80,145,.12);
+
+    backdrop-filter: blur(15px);
 }
 
-.character-tag {
-
-    margin-top: 5px;
-
-    color: #d9afc6;
-
-    font-size: 14px;
-
-}
-
-
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.content {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-}
-
-
-.logo {
-
-    font-size: 48px;
-
-    margin-bottom: 5px;
-
-    animation:
-        logoBounce 3s ease-in-out infinite;
-
-}
-
-
-@keyframes logoBounce {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0);
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-8px);
-
-    }
-
-}
-
+/* Main heading */
 
 h1 {
+    margin:
+        22px
+        0
+        20px;
 
-    font-size: clamp(38px, 6vw, 62px);
+    font-size:
+        clamp(55px, 7vw, 88px);
 
-    line-height: 1;
+    line-height: .95;
 
-    margin-bottom: 15px;
+    letter-spacing: -4px;
 
+    color: #6c2046;
+}
+
+.gradient-text {
     background:
         linear-gradient(
             90deg,
-            #fff,
-            #ffb6d9,
-            #fff
+            #ff3f91,
+            #ff72ad,
+            #ff9bc7,
+            #ff4f9a
         );
-
-    background-size: 200%;
 
     -webkit-background-clip: text;
 
@@ -950,631 +506,1024 @@ h1 {
 
     color: transparent;
 
-    animation:
-        titleShine 4s linear infinite;
+    background-size: 250% auto;
 
+    animation:
+        pinkGradient
+        5s
+        ease
+        infinite;
 }
 
-
-@keyframes titleShine {
+@keyframes pinkGradient {
 
     0% {
+        background-position: 0% center;
+    }
 
-        background-position:
-            0%;
-
+    50% {
+        background-position: 100% center;
     }
 
     100% {
-
-        background-position:
-            200%;
-
+        background-position: 0% center;
     }
-
 }
 
+/* Description */
 
-.subtitle {
+.hero-text p {
+    max-width: 570px;
 
-    color: #d8b7c9;
+    color: #7e4562;
 
-    font-size: 17px;
+    font-size: 18px;
 
-    line-height: 1.7;
-
-    margin-bottom: 28px;
-
+    line-height: 1.8;
 }
 
-
-/* =========================================================
-   INFO BOXES
-========================================================= */
-
-.info-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 14px;
-
-    margin-bottom: 25px;
-
-}
-
-
-.info {
-
-    padding: 18px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid rgba(255,180,215,.13);
-
-    transition:
-        transform .3s ease,
-        background .3s ease;
-
-}
-
-
-.info:hover {
-
-    transform:
-        translateY(-5px);
-
-    background:
-        rgba(255,130,190,.12);
-
-}
-
-
-.info-icon {
-
-    font-size: 25px;
-
-    margin-bottom: 7px;
-
-}
-
-
-.info-title {
-
-    font-weight: 700;
-
-    margin-bottom: 4px;
-
-}
-
-
-.info-text {
-
-    color: #c6a8ba;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-}
-
-
-/* =========================================================
-   CREATOR
-========================================================= */
+/* Creator */
 
 .creator {
-
-    padding: 18px 20px;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,100,175,.12),
-            rgba(255,255,255,.04)
-        );
-
-    border:
-        1px solid rgba(255,150,205,.18);
-
-    margin-bottom: 20px;
-
-}
-
-
-.creator small {
-
-    display: block;
-
-    color: #bfa2b4;
-
-    margin-bottom: 5px;
-
-}
-
-
-.creator strong {
-
-    font-size: 20px;
-
-    color: #ffd4e7;
-
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-button {
+    margin-top: 28px;
 
     display: inline-flex;
 
     align-items: center;
 
-    justify-content: center;
+    gap: 6px;
 
-    gap: 8px;
+    padding:
+        11px
+        17px;
 
-    width: fit-content;
+    border-radius: 16px;
 
-    padding: 13px 22px;
+    color: #74314f;
 
-    border-radius: 14px;
+    font-size: 14px;
+
+    background:
+        rgba(255,255,255,.45);
 
     border:
-        1px solid rgba(255,255,255,.15);
+        1px solid
+        rgba(255,255,255,.7);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(180,50,105,.08);
+}
+
+.creator span {
+    color: #ec3f89;
+
+    font-weight: 900;
+}
+
+/* =========================================================
+   ANIME GIRL
+========================================================= */
+
+.character-wrap {
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    animation:
+        characterEnter
+        1.15s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+}
+
+@keyframes characterEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(50px)
+            scale(.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* Big pink glow */
+
+.character-glow {
+    position: absolute;
+
+    width: 470px;
+    height: 470px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.9),
+            rgba(255,104,171,.45),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    animation:
+        animeGlow
+        4s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes animeGlow {
+
+    from {
+        transform: scale(.92);
+
+        opacity: .65;
+    }
+
+    to {
+        transform: scale(1.1);
+
+        opacity: .95;
+    }
+}
+
+/* Card */
+
+.character-card {
+    position: relative;
+
+    width:
+        min(500px, 100%);
+
+    padding: 12px;
+
+    border-radius: 38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.82),
+            rgba(255,184,215,.45)
+        );
+
+    border:
+        2px solid
+        rgba(255,255,255,.8);
+
+    box-shadow:
+        0 35px 90px
+        rgba(178,44,105,.2),
+
+        0 0 70px
+        rgba(255,86,156,.22);
+
+    backdrop-filter: blur(18px);
+
+    animation:
+        animeFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes animeFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-13px)
+            rotate(.6deg);
+    }
+}
+
+.character-card::before {
+    content: "♡";
+
+    position: absolute;
+
+    top: -22px;
+
+    right: 25px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #ff4d96;
+
+    font-size: 28px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    box-shadow:
+        0 8px 25px
+        rgba(180,40,100,.18);
+
+    animation:
+        heartFloat
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes heartFloat {
+
+    50% {
+        transform:
+            translateY(-7px)
+            rotate(8deg);
+    }
+}
+
+.character-card::after {
+    content: "✨";
+
+    position: absolute;
+
+    left: -20px;
+
+    bottom: 30px;
+
+    font-size: 30px;
+
+    animation:
+        sparkle
+        2s
+        ease-in-out
+        infinite;
+}
+
+@keyframes sparkle {
+
+    0%,100% {
+        transform:
+            scale(.8)
+            rotate(0deg);
+
+        opacity: .5;
+    }
+
+    50% {
+        transform:
+            scale(1.2)
+            rotate(15deg);
+
+        opacity: 1;
+    }
+}
+
+.character-card img {
+    display: block;
+
+    width: 100%;
+
+    border-radius: 28px;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+}
+
+.character-card:hover img {
+    transform: scale(1.015);
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    position: relative;
+
+    margin-top: 65px;
+
+    padding: 42px;
+
+    border-radius: 32px;
+
+    background:
+        rgba(255,255,255,.52);
+
+    border:
+        1px solid
+        rgba(255,255,255,.75);
+
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(176,43,103,.10);
+
+    animation:
+        sectionEnter
+        .9s
+        ease
+        both;
+}
+
+@keyframes sectionEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+.section h2 {
+    margin-bottom: 12px;
+
+    color: #702344;
+
+    font-size: 32px;
+
+    letter-spacing: -.8px;
+}
+
+.section > p {
+    max-width: 850px;
+
+    color: #82506a;
+
+    line-height: 1.8;
+
+    font-size: 16px;
+}
+
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
+
+.features {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-top: 28px;
+}
+
+.feature {
+    position: relative;
+
+    padding: 28px;
+
+    min-height: 210px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.72),
+            rgba(255,213,230,.55)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
+
+    box-shadow:
+        0 12px 35px
+        rgba(177,50,105,.08);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+}
+
+.feature:hover {
+    transform:
+        translateY(-9px)
+        scale(1.015);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.9),
+            rgba(255,188,216,.7)
+        );
+
+    box-shadow:
+        0 22px 45px
+        rgba(204,50,112,.16);
+}
+
+.feature-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 18px;
+
+    font-size: 29px;
 
     background:
         linear-gradient(
             135deg,
-            #ff67ac,
-            #d93688
+            #ff6ca9,
+            #ff9dc5
         );
 
-    color: white;
-
-    text-decoration: none;
-
-    font-weight: 700;
-
     box-shadow:
-        0 10px 30px rgba(225,50,130,.25);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
+        0 10px 25px
+        rgba(255,77,145,.2);
 }
 
+.feature h3 {
+    margin-bottom: 8px;
 
-.back-button:hover {
+    color: #702344;
 
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
-    box-shadow:
-        0 15px 35px rgba(225,50,130,.4);
-
+    font-size: 19px;
 }
 
+.feature p {
+    color: #87536d;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
 
 /* =========================================================
-   FLOATING HEARTS
+   BUILT FOR YOU SPECIAL CARD
 ========================================================= */
 
-.heart {
+.special-section {
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.65),
+            rgba(255,132,186,.42)
+        );
+}
+
+.special-section::before {
+    content: "🌸";
 
     position: absolute;
 
-    font-size: 18px;
+    right: 35px;
 
-    opacity: .5;
+    top: 22px;
+
+    font-size: 55px;
+
+    opacity: .35;
 
     animation:
-        heartFloat 7s ease-in-out infinite;
-
+        flowerFloat
+        4s
+        ease-in-out
+        infinite;
 }
 
-.heart.one {
-
-    left: 5%;
-    bottom: 15%;
-
-}
-
-.heart.two {
-
-    right: 8%;
-    bottom: 25%;
-
-    animation-delay: 2s;
-
-}
-
-.heart.three {
-
-    right: 18%;
-    top: 15%;
-
-    animation-delay: 4s;
-
-}
-
-
-@keyframes heartFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0)
-            rotate(-10deg);
-
-    }
+@keyframes flowerFloat {
 
     50% {
-
         transform:
-            translateY(-30px)
+            translateY(-8px)
             rotate(10deg);
-
     }
-
 }
 
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    padding:
+        30px
+        20px
+        45px;
+
+    color: #874866;
+
+    font-size: 13px;
+}
+
+.footer-heart {
+    color: #ef438d;
+
+    font-size: 17px;
+}
+
+/* =========================================================
+   SCROLL BAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.3);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            #ff65a4,
+            #ff9ac5
+        );
+}
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
-@media (max-width: 760px) {
+@media (max-width: 850px) {
 
-    body {
+    .navbar {
+        height: 68px;
 
-        overflow-y: auto;
-
+        padding:
+            0
+            18px;
     }
 
-    .main {
-
-        min-height: 100vh;
-
-        height: auto;
-
-        padding: 20px;
-
+    .logo {
+        font-size: 17px;
     }
 
-    .about-card {
+    .back-btn {
+        padding:
+            9px
+            14px;
 
+        font-size: 13px;
+    }
+
+    main {
+        width: 92%;
+
+        padding:
+            40px
+            0
+            60px;
+    }
+
+    .hero {
         grid-template-columns: 1fr;
 
-        gap: 20px;
+        gap: 45px;
 
-        padding: 30px 22px;
-
-        max-height: none;
-
-    }
-
-    .character-area {
-
-        transform:
-            scale(.85);
-
-        margin-bottom:
-            -20px;
-
-    }
-
-    .content {
+        min-height: auto;
 
         text-align: center;
-
     }
 
-    .info-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    .back-button {
-
+    .hero-text p {
         margin:
-            0 auto;
-
+            0
+            auto;
     }
 
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-
-    .about-card {
-
-        padding: 22px 16px;
-
-        border-radius: 25px;
-
+    .creator {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     h1 {
+        font-size:
+            clamp(50px, 15vw, 72px);
 
-        font-size: 42px;
-
+        letter-spacing: -3px;
     }
 
-    .subtitle {
-
-        font-size: 15px;
-
+    .character-card {
+        width:
+            min(440px, 94%);
     }
 
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 28px 23px;
+    }
+
+    .section h2 {
+        font-size: 27px;
+    }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 500px) {
+
+    main {
+        width: 94%;
+    }
+
+    .navbar {
+        padding:
+            0
+            13px;
+    }
+
+    .logo-flower {
+        font-size: 23px;
+    }
+
+    .back-btn {
+        padding:
+            8px
+            12px;
+
+        font-size: 12px;
+    }
+
+    .badge {
+        font-size: 12px;
+
+        padding:
+            8px
+            13px;
+    }
+
+    h1 {
+        font-size: 52px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .creator {
+        font-size: 12px;
+    }
+
+    .character-card {
+        padding: 8px;
+
+        border-radius: 28px;
+    }
+
+    .character-card img {
+        border-radius: 21px;
+    }
+
+    .character-glow {
+        width: 320px;
+        height: 320px;
+    }
+
+    .feature {
+        min-height: auto;
+
+        padding: 23px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+
+        scroll-behavior: auto !important;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
 <!-- =========================================================
-     ANIMATED BACKGROUND
+     FLOATING BACKGROUND
 ========================================================= -->
 
-<div class="background">
+<div class="decorations" aria-hidden="true">
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-
-
-    <div class="particles">
-
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-
-    </div>
-
-
-    <div class="sakura">🌸</div>
-    <div class="sakura">🌸</div>
-    <div class="sakura">🌸</div>
-    <div class="sakura">🌸</div>
-    <div class="sakura">🌸</div>
-    <div class="sakura">🌸</div>
-
-
-    <div class="heart one">💗</div>
-    <div class="heart two">💖</div>
-    <div class="heart three">💕</div>
+    <span class="decor">🌸</span>
+    <span class="decor">♡</span>
+    <span class="decor">✨</span>
+    <span class="decor">🌷</span>
+    <span class="decor">💗</span>
+    <span class="decor">✦</span>
+    <span class="decor">🌸</span>
+    <span class="decor">💖</span>
 
 </div>
 
 
 <!-- =========================================================
-     MAIN ABOUT
+     NAVBAR
 ========================================================= -->
 
-<main class="main">
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-flower">
+            🌸
+        </span>
+
+        <span>
+            Flavi AI
+        </span>
+
+    </div>
 
 
-    <section class="about-card">
+    <a
+        href="index.html"
+        class="back-btn"
+    >
+        ← Back to Flavi
+    </a>
+
+</nav>
 
 
-        <!-- =================================================
-             ANIME FLAVI
-        ================================================== -->
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-        <div class="character-area">
-
-            <div class="anime-girl">
-
-                <div class="character-glow"></div>
-
-                <div class="hair"></div>
-
-                <div class="face"></div>
-
-                <div class="fringe"></div>
-
-                <div class="eye left"></div>
-                <div class="eye right"></div>
-
-                <div class="mouth"></div>
-
-                <div class="body"></div>
-
-                <div class="collar"></div>
-
-                <div class="bow"></div>
-
-                <div class="flower">
-                    🌸
-                </div>
-
-            </div>
+<main>
 
 
-            <div class="character-name">
-                Flavi
-            </div>
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-            <div class="character-tag">
-                Your cute AI companion ✨
-            </div>
-
-        </div>
+    <section class="hero">
 
 
-        <!-- =================================================
-             ABOUT CONTENT
-        ================================================== -->
+        <div class="hero-text">
 
-        <div class="content">
-
-
-            <div class="logo">
-                🌸
+            <div class="badge">
+                🌸 Meet Flavi AI
             </div>
 
 
             <h1>
-                About Flavi
+
+                <span class="gradient-text">
+                    Flavi
+                </span>
+
+                <br>
+
+                your cute AI companion
+
             </h1>
 
 
-            <p class="subtitle">
-
-                A tiny little AI companion made to
-                chat, help, remember and keep you
-                company. 💗
-
+            <p>
+                Flavi is a friendly AI companion designed
+                to chat, remember important things, help
+                with questions, and make conversations
+                feel a little more fun. 💗
             </p>
 
 
-            <!-- INFO -->
-
-            <div class="info-grid">
-
-
-                <div class="info">
-
-                    <div class="info-icon">
-                        🧠
-                    </div>
-
-                    <div class="info-title">
-                        Smart
-                    </div>
-
-                    <div class="info-text">
-                        Flavi can answer questions,
-                        search the web and use saved
-                        memories to make conversations
-                        more personal.
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="info-icon">
-                        💬
-                    </div>
-
-                    <div class="info-title">
-                        Friendly
-                    </div>
-
-                    <div class="info-text">
-                        Flavi talks casually and can
-                        understand English and
-                        Tanglish conversations.
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="info-icon">
-                        🌸
-                    </div>
-
-                    <div class="info-title">
-                        Personal
-                    </div>
-
-                    <div class="info-text">
-                        Flavi can remember things you
-                        choose to save using her
-                        memory system.
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="info-icon">
-                        ✨
-                    </div>
-
-                    <div class="info-title">
-                        Always Improving
-                    </div>
-
-                    <div class="info-text">
-                        Flavi is continuously being
-                        developed with new features
-                        and improvements.
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- CREATOR -->
-
             <div class="creator">
 
-                <small>
-                    Created & developed by
-                </small>
-
-                <strong>
-                    Pragatheesh 🌸
-                </strong>
+                Created and developed with
+                <span>💗 by Pragatheesh</span>
 
             </div>
-
-
-            <!-- BACK -->
-
-            <a
-                href="index.html"
-                class="back-button"
-            >
-
-                ← Back to Flavi
-
-            </a>
-
 
         </div>
 
+
+        <!-- =================================================
+             ANIME CHARACTER
+        ================================================== -->
+
+        <div class="character-wrap">
+
+            <div class="character-glow"></div>
+
+
+            <div class="character-card">
+
+                <img
+                    src="about-flavi-anime.png"
+                    alt="Cute anime girl representing Flavi AI"
+                    loading="eager"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="section">
+
+        <h2>
+            What makes Flavi special? 🌸
+        </h2>
+
+
+        <p>
+            Flavi is built to feel more personal than a
+            normal chatbot. She can connect to your AI
+            backend, use saved memories, access
+            announcements, and respond in a friendly
+            conversational style.
+        </p>
+
+
+        <div class="features">
+
+
+            <!-- MEMORY -->
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Memory
+                </h3>
+
+                <p>
+                    Flavi can use saved memories to make
+                    conversations feel more personal
+                    and meaningful.
+                </p>
+
+            </div>
+
+
+            <!-- WEB -->
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Web Knowledge
+                </h3>
+
+                <p>
+                    Flavi can use web-search information
+                    when current information is needed.
+                </p>
+
+            </div>
+
+
+            <!-- PERSONALITY -->
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    💗
+                </div>
+
+                <h3>
+                    Friendly Personality
+                </h3>
+
+                <p>
+                    Casual conversations in English and
+                    Tanglish with a warm and natural
+                    personality.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BUILT FOR YOU
+    ====================================================== -->
+
+    <section class="section special-section">
+
+        <h2>
+            Built with love for you ✨
+        </h2>
+
+
+        <p>
+            Flavi is continuously being improved with
+            new features, animations, voice support,
+            memory, announcements and other tools to
+            make the experience more fun. 🌷
+        </p>
 
     </section>
 
 </main>
 
 
-</body>
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
+<footer>
+
+    🌸 Flavi AI — A friendly AI companion
+
+    <br><br>
+
+    Made with
+    <span class="footer-heart">💗</span>
+    by Pragatheesh
+
+</footer>
+
+
+</body>
 </html>
