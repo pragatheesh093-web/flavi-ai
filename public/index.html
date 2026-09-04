@@ -5,17 +5,14 @@
 
 <meta charset="UTF-8">
 
-<meta name="google-site-verification"
-      content="jBwxrf0DYO2nrPKp2E3LjDNCwdnH1Hn5SssFw5nnFy8">
-
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
 <meta name="description"
-      content="Flavi AI - A friendly AI companion created by Pragatheesh.">
+      content="Flavi AI — Your Friendly AI Companion">
 
 <meta name="theme-color"
-      content="#e889b8">
+      content="#17101f">
 
 <title>Flavi AI — Your Friendly AI Companion</title>
 
@@ -51,52 +48,90 @@ body {
     overflow: hidden;
 
     background:
-        linear-gradient(
-            180deg,
-            #f7b8d5 0%,
-            #d98db6 35%,
-            #8f638d 65%,
-            #42394f 100%
-        );
+        #140d1b;
 }
 
 
 /* =========================================================
-   JAPANESE SCENERY BACKGROUND
+   MAIN CINEMATIC BACKGROUND
 ========================================================= */
 
 .background {
 
     position: fixed;
+
     inset: 0;
 
     overflow: hidden;
-
-    pointer-events: none;
 
     z-index: 0;
 
     background:
 
         radial-gradient(
-            circle at 76% 17%,
-            rgba(255,255,255,.7),
-            transparent 5%
+            circle at 78% 22%,
+            rgba(255,220,244,.20),
+            transparent 18%
         ),
 
         radial-gradient(
-            circle at 70% 25%,
-            rgba(255,183,216,.35),
-            transparent 25%
+            circle at 30% 20%,
+            rgba(255,139,201,.20),
+            transparent 30%
         ),
 
         linear-gradient(
             180deg,
-            #f7bfd9 0%,
-            #df9abb 35%,
-            #a66e93 58%,
-            #51445b 100%
+            #d997bb 0%,
+            #bd7fa6 28%,
+            #74536f 58%,
+            #241a31 100%
         );
+}
+
+
+/* =========================================================
+   SOFT SKY LIGHT
+========================================================= */
+
+.sky-light {
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    right: 2%;
+    top: -130px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,235,249,.48),
+            rgba(255,201,232,.16) 35%,
+            transparent 70%
+        );
+
+    filter: blur(15px);
+
+    animation:
+        skyGlow 7s ease-in-out infinite;
+}
+
+@keyframes skyGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: .8;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
 }
 
 
@@ -108,10 +143,10 @@ body {
 
     position: absolute;
 
-    width: 120px;
-    height: 120px;
+    width: 115px;
+    height: 115px;
 
-    right: 13%;
+    right: 11%;
     top: 11%;
 
     border-radius: 50%;
@@ -120,16 +155,20 @@ body {
         radial-gradient(
             circle at 35% 30%,
             #ffffff,
-            #ffeaf4 55%,
-            #ffd3e7 100%
+            #ffeaf5 55%,
+            #f7cfe5
         );
 
     box-shadow:
-        0 0 35px rgba(255,255,255,.7),
-        0 0 100px rgba(255,200,225,.45);
+
+        0 0 35px rgba(255,238,249,.8),
+
+        0 0 100px rgba(255,195,225,.55),
+
+        0 0 180px rgba(255,172,216,.25);
 
     animation:
-        moonFloat 7s ease-in-out infinite;
+        moonFloat 6s ease-in-out infinite;
 }
 
 @keyframes moonFloat {
@@ -140,48 +179,95 @@ body {
     }
 
     50% {
-        transform: translateY(-8px);
+        transform: translateY(7px);
     }
 }
 
 
 /* =========================================================
-   DISTANT MIST
+   CLOUDS
 ========================================================= */
 
-.mist {
+.cloud {
 
     position: absolute;
 
-    left: -10%;
-    right: -10%;
+    height: 55px;
 
-    height: 180px;
-
-    bottom: 29%;
+    border-radius: 100px;
 
     background:
-        radial-gradient(
-            ellipse,
-            rgba(255,225,239,.22),
-            transparent 65%
-        );
+        rgba(255,235,247,.12);
 
-    filter: blur(20px);
+    filter: blur(12px);
 
-    animation:
-        mistMove 18s ease-in-out infinite;
+    opacity: .8;
 }
 
-@keyframes mistMove {
+.cloud::before,
+.cloud::after {
 
-    0%,
-    100% {
-        transform: translateX(-2%);
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        inherit;
+}
+
+.cloud.one {
+
+    width: 300px;
+
+    top: 21%;
+    right: 24%;
+
+    animation:
+        cloudMove 25s linear infinite;
+}
+
+.cloud.one::before {
+
+    width: 130px;
+    height: 100px;
+
+    left: 60px;
+    bottom: 15px;
+}
+
+.cloud.one::after {
+
+    width: 100px;
+    height: 80px;
+
+    right: 50px;
+    bottom: 10px;
+}
+
+
+.cloud.two {
+
+    width: 230px;
+
+    top: 32%;
+    left: 38%;
+
+    opacity: .35;
+
+    animation:
+        cloudMove 32s linear infinite reverse;
+}
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(-40px);
     }
 
-    50% {
-        transform: translateX(3%);
+    to {
+        transform: translateX(80px);
     }
 }
 
@@ -190,167 +276,184 @@ body {
    MOUNTAINS
 ========================================================= */
 
-.mountain {
+.mountains {
 
     position: absolute;
 
-    left: -10%;
-    width: 120%;
-
+    left: 0;
+    right: 0;
     bottom: 0;
 
-    transform-origin: bottom center;
+    height: 53%;
 }
 
 
 /* far mountains */
 
-.mountain-back {
+.mountain.far {
 
-    height: 47%;
+    position: absolute;
 
-    background:
+    bottom: 27%;
 
-        linear-gradient(
-            135deg,
-            transparent 0 17%,
-            rgba(103,76,105,.75) 17.2% 26%,
-            transparent 26.2% 31%,
-            rgba(112,82,112,.72) 31.2% 42%,
-            transparent 42.2% 48%,
-            rgba(94,72,101,.76) 48.2% 60%,
-            transparent 60.2%
-        );
+    width: 0;
+    height: 0;
 
-    opacity: .75;
+    border-left:
+        350px solid transparent;
 
-    filter: blur(1px);
+    border-right:
+        350px solid transparent;
+
+    border-bottom:
+        310px solid rgba(92,65,96,.55);
+}
+
+.mountain.far.left {
+    left: -260px;
+}
+
+.mountain.far.middle {
+    left: 25%;
+    transform: scale(.85);
+}
+
+.mountain.far.right {
+    right: -270px;
+    transform: scale(.9);
 }
 
 
-/* middle mountains */
+/* Mount Fuji */
 
-.mountain-middle {
-
-    height: 38%;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            transparent 0 12%,
-            #72546e 12.2% 28%,
-            transparent 28.2% 36%,
-            #654d68 36.2% 52%,
-            transparent 52.2% 59%,
-            #74536e 59.2% 78%,
-            transparent 78.2%
-        );
-
-    opacity: .9;
-}
-
-
-/* foreground mountain */
-
-.mountain-front {
-
-    height: 29%;
-
-    background:
-
-        linear-gradient(
-            150deg,
-            transparent 0 7%,
-            #40394e 7.2% 31%,
-            transparent 31.2% 38%,
-            #363342 38.2% 67%,
-            transparent 67.2% 73%,
-            #433746 73.2% 100%
-        );
-
-    filter:
-        drop-shadow(
-            0 -10px 20px
-            rgba(35,20,35,.25)
-        );
-}
-
-
-/* =========================================================
-   MOUNT FUJI SNOW CAP
-========================================================= */
-
-.fuji {
+.mount-fuji {
 
     position: absolute;
 
     left: 50%;
-    bottom: 27%;
 
-    width: 420px;
-    height: 290px;
+    bottom: 22%;
 
     transform:
         translateX(-50%);
 
-    clip-path:
-        polygon(
-            50% 0%,
-            61% 27%,
-            74% 47%,
-            100% 100%,
-            0% 100%,
-            26% 47%,
-            39% 27%
-        );
+    width: 0;
+    height: 0;
 
-    background:
+    border-left:
+        245px solid transparent;
 
-        linear-gradient(
-            145deg,
-            #66506d,
-            #3e374b 80%
-        );
+    border-right:
+        245px solid transparent;
 
-    opacity: .9;
+    border-bottom:
+        390px solid #44354f;
 
     filter:
         drop-shadow(
-            0 15px 25px
-            rgba(40,25,45,.25)
+            0 20px 30px
+            rgba(20,10,30,.25)
         );
 }
 
 
-.fuji::before {
+/* snow cap */
+
+.mount-fuji::before {
 
     content: "";
 
     position: absolute;
 
-    left: 50%;
+    left: -88px;
+
     top: 0;
 
-    width: 125px;
-    height: 100px;
+    width: 0;
+    height: 0;
 
-    transform:
-        translateX(-50%);
+    border-left:
+        88px solid transparent;
 
-    clip-path:
-        polygon(
-            50% 0,
-            100% 100%,
-            0 100%
-        );
+    border-right:
+        88px solid transparent;
+
+    border-bottom:
+        108px solid rgba(255,247,251,.95);
+}
+
+
+/* mountain shadow */
+
+.mount-fuji::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -245px;
+
+    top: 155px;
+
+    width: 490px;
+    height: 230px;
 
     background:
+
         linear-gradient(
-            135deg,
-            rgba(255,255,255,.95),
-            rgba(255,226,239,.8)
+            145deg,
+            transparent 47%,
+            rgba(35,23,44,.45) 48%,
+            rgba(35,23,44,.45) 65%,
+            transparent 66%
         );
+
+    opacity: .8;
+}
+
+
+/* =========================================================
+   MOUNTAIN FOG
+========================================================= */
+
+.fog {
+
+    position: absolute;
+
+    left: -10%;
+
+    width: 120%;
+
+    height: 150px;
+
+    bottom: 31%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(240,207,230,.16),
+            rgba(255,232,245,.22),
+            rgba(240,207,230,.12),
+            transparent
+        );
+
+    filter: blur(20px);
+
+    animation:
+        fogMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes fogMove {
+
+    from {
+        transform: translateX(-30px);
+    }
+
+    to {
+        transform: translateX(40px);
+    }
 }
 
 
@@ -366,338 +469,263 @@ body {
     right: 0;
     bottom: 0;
 
-    height: 25%;
+    height: 40%;
 
     background:
 
         linear-gradient(
             180deg,
-            rgba(48,37,49,.3),
-            #292532
+            rgba(50,34,57,.15),
+            rgba(20,13,29,.88)
         );
 
-    box-shadow:
-        inset 0 25px 40px
-        rgba(255,180,215,.08);
+    clip-path:
+        polygon(
+            0 25%,
+            15% 12%,
+            31% 23%,
+            48% 8%,
+            67% 22%,
+            83% 10%,
+            100% 20%,
+            100% 100%,
+            0 100%
+        );
 }
 
 
 /* =========================================================
-   TREE SYSTEM
+   DISTANT LIGHTS
+========================================================= */
+
+.village {
+
+    position: absolute;
+
+    bottom: 31%;
+
+    left: 0;
+
+    right: 0;
+
+    height: 70px;
+
+    opacity: .65;
+}
+
+.house-light {
+
+    position: absolute;
+
+    width: 5px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ffdca3;
+
+    box-shadow:
+        0 0 8px #ffdca3;
+
+    animation:
+        lightBlink 3s ease-in-out infinite;
+}
+
+@keyframes lightBlink {
+
+    0%,
+    100% {
+        opacity: .4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   SAKURA TREES
 ========================================================= */
 
 .tree {
 
     position: absolute;
 
-    bottom: 7%;
+    bottom: 8%;
 
-    width: 210px;
-    height: 530px;
+    width: 180px;
 
-    transform-origin:
-        bottom center;
+    height: 520px;
 
-    z-index: 4;
-
-    animation:
-        treeSway 4.5s ease-in-out infinite;
+    z-index: 2;
 }
-
 
 .tree.left {
-    left: -20px;
+    left: -35px;
 }
-
 
 .tree.right {
-    right: -20px;
-
-    transform:
-        scaleX(-1);
-
-    animation-delay:
-        -1.7s;
+    right: -35px;
+    transform: scaleX(-1);
 }
 
 
-@keyframes treeSway {
-
-    0%,
-    100% {
-        transform:
-            rotate(-1deg);
-    }
-
-    50% {
-        transform:
-            rotate(2deg);
-    }
-}
-
-
-/* trunk */
-
-.tree-trunk {
+.trunk {
 
     position: absolute;
 
-    left: 96px;
     bottom: 0;
 
-    width: 25px;
-    height: 380px;
+    left: 70px;
 
-    border-radius:
-        50% 50% 10% 10%;
+    width: 20px;
+
+    height: 410px;
+
+    border-radius: 20px;
 
     background:
 
         linear-gradient(
             90deg,
-            #2b2028,
-            #51323b,
-            #241c25
+            #1d101d,
+            #41263b,
+            #180d18
         );
 
     transform:
-        rotate(3deg);
-
-    box-shadow:
-        8px 0 20px
-        rgba(20,10,20,.25);
+        rotate(-5deg);
 }
 
-
-/* branches */
 
 .branch {
 
     position: absolute;
 
-    height: 15px;
+    height: 13px;
 
     border-radius: 20px;
 
     background:
-        linear-gradient(
-            90deg,
-            #2a2029,
-            #4b3039
-        );
+        #291525;
 
-    transform-origin:
-        left center;
+    transform-origin: left center;
 }
-
 
 .branch.one {
 
-    width: 190px;
+    width: 180px;
 
-    left: 95px;
-    bottom: 285px;
+    top: 130px;
 
-    transform:
-        rotate(-34deg);
-}
-
-
-.branch.two {
-
-    width: 155px;
-
-    left: 105px;
-    bottom: 230px;
-
-    transform:
-        rotate(27deg);
-}
-
-
-.branch.three {
-
-    width: 135px;
-
-    left: 100px;
-    bottom: 170px;
+    left: 68px;
 
     transform:
         rotate(-28deg);
 }
 
+.branch.two {
 
-.branch.four {
+    width: 140px;
 
-    width: 125px;
+    top: 205px;
 
-    left: 104px;
-    bottom: 330px;
+    left: 55px;
 
     transform:
         rotate(25deg);
 }
 
+.branch.three {
 
-/* leaves */
+    width: 155px;
 
-.leaves {
+    top: 85px;
+
+    left: 65px;
+
+    transform:
+        rotate(18deg);
+}
+
+
+/* blossoms */
+
+.blossoms {
 
     position: absolute;
 
-    width: 115px;
-    height: 115px;
+    inset: 25px;
+
+}
+
+.blossom {
+
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
 
     border-radius: 50%;
 
     background:
 
         radial-gradient(
-            circle at 35% 35%,
-            rgba(105,63,83,.9),
-            transparent 45%
+            circle at center,
+            #ffd7eb 0 12%,
+            transparent 13%
         ),
 
         radial-gradient(
-            circle at 65% 45%,
-            rgba(62,48,65,.95),
-            transparent 55%
+            circle at 25% 25%,
+            #ffb8d7 0 35%,
+            transparent 36%
         ),
 
         radial-gradient(
-            circle at 50% 70%,
-            rgba(80,53,72,.95),
-            transparent 55%
+            circle at 75% 25%,
+            #ffbfdc 0 35%,
+            transparent 36%
+        ),
+
+        radial-gradient(
+            circle at 25% 75%,
+            #ffaed2 0 35%,
+            transparent 36%
+        ),
+
+        radial-gradient(
+            circle at 75% 75%,
+            #ffb5d6 0 35%,
+            transparent 36%
         );
 
     filter:
-        blur(.2px);
+        drop-shadow(
+            0 4px 10px
+            rgba(255,128,184,.25)
+        );
 
     animation:
-        leafSway 3.5s ease-in-out infinite;
+        blossomSway 4s ease-in-out infinite;
 }
 
-
-.leaves.a {
-    left: 10px;
-    top: 90px;
-}
-
-
-.leaves.b {
-    left: 80px;
-    top: 125px;
-
-    width: 135px;
-    height: 120px;
-
-    animation-delay:
-        -.8s;
-}
-
-
-.leaves.c {
-    left: 5px;
-    top: 210px;
-
-    width: 125px;
-    height: 115px;
-
-    animation-delay:
-        -1.5s;
-}
-
-
-.leaves.d {
-    left: 95px;
-    top: 245px;
-
-    width: 115px;
-    height: 105px;
-
-    animation-delay:
-        -2s;
-}
-
-
-@keyframes leafSway {
+@keyframes blossomSway {
 
     0%,
     100% {
-        transform:
-            translateX(0)
-            rotate(0deg);
+        transform: rotate(-4deg);
     }
 
     50% {
-        transform:
-            translateX(9px)
-            rotate(3deg);
+        transform: rotate(5deg);
     }
 }
 
 
 /* =========================================================
-   SMALL WIND LEAVES
-========================================================= */
-
-.wind-leaf {
-
-    position: absolute;
-
-    font-size: 18px;
-
-    color:
-        rgba(255,205,228,.75);
-
-    animation:
-        windLeaf 9s linear infinite;
-
-    z-index: 7;
-}
-
-@keyframes windLeaf {
-
-    0% {
-
-        transform:
-            translateX(-10vw)
-            translateY(15vh)
-            rotate(0deg);
-
-        opacity: 0;
-    }
-
-    10% {
-        opacity: .8;
-    }
-
-    50% {
-
-        transform:
-            translateX(50vw)
-            translateY(-3vh)
-            rotate(180deg);
-    }
-
-    90% {
-        opacity: .8;
-    }
-
-    100% {
-
-        transform:
-            translateX(115vw)
-            translateY(13vh)
-            rotate(360deg);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   GIRL — BACK VIEW
+   ANIME GIRL
 ========================================================= */
 
 .girl {
@@ -705,20 +733,22 @@ body {
     position: absolute;
 
     left: 50%;
-    bottom: 4%;
 
-    width: 180px;
-    height: 360px;
+    bottom: 3%;
 
     transform:
         translateX(-50%);
 
-    z-index: 9;
+    width: 180px;
+
+    height: 330px;
+
+    z-index: 4;
 
     filter:
         drop-shadow(
-            0 15px 20px
-            rgba(15,10,20,.35)
+            0 20px 30px
+            rgba(0,0,0,.45)
         );
 }
 
@@ -729,104 +759,67 @@ body {
 
     position: absolute;
 
-    left: 50%;
+    left: 43px;
 
-    top: 25px;
+    top: 5px;
 
-    width: 92px;
+    width: 95px;
+
     height: 125px;
 
-    transform:
-        translateX(-50%);
-
     border-radius:
-        48% 48% 42% 42%;
+        50px 50px 42px 42px;
 
     background:
 
         linear-gradient(
             90deg,
-            #17151c,
-            #302331 48%,
-            #121018
+            #130f1b,
+            #2a1a31,
+            #100d17
         );
 
     box-shadow:
-        12px 15px 0
-        rgba(15,12,18,.25);
-
-    animation:
-        hairWind 3.5s ease-in-out infinite;
-}
-
-
-@keyframes hairWind {
-
-    0%,
-    100% {
-        transform:
-            translateX(-50%)
-            rotate(-1deg);
-    }
-
-    50% {
-        transform:
-            translateX(-46%)
-            rotate(3deg);
-    }
+        inset -10px 0 20px rgba(255,150,210,.08);
 }
 
 
 /* hair strands */
 
-.girl-hair::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: -25px;
-    top: 35px;
-
-    width: 35px;
-    height: 145px;
-
-    border-radius:
-        50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #141119,
-            #30232f
-        );
-
-    transform:
-        rotate(8deg);
-}
-
-
+.girl-hair::before,
 .girl-hair::after {
 
     content: "";
 
     position: absolute;
 
-    right: -22px;
-    top: 35px;
+    top: 65px;
 
-    width: 34px;
-    height: 150px;
+    width: 35px;
 
-    border-radius:
-        50%;
+    height: 145px;
+
+    border-radius: 40px;
 
     background:
         linear-gradient(
             90deg,
-            #30232f,
-            #141119
+            #0d0a12,
+            #2b1930
         );
+}
+
+.girl-hair::before {
+
+    left: -17px;
+
+    transform:
+        rotate(7deg);
+}
+
+.girl-hair::after {
+
+    right: -17px;
 
     transform:
         rotate(-7deg);
@@ -839,62 +832,54 @@ body {
 
     position: absolute;
 
-    left: 50%;
-    top: 133px;
+    top: 105px;
 
-    width: 27px;
-    height: 30px;
+    left: 75px;
 
-    transform:
-        translateX(-50%);
+    width: 30px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #d98fae,
-            #efb0c8,
-            #c97d9d
-        );
+    height: 32px;
 
-    border-radius:
-        0 0 12px 12px;
+    background: #e9b5bd;
+
+    border-radius: 10px;
+
+    z-index: -1;
 }
 
 
-/* body / hoodie */
+/* body / dress */
 
 .girl-body {
 
     position: absolute;
 
-    left: 50%;
-    top: 150px;
+    left: 42px;
 
-    width: 112px;
-    height: 165px;
+    top: 115px;
 
-    transform:
-        translateX(-50%);
+    width: 98px;
+
+    height: 190px;
+
+    border-radius:
+        45px 45px 25px 25px;
 
     background:
 
         linear-gradient(
             90deg,
-            #29222e,
-            #493245 48%,
-            #25202b
+            #201327,
+            #56314f 50%,
+            #211327
         );
 
-    border-radius:
-        40px 40px 20px 20px;
-
     box-shadow:
-        inset 0 0 25px
-        rgba(255,170,210,.07);
+        inset 0 10px 25px rgba(255,190,225,.08);
 }
 
 
-/* shoulders */
+/* dress highlight */
 
 .girl-body::before {
 
@@ -902,215 +887,118 @@ body {
 
     position: absolute;
 
-    left: -24px;
-    top: 4px;
+    left: 25px;
 
-    width: 55px;
-    height: 135px;
+    top: 5px;
 
-    border-radius:
-        40px;
+    width: 48px;
 
-    background:
-        #302530;
-
-    transform:
-        rotate(7deg);
-}
-
-
-.girl-body::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: -24px;
-    top: 4px;
-
-    width: 55px;
-    height: 135px;
-
-    border-radius:
-        40px;
+    height: 150px;
 
     background:
-        #302530;
 
-    transform:
-        rotate(-7deg);
-}
-
-
-/* skirt */
-
-.girl-skirt {
-
-    position: absolute;
-
-    left: 50%;
-    top: 285px;
-
-    width: 130px;
-    height: 55px;
-
-    transform:
-        translateX(-50%);
-
-    clip-path:
-        polygon(
-            18% 0,
-            82% 0,
-            100% 100%,
-            0 100%
+        linear-gradient(
+            180deg,
+            rgba(255,182,219,.16),
+            transparent
         );
+
+    border-radius: 30px;
+}
+
+
+/* arms */
+
+.girl-arm {
+
+    position: absolute;
+
+    top: 138px;
+
+    width: 30px;
+
+    height: 120px;
+
+    border-radius: 25px;
 
     background:
         linear-gradient(
             90deg,
-            #29222e,
-            #443044,
-            #29222e
+            #211428,
+            #382038
         );
+
+    z-index: 5;
 }
 
+.girl-arm.left {
 
-/* legs */
-
-.girl-leg {
-
-    position: absolute;
-
-    top: 320px;
-
-    width: 24px;
-    height: 43px;
-
-    background:
-        #1d1922;
-
-    border-radius:
-        0 0 12px 12px;
-}
-
-
-.girl-leg.left {
-    left: 66px;
-}
-
-
-.girl-leg.right {
-    right: 66px;
-}
-
-
-/* shoes */
-
-.girl-shoe {
-
-    position: absolute;
-
-    bottom: 0;
-
-    width: 48px;
-    height: 20px;
-
-    background:
-        #18151d;
-
-    border-radius:
-        20px 20px 8px 8px;
-}
-
-
-.girl-shoe.left {
-    left: 45px;
-}
-
-
-.girl-shoe.right {
-    right: 45px;
-}
-
-
-/* =========================================================
-   WIND GLOW
-========================================================= */
-
-.wind-glow {
-
-    position: absolute;
-
-    width: 600px;
-    height: 180px;
-
-    left: 50%;
-    bottom: 25%;
+    left: 27px;
 
     transform:
-        translateX(-50%);
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(255,195,224,.16),
-            transparent 70%
-        );
-
-    filter:
-        blur(20px);
-
-    animation:
-        windGlow 5s ease-in-out infinite;
+        rotate(8deg);
 }
 
+.girl-arm.right {
 
-@keyframes windGlow {
+    right: 27px;
 
-    0%,
-    100% {
-        transform:
-            translateX(-50%)
-            scaleX(1);
-    }
-
-    50% {
-        transform:
-            translateX(-50%)
-            scaleX(1.12);
-    }
+    transform:
+        rotate(-8deg);
 }
 
 
 /* =========================================================
-   SAKURA PETALS
+   WIND PETALS
 ========================================================= */
+
+.petals {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 7;
+}
 
 .petal {
 
     position: absolute;
 
-    top: -40px;
+    width: 12px;
+    height: 8px;
 
-    color:
-        rgba(255,211,229,.9);
+    border-radius:
+        70% 30% 70% 30%;
 
-    font-size:
-        17px;
+    background:
+        #ffc3df;
 
-    z-index: 10;
+    opacity: .8;
+
+    filter:
+        drop-shadow(
+            0 2px 4px
+            rgba(255,140,190,.25)
+        );
 
     animation:
-        petalFall linear infinite;
+        petalWind linear infinite;
 }
 
-
-@keyframes petalFall {
+@keyframes petalWind {
 
     0% {
 
         transform:
-            translate3d(0,-10vh,0)
+            translate(
+                -10vw,
+                -10vh
+            )
             rotate(0deg);
 
         opacity: 0;
@@ -1123,10 +1011,9 @@ body {
     50% {
 
         transform:
-            translate3d(
-                80px,
-                50vh,
-                0
+            translate(
+                45vw,
+                40vh
             )
             rotate(180deg);
     }
@@ -1134,15 +1021,46 @@ body {
     100% {
 
         transform:
-            translate3d(
-                -80px,
-                115vh,
-                0
+            translate(
+                115vw,
+                90vh
             )
-            rotate(360deg);
+            rotate(420deg);
 
         opacity: 0;
     }
+}
+
+
+/* =========================================================
+   DARK OVERLAY
+========================================================= */
+
+.scene-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(20,12,26,.42),
+            transparent 28%,
+            transparent 72%,
+            rgba(20,12,26,.30)
+        ),
+
+        linear-gradient(
+            0deg,
+            rgba(15,9,21,.45),
+            transparent 35%
+        );
+
+    z-index: 8;
+
+    pointer-events: none;
 }
 
 
@@ -1153,64 +1071,31 @@ body {
 .glass {
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(255,255,255,.30),
-            rgba(255,255,255,.10)
+            rgba(255,255,255,.14),
+            rgba(255,255,255,.055)
         );
 
     border:
         1px solid
-        rgba(255,255,255,.48);
+        rgba(255,255,255,.20);
 
     backdrop-filter:
-        blur(28px)
-        saturate(150%);
+        blur(24px)
+        saturate(125%);
 
     -webkit-backdrop-filter:
-        blur(28px)
-        saturate(150%);
+        blur(24px)
+        saturate(125%);
 
     box-shadow:
 
-        inset
-        0 1px 0
-        rgba(255,255,255,.65),
-
-        inset
-        0 -1px 0
-        rgba(255,255,255,.10),
-
         0 25px 80px
-        rgba(58,25,52,.22);
+        rgba(15,8,25,.28),
 
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-.glass::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-
-        linear-gradient(
-            120deg,
-            rgba(255,255,255,.22),
-            transparent 35%,
-            transparent 65%,
-            rgba(255,255,255,.06)
-        );
-
-    pointer-events:
-        none;
+        inset 0 1px 0
+        rgba(255,255,255,.18);
 }
 
 
@@ -1221,6 +1106,7 @@ body {
 #introScreen {
 
     position: fixed;
+
     inset: 0;
 
     z-index: 9999;
@@ -1228,22 +1114,21 @@ body {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     background:
 
         radial-gradient(
             circle at center,
-            #f6b5d4,
-            #a85f8d 48%,
-            #302536 100%
+            #693c61,
+            #160d1c 70%
         );
 
     transition:
         opacity .8s ease,
         visibility .8s ease;
 }
-
 
 #introScreen.hide {
 
@@ -1252,99 +1137,65 @@ body {
     visibility: hidden;
 }
 
-
 .intro-content {
 
     text-align: center;
 
     animation:
-        introAppear 1.2s ease;
+        introIn 1.1s ease;
 }
-
 
 .intro-logo {
 
-    width: 110px;
-    height: 110px;
+    width: 105px;
+    height: 105px;
 
     margin:
-        auto auto 22px;
+        0 auto 22px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 35px;
+    border-radius: 32px;
 
-    font-size: 60px;
+    font-size: 56px;
 
     background:
 
         linear-gradient(
             135deg,
-            #ff75b7,
-            #b36cff
+            #ff82bd,
+            #a974ff
         );
 
     box-shadow:
-
-        0 0 60px
-        rgba(255,105,180,.55);
+        0 0 70px
+        rgba(255,120,190,.5);
 
     animation:
-        logoPulse 2s ease-in-out infinite;
+        introPulse 2s ease-in-out infinite;
 }
-
 
 .intro-title {
 
-    font-size: 46px;
+    font-size: 48px;
 
-    font-weight: 800;
+    font-weight: 850;
 
-    letter-spacing:
-        -2px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #fff,
-            #ffd0e8,
-            #ead2ff,
-            #fff
-        );
-
-    background-size:
-        250% auto;
-
-    -webkit-background-clip:
-        text;
-
-    background-clip:
-        text;
-
-    color:
-        transparent;
-
-    animation:
-        gradientMove 3s linear infinite;
+    letter-spacing: -2px;
 }
-
 
 .intro-subtitle {
 
-    margin-top: 10px;
+    margin-top: 9px;
 
     color:
-        rgba(255,255,255,.75);
-
-    font-size: 15px;
+        rgba(255,255,255,.62);
 }
 
-
-@keyframes introAppear {
+@keyframes introIn {
 
     from {
 
@@ -1365,8 +1216,7 @@ body {
     }
 }
 
-
-@keyframes logoPulse {
+@keyframes introPulse {
 
     0%,
     100% {
@@ -1374,16 +1224,7 @@ body {
     }
 
     50% {
-        transform: scale(1.08);
-    }
-}
-
-
-@keyframes gradientMove {
-
-    to {
-        background-position:
-            250% center;
+        transform: scale(1.06);
     }
 }
 
@@ -1397,11 +1238,13 @@ body {
     position: relative;
 
     width: 100%;
+
     height: 100vh;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     z-index: 20;
@@ -1409,7 +1252,7 @@ body {
 
 
 /* =========================================================
-   LOGIN CARD
+   LOGIN / NAME CARD
 ========================================================= */
 
 .card {
@@ -1418,29 +1261,25 @@ body {
 
     max-width: 92%;
 
-    padding:
-        42px 35px;
+    padding: 42px 36px;
 
-    border-radius:
-        32px;
+    border-radius: 32px;
 
-    text-align:
-        center;
+    text-align: center;
 
     animation:
-        cardAppear .8s ease;
+        cardIn .7s ease;
 }
 
-
-@keyframes cardAppear {
+@keyframes cardIn {
 
     from {
 
         opacity: 0;
 
         transform:
-            translateY(35px)
-            scale(.94);
+            translateY(30px)
+            scale(.95);
     }
 
     to {
@@ -1453,11 +1292,10 @@ body {
     }
 }
 
-
 .logo {
 
-    width: 88px;
-    height: 88px;
+    width: 82px;
+    height: 82px;
 
     margin:
         0 auto 20px;
@@ -1467,52 +1305,37 @@ body {
     align-items: center;
     justify-content: center;
 
-    border-radius:
-        28px;
+    border-radius: 26px;
 
-    font-size:
-        48px;
+    font-size: 45px;
 
     background:
-
         linear-gradient(
             135deg,
-            #ff70b5,
-            #a56cff
+            #ff72b5,
+            #a86cff
         );
 
     box-shadow:
-        0 15px 45px
+        0 15px 50px
         rgba(255,105,180,.35);
-
-    animation:
-        logoPulse 3s ease-in-out infinite;
 }
 
+.card h1 {
 
-h1 {
+    font-size: 34px;
 
-    font-size:
-        34px;
-
-    margin-bottom:
-        9px;
-
-    letter-spacing:
-        -.8px;
+    margin-bottom: 10px;
 }
-
 
 .card p {
 
     color:
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.68);
 
-    margin-bottom:
-        25px;
+    line-height: 1.6;
 
-    line-height:
-        1.6;
+    margin-bottom: 25px;
 }
 
 
@@ -1524,91 +1347,73 @@ input {
 
     width: 100%;
 
-    padding:
-        16px 18px;
+    padding: 15px 17px;
 
     border:
         1px solid
-        rgba(255,255,255,.25);
+        rgba(255,255,255,.14);
 
-    border-radius:
-        16px;
+    border-radius: 16px;
 
     background:
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.09);
 
-    color:
-        white;
+    color: white;
 
-    font-size:
-        16px;
+    outline: none;
 
-    outline:
-        none;
+    font-size: 16px;
 
-    transition:
-        .25s;
+    transition: .25s;
 }
-
 
 input::placeholder {
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.42);
 }
-
 
 input:focus {
 
     border-color:
-        rgba(255,112,180,.8);
+        rgba(255,145,205,.7);
 
     box-shadow:
         0 0 0 4px
-        rgba(255,112,180,.12);
+        rgba(255,125,190,.12);
 }
 
 
 /* =========================================================
-   BUTTON
+   BUTTONS
 ========================================================= */
 
 button {
 
     border: none;
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
-    padding:
-        15px 20px;
+    padding: 14px 20px;
+
+    color: white;
 
     background:
-
         linear-gradient(
             135deg,
-            #ff6eae,
-            #b06cff
+            #ff6daf,
+            #a96cff
         );
 
-    color:
-        white;
+    font-weight: 750;
 
-    font-size:
-        15px;
-
-    font-weight:
-        700;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
-        transform .2s,
-        box-shadow .2s,
-        opacity .2s;
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
 }
-
 
 button:hover {
 
@@ -1616,10 +1421,9 @@ button:hover {
         translateY(-2px);
 
     box-shadow:
-        0 10px 30px
-        rgba(255,105,180,.3);
+        0 12px 35px
+        rgba(255,105,180,.25);
 }
-
 
 button:active {
 
@@ -1627,24 +1431,19 @@ button:active {
         scale(.97);
 }
 
-
 button:disabled {
 
-    opacity:
-        .5;
+    opacity: .5;
 
     cursor:
         not-allowed;
 }
 
-
 #startButton {
 
-    width:
-        100%;
+    width: 100%;
 
-    margin-top:
-        14px;
+    margin-top: 14px;
 }
 
 
@@ -1654,68 +1453,51 @@ button:disabled {
 
 #googleLogin {
 
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    margin-top:
-        20px;
+    margin-top: 20px;
 }
-
 
 .google-button {
 
-    width:
-        100%;
+    width: 100%;
 
     background:
-        rgba(255,255,255,.15);
+        rgba(255,255,255,.10);
 
     border:
         1px solid
-        rgba(255,255,255,.3);
+        rgba(255,255,255,.16);
 
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.35);
+    box-shadow: none;
 }
-
 
 .google-button:hover {
 
     background:
-        rgba(255,255,255,.22);
-}
+        rgba(255,255,255,.16);
 
+    box-shadow: none;
+}
 
 .account-info {
 
-    margin-top:
-        16px;
+    margin-top: 15px;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.42);
 }
-
 
 .error {
 
+    margin-top: 14px;
+
     color:
-        #ffd0dc;
+        #ff9fba;
 
-    margin-top:
-        15px;
+    font-size: 13px;
 
-    font-size:
-        13px;
-
-    white-space:
-        pre-wrap;
+    white-space: pre-wrap;
 }
 
 
@@ -1725,20 +1507,15 @@ button:disabled {
 
 #chatScreen {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        100vh;
+    height: 100vh;
 
-    z-index:
-        20;
+    z-index: 20;
 
-    display:
-        none;
+    display: none;
 }
 
 
@@ -1748,384 +1525,253 @@ button:disabled {
 
 .sidebar {
 
-    position:
-        fixed;
+    position: fixed;
 
-    left:
-        18px;
+    left: 18px;
 
-    top:
-        18px;
+    top: 18px;
 
-    bottom:
-        18px;
+    bottom: 18px;
 
-    width:
-        245px;
+    width: 245px;
 
-    border-radius:
-        27px;
+    padding: 20px;
 
-    padding:
-        20px;
+    border-radius: 27px;
 
-    z-index:
-        30;
+    z-index: 50;
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.30),
-            rgba(255,255,255,.09)
-        );
-
-    backdrop-filter:
-        blur(32px)
-        saturate(160%);
-
-    -webkit-backdrop-filter:
-        blur(32px)
-        saturate(160%);
-
-    border:
-        1px solid
-        rgba(255,255,255,.42);
-
-    box-shadow:
-
-        inset
-        0 1px 0
-        rgba(255,255,255,.6),
-
-        0 25px 70px
-        rgba(50,20,45,.25);
-
-    transition:
-        transform .3s ease;
+    flex-direction: column;
 }
-
 
 .sidebar-brand {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        12px;
+    gap: 12px;
 
     padding:
-        7px 5px 25px;
+        5px 5px 25px;
 }
-
 
 .sidebar-brand-icon {
 
-    width:
-        45px;
+    width: 45px;
+    height: 45px;
 
-    height:
-        45px;
+    display: flex;
 
-    border-radius:
-        15px;
+    align-items: center;
+    justify-content: center;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    border-radius: 15px;
 
     background:
-
         linear-gradient(
             135deg,
             #ff6eae,
             #a86cff
         );
 
-    font-size:
-        24px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(255,105,180,.25);
+    font-size: 23px;
 }
-
 
 .sidebar-brand strong {
 
-    font-size:
-        18px;
+    font-size: 18px;
 }
-
 
 .sidebar-brand small {
 
-    display:
-        block;
+    display: block;
+
+    margin-top: 2px;
 
     color:
-        rgba(255,255,255,.55);
-
-    margin-top:
-        2px;
+        rgba(255,255,255,.48);
 }
-
 
 .sidebar-section {
 
     margin:
         8px 0 9px 7px;
 
-    font-size:
-        11px;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
-
     color:
-        rgba(255,255,255,.45);
-}
+        rgba(255,255,255,.40);
 
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
 
 .sidebar-button {
 
-    width:
-        100%;
+    width: 100%;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        12px;
+    gap: 12px;
 
-    padding:
-        13px 14px;
+    padding: 13px 14px;
 
-    margin-bottom:
-        6px;
+    margin-bottom: 5px;
 
-    background:
-        transparent;
+    border-radius: 14px;
+
+    background: transparent;
 
     color:
         rgba(255,255,255,.78);
 
-    text-align:
-        left;
+    text-align: left;
 
-    border-radius:
-        14px;
-
-    box-shadow:
-        none;
-
-    font-weight:
-        600;
+    box-shadow: none;
 }
-
 
 .sidebar-button:hover {
 
+    transform: none;
+
     background:
-        rgba(255,255,255,.13);
+        rgba(255,255,255,.09);
 
-    box-shadow:
-        none;
-
-    transform:
-        none;
-
-    color:
-        white;
+    box-shadow: none;
 }
-
 
 .sidebar-button.active {
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(255,105,180,.28),
-            rgba(170,100,255,.22)
+            rgba(255,112,180,.28),
+            rgba(170,100,255,.20)
         );
 
-    color:
-        white;
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.2);
+    color: white;
 }
-
 
 .sidebar-spacer {
 
-    flex:
-        1;
+    flex: 1;
 }
-
 
 .voice-status {
 
-    padding:
-        12px;
+    padding: 12px;
 
-    margin-bottom:
-        12px;
+    margin-bottom: 10px;
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.06);
 
     border:
         1px solid
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.08);
 
     color:
-        rgba(255,255,255,.62);
+        rgba(255,255,255,.56);
 
-    font-size:
-        12px;
+    font-size: 11px;
 
-    line-height:
-        1.5;
+    line-height: 1.5;
 }
-
 
 .voice-status strong {
 
     color:
-        #ffd0e7;
+        #ffb9da;
 }
 
 
 /* =========================================================
-   MAIN CHAT
+   MAIN
 ========================================================= */
 
 .chat-main {
 
-    height:
-        100vh;
+    height: 100vh;
 
-    margin-left:
-        281px;
+    margin-left: 281px;
 
-    position:
-        relative;
+    position: relative;
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 }
-
 
 .chat-header {
 
-    height:
-        75px;
+    height: 75px;
 
-    flex-shrink:
-        0;
+    flex-shrink: 0;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
     padding:
-        0 28px;
+        0 30px;
+
+    background:
+        rgba(25,14,30,.25);
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.18);
-
-    background:
-        rgba(90,50,80,.18);
+        rgba(255,255,255,.09);
 
     backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
+        blur(20px);
 }
-
 
 .chat-title {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        10px;
+    gap: 10px;
 
-    font-weight:
-        800;
+    font-size: 18px;
 
-    font-size:
-        18px;
+    font-weight: 800;
 }
-
 
 .online-dot {
 
-    width:
-        8px;
+    width: 8px;
+    height: 8px;
 
-    height:
-        8px;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
-        #75f0a6;
+        #78f2a5;
 
     box-shadow:
         0 0 12px
-        #75f0a6;
+        #78f2a5;
 }
-
 
 .user-info {
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.55);
 
-    font-size:
-        12px;
+    font-size: 12px;
 }
 
 
@@ -2135,41 +1781,32 @@ button:disabled {
 
 #messages {
 
-    flex:
-        1;
+    flex: 1;
 
-    overflow-y:
-        auto;
+    overflow-y: auto;
 
     padding:
         30px 7% 140px;
 
-    scroll-behavior:
-        smooth;
+    scroll-behavior: smooth;
 }
-
 
 #messages::-webkit-scrollbar {
 
-    width:
-        7px;
+    width: 6px;
 }
-
 
 #messages::-webkit-scrollbar-thumb {
 
     background:
-        rgba(255,255,255,.18);
+        rgba(255,255,255,.13);
 
-    border-radius:
-        20px;
+    border-radius: 20px;
 }
-
 
 .message {
 
-    max-width:
-        72%;
+    max-width: 72%;
 
     padding:
         13px 17px;
@@ -2177,42 +1814,32 @@ button:disabled {
     margin:
         10px 0;
 
-    border-radius:
-        21px;
+    border-radius: 21px;
 
-    line-height:
-        1.55;
+    line-height: 1.55;
 
-    white-space:
-        pre-wrap;
+    white-space: pre-wrap;
 
-    word-wrap:
-        break-word;
+    word-wrap: break-word;
 
     animation:
         messageIn .3s ease;
-
-    position:
-        relative;
 }
-
 
 @keyframes messageIn {
 
     from {
 
-        opacity:
-            0;
+        opacity: 0;
 
         transform:
-            translateY(10px)
+            translateY(9px)
             scale(.98);
     }
 
     to {
 
-        opacity:
-            1;
+        opacity: 1;
 
         transform:
             translateY(0)
@@ -2220,157 +1847,96 @@ button:disabled {
     }
 }
 
-
 .message.user {
 
-    margin-left:
-        auto;
+    margin-left: auto;
 
     background:
-
         linear-gradient(
             135deg,
-            #ff6ba9,
+            #ff6baa,
             #a76cff
         );
 
-    border-bottom-right-radius:
-        7px;
+    border-bottom-right-radius: 7px;
 
     box-shadow:
-        0 8px 30px
-        rgba(255,105,180,.2);
+        0 10px 30px
+        rgba(255,105,180,.17);
 }
-
 
 .message.ai {
 
-    margin-right:
-        auto;
+    margin-right: auto;
 
     background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.30),
-            rgba(255,255,255,.12)
-        );
-
-    backdrop-filter:
-        blur(22px)
-        saturate(145%);
-
-    -webkit-backdrop-filter:
-        blur(22px)
-        saturate(145%);
+        rgba(255,255,255,.09);
 
     border:
         1px solid
-        rgba(255,255,255,.35);
+        rgba(255,255,255,.10);
 
-    border-bottom-left-radius:
-        7px;
+    border-bottom-left-radius: 7px;
 
-    box-shadow:
-
-        inset
-        0 1px 0
-        rgba(255,255,255,.45),
-
-        0 10px 30px
-        rgba(70,30,60,.12);
+    backdrop-filter:
+        blur(15px);
 }
-
 
 .typing {
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.55);
 
-    font-style:
-        italic;
+    font-style: italic;
 }
 
 
 /* =========================================================
-   INPUT AREA
+   INPUT
 ========================================================= */
 
 .input-area {
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    right:
-        0;
+    display: flex;
 
-    bottom:
-        0;
+    gap: 10px;
 
     padding:
         18px 7% 22px;
 
-    display:
-        flex;
-
-    gap:
-        10px;
+    z-index: 40;
 
     background:
-
         linear-gradient(
             to top,
-            rgba(55,35,52,.72),
-            rgba(55,35,52,.35),
+            rgba(19,11,26,.92),
+            rgba(19,11,26,.55),
             transparent
         );
-
-    backdrop-filter:
-        blur(15px);
-
-    z-index:
-        20;
 }
-
 
 .input-area input {
 
-    flex:
-        1;
+    flex: 1;
 
-    min-width:
-        0;
-
-    margin:
-        0;
+    min-width: 0;
 
     background:
-        rgba(255,255,255,.14);
+        rgba(255,255,255,.10);
 
     backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.3);
-
-    box-shadow:
-        inset
-        0 1px 0
-        rgba(255,255,255,.3);
+        blur(22px);
 }
-
 
 .input-area button {
 
-    width:
-        105px;
+    width: 95px;
 }
 
 
@@ -2380,38 +1946,21 @@ button:disabled {
 
 .mobile-menu {
 
-    display:
-        none;
+    display: none;
 
-    position:
-        fixed;
+    position: fixed;
 
-    left:
-        16px;
+    top: 15px;
+    left: 15px;
 
-    top:
-        16px;
+    width: 45px;
+    height: 45px;
 
-    z-index:
-        100;
+    padding: 0;
 
-    width:
-        45px;
+    border-radius: 14px;
 
-    height:
-        45px;
-
-    padding:
-        0;
-
-    border-radius:
-        14px;
-
-    background:
-        rgba(255,255,255,.2);
-
-    backdrop-filter:
-        blur(20px);
+    z-index: 100;
 }
 
 
@@ -2421,85 +1970,63 @@ button:disabled {
 
 .modal {
 
-    position:
-        fixed;
+    position: fixed;
 
-    inset:
-        0;
+    inset: 0;
 
-    z-index:
-        200;
+    z-index: 200;
 
-    display:
-        none;
+    display: none;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        20px;
+    padding: 20px;
 
     background:
-        rgba(30,15,30,.48);
+        rgba(8,4,12,.60);
 
     backdrop-filter:
         blur(12px);
 }
 
-
 .modal.show {
 
-    display:
-        flex;
+    display: flex;
 }
-
 
 .modal-card {
 
-    width:
-        440px;
+    width: 440px;
 
-    max-width:
-        100%;
+    max-width: 100%;
 
-    padding:
-        30px;
+    padding: 30px;
 
-    border-radius:
-        25px;
-
-    animation:
-        cardAppear .3s ease;
+    border-radius: 25px;
 }
-
 
 .modal-card h2 {
 
-    margin-bottom:
-        12px;
+    margin-bottom: 13px;
 }
-
 
 .modal-card p {
 
     color:
-        rgba(255,255,255,.7);
+        rgba(255,255,255,.68);
 
-    line-height:
-        1.6;
+    line-height: 1.65;
 
-    margin-bottom:
-        20px;
+    margin-bottom: 20px;
+
+    white-space: pre-wrap;
 }
-
 
 .modal-close {
 
-    width:
-        100%;
+    width: 100%;
 }
 
 
@@ -2512,18 +2039,17 @@ button:disabled {
     .sidebar {
 
         transform:
-            translateX(-115%);
+            translateX(-120%);
 
-        top:
-            12px;
+        left: 12px;
 
-        bottom:
-            12px;
+        top: 12px;
 
-        left:
-            12px;
+        bottom: 12px;
+
+        transition:
+            transform .3s ease;
     }
-
 
     .sidebar.open {
 
@@ -2531,99 +2057,72 @@ button:disabled {
             translateX(0);
 
         box-shadow:
-            0 20px 70px
-            rgba(30,15,30,.55);
+            0 25px 80px
+            rgba(0,0,0,.55);
     }
-
 
     .mobile-menu {
 
-        display:
-            flex;
+        display: flex;
 
-        align-items:
-            center;
-
-        justify-content:
-            center;
+        align-items: center;
+        justify-content: center;
     }
-
 
     .chat-main {
 
-        margin-left:
-            0;
+        margin-left: 0;
     }
-
 
     .chat-header {
 
-        padding-left:
-            75px;
+        padding-left: 75px;
     }
-
 
     #messages {
 
-        padding-left:
-            18px;
-
-        padding-right:
-            18px;
+        padding-left: 18px;
+        padding-right: 18px;
     }
-
 
     .input-area {
 
-        padding-left:
-            15px;
-
-        padding-right:
-            15px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-
 
     .message {
 
-        max-width:
-            86%;
+        max-width: 86%;
     }
-
 
     .girl {
 
         transform:
             translateX(-50%)
-            scale(.8);
+            scale(.78);
 
         transform-origin:
             bottom center;
     }
 
+    .mount-fuji {
 
-    .fuji {
+        transform:
+            translateX(-50%)
+            scale(.72);
 
-        width:
-            320px;
-
-        height:
-            220px;
+        transform-origin:
+            bottom center;
     }
 
+    .tree {
 
-    .moon {
+        transform:
+            scale(.75);
 
-        width:
-            80px;
-
-        height:
-            80px;
-
-        right:
-            10%;
-
-        top:
-            9%;
+        transform-origin:
+            bottom;
     }
 }
 
@@ -2636,50 +2135,49 @@ button:disabled {
             32px 22px;
     }
 
-
     .intro-title {
 
-        font-size:
-            38px;
+        font-size: 38px;
     }
-
-
-    .input-area button {
-
-        width:
-            78px;
-    }
-
 
     .user-info {
 
-        display:
-            none;
+        display: none;
     }
 
+    .input-area button {
 
-    .girl {
-
-        opacity:
-            .75;
+        width: 75px;
     }
 
+    .moon {
 
-    .tree {
+        width: 85px;
+        height: 85px;
 
-        transform:
-            scale(.72);
-
-        transform-origin:
-            bottom;
+        right: 9%;
     }
+}
 
 
-    .tree.right {
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-        transform:
-            scaleX(-1)
-            scale(.72);
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
     }
 }
 
@@ -2692,129 +2190,132 @@ button:disabled {
 
 
 <!-- =========================================================
-     JAPANESE SCENERY
+     CINEMATIC BACKGROUND
 ========================================================= -->
 
 <div class="background">
 
+    <div class="sky-light"></div>
+
     <div class="moon"></div>
 
-    <div class="mist"></div>
-
-    <div class="mountain mountain-back"></div>
-
-    <div class="fuji"></div>
-
-    <div class="mountain mountain-middle"></div>
-
-    <div class="mountain mountain-front"></div>
-
-    <div class="ground"></div>
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
 
 
-    <div class="wind-glow"></div>
+    <div class="mountains">
+
+        <div class="mountain far left"></div>
+
+        <div class="mountain far middle"></div>
+
+        <div class="mountain far right"></div>
+
+        <div class="mount-fuji"></div>
+
+        <div class="fog"></div>
+
+        <div class="ground"></div>
+
+    </div>
 
 
-    <!-- LEFT TREE -->
+    <!-- distant village -->
+
+    <div class="village">
+
+        <span class="house-light"
+              style="left:31%;top:38%;"></span>
+
+        <span class="house-light"
+              style="left:35%;top:50%;animation-delay:.8s;"></span>
+
+        <span class="house-light"
+              style="left:40%;top:32%;animation-delay:1.2s;"></span>
+
+        <span class="house-light"
+              style="left:61%;top:42%;animation-delay:.5s;"></span>
+
+        <span class="house-light"
+              style="left:67%;top:28%;animation-delay:1.5s;"></span>
+
+        <span class="house-light"
+              style="left:72%;top:48%;animation-delay:2s;"></span>
+
+    </div>
+
+
+    <!-- LEFT SAKURA TREE -->
 
     <div class="tree left">
 
-        <div class="tree-trunk"></div>
+        <div class="trunk"></div>
 
         <div class="branch one"></div>
         <div class="branch two"></div>
         <div class="branch three"></div>
-        <div class="branch four"></div>
 
-        <div class="leaves a"></div>
-        <div class="leaves b"></div>
-        <div class="leaves c"></div>
-        <div class="leaves d"></div>
+        <div class="blossoms">
+
+            <div class="blossom"
+                 style="left:0;top:55px;"></div>
+
+            <div class="blossom"
+                 style="left:55px;top:25px;animation-delay:.5s;"></div>
+
+            <div class="blossom"
+                 style="left:110px;top:75px;animation-delay:1s;"></div>
+
+            <div class="blossom"
+                 style="left:30px;top:135px;animation-delay:1.5s;"></div>
+
+            <div class="blossom"
+                 style="left:95px;top:155px;animation-delay:2s;"></div>
+
+            <div class="blossom"
+                 style="left:120px;top:30px;animation-delay:2.5s;"></div>
+
+        </div>
 
     </div>
 
 
-    <!-- RIGHT TREE -->
+    <!-- RIGHT SAKURA TREE -->
 
     <div class="tree right">
 
-        <div class="tree-trunk"></div>
+        <div class="trunk"></div>
 
         <div class="branch one"></div>
         <div class="branch two"></div>
         <div class="branch three"></div>
-        <div class="branch four"></div>
 
-        <div class="leaves a"></div>
-        <div class="leaves b"></div>
-        <div class="leaves c"></div>
-        <div class="leaves d"></div>
+        <div class="blossoms">
+
+            <div class="blossom"
+                 style="left:0;top:55px;"></div>
+
+            <div class="blossom"
+                 style="left:55px;top:25px;animation-delay:.5s;"></div>
+
+            <div class="blossom"
+                 style="left:110px;top:75px;animation-delay:1s;"></div>
+
+            <div class="blossom"
+                 style="left:30px;top:135px;animation-delay:1.5s;"></div>
+
+            <div class="blossom"
+                 style="left:95px;top:155px;animation-delay:2s;"></div>
+
+            <div class="blossom"
+                 style="left:120px;top:30px;animation-delay:2.5s;"></div>
+
+        </div>
 
     </div>
 
 
-    <!-- WIND LEAVES -->
-
-    <div class="wind-leaf"
-         style="left:-5%;top:30%;animation-delay:1s;">
-        🍃
-    </div>
-
-    <div class="wind-leaf"
-         style="left:15%;top:55%;animation-delay:4s;">
-        🍃
-    </div>
-
-    <div class="wind-leaf"
-         style="left:40%;top:38%;animation-delay:7s;">
-        🍂
-    </div>
-
-    <div class="wind-leaf"
-         style="left:65%;top:58%;animation-delay:2s;">
-        🍃
-    </div>
-
-
-    <!-- SAKURA PETALS -->
-
-    <div class="petal"
-         style="left:4%;animation-duration:12s;animation-delay:0s;">
-        🌸
-    </div>
-
-    <div class="petal"
-         style="left:14%;animation-duration:15s;animation-delay:2s;">
-        ✿
-    </div>
-
-    <div class="petal"
-         style="left:27%;animation-duration:11s;animation-delay:5s;">
-        🌸
-    </div>
-
-    <div class="petal"
-         style="left:42%;animation-duration:16s;animation-delay:1s;">
-        ✿
-    </div>
-
-    <div class="petal"
-         style="left:58%;animation-duration:13s;animation-delay:4s;">
-        🌸
-    </div>
-
-    <div class="petal"
-         style="left:72%;animation-duration:17s;animation-delay:3s;">
-        ✿
-    </div>
-
-    <div class="petal"
-         style="left:86%;animation-duration:12s;animation-delay:6s;">
-        🌸
-    </div>
-
-
-    <!-- GIRL BACK VIEW -->
+    <!-- ANIME GIRL -->
 
     <div class="girl">
 
@@ -2824,15 +2325,48 @@ button:disabled {
 
         <div class="girl-body"></div>
 
-        <div class="girl-skirt"></div>
+        <div class="girl-arm left"></div>
 
-        <div class="girl-leg left"></div>
-        <div class="girl-leg right"></div>
-
-        <div class="girl-shoe left"></div>
-        <div class="girl-shoe right"></div>
+        <div class="girl-arm right"></div>
 
     </div>
+
+
+    <!-- PETALS -->
+
+    <div class="petals">
+
+        <span class="petal"
+              style="left:3%;top:10%;animation-duration:12s;"></span>
+
+        <span class="petal"
+              style="left:12%;top:20%;animation-duration:15s;animation-delay:2s;"></span>
+
+        <span class="petal"
+              style="left:22%;top:3%;animation-duration:13s;animation-delay:4s;"></span>
+
+        <span class="petal"
+              style="left:34%;top:15%;animation-duration:17s;animation-delay:1s;"></span>
+
+        <span class="petal"
+              style="left:45%;top:5%;animation-duration:14s;animation-delay:5s;"></span>
+
+        <span class="petal"
+              style="left:57%;top:18%;animation-duration:16s;animation-delay:3s;"></span>
+
+        <span class="petal"
+              style="left:68%;top:8%;animation-duration:12s;animation-delay:6s;"></span>
+
+        <span class="petal"
+              style="left:80%;top:25%;animation-duration:18s;animation-delay:2s;"></span>
+
+        <span class="petal"
+              style="left:92%;top:12%;animation-duration:14s;animation-delay:4s;"></span>
+
+    </div>
+
+
+    <div class="scene-overlay"></div>
 
 </div>
 
@@ -2946,7 +2480,7 @@ button:disabled {
 <div id="chatScreen">
 
 
-    <!-- MOBILE MENU -->
+    <!-- MOBILE -->
 
     <button
         id="mobileMenu"
@@ -2957,12 +2491,12 @@ button:disabled {
     </button>
 
 
-
     <!-- SIDEBAR -->
 
     <aside
         id="sidebar"
-        class="sidebar">
+        class="sidebar glass">
+
 
         <div class="sidebar-brand">
 
@@ -3209,8 +2743,7 @@ const AI_WORKER_URL =
 
 import {
     initializeApp
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
@@ -3220,8 +2753,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
     signOut
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
@@ -3284,7 +2816,7 @@ let voiceEnabled =
 
 
 /* =========================================================
-   ARIA VOICE
+   VOICE
 ========================================================= */
 
 const FLAVI_VOICE_NAME =
@@ -3296,14 +2828,12 @@ function loadFlaviVoice() {
     const voices =
         speechSynthesis.getVoices();
 
-
     flaviVoice =
         voices.find(
             voice =>
                 voice.name ===
                 FLAVI_VOICE_NAME
         ) || null;
-
 }
 
 
@@ -3316,10 +2846,6 @@ speechSynthesis.addEventListener(
 loadFlaviVoice();
 
 
-/* =========================================================
-   SPEAK
-========================================================= */
-
 function speakFlavi(text) {
 
     if (!voiceEnabled)
@@ -3328,48 +2854,32 @@ function speakFlavi(text) {
     if (!text)
         return;
 
-
     loadFlaviVoice();
 
-
-    if (!flaviVoice) {
-
-        console.warn(
-            "Microsoft Aria Online is unavailable."
-        );
-
+    if (!flaviVoice)
         return;
-    }
-
 
     speechSynthesis.cancel();
-
 
     const utterance =
         new SpeechSynthesisUtterance(
             text
         );
 
-
     utterance.voice =
         flaviVoice;
-
 
     utterance.lang =
         "en-US";
 
-
     utterance.rate =
-        0.92;
-
+        .92;
 
     utterance.pitch =
         1.12;
 
-
     utterance.volume =
-        1.0;
-
+        1;
 
     speechSynthesis.speak(
         utterance
@@ -3386,54 +2896,45 @@ const loginScreen =
         "loginScreen"
     );
 
-
 const nameScreen =
     document.getElementById(
         "nameScreen"
     );
-
 
 const chatScreen =
     document.getElementById(
         "chatScreen"
     );
 
-
 const nameInput =
     document.getElementById(
         "nameInput"
     );
-
 
 const messageInput =
     document.getElementById(
         "messageInput"
     );
 
-
 const sendButton =
     document.getElementById(
         "sendButton"
     );
-
 
 const loginError =
     document.getElementById(
         "loginError"
     );
 
-
 const userInfo =
     document.getElementById(
         "userInfo"
     );
 
-
 const messages =
     document.getElementById(
         "messages"
     );
-
 
 const sidebar =
     document.getElementById(
@@ -3442,7 +2943,7 @@ const sidebar =
 
 
 /* =========================================================
-   GOOGLE BUTTON
+   GOOGLE LOGIN BUTTON
 ========================================================= */
 
 const googleButton =
@@ -3450,20 +2951,16 @@ const googleButton =
         "button"
     );
 
-
 googleButton.className =
     "google-button";
 
-
 googleButton.textContent =
     "🔵 Continue with Google";
-
 
 googleButton.addEventListener(
     "click",
     loginWithGoogle
 );
-
 
 document
     .getElementById(
@@ -3473,10 +2970,6 @@ document
         googleButton
     );
 
-
-/* =========================================================
-   GOOGLE LOGIN
-========================================================= */
 
 async function loginWithGoogle() {
 
@@ -3489,7 +2982,6 @@ async function loginWithGoogle() {
     googleButton.textContent =
         "Signing in... 🌸";
 
-
     try {
 
         const result =
@@ -3498,14 +2990,11 @@ async function loginWithGoogle() {
                 provider
             );
 
-
         currentUser =
             result.user;
 
-
         await currentUser
             .getIdToken(true);
-
 
         if (
             currentUser.displayName
@@ -3515,25 +3004,20 @@ async function loginWithGoogle() {
                 currentUser.displayName;
         }
 
-
         showNameScreen();
 
     }
 
-
     catch (error) {
 
         console.error(
-            "Google login error:",
             error
         );
-
 
         loginError.textContent =
             "Google Sign-In failed.\n\n" +
             error.message;
     }
-
 
     finally {
 
@@ -3547,12 +3031,12 @@ async function loginWithGoogle() {
 
 
 /* =========================================================
-   AUTH
+   AUTH STATE
 ========================================================= */
 
 onAuthStateChanged(
     auth,
-    async function(user) {
+    async user => {
 
         if (!user) {
 
@@ -3652,6 +3136,7 @@ function showChatScreen() {
 
         userInfo.textContent =
             currentUser.email || "";
+
     }
 }
 
@@ -3678,9 +3163,7 @@ function saveName() {
 
     if (!name) {
 
-        alert(
-            "Please enter your name."
-        );
+        nameInput.focus();
 
         return;
     }
@@ -3707,18 +3190,13 @@ function saveName() {
         const greeting =
             `Hi ${userName}! 🌸 I'm Flavi. Nice to meet you!`;
 
-
         addMessage(
             "ai",
             greeting
         );
 
-
         setTimeout(
-            () =>
-                speakFlavi(
-                    greeting
-                ),
+            () => speakFlavi(greeting),
             500
         );
     }
@@ -3738,6 +3216,23 @@ document
     );
 
 
+nameInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            saveName();
+
+        }
+
+    }
+);
+
+
 /* =========================================================
    ADD MESSAGE
 ========================================================= */
@@ -3752,19 +3247,15 @@ function addMessage(
             "div"
         );
 
-
     div.className =
         "message " + type;
-
 
     div.textContent =
         text;
 
-
     messages.appendChild(
         div
     );
-
 
     messages.scrollTop =
         messages.scrollHeight;
@@ -3772,7 +3263,7 @@ function addMessage(
 
 
 /* =========================================================
-   TOKEN
+   FIREBASE TOKEN
 ========================================================= */
 
 async function getFreshFirebaseToken(
@@ -3806,7 +3297,7 @@ async function getFreshFirebaseToken(
 
 
 /* =========================================================
-   WORKER
+   CALL FLAVI WORKER
 ========================================================= */
 
 async function callFlaviWorker(
@@ -3847,7 +3338,9 @@ async function callFlaviWorker(
 
                         idToken:
                             idToken
+
                     })
+
             }
         );
 
@@ -3862,23 +3355,26 @@ async function callFlaviWorker(
     try {
 
         data =
-            JSON.parse(raw);
+            JSON.parse(
+                raw
+            );
 
     }
 
     catch {
 
-        data = null;
+        data =
+            null;
+
     }
 
 
     return {
 
         response,
-
         raw,
-
         data
+
     };
 }
 
@@ -3982,10 +3478,8 @@ async function sendMessage() {
 
 
         if (
-            result.response.status ===
-                401 ||
-            result.response.status ===
-                403
+            result.response.status === 401 ||
+            result.response.status === 403
         ) {
 
             addMessage(
@@ -4049,11 +3543,9 @@ async function sendMessage() {
 
     }
 
-
     catch (error) {
 
         console.error(
-            "Flavi connection error:",
             error
         );
 
@@ -4066,7 +3558,6 @@ async function sendMessage() {
             "Unable to connect to Flavi's AI brain 😭\n\n" +
             error.message
         );
-
     }
 
 
@@ -4083,13 +3574,15 @@ async function sendMessage() {
 }
 
 
-/* =========================================================
-   ENTER
-========================================================= */
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
+
 
 messageInput.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (
             event.key ===
@@ -4105,12 +3598,6 @@ messageInput.addEventListener(
 );
 
 
-sendButton.addEventListener(
-    "click",
-    sendMessage
-);
-
-
 /* =========================================================
    NEW CHAT
 ========================================================= */
@@ -4121,28 +3608,25 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             messages.innerHTML =
                 "";
 
-
             const greeting =
                 `Hey ${userName || "there"}! 🌸 I'm Flavi. What's on your mind?`;
-
 
             addMessage(
                 "ai",
                 greeting
             );
 
-
             speakFlavi(
                 greeting
             );
 
-
             messageInput.focus();
+
         }
     );
 
@@ -4157,25 +3641,23 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             messages.innerHTML =
                 "";
 
-
             const greeting =
                 `Chat cleared 🌸 I'm still here, ${userName || "friend"}!`;
-
 
             addMessage(
                 "ai",
                 greeting
             );
 
-
             speakFlavi(
                 greeting
             );
+
         }
     );
 
@@ -4190,7 +3672,7 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             voiceEnabled =
                 !voiceEnabled;
@@ -4206,9 +3688,9 @@ document
 
                 speechSynthesis.cancel();
 
-
-                alert(
-                    "Flavi voice is now OFF 🔇"
+                showModal(
+                    "🔇 Flavi Voice",
+                    "Flavi's voice is now OFF."
                 );
 
             }
@@ -4218,9 +3700,13 @@ document
                 const test =
                     `Hi ${userName || "Pragatheesh"}! 🌸`;
 
-
                 speakFlavi(
                     test
+                );
+
+                showModal(
+                    "🎀 Flavi Voice",
+                    "Flavi's voice is now ON.\n\nMicrosoft Aria Online is selected when available."
                 );
             }
 
@@ -4238,12 +3724,11 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             showModal(
                 "🧠 My Memories",
-
-                "Your memories are managed by Flavi's existing D1 memory system. You can use Flavi's memory commands in chat, such as /remember."
+                "Flavi's D1 memory system is connected.\n\nYou can use commands such as:\n\n/remember TEXT\n/memories\n/forget ID\n/clear\n/help"
             );
 
         }
@@ -4260,12 +3745,11 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             showModal(
                 "📢 Announcements",
-
-                "Your existing announcements system is connected through your Flavi backend. Owner announcements can continue to be managed using your existing owner commands."
+                "Announcements are managed by your Flavi backend.\n\nOwner commands:\n\n/announce TEXT\n/announcements\n/deleteannouncement ID"
             );
 
         }
@@ -4282,10 +3766,11 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             window.location.href =
                 "about.html";
+
         }
     );
 
@@ -4299,12 +3784,10 @@ const modal =
         "modal"
     );
 
-
 const modalTitle =
     document.getElementById(
         "modalTitle"
     );
-
 
 const modalText =
     document.getElementById(
@@ -4335,18 +3818,19 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             modal.classList.remove(
                 "show"
             );
+
         }
     );
 
 
 modal.addEventListener(
     "click",
-    function(event) {
+    event => {
 
         if (
             event.target ===
@@ -4356,7 +3840,9 @@ modal.addEventListener(
             modal.classList.remove(
                 "show"
             );
+
         }
+
     }
 );
 
@@ -4371,11 +3857,12 @@ document
     )
     .addEventListener(
         "click",
-        function() {
+        () => {
 
             sidebar.classList.toggle(
                 "open"
             );
+
         }
     );
 
@@ -4389,7 +3876,7 @@ document
 
             button.addEventListener(
                 "click",
-                function() {
+                () => {
 
                     if (
                         window.innerWidth <=
@@ -4418,7 +3905,7 @@ document
     )
     .addEventListener(
         "click",
-        async function() {
+        async () => {
 
             speechSynthesis.cancel();
 
@@ -4433,21 +3920,17 @@ document
                 currentUser =
                     null;
 
-
                 userName =
                     "";
-
 
                 localStorage.removeItem(
                     "flavi_user_name"
                 );
 
-
                 messages.innerHTML =
                     "";
 
             }
-
 
             catch (error) {
 
@@ -4455,6 +3938,7 @@ document
                     "Sign out error:",
                     error
                 );
+
             }
 
         }
@@ -4471,13 +3955,12 @@ document
 <script>
 
 setTimeout(
-    function() {
+    () => {
 
         const intro =
             document.getElementById(
                 "introScreen"
             );
-
 
         intro.classList.add(
             "hide"
@@ -4491,4 +3974,5 @@ setTimeout(
 
 
 </body>
+
 </html>
