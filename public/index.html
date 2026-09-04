@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +15,10 @@
       content="Flavi AI - A friendly AI companion created by Pragatheesh.">
 
 <meta name="theme-color"
-      content="#ff9fc7">
+      content="#e889b8">
 
 <title>Flavi AI — Your Friendly AI Companion</title>
+
 
 <style>
 
@@ -46,29 +46,28 @@ body {
         Arial,
         sans-serif;
 
-    color: #5a2140;
+    color: white;
+
+    overflow: hidden;
 
     background:
         linear-gradient(
             180deg,
-            #ffd6e7 0%,
-            #ffc2dc 35%,
-            #ffacd0 70%,
-            #ff9fc7 100%
+            #f7b8d5 0%,
+            #d98db6 35%,
+            #8f638d 65%,
+            #42394f 100%
         );
-
-    overflow: hidden;
 }
 
 
 /* =========================================================
-   JAPANESE SAKURA BACKGROUND 🌸
+   JAPANESE SCENERY BACKGROUND
 ========================================================= */
 
 .background {
 
     position: fixed;
-
     inset: 0;
 
     overflow: hidden;
@@ -80,21 +79,23 @@ body {
     background:
 
         radial-gradient(
-            circle at 50% 12%,
-            rgba(255,255,255,.72),
+            circle at 76% 17%,
+            rgba(255,255,255,.7),
+            transparent 5%
+        ),
+
+        radial-gradient(
+            circle at 70% 25%,
+            rgba(255,183,216,.35),
             transparent 25%
         ),
 
-        radial-gradient(
-            circle at 10% 60%,
-            rgba(255,255,255,.25),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 90% 70%,
-            rgba(255,255,255,.25),
-            transparent 30%
+        linear-gradient(
+            180deg,
+            #f7bfd9 0%,
+            #df9abb 35%,
+            #a66e93 58%,
+            #51445b 100%
         );
 }
 
@@ -103,25 +104,29 @@ body {
    MOON
 ========================================================= */
 
-.background::before {
-
-    content: "🌕";
+.moon {
 
     position: absolute;
 
-    right: 9%;
+    width: 120px;
+    height: 120px;
 
-    top: 7%;
+    right: 13%;
+    top: 11%;
 
-    font-size: 85px;
+    border-radius: 50%;
 
-    opacity: .72;
-
-    filter:
-        drop-shadow(
-            0 0 35px
-            rgba(255,255,255,.8)
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #ffeaf4 55%,
+            #ffd3e7 100%
         );
+
+    box-shadow:
+        0 0 35px rgba(255,255,255,.7),
+        0 0 100px rgba(255,200,225,.45);
 
     animation:
         moonFloat 7s ease-in-out infinite;
@@ -131,190 +136,559 @@ body {
 
     0%,
     100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================================
+   DISTANT MIST
+========================================================= */
+
+.mist {
+
+    position: absolute;
+
+    left: -10%;
+    right: -10%;
+
+    height: 180px;
+
+    bottom: 29%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,225,239,.22),
+            transparent 65%
+        );
+
+    filter: blur(20px);
+
+    animation:
+        mistMove 18s ease-in-out infinite;
+}
+
+@keyframes mistMove {
+
+    0%,
+    100% {
+        transform: translateX(-2%);
+    }
+
+    50% {
+        transform: translateX(3%);
+    }
+}
+
+
+/* =========================================================
+   MOUNTAINS
+========================================================= */
+
+.mountain {
+
+    position: absolute;
+
+    left: -10%;
+    width: 120%;
+
+    bottom: 0;
+
+    transform-origin: bottom center;
+}
+
+
+/* far mountains */
+
+.mountain-back {
+
+    height: 47%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 0 17%,
+            rgba(103,76,105,.75) 17.2% 26%,
+            transparent 26.2% 31%,
+            rgba(112,82,112,.72) 31.2% 42%,
+            transparent 42.2% 48%,
+            rgba(94,72,101,.76) 48.2% 60%,
+            transparent 60.2%
+        );
+
+    opacity: .75;
+
+    filter: blur(1px);
+}
+
+
+/* middle mountains */
+
+.mountain-middle {
+
+    height: 38%;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            transparent 0 12%,
+            #72546e 12.2% 28%,
+            transparent 28.2% 36%,
+            #654d68 36.2% 52%,
+            transparent 52.2% 59%,
+            #74536e 59.2% 78%,
+            transparent 78.2%
+        );
+
+    opacity: .9;
+}
+
+
+/* foreground mountain */
+
+.mountain-front {
+
+    height: 29%;
+
+    background:
+
+        linear-gradient(
+            150deg,
+            transparent 0 7%,
+            #40394e 7.2% 31%,
+            transparent 31.2% 38%,
+            #363342 38.2% 67%,
+            transparent 67.2% 73%,
+            #433746 73.2% 100%
+        );
+
+    filter:
+        drop-shadow(
+            0 -10px 20px
+            rgba(35,20,35,.25)
+        );
+}
+
+
+/* =========================================================
+   MOUNT FUJI SNOW CAP
+========================================================= */
+
+.fuji {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 27%;
+
+    width: 420px;
+    height: 290px;
+
+    transform:
+        translateX(-50%);
+
+    clip-path:
+        polygon(
+            50% 0%,
+            61% 27%,
+            74% 47%,
+            100% 100%,
+            0% 100%,
+            26% 47%,
+            39% 27%
+        );
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #66506d,
+            #3e374b 80%
+        );
+
+    opacity: .9;
+
+    filter:
+        drop-shadow(
+            0 15px 25px
+            rgba(40,25,45,.25)
+        );
+}
+
+
+.fuji::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 125px;
+    height: 100px;
+
+    transform:
+        translateX(-50%);
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            0 100%
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.95),
+            rgba(255,226,239,.8)
+        );
+}
+
+
+/* =========================================================
+   GROUND
+========================================================= */
+
+.ground {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 25%;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(48,37,49,.3),
+            #292532
+        );
+
+    box-shadow:
+        inset 0 25px 40px
+        rgba(255,180,215,.08);
+}
+
+
+/* =========================================================
+   TREE SYSTEM
+========================================================= */
+
+.tree {
+
+    position: absolute;
+
+    bottom: 7%;
+
+    width: 210px;
+    height: 530px;
+
+    transform-origin:
+        bottom center;
+
+    z-index: 4;
+
+    animation:
+        treeSway 4.5s ease-in-out infinite;
+}
+
+
+.tree.left {
+    left: -20px;
+}
+
+
+.tree.right {
+    right: -20px;
+
+    transform:
+        scaleX(-1);
+
+    animation-delay:
+        -1.7s;
+}
+
+
+@keyframes treeSway {
+
+    0%,
+    100% {
         transform:
-            translateY(0)
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            rotate(2deg);
+    }
+}
+
+
+/* trunk */
+
+.tree-trunk {
+
+    position: absolute;
+
+    left: 96px;
+    bottom: 0;
+
+    width: 25px;
+    height: 380px;
+
+    border-radius:
+        50% 50% 10% 10%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #2b2028,
+            #51323b,
+            #241c25
+        );
+
+    transform:
+        rotate(3deg);
+
+    box-shadow:
+        8px 0 20px
+        rgba(20,10,20,.25);
+}
+
+
+/* branches */
+
+.branch {
+
+    position: absolute;
+
+    height: 15px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2a2029,
+            #4b3039
+        );
+
+    transform-origin:
+        left center;
+}
+
+
+.branch.one {
+
+    width: 190px;
+
+    left: 95px;
+    bottom: 285px;
+
+    transform:
+        rotate(-34deg);
+}
+
+
+.branch.two {
+
+    width: 155px;
+
+    left: 105px;
+    bottom: 230px;
+
+    transform:
+        rotate(27deg);
+}
+
+
+.branch.three {
+
+    width: 135px;
+
+    left: 100px;
+    bottom: 170px;
+
+    transform:
+        rotate(-28deg);
+}
+
+
+.branch.four {
+
+    width: 125px;
+
+    left: 104px;
+    bottom: 330px;
+
+    transform:
+        rotate(25deg);
+}
+
+
+/* leaves */
+
+.leaves {
+
+    position: absolute;
+
+    width: 115px;
+    height: 115px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 35%,
+            rgba(105,63,83,.9),
+            transparent 45%
+        ),
+
+        radial-gradient(
+            circle at 65% 45%,
+            rgba(62,48,65,.95),
+            transparent 55%
+        ),
+
+        radial-gradient(
+            circle at 50% 70%,
+            rgba(80,53,72,.95),
+            transparent 55%
+        );
+
+    filter:
+        blur(.2px);
+
+    animation:
+        leafSway 3.5s ease-in-out infinite;
+}
+
+
+.leaves.a {
+    left: 10px;
+    top: 90px;
+}
+
+
+.leaves.b {
+    left: 80px;
+    top: 125px;
+
+    width: 135px;
+    height: 120px;
+
+    animation-delay:
+        -.8s;
+}
+
+
+.leaves.c {
+    left: 5px;
+    top: 210px;
+
+    width: 125px;
+    height: 115px;
+
+    animation-delay:
+        -1.5s;
+}
+
+
+.leaves.d {
+    left: 95px;
+    top: 245px;
+
+    width: 115px;
+    height: 105px;
+
+    animation-delay:
+        -2s;
+}
+
+
+@keyframes leafSway {
+
+    0%,
+    100% {
+        transform:
+            translateX(0)
             rotate(0deg);
     }
 
     50% {
         transform:
-            translateY(-12px)
-            rotate(4deg);
+            translateX(9px)
+            rotate(3deg);
     }
 }
 
 
 /* =========================================================
-   TORII GATE
+   SMALL WIND LEAVES
 ========================================================= */
 
-.background::after {
-
-    content: "⛩️";
+.wind-leaf {
 
     position: absolute;
-
-    left: 50%;
-
-    bottom: -25px;
-
-    transform:
-        translateX(-50%);
-
-    font-size: 170px;
-
-    opacity: .10;
-
-    filter:
-        blur(.4px);
-
-}
-
-
-/* =========================================================
-   SOFT BLOBS
-========================================================= */
-
-.blob {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    filter:
-        blur(80px);
-
-    opacity: .48;
-
-    animation:
-        japanBlob 13s ease-in-out infinite;
-}
-
-
-.blob.one {
-
-    width: 350px;
-    height: 350px;
-
-    left: -130px;
-
-    top: 8%;
-
-    background:
-        #ff6fae;
-}
-
-
-.blob.two {
-
-    width: 420px;
-    height: 420px;
-
-    right: -150px;
-
-    top: 28%;
-
-    background:
-        #ff82b9;
-
-    animation-delay:
-        -4s;
-}
-
-
-.blob.three {
-
-    width: 320px;
-    height: 320px;
-
-    left: 40%;
-
-    bottom: -140px;
-
-    background:
-        #ffd9e8;
-
-    animation-delay:
-        -7s;
-}
-
-
-@keyframes japanBlob {
-
-    0%,
-    100% {
-
-        transform:
-            translate(0,0)
-            scale(1);
-    }
-
-    50% {
-
-        transform:
-            translate(40px,-35px)
-            scale(1.13);
-    }
-}
-
-
-/* =========================================================
-   FLOATING SAKURA
-========================================================= */
-
-.particle {
-
-    position: absolute;
-
-    top: -60px;
-
-    color:
-        rgba(255,255,255,.92);
 
     font-size: 18px;
 
-    text-shadow:
-        0 3px 15px
-        rgba(255,70,140,.35);
+    color:
+        rgba(255,205,228,.75);
 
     animation:
-        sakuraFall linear infinite;
+        windLeaf 9s linear infinite;
+
+    z-index: 7;
 }
 
-
-@keyframes sakuraFall {
+@keyframes windLeaf {
 
     0% {
 
         transform:
-            translateY(-10vh)
-            translateX(0)
+            translateX(-10vw)
+            translateY(15vh)
             rotate(0deg);
 
         opacity: 0;
     }
 
     10% {
-        opacity: .95;
+        opacity: .8;
     }
 
     50% {
 
         transform:
-            translateY(50vh)
-            translateX(75px)
+            translateX(50vw)
+            translateY(-3vh)
             rotate(180deg);
     }
 
     90% {
-        opacity: .9;
+        opacity: .8;
     }
 
     100% {
 
         transform:
-            translateY(115vh)
-            translateX(-50px)
+            translateX(115vw)
+            translateY(13vh)
             rotate(360deg);
 
         opacity: 0;
@@ -323,27 +697,452 @@ body {
 
 
 /* =========================================================
-   EXTRA LIGHT GLOW
+   GIRL — BACK VIEW
 ========================================================= */
 
-body::before {
+.girl {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 4%;
+
+    width: 180px;
+    height: 360px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 9;
+
+    filter:
+        drop-shadow(
+            0 15px 20px
+            rgba(15,10,20,.35)
+        );
+}
+
+
+/* hair */
+
+.girl-hair {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 25px;
+
+    width: 92px;
+    height: 125px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        48% 48% 42% 42%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #17151c,
+            #302331 48%,
+            #121018
+        );
+
+    box-shadow:
+        12px 15px 0
+        rgba(15,12,18,.25);
+
+    animation:
+        hairWind 3.5s ease-in-out infinite;
+}
+
+
+@keyframes hairWind {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            translateX(-46%)
+            rotate(3deg);
+    }
+}
+
+
+/* hair strands */
+
+.girl-hair::before {
 
     content: "";
 
-    position: fixed;
+    position: absolute;
 
-    inset: 0;
+    left: -25px;
+    top: 35px;
 
-    pointer-events: none;
+    width: 35px;
+    height: 145px;
 
-    z-index: 1;
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #141119,
+            #30232f
+        );
+
+    transform:
+        rotate(8deg);
+}
+
+
+.girl-hair::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: -22px;
+    top: 35px;
+
+    width: 34px;
+    height: 150px;
+
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #30232f,
+            #141119
+        );
+
+    transform:
+        rotate(-7deg);
+}
+
+
+/* neck */
+
+.girl-neck {
+
+    position: absolute;
+
+    left: 50%;
+    top: 133px;
+
+    width: 27px;
+    height: 30px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #d98fae,
+            #efb0c8,
+            #c97d9d
+        );
+
+    border-radius:
+        0 0 12px 12px;
+}
+
+
+/* body / hoodie */
+
+.girl-body {
+
+    position: absolute;
+
+    left: 50%;
+    top: 150px;
+
+    width: 112px;
+    height: 165px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #29222e,
+            #493245 48%,
+            #25202b
+        );
+
+    border-radius:
+        40px 40px 20px 20px;
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(255,170,210,.07);
+}
+
+
+/* shoulders */
+
+.girl-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -24px;
+    top: 4px;
+
+    width: 55px;
+    height: 135px;
+
+    border-radius:
+        40px;
+
+    background:
+        #302530;
+
+    transform:
+        rotate(7deg);
+}
+
+
+.girl-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: -24px;
+    top: 4px;
+
+    width: 55px;
+    height: 135px;
+
+    border-radius:
+        40px;
+
+    background:
+        #302530;
+
+    transform:
+        rotate(-7deg);
+}
+
+
+/* skirt */
+
+.girl-skirt {
+
+    position: absolute;
+
+    left: 50%;
+    top: 285px;
+
+    width: 130px;
+    height: 55px;
+
+    transform:
+        translateX(-50%);
+
+    clip-path:
+        polygon(
+            18% 0,
+            82% 0,
+            100% 100%,
+            0 100%
+        );
+
+    background:
+        linear-gradient(
+            90deg,
+            #29222e,
+            #443044,
+            #29222e
+        );
+}
+
+
+/* legs */
+
+.girl-leg {
+
+    position: absolute;
+
+    top: 320px;
+
+    width: 24px;
+    height: 43px;
+
+    background:
+        #1d1922;
+
+    border-radius:
+        0 0 12px 12px;
+}
+
+
+.girl-leg.left {
+    left: 66px;
+}
+
+
+.girl-leg.right {
+    right: 66px;
+}
+
+
+/* shoes */
+
+.girl-shoe {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 48px;
+    height: 20px;
+
+    background:
+        #18151d;
+
+    border-radius:
+        20px 20px 8px 8px;
+}
+
+
+.girl-shoe.left {
+    left: 45px;
+}
+
+
+.girl-shoe.right {
+    right: 45px;
+}
+
+
+/* =========================================================
+   WIND GLOW
+========================================================= */
+
+.wind-glow {
+
+    position: absolute;
+
+    width: 600px;
+    height: 180px;
+
+    left: 50%;
+    bottom: 25%;
+
+    transform:
+        translateX(-50%);
 
     background:
         radial-gradient(
-            circle at 50% 50%,
-            rgba(255,255,255,.12),
-            transparent 55%
+            ellipse,
+            rgba(255,195,224,.16),
+            transparent 70%
         );
+
+    filter:
+        blur(20px);
+
+    animation:
+        windGlow 5s ease-in-out infinite;
+}
+
+
+@keyframes windGlow {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            scaleX(1);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            scaleX(1.12);
+    }
+}
+
+
+/* =========================================================
+   SAKURA PETALS
+========================================================= */
+
+.petal {
+
+    position: absolute;
+
+    top: -40px;
+
+    color:
+        rgba(255,211,229,.9);
+
+    font-size:
+        17px;
+
+    z-index: 10;
+
+    animation:
+        petalFall linear infinite;
+}
+
+
+@keyframes petalFall {
+
+    0% {
+
+        transform:
+            translate3d(0,-10vh,0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .9;
+    }
+
+    50% {
+
+        transform:
+            translate3d(
+                80px,
+                50vh,
+                0
+            )
+            rotate(180deg);
+    }
+
+    100% {
+
+        transform:
+            translate3d(
+                -80px,
+                115vh,
+                0
+            )
+            rotate(360deg);
+
+        opacity: 0;
+    }
 }
 
 
@@ -354,21 +1153,64 @@ body::before {
 .glass {
 
     background:
-        rgba(255,255,255,.46);
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.30),
+            rgba(255,255,255,.10)
+        );
 
     border:
         1px solid
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.48);
 
     backdrop-filter:
-        blur(28px);
+        blur(28px)
+        saturate(150%);
 
     -webkit-backdrop-filter:
-        blur(28px);
+        blur(28px)
+        saturate(150%);
 
     box-shadow:
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.65),
+
+        inset
+        0 -1px 0
+        rgba(255,255,255,.10),
+
         0 25px 80px
-        rgba(180,50,105,.14);
+        rgba(58,25,52,.22);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.glass::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.22),
+            transparent 35%,
+            transparent 65%,
+            rgba(255,255,255,.06)
+        );
+
+    pointer-events:
+        none;
 }
 
 
@@ -379,7 +1221,6 @@ body::before {
 #introScreen {
 
     position: fixed;
-
     inset: 0;
 
     z-index: 9999;
@@ -387,16 +1228,15 @@ body::before {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background:
 
         radial-gradient(
             circle at center,
-            #ffe7f1,
-            #ffc1dc 55%,
-            #ff9fc7
+            #f6b5d4,
+            #a85f8d 48%,
+            #302536 100%
         );
 
     transition:
@@ -425,7 +1265,6 @@ body::before {
 .intro-logo {
 
     width: 110px;
-
     height: 110px;
 
     margin:
@@ -434,7 +1273,6 @@ body::before {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 35px;
@@ -445,13 +1283,14 @@ body::before {
 
         linear-gradient(
             135deg,
-            #ff73ae,
-            #ff9bc7
+            #ff75b7,
+            #b36cff
         );
 
     box-shadow:
+
         0 0 60px
-        rgba(255,105,180,.42);
+        rgba(255,105,180,.55);
 
     animation:
         logoPulse 2s ease-in-out infinite;
@@ -464,25 +1303,30 @@ body::before {
 
     font-weight: 800;
 
-    letter-spacing: -2px;
+    letter-spacing:
+        -2px;
 
     background:
 
         linear-gradient(
             90deg,
-            #6b294b,
-            #ff4f98,
-            #8f4167,
-            #6b294b
+            #fff,
+            #ffd0e8,
+            #ead2ff,
+            #fff
         );
 
-    background-size: 250% auto;
+    background-size:
+        250% auto;
 
-    -webkit-background-clip: text;
+    -webkit-background-clip:
+        text;
 
-    background-clip: text;
+    background-clip:
+        text;
 
-    color: transparent;
+    color:
+        transparent;
 
     animation:
         gradientMove 3s linear infinite;
@@ -494,12 +1338,9 @@ body::before {
     margin-top: 10px;
 
     color:
-        rgba(90,33,64,.62);
+        rgba(255,255,255,.75);
 
     font-size: 15px;
-
-    animation:
-        fadeIn 1.5s ease;
 }
 
 
@@ -547,18 +1388,6 @@ body::before {
 }
 
 
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-
 /* =========================================================
    SCREENS
 ========================================================= */
@@ -568,16 +1397,14 @@ body::before {
     position: relative;
 
     width: 100%;
-
     height: 100vh;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    z-index: 2;
+    z-index: 20;
 }
 
 
@@ -591,11 +1418,14 @@ body::before {
 
     max-width: 92%;
 
-    padding: 42px 35px;
+    padding:
+        42px 35px;
 
-    border-radius: 32px;
+    border-radius:
+        32px;
 
-    text-align: center;
+    text-align:
+        center;
 
     animation:
         cardAppear .8s ease;
@@ -624,14 +1454,9 @@ body::before {
 }
 
 
-/* =========================================================
-   FLAVI LOGO
-========================================================= */
-
 .logo {
 
     width: 88px;
-
     height: 88px;
 
     margin:
@@ -640,24 +1465,25 @@ body::before {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    border-radius: 28px;
+    border-radius:
+        28px;
 
-    font-size: 48px;
+    font-size:
+        48px;
 
     background:
 
         linear-gradient(
             135deg,
-            #ff69a9,
-            #ff9bc7
+            #ff70b5,
+            #a56cff
         );
 
     box-shadow:
         0 15px 45px
-        rgba(255,105,180,.3);
+        rgba(255,105,180,.35);
 
     animation:
         logoPulse 3s ease-in-out infinite;
@@ -666,25 +1492,27 @@ body::before {
 
 h1 {
 
-    font-size: 34px;
+    font-size:
+        34px;
 
-    margin-bottom: 9px;
+    margin-bottom:
+        9px;
 
-    letter-spacing: -.8px;
-
-    color:
-        #5a2140;
+    letter-spacing:
+        -.8px;
 }
 
 
 .card p {
 
     color:
-        rgba(90,33,64,.62);
+        rgba(255,255,255,.72);
 
-    margin-bottom: 25px;
+    margin-bottom:
+        25px;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 }
 
 
@@ -696,82 +1524,84 @@ input {
 
     width: 100%;
 
-    padding: 16px 18px;
+    padding:
+        16px 18px;
 
     border:
         1px solid
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.25);
 
-    border-radius: 16px;
+    border-radius:
+        16px;
 
     background:
-        rgba(255,255,255,.58);
+        rgba(255,255,255,.12);
 
     color:
-        #5a2140;
+        white;
 
-    font-size: 16px;
+    font-size:
+        16px;
 
-    outline: none;
+    outline:
+        none;
 
     transition:
         .25s;
-
-    box-shadow:
-        0 8px 25px
-        rgba(180,50,105,.07);
 }
 
 
 input::placeholder {
 
     color:
-        rgba(90,33,64,.42);
+        rgba(255,255,255,.55);
 }
 
 
 input:focus {
 
     border-color:
-        rgba(255,70,145,.65);
+        rgba(255,112,180,.8);
 
     box-shadow:
-
         0 0 0 4px
-        rgba(255,112,180,.12),
-
-        0 10px 30px
-        rgba(180,50,105,.10);
+        rgba(255,112,180,.12);
 }
 
 
 /* =========================================================
-   BUTTONS
+   BUTTON
 ========================================================= */
 
 button {
 
     border: none;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
-    padding: 15px 20px;
+    padding:
+        15px 20px;
 
     background:
 
         linear-gradient(
             135deg,
-            #ff5fa3,
-            #ff91bf
+            #ff6eae,
+            #b06cff
         );
 
-    color: white;
+    color:
+        white;
 
-    font-size: 15px;
+    font-size:
+        15px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
         transform .2s,
@@ -786,9 +1616,8 @@ button:hover {
         translateY(-2px);
 
     box-shadow:
-
         0 10px 30px
-        rgba(255,105,180,.25);
+        rgba(255,105,180,.3);
 }
 
 
@@ -801,7 +1630,8 @@ button:active {
 
 button:disabled {
 
-    opacity: .5;
+    opacity:
+        .5;
 
     cursor:
         not-allowed;
@@ -810,9 +1640,11 @@ button:disabled {
 
 #startButton {
 
-    width: 100%;
+    width:
+        100%;
 
-    margin-top: 14px;
+    margin-top:
+        14px;
 }
 
 
@@ -822,66 +1654,68 @@ button:disabled {
 
 #googleLogin {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    margin-top: 20px;
+    margin-top:
+        20px;
 }
 
 
 .google-button {
 
-    width: 100%;
+    width:
+        100%;
 
     background:
-        rgba(255,255,255,.68);
-
-    color:
-        #5a2140;
+        rgba(255,255,255,.15);
 
     border:
         1px solid
-        rgba(255,255,255,.85);
+        rgba(255,255,255,.3);
 
     box-shadow:
-        0 8px 25px
-        rgba(180,50,105,.08);
+        inset 0 1px 0
+        rgba(255,255,255,.35);
 }
 
 
 .google-button:hover {
 
     background:
-        rgba(255,255,255,.82);
-
-    box-shadow:
-        0 12px 35px
-        rgba(180,50,105,.12);
+        rgba(255,255,255,.22);
 }
 
 
 .account-info {
 
-    margin-top: 16px;
+    margin-top:
+        16px;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
     color:
-        rgba(90,33,64,.45);
+        rgba(255,255,255,.55);
 }
 
 
 .error {
 
     color:
-        #d6336c;
+        #ffd0dc;
 
-    margin-top: 15px;
+    margin-top:
+        15px;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    white-space: pre-wrap;
+    white-space:
+        pre-wrap;
 }
 
 
@@ -891,15 +1725,20 @@ button:disabled {
 
 #chatScreen {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100vh;
+    height:
+        100vh;
 
-    z-index: 5;
+    z-index:
+        20;
 
-    display: none;
+    display:
+        none;
 }
 
 
@@ -909,41 +1748,80 @@ button:disabled {
 
 .sidebar {
 
-    position: fixed;
+    position:
+        fixed;
 
-    left: 18px;
+    left:
+        18px;
 
-    top: 18px;
+    top:
+        18px;
 
-    bottom: 18px;
+    bottom:
+        18px;
 
-    width: 245px;
+    width:
+        245px;
 
-    border-radius: 27px;
+    border-radius:
+        27px;
 
-    padding: 20px;
+    padding:
+        20px;
 
-    z-index: 30;
+    z-index:
+        30;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.30),
+            rgba(255,255,255,.09)
+        );
+
+    backdrop-filter:
+        blur(32px)
+        saturate(160%);
+
+    -webkit-backdrop-filter:
+        blur(32px)
+        saturate(160%);
+
+    border:
+        1px solid
+        rgba(255,255,255,.42);
+
+    box-shadow:
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.6),
+
+        0 25px 70px
+        rgba(50,20,45,.25);
 
     transition:
         transform .3s ease;
-
-    background:
-        rgba(255,255,255,.48);
 }
 
 
 .sidebar-brand {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        12px;
 
     padding:
         7px 5px 25px;
@@ -952,51 +1830,58 @@ button:disabled {
 
 .sidebar-brand-icon {
 
-    width: 45px;
+    width:
+        45px;
 
-    height: 45px;
+    height:
+        45px;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
 
         linear-gradient(
             135deg,
-            #ff62a5,
-            #ff9ac7
+            #ff6eae,
+            #a86cff
         );
 
-    font-size: 24px;
+    font-size:
+        24px;
 
     box-shadow:
-        0 8px 22px
-        rgba(255,90,160,.18);
+        0 8px 25px
+        rgba(255,105,180,.25);
 }
 
 
 .sidebar-brand strong {
 
-    font-size: 18px;
-
-    color:
-        #5a2140;
+    font-size:
+        18px;
 }
 
 
 .sidebar-brand small {
 
-    display: block;
+    display:
+        block;
 
     color:
-        rgba(90,33,64,.45);
+        rgba(255,255,255,.55);
 
-    margin-top: 2px;
+    margin-top:
+        2px;
 }
 
 
@@ -1005,58 +1890,73 @@ button:disabled {
     margin:
         8px 0 9px 7px;
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
     color:
-        rgba(90,33,64,.38);
+        rgba(255,255,255,.45);
 }
 
 
 .sidebar-button {
 
-    width: 100%;
+    width:
+        100%;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        12px;
 
-    padding: 13px 14px;
+    padding:
+        13px 14px;
 
-    margin-bottom: 6px;
+    margin-bottom:
+        6px;
 
     background:
         transparent;
 
     color:
-        rgba(90,33,64,.68);
+        rgba(255,255,255,.78);
 
-    text-align: left;
+    text-align:
+        left;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    box-shadow: none;
+    box-shadow:
+        none;
 
-    font-weight: 600;
+    font-weight:
+        600;
 }
 
 
 .sidebar-button:hover {
 
     background:
-        rgba(255,255,255,.45);
+        rgba(255,255,255,.13);
 
-    box-shadow: none;
+    box-shadow:
+        none;
 
-    transform: none;
+    transform:
+        none;
 
     color:
-        #5a2140;
+        white;
 }
 
 
@@ -1066,148 +1966,166 @@ button:disabled {
 
         linear-gradient(
             135deg,
-            rgba(255,105,180,.22),
-            rgba(255,255,255,.35)
+            rgba(255,105,180,.28),
+            rgba(170,100,255,.22)
         );
 
     color:
-        #8f2f5a;
+        white;
 
     box-shadow:
-        inset 0 0 0 1px
-        rgba(255,255,255,.35);
+        inset 0 1px 0
+        rgba(255,255,255,.2);
 }
 
 
 .sidebar-spacer {
 
-    flex: 1;
+    flex:
+        1;
 }
 
 
 .voice-status {
 
-    padding: 12px;
+    padding:
+        12px;
 
-    margin-bottom: 12px;
+    margin-bottom:
+        12px;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     background:
-        rgba(255,255,255,.34);
-
-    color:
-        rgba(90,33,64,.58);
-
-    font-size: 12px;
-
-    line-height: 1.5;
+        rgba(255,255,255,.08);
 
     border:
         1px solid
-        rgba(255,255,255,.45);
+        rgba(255,255,255,.12);
+
+    color:
+        rgba(255,255,255,.62);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.5;
 }
 
 
 .voice-status strong {
 
     color:
-        #d43d78;
+        #ffd0e7;
 }
 
 
 /* =========================================================
-   CHAT MAIN
+   MAIN CHAT
 ========================================================= */
 
 .chat-main {
 
-    height: 100vh;
+    height:
+        100vh;
 
-    margin-left: 281px;
+    margin-left:
+        281px;
 
-    position: relative;
+    position:
+        relative;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 }
 
 
-/* =========================================================
-   CHAT HEADER
-========================================================= */
-
 .chat-header {
 
-    height: 75px;
+    height:
+        75px;
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
     padding:
         0 28px;
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.45);
+        rgba(255,255,255,.18);
 
     background:
-        rgba(255,255,255,.22);
+        rgba(90,50,80,.18);
 
     backdrop-filter:
-        blur(20px);
+        blur(25px);
 
     -webkit-backdrop-filter:
-        blur(20px);
+        blur(25px);
 }
 
 
 .chat-title {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 10px;
+    gap:
+        10px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    font-size: 18px;
-
-    color:
-        #5a2140;
+    font-size:
+        18px;
 }
 
 
 .online-dot {
 
-    width: 8px;
+    width:
+        8px;
 
-    height: 8px;
+    height:
+        8px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
-        #45d98a;
+        #75f0a6;
 
     box-shadow:
         0 0 12px
-        rgba(69,217,138,.7);
+        #75f0a6;
 }
 
 
 .user-info {
 
     color:
-        rgba(90,33,64,.5);
+        rgba(255,255,255,.65);
 
-    font-size: 12px;
+    font-size:
+        12px;
 }
 
 
@@ -1217,27 +2135,31 @@ button:disabled {
 
 #messages {
 
-    flex: 1;
+    flex:
+        1;
 
-    overflow-y: auto;
+    overflow-y:
+        auto;
 
     padding:
         30px 7% 140px;
 
-    scroll-behavior: smooth;
+    scroll-behavior:
+        smooth;
 }
 
 
 #messages::-webkit-scrollbar {
 
-    width: 7px;
+    width:
+        7px;
 }
 
 
 #messages::-webkit-scrollbar-thumb {
 
     background:
-        rgba(180,50,105,.18);
+        rgba(255,255,255,.18);
 
     border-radius:
         20px;
@@ -1246,7 +2168,8 @@ button:disabled {
 
 .message {
 
-    max-width: 72%;
+    max-width:
+        72%;
 
     padding:
         13px 17px;
@@ -1254,18 +2177,23 @@ button:disabled {
     margin:
         10px 0;
 
-    border-radius: 21px;
+    border-radius:
+        21px;
 
-    line-height: 1.55;
+    line-height:
+        1.55;
 
-    white-space: pre-wrap;
+    white-space:
+        pre-wrap;
 
-    word-wrap: break-word;
+    word-wrap:
+        break-word;
 
     animation:
         messageIn .3s ease;
 
-    position: relative;
+    position:
+        relative;
 }
 
 
@@ -1273,7 +2201,8 @@ button:disabled {
 
     from {
 
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
             translateY(10px)
@@ -1282,7 +2211,8 @@ button:disabled {
 
     to {
 
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
             translateY(0)
@@ -1291,66 +2221,71 @@ button:disabled {
 }
 
 
-/* =========================================================
-   USER MESSAGE
-========================================================= */
-
 .message.user {
 
-    margin-left: auto;
+    margin-left:
+        auto;
 
     background:
 
         linear-gradient(
             135deg,
-            #ff579d,
-            #ff82b8
+            #ff6ba9,
+            #a76cff
         );
-
-    color:
-        white;
 
     border-bottom-right-radius:
         7px;
 
     box-shadow:
-
         0 8px 30px
-        rgba(255,105,180,.18);
+        rgba(255,105,180,.2);
 }
 
 
-/* =========================================================
-   AI MESSAGE
-========================================================= */
-
 .message.ai {
 
-    margin-right: auto;
+    margin-right:
+        auto;
 
     background:
-        rgba(255,255,255,.56);
 
-    color:
-        #5a2140;
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.30),
+            rgba(255,255,255,.12)
+        );
+
+    backdrop-filter:
+        blur(22px)
+        saturate(145%);
+
+    -webkit-backdrop-filter:
+        blur(22px)
+        saturate(145%);
 
     border:
         1px solid
-        rgba(255,255,255,.68);
+        rgba(255,255,255,.35);
 
     border-bottom-left-radius:
         7px;
 
     box-shadow:
-        0 7px 25px
-        rgba(180,50,105,.06);
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.45),
+
+        0 10px 30px
+        rgba(70,30,60,.12);
 }
 
 
 .typing {
 
     color:
-        rgba(90,33,64,.52);
+        rgba(255,255,255,.65);
 
     font-style:
         italic;
@@ -1363,44 +2298,57 @@ button:disabled {
 
 .input-area {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
+    left:
+        0;
 
-    right: 0;
+    right:
+        0;
 
-    bottom: 0;
+    bottom:
+        0;
 
     padding:
         18px 7% 22px;
 
-    display: flex;
+    display:
+        flex;
 
-    gap: 10px;
+    gap:
+        10px;
 
     background:
 
         linear-gradient(
             to top,
-            rgba(255,159,199,.96) 20%,
-            rgba(255,180,212,.82),
+            rgba(55,35,52,.72),
+            rgba(55,35,52,.35),
             transparent
         );
 
-    z-index: 20;
+    backdrop-filter:
+        blur(15px);
+
+    z-index:
+        20;
 }
 
 
 .input-area input {
 
-    flex: 1;
+    flex:
+        1;
 
-    min-width: 0;
+    min-width:
+        0;
 
-    margin: 0;
+    margin:
+        0;
 
     background:
-        rgba(255,255,255,.68);
+        rgba(255,255,255,.14);
 
     backdrop-filter:
         blur(20px);
@@ -1410,17 +2358,19 @@ button:disabled {
 
     border:
         1px solid
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.3);
 
     box-shadow:
-        0 10px 35px
-        rgba(180,50,105,.12);
+        inset
+        0 1px 0
+        rgba(255,255,255,.3);
 }
 
 
 .input-area button {
 
-    width: 105px;
+    width:
+        105px;
 }
 
 
@@ -1430,33 +2380,38 @@ button:disabled {
 
 .mobile-menu {
 
-    display: none;
+    display:
+        none;
 
-    position: fixed;
+    position:
+        fixed;
 
-    left: 16px;
+    left:
+        16px;
 
-    top: 16px;
+    top:
+        16px;
 
-    z-index: 100;
+    z-index:
+        100;
 
-    width: 45px;
+    width:
+        45px;
 
-    height: 45px;
+    height:
+        45px;
 
-    padding: 0;
+    padding:
+        0;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
     background:
-        rgba(255,255,255,.7);
+        rgba(255,255,255,.2);
 
-    color:
-        #8f2f5a;
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
+    backdrop-filter:
+        blur(20px);
 }
 
 
@@ -1466,46 +2421,55 @@ button:disabled {
 
 .modal {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 200;
+    z-index:
+        200;
 
-    display: none;
+    display:
+        none;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    padding: 20px;
+    padding:
+        20px;
 
     background:
-        rgba(130,40,80,.22);
+        rgba(30,15,30,.48);
 
     backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
         blur(12px);
 }
 
 
 .modal.show {
 
-    display: flex;
+    display:
+        flex;
 }
 
 
 .modal-card {
 
-    width: 440px;
+    width:
+        440px;
 
-    max-width: 100%;
+    max-width:
+        100%;
 
-    padding: 30px;
+    padding:
+        30px;
 
-    border-radius: 25px;
+    border-radius:
+        25px;
 
     animation:
         cardAppear .3s ease;
@@ -1514,27 +2478,28 @@ button:disabled {
 
 .modal-card h2 {
 
-    margin-bottom: 12px;
-
-    color:
-        #5a2140;
+    margin-bottom:
+        12px;
 }
 
 
 .modal-card p {
 
     color:
-        rgba(90,33,64,.62);
+        rgba(255,255,255,.7);
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 
-    margin-bottom: 20px;
+    margin-bottom:
+        20px;
 }
 
 
 .modal-close {
 
-    width: 100%;
+    width:
+        100%;
 }
 
 
@@ -1549,11 +2514,14 @@ button:disabled {
         transform:
             translateX(-115%);
 
-        top: 12px;
+        top:
+            12px;
 
-        bottom: 12px;
+        bottom:
+            12px;
 
-        left: 12px;
+        left:
+            12px;
     }
 
 
@@ -1564,23 +2532,27 @@ button:disabled {
 
         box-shadow:
             0 20px 70px
-            rgba(130,40,80,.25);
+            rgba(30,15,30,.55);
     }
 
 
     .mobile-menu {
 
-        display: flex;
+        display:
+            flex;
 
-        align-items: center;
+        align-items:
+            center;
 
-        justify-content: center;
+        justify-content:
+            center;
     }
 
 
     .chat-main {
 
-        margin-left: 0;
+        margin-left:
+            0;
     }
 
 
@@ -1593,23 +2565,65 @@ button:disabled {
 
     #messages {
 
-        padding-left: 18px;
+        padding-left:
+            18px;
 
-        padding-right: 18px;
+        padding-right:
+            18px;
     }
 
 
     .input-area {
 
-        padding-left: 15px;
+        padding-left:
+            15px;
 
-        padding-right: 15px;
+        padding-right:
+            15px;
     }
 
 
     .message {
 
-        max-width: 86%;
+        max-width:
+            86%;
+    }
+
+
+    .girl {
+
+        transform:
+            translateX(-50%)
+            scale(.8);
+
+        transform-origin:
+            bottom center;
+    }
+
+
+    .fuji {
+
+        width:
+            320px;
+
+        height:
+            220px;
+    }
+
+
+    .moon {
+
+        width:
+            80px;
+
+        height:
+            80px;
+
+        right:
+            10%;
+
+        top:
+            9%;
     }
 }
 
@@ -1625,57 +2639,47 @@ button:disabled {
 
     .intro-title {
 
-        font-size: 38px;
+        font-size:
+            38px;
     }
 
 
     .input-area button {
 
-        width: 78px;
+        width:
+            78px;
     }
 
 
     .user-info {
 
-        display: none;
+        display:
+            none;
     }
 
 
-    .background::before {
+    .girl {
 
-        right: 4%;
-
-        top: 5%;
-
-        font-size: 60px;
+        opacity:
+            .75;
     }
 
 
-    .background::after {
+    .tree {
 
-        font-size: 120px;
+        transform:
+            scale(.72);
+
+        transform-origin:
+            bottom;
     }
-}
 
 
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
+    .tree.right {
 
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        scroll-behavior:
-            auto !important;
+        transform:
+            scaleX(-1)
+            scale(.72);
     }
 }
 
@@ -1688,64 +2692,150 @@ button:disabled {
 
 
 <!-- =========================================================
-     JAPANESE BACKGROUND
+     JAPANESE SCENERY
 ========================================================= -->
 
 <div class="background">
 
-    <div class="blob one"></div>
+    <div class="moon"></div>
 
-    <div class="blob two"></div>
+    <div class="mist"></div>
 
-    <div class="blob three"></div>
+    <div class="mountain mountain-back"></div>
+
+    <div class="fuji"></div>
+
+    <div class="mountain mountain-middle"></div>
+
+    <div class="mountain mountain-front"></div>
+
+    <div class="ground"></div>
 
 
-    <div class="particle"
-         style="left:5%;animation-duration:11s;">
+    <div class="wind-glow"></div>
+
+
+    <!-- LEFT TREE -->
+
+    <div class="tree left">
+
+        <div class="tree-trunk"></div>
+
+        <div class="branch one"></div>
+        <div class="branch two"></div>
+        <div class="branch three"></div>
+        <div class="branch four"></div>
+
+        <div class="leaves a"></div>
+        <div class="leaves b"></div>
+        <div class="leaves c"></div>
+        <div class="leaves d"></div>
+
+    </div>
+
+
+    <!-- RIGHT TREE -->
+
+    <div class="tree right">
+
+        <div class="tree-trunk"></div>
+
+        <div class="branch one"></div>
+        <div class="branch two"></div>
+        <div class="branch three"></div>
+        <div class="branch four"></div>
+
+        <div class="leaves a"></div>
+        <div class="leaves b"></div>
+        <div class="leaves c"></div>
+        <div class="leaves d"></div>
+
+    </div>
+
+
+    <!-- WIND LEAVES -->
+
+    <div class="wind-leaf"
+         style="left:-5%;top:30%;animation-delay:1s;">
+        🍃
+    </div>
+
+    <div class="wind-leaf"
+         style="left:15%;top:55%;animation-delay:4s;">
+        🍃
+    </div>
+
+    <div class="wind-leaf"
+         style="left:40%;top:38%;animation-delay:7s;">
+        🍂
+    </div>
+
+    <div class="wind-leaf"
+         style="left:65%;top:58%;animation-delay:2s;">
+        🍃
+    </div>
+
+
+    <!-- SAKURA PETALS -->
+
+    <div class="petal"
+         style="left:4%;animation-duration:12s;animation-delay:0s;">
         🌸
     </div>
 
-    <div class="particle"
+    <div class="petal"
          style="left:14%;animation-duration:15s;animation-delay:2s;">
-        🌸
-    </div>
-
-    <div class="particle"
-         style="left:25%;animation-duration:13s;animation-delay:5s;">
         ✿
     </div>
 
-    <div class="particle"
-         style="left:37%;animation-duration:17s;animation-delay:1s;">
+    <div class="petal"
+         style="left:27%;animation-duration:11s;animation-delay:5s;">
         🌸
     </div>
 
-    <div class="particle"
-         style="left:49%;animation-duration:12s;animation-delay:4s;">
-        ✧
-    </div>
-
-    <div class="particle"
-         style="left:61%;animation-duration:16s;animation-delay:3s;">
-        🌸
-    </div>
-
-    <div class="particle"
-         style="left:74%;animation-duration:14s;animation-delay:6s;">
+    <div class="petal"
+         style="left:42%;animation-duration:16s;animation-delay:1s;">
         ✿
     </div>
 
-    <div class="particle"
-         style="left:86%;animation-duration:18s;animation-delay:1s;">
+    <div class="petal"
+         style="left:58%;animation-duration:13s;animation-delay:4s;">
         🌸
     </div>
 
-    <div class="particle"
-         style="left:95%;animation-duration:13s;animation-delay:5s;">
-        ♡
+    <div class="petal"
+         style="left:72%;animation-duration:17s;animation-delay:3s;">
+        ✿
+    </div>
+
+    <div class="petal"
+         style="left:86%;animation-duration:12s;animation-delay:6s;">
+        🌸
+    </div>
+
+
+    <!-- GIRL BACK VIEW -->
+
+    <div class="girl">
+
+        <div class="girl-hair"></div>
+
+        <div class="girl-neck"></div>
+
+        <div class="girl-body"></div>
+
+        <div class="girl-skirt"></div>
+
+        <div class="girl-leg left"></div>
+        <div class="girl-leg right"></div>
+
+        <div class="girl-shoe left"></div>
+        <div class="girl-shoe right"></div>
+
     </div>
 
 </div>
+
 
 
 <!-- =========================================================
@@ -1773,11 +2863,13 @@ button:disabled {
 </div>
 
 
+
 <!-- =========================================================
      LOGIN
 ========================================================= -->
 
-<div id="loginScreen" class="screen">
+<div id="loginScreen"
+     class="screen">
 
     <div class="card glass">
 
@@ -1799,11 +2891,14 @@ button:disabled {
             Sign in securely with your Google account
         </div>
 
-        <div id="loginError" class="error"></div>
+        <div id="loginError"
+             class="error">
+        </div>
 
     </div>
 
 </div>
+
 
 
 <!-- =========================================================
@@ -1843,6 +2938,7 @@ button:disabled {
 </div>
 
 
+
 <!-- =========================================================
      CHAT
 ========================================================= -->
@@ -1861,12 +2957,12 @@ button:disabled {
     </button>
 
 
+
     <!-- SIDEBAR -->
 
     <aside
         id="sidebar"
-        class="sidebar glass">
-
+        class="sidebar">
 
         <div class="sidebar-brand">
 
@@ -2014,6 +3110,7 @@ button:disabled {
     </aside>
 
 
+
     <!-- MAIN -->
 
     <main class="chat-main">
@@ -2028,6 +3125,7 @@ button:disabled {
                 🌸 Flavi AI
 
             </div>
+
 
             <div
                 id="userInfo"
@@ -2054,10 +3152,10 @@ button:disabled {
 
         </div>
 
-
     </main>
 
 </div>
+
 
 
 <!-- =========================================================
@@ -2087,6 +3185,7 @@ button:disabled {
     </div>
 
 </div>
+
 
 
 <!-- =========================================================
@@ -2145,12 +3244,13 @@ const firebaseConfig = {
 
     appId:
         "1:924955533897:web:858db6f25255aba8ee5598"
-
 };
 
 
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
 
 
 const auth =
@@ -2162,10 +3262,8 @@ const provider =
 
 
 provider.setCustomParameters({
-
     prompt:
         "select_account"
-
 });
 
 
@@ -2173,24 +3271,16 @@ provider.setCustomParameters({
    VARIABLES
 ========================================================= */
 
-let currentUser =
-    null;
+let currentUser = null;
 
+let userName = "";
 
-let userName =
-    "";
-
-
-let flaviVoice =
-    null;
-
+let flaviVoice = null;
 
 let voiceEnabled =
-
     localStorage.getItem(
         "flavi_voice_enabled"
-    )
-    !== "false";
+    ) !== "false";
 
 
 /* =========================================================
@@ -2214,14 +3304,6 @@ function loadFlaviVoice() {
                 FLAVI_VOICE_NAME
         ) || null;
 
-
-    console.log(
-        "Flavi voice:",
-        flaviVoice
-            ? flaviVoice.name
-            : "Aria not loaded yet"
-    );
-
 }
 
 
@@ -2243,7 +3325,6 @@ function speakFlavi(text) {
     if (!voiceEnabled)
         return;
 
-
     if (!text)
         return;
 
@@ -2258,7 +3339,6 @@ function speakFlavi(text) {
         );
 
         return;
-
     }
 
 
@@ -2294,7 +3374,6 @@ function speakFlavi(text) {
     speechSynthesis.speak(
         utterance
     );
-
 }
 
 
@@ -2404,10 +3483,8 @@ async function loginWithGoogle() {
     loginError.textContent =
         "";
 
-
     googleButton.disabled =
         true;
-
 
     googleButton.textContent =
         "Signing in... 🌸";
@@ -2436,13 +3513,13 @@ async function loginWithGoogle() {
 
             nameInput.value =
                 currentUser.displayName;
-
         }
 
 
         showNameScreen();
 
     }
+
 
     catch (error) {
 
@@ -2455,20 +3532,17 @@ async function loginWithGoogle() {
         loginError.textContent =
             "Google Sign-In failed.\n\n" +
             error.message;
-
     }
+
 
     finally {
 
         googleButton.disabled =
             false;
 
-
         googleButton.textContent =
             "🔵 Continue with Google";
-
     }
-
 }
 
 
@@ -2485,21 +3559,16 @@ onAuthStateChanged(
             currentUser =
                 null;
 
-
             loginScreen.style.display =
                 "flex";
-
 
             nameScreen.style.display =
                 "none";
 
-
             chatScreen.style.display =
                 "none";
 
-
             return;
-
         }
 
 
@@ -2522,7 +3591,6 @@ onAuthStateChanged(
             );
 
             return;
-
         }
 
 
@@ -2536,7 +3604,6 @@ onAuthStateChanged(
 
             userName =
                 savedName;
-
 
             showChatScreen();
 
@@ -2561,14 +3628,11 @@ function showNameScreen() {
     loginScreen.style.display =
         "none";
 
-
     nameScreen.style.display =
         "flex";
 
-
     chatScreen.style.display =
         "none";
-
 }
 
 
@@ -2577,10 +3641,8 @@ function showChatScreen() {
     loginScreen.style.display =
         "none";
 
-
     nameScreen.style.display =
         "none";
-
 
     chatScreen.style.display =
         "block";
@@ -2590,9 +3652,7 @@ function showChatScreen() {
 
         userInfo.textContent =
             currentUser.email || "";
-
     }
-
 }
 
 
@@ -2609,7 +3669,6 @@ function saveName() {
         );
 
         return;
-
     }
 
 
@@ -2624,7 +3683,6 @@ function saveName() {
         );
 
         return;
-
     }
 
 
@@ -2657,15 +3715,16 @@ function saveName() {
 
 
         setTimeout(
-            () => speakFlavi(greeting),
+            () =>
+                speakFlavi(
+                    greeting
+                ),
             500
         );
-
     }
 
 
     messageInput.focus();
-
 }
 
 
@@ -2709,7 +3768,6 @@ function addMessage(
 
     messages.scrollTop =
         messages.scrollHeight;
-
 }
 
 
@@ -2726,7 +3784,6 @@ async function getFreshFirebaseToken(
         throw new Error(
             "No authenticated Firebase user."
         );
-
     }
 
 
@@ -2741,12 +3798,10 @@ async function getFreshFirebaseToken(
         throw new Error(
             "Firebase did not return an ID token."
         );
-
     }
 
 
     return token;
-
 }
 
 
@@ -2777,7 +3832,6 @@ async function callFlaviWorker(
 
                     "Content-Type":
                         "application/json"
-
                 },
 
                 body:
@@ -2793,9 +3847,7 @@ async function callFlaviWorker(
 
                         idToken:
                             idToken
-
                     })
-
             }
         );
 
@@ -2804,8 +3856,7 @@ async function callFlaviWorker(
         await response.text();
 
 
-    let data =
-        null;
+    let data = null;
 
 
     try {
@@ -2817,20 +3868,18 @@ async function callFlaviWorker(
 
     catch {
 
-        data =
-            null;
-
+        data = null;
     }
 
 
     return {
 
         response,
+
         raw,
+
         data
-
     };
-
 }
 
 
@@ -2856,7 +3905,6 @@ async function sendMessage() {
         );
 
         return;
-
     }
 
 
@@ -2865,7 +3913,6 @@ async function sendMessage() {
         userName =
             currentUser.displayName ||
             "friend";
-
     }
 
 
@@ -2881,7 +3928,6 @@ async function sendMessage() {
 
     sendButton.disabled =
         true;
-
 
     messageInput.disabled =
         true;
@@ -2929,7 +3975,6 @@ async function sendMessage() {
                     text,
                     true
                 );
-
         }
 
 
@@ -2949,7 +3994,6 @@ async function sendMessage() {
             );
 
             return;
-
         }
 
 
@@ -2964,7 +4008,6 @@ async function sendMessage() {
             );
 
             return;
-
         }
 
 
@@ -2977,7 +4020,6 @@ async function sendMessage() {
             );
 
             return;
-
         }
 
 
@@ -3003,10 +4045,10 @@ async function sendMessage() {
                 "ai",
                 "Flavi returned an unexpected response 😭"
             );
-
         }
 
     }
+
 
     catch (error) {
 
@@ -3027,20 +4069,17 @@ async function sendMessage() {
 
     }
 
+
     finally {
 
         sendButton.disabled =
             false;
 
-
         messageInput.disabled =
             false;
 
-
         messageInput.focus();
-
     }
-
 }
 
 
@@ -3060,7 +4099,6 @@ messageInput.addEventListener(
             event.preventDefault();
 
             sendMessage();
-
         }
 
     }
@@ -3105,7 +4143,6 @@ document
 
 
             messageInput.focus();
-
         }
     );
 
@@ -3139,13 +4176,12 @@ document
             speakFlavi(
                 greeting
             );
-
         }
     );
 
 
 /* =========================================================
-   VOICE BUTTON
+   VOICE
 ========================================================= */
 
 document
@@ -3186,7 +4222,6 @@ document
                 speakFlavi(
                     test
                 );
-
             }
 
         }
@@ -3207,6 +4242,7 @@ document
 
             showModal(
                 "🧠 My Memories",
+
                 "Your memories are managed by Flavi's existing D1 memory system. You can use Flavi's memory commands in chat, such as /remember."
             );
 
@@ -3228,6 +4264,7 @@ document
 
             showModal(
                 "📢 Announcements",
+
                 "Your existing announcements system is connected through your Flavi backend. Owner announcements can continue to be managed using your existing owner commands."
             );
 
@@ -3249,7 +4286,6 @@ document
 
             window.location.href =
                 "about.html";
-
         }
     );
 
@@ -3284,15 +4320,12 @@ function showModal(
     modalTitle.textContent =
         title;
 
-
     modalText.textContent =
         text;
-
 
     modal.classList.add(
         "show"
     );
-
 }
 
 
@@ -3307,7 +4340,6 @@ document
             modal.classList.remove(
                 "show"
             );
-
         }
     );
 
@@ -3324,9 +4356,7 @@ modal.addEventListener(
             modal.classList.remove(
                 "show"
             );
-
         }
-
     }
 );
 
@@ -3346,7 +4376,6 @@ document
             sidebar.classList.toggle(
                 "open"
             );
-
         }
     );
 
@@ -3370,7 +4399,6 @@ document
                         sidebar.classList.remove(
                             "open"
                         );
-
                     }
 
                 }
@@ -3420,19 +4448,20 @@ document
 
             }
 
+
             catch (error) {
 
                 console.error(
                     "Sign out error:",
                     error
                 );
-
             }
 
         }
     );
 
 </script>
+
 
 
 <!-- =========================================================
@@ -3462,6 +4491,4 @@ setTimeout(
 
 
 </body>
-
 </html>
-```
